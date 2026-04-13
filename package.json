@@ -1,0 +1,11 @@
+{
+  "name": "paper-trading-bot",
+  "version": "1.0.0",
+  "description": "Autonomous AI paper trading bot - Mistral AI powered, GitHub Actions scheduled",
+  "main": "trading-bot.js",
+  "scripts": {
+    "scan": "node trading-bot.js scan",
+    "eval": "node trading-bot.js eval"
+  },
+  "dependencies": {}
+}

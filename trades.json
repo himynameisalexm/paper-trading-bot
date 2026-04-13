@@ -1,0 +1,147 @@
+{
+  "session": {
+    "date": "2026-04-12",
+    "starting_capital": 5000,
+    "current_cash": 5000.00,
+    "open_positions_value": 0.00,
+    "total_account_value": 5000.00,
+    "realized_pnl": 0.00,
+    "unrealized_pnl": 0.00,
+    "total_pnl": 0.00,
+    "trades_closed": 0,
+    "trades_open": 0,
+    "win_rate": 0.0,
+    "wins": 0,
+    "losses": 0,
+    "break_even": 0
+  },
+
+  "open_positions": [],
+
+  "closed_trades": [],
+
+  "watchlist": [
+    {
+      "symbol": "MSFT",
+      "current_price": null,
+      "confidence": null,
+      "entry_signal": false,
+      "entry_target": null,
+      "priority": 2,
+      "reason": "Watch breakout above pre-tariff highs. Azure AI + Copilot strength.",
+      "last_updated": null
+    },
+    {
+      "symbol": "PLTR",
+      "current_price": null,
+      "confidence": null,
+      "entry_signal": false,
+      "entry_target": null,
+      "priority": 3,
+      "reason": "Down 31% from ATH. Maven Smart System tailwind. Watch $148 support.",
+      "last_updated": null
+    },
+    {
+      "symbol": "ORCL",
+      "current_price": null,
+      "confidence": null,
+      "entry_signal": false,
+      "entry_target": null,
+      "priority": 2,
+      "reason": "Stargate contract. Cloud/AI infra buildout.",
+      "last_updated": null
+    },
+    {
+      "symbol": "CRWD",
+      "current_price": null,
+      "confidence": null,
+      "entry_signal": false,
+      "entry_target": null,
+      "priority": 2,
+      "reason": "Wolfe Research + Morgan Stanley top pick. Watch $415 breakout.",
+      "last_updated": null
+    },
+    {
+      "symbol": "NVDA",
+      "current_price": null,
+      "confidence": null,
+      "entry_signal": false,
+      "entry_target": null,
+      "priority": 1,
+      "reason": "Monitor for consolidation. Potential re-entry if strong setup",
+      "last_updated": null
+    },
+    {
+      "symbol": "TSLA",
+      "current_price": null,
+      "confidence": null,
+      "entry_signal": false,
+      "entry_target": null,
+      "priority": 3,
+      "reason": "Watch for oversold bounce or momentum play",
+      "last_updated": null
+    },
+    {
+      "symbol": "AMD",
+      "current_price": null,
+      "confidence": null,
+      "entry_signal": false,
+      "entry_target": null,
+      "priority": 3,
+      "reason": "AI chip trend. Watch for technical setup",
+      "last_updated": null
+    },
+    {
+      "symbol": "BTC",
+      "current_price": null,
+      "confidence": null,
+      "entry_signal": false,
+      "entry_target": null,
+      "priority": 4,
+      "reason": "Primary crypto vehicle. Route via Binance AU",
+      "last_updated": null
+    },
+    {
+      "symbol": "ETH",
+      "current_price": null,
+      "confidence": null,
+      "entry_signal": false,
+      "entry_target": null,
+      "priority": 4,
+      "reason": "Secondary crypto vehicle. Route via Binance AU",
+      "last_updated": null
+    }
+  ],
+
+  "macro_status": {
+    "timestamp": null,
+    "qqq_price": null,
+    "qqq_50day_ma": null,
+    "qqq_above_ma": null,
+    "vix": null,
+    "vix_below_25": null,
+    "gate_pass": null,
+    "override_active": false,
+    "override_reason": null
+  },
+
+  "performance_metrics": {
+    "daily_pnl": 0.00,
+    "weekly_pnl": 0.00,
+    "monthly_pnl": 0.00,
+    "best_trade": null,
+    "worst_trade": null,
+    "avg_win": 0.00,
+    "avg_loss": 0.00,
+    "consecutive_wins": 0,
+    "consecutive_losses": 0
+  },
+
+  "system_status": {
+    "last_scan": null,
+    "last_eval": null,
+    "market_status": "closed",
+    "bot_version": "1.0.0",
+    "trades_json_version": 1
+  }
+}
