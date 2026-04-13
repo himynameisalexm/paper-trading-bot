@@ -115,7 +115,7 @@
     "qqq_above_ma": null,
     "vix": null,
     "vix_below_25": null,
-    "timestamp": "2026-04-13T14:53:59.393Z",
+    "timestamp": "2026-04-13T15:52:37.755Z",
     "gate_pass": null
   },
   "performance_metrics": {
@@ -131,8 +131,8 @@
   },
   "system_status": {
     "last_scan": "2026-04-13T14:54:18.900Z",
-    "last_eval": null,
-    "market_status": "pre-market",
+    "last_eval": "2026-04-13T15:52:44.244Z",
+    "market_status": "open",
     "bot_version": "1.0.0",
     "trades_json_version": 1
   }
