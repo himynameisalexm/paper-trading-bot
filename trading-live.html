@@ -315,7 +315,7 @@ function render(data) {
   const posEl = document.getElementById('openPositions');
   const positions = data.open_positions || [];
   if (positions.length === 0) {
-    posEl.innerHTML = '<div class="empty-state">No open positions. Bot is monitoring watchlist.</div>';
+    posEl.innerHTML = '<div class="empty-state">No open positions. Bot is monitoring watchlist for entries.</div>';
   } else {
     posEl.innerHTML = positions.map(pos => {
       const pnl = (pos.current_price - pos.entry_price) * pos.shares;
@@ -324,59 +324,114 @@ function render(data) {
       const progress = range > 0 ? ((pos.current_price - pos.stop_loss) / range * 100) : 0;
       const progressClamped = Math.max(0, Math.min(100, progress));
       const isUp = pnl >= 0;
+      const isCrypto = ['BTC','ETH'].includes(pos.symbol);
+      const sizeLabel = isCrypto ? `${pos.shares} ${pos.symbol}` : `${pos.shares} shares`;
+      const toTarget = ((pos.profit_target - pos.current_price) / pos.current_price * 100).toFixed(1);
+      const toStop = ((pos.current_price - pos.stop_loss) / pos.current_price * 100).toFixed(1);
       return `<div class="position-card">
         <div class="pos-header">
-          <div class="pos-symbol">${pos.symbol}</div>
-          <div class="pos-pnl ${isUp ? 'green' : 'red'}">${isUp ? '+' : ''}${fmt(pnl)} (${fmtPct(pnlPct)})</div>
+          <div>
+            <div class="pos-symbol">${pos.symbol} <span style="font-size:10px;color:var(--label);font-weight:normal">OPEN</span></div>
+            <div style="font-size:10px;color:var(--label);margin-top:2px">Confidence ${pos.confidence}/10 · Entered ${fmtDate(pos.entry_date)}</div>
+          </div>
+          <div style="text-align:right">
+            <div class="pos-pnl ${isUp ? 'green' : 'red'}">${isUp ? '+' : ''}${fmt(pnl)}</div>
+            <div style="font-size:11px;color:${isUp ? 'var(--green)' : 'var(--red)'}">${fmtPct(pnlPct)}</div>
+          </div>
         </div>
-        <div class="pos-details">
-          <span>${pos.shares} shares @ ${fmt(pos.entry_price)}</span>
-          <span>Current: ${fmt(pos.current_price)}</span>
-          <span>Confidence: ${pos.confidence}/10</span>
-          <span>Entered: ${fmtDate(pos.entry_date)}</span>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0;font-size:11px">
+          <div style="background:#111;padding:8px;border-radius:3px">
+            <div style="color:var(--label);margin-bottom:3px">ENTRY</div>
+            <div style="color:var(--bright);font-weight:bold">${fmt(pos.entry_price)}</div>
+            <div style="color:var(--label);font-size:10px">${sizeLabel}</div>
+          </div>
+          <div style="background:#111;padding:8px;border-radius:3px">
+            <div style="color:var(--label);margin-bottom:3px">CURRENT</div>
+            <div style="color:${isUp ? 'var(--green)' : 'var(--red)'};font-weight:bold">${fmt(pos.current_price)}</div>
+            <div style="color:var(--label);font-size:10px">${isUp ? '+' : ''}${fmtPct(pnlPct)} vs entry</div>
+          </div>
+          <div style="background:#111;padding:8px;border-radius:3px">
+            <div style="color:var(--label);margin-bottom:3px">TARGET</div>
+            <div style="color:var(--green);font-weight:bold">${fmt(pos.profit_target)}</div>
+            <div style="color:var(--label);font-size:10px">+${toTarget}% to go</div>
+          </div>
         </div>
-        <div class="pos-progress">
+        <div class="pos-progress" title="Position between stop and target">
           <div class="pos-progress-bar ${isUp ? '' : 'red'}" style="width:${progressClamped}%"></div>
         </div>
         <div class="pos-stops">
-          <span>Stop ${fmt(pos.stop_loss)}</span>
-          <span>Target ${fmt(pos.profit_target)}</span>
+          <span style="color:var(--red)">▼ Stop ${fmt(pos.stop_loss)} (−${toStop}%)</span>
+          <span style="color:var(--green)">▲ Target ${fmt(pos.profit_target)} (+${toTarget}%)</span>
         </div>
-        <div class="pos-thesis-toggle" onclick="toggleThesis(this)">▶ thesis</div>
-        <div class="pos-thesis">${pos.thesis || pos.entry_reason || '—'}</div>
+        <div class="pos-thesis-toggle" onclick="toggleThesis(this)" style="margin-top:10px">▶ full thesis & reasoning</div>
+        <div class="pos-thesis">
+          <div style="color:var(--text);margin-bottom:6px;font-weight:bold">Why I entered:</div>
+          ${pos.entry_reason || '—'}
+          <div style="color:var(--text);margin:10px 0 6px;font-weight:bold">Trade thesis:</div>
+          ${pos.thesis || '—'}
+        </div>
       </div>`;
     }).join('');
   }
 
-  // Watchlist
+  // Watchlist — rich cards
   const watchEl = document.getElementById('watchlist');
   const watchlist = (data.watchlist || []).filter(w => w.confidence != null).sort((a, b) => (b.confidence || 0) - (a.confidence || 0));
   if (watchlist.length === 0) {
     watchEl.innerHTML = '<div class="empty-state">Watchlist pending next pre-market scan (8 AM ET).</div>';
   } else {
-    watchEl.innerHTML = watchlist.map(w => `
-      <div class="watch-row">
-        <div class="watch-symbol">${w.symbol}</div>
-        <div class="watch-price">${w.current_price ? fmt(w.current_price) : '—'}</div>
-        <div class="watch-conf">${confPips(w.confidence)} <span style="font-size:10px;color:var(--label);margin-left:4px">${w.confidence?.toFixed(1) || '—'}/10</span></div>
-        <div class="watch-signal ${w.entry_signal ? 'active' : 'waiting'}">${w.entry_signal ? '▶ ENTRY' : '◦ WATCH'}</div>
-        <div class="watch-reason">${w.reason || '—'}</div>
-      </div>`).join('');
+    watchEl.innerHTML = watchlist.map(w => {
+      const signalClass = w.entry_signal ? 'active' : 'waiting';
+      const signalLabel = w.entry_signal ? '▶ ENTRY SIGNAL' : '◦ WATCHING';
+      return `<div class="position-card" style="margin-bottom:8px">
+        <div class="pos-header" style="margin-bottom:8px">
+          <div>
+            <div class="pos-symbol">${w.symbol} <span class="watch-signal ${signalClass}" style="margin-left:6px;font-size:10px">${signalLabel}</span></div>
+            <div style="font-size:10px;color:var(--label);margin-top:2px">${confPips(w.confidence)} <span style="margin-left:4px">${w.confidence?.toFixed(1)}/10 confidence</span></div>
+          </div>
+          <div style="text-align:right;font-size:13px;color:var(--bright);font-weight:bold">${w.current_price ? fmt(w.current_price) : '—'}</div>
+        </div>
+        <div style="font-size:11px;color:var(--label);line-height:1.7;border-top:1px solid #141414;padding-top:8px">
+          ${w.reason || '—'}
+        </div>
+      </div>`;
+    }).join('');
   }
 
-  // Trade History
+  // Trade History — rich rows
   const histEl = document.getElementById('tradeHistory');
   const closed = (data.closed_trades || []).slice().reverse();
   if (closed.length === 0) {
-    histEl.innerHTML = '<div class="empty-state">No closed trades yet.</div>';
+    histEl.innerHTML = '<div class="empty-state">No closed trades yet. First trade in progress.</div>';
   } else {
     histEl.innerHTML = closed.map(t => {
       const pnl = t.realized_pnl || 0;
-      return `<div class="trade-row">
-        <div class="trade-symbol">${t.symbol}</div>
-        <div class="trade-prices">${fmt(t.entry_price)} → ${fmt(t.exit_price)}</div>
-        <div class="trade-pnl ${pnl >= 0 ? 'green' : 'red'}">${pnl >= 0 ? '+' : ''}${fmt(pnl)} (${fmtPct(t.realized_pnl_percent)})</div>
-        <div class="trade-reason">${t.exit_reason || '—'}</div>
+      const isWin = pnl >= 0;
+      return `<div class="position-card" style="margin-bottom:8px">
+        <div class="pos-header" style="margin-bottom:8px">
+          <div>
+            <div class="pos-symbol">${t.symbol} <span style="font-size:10px;color:var(--label);font-weight:normal">${isWin ? '✓ WIN' : '✗ LOSS'}</span></div>
+            <div style="font-size:10px;color:var(--label);margin-top:2px">${fmtDate(t.entry_date)} → ${fmtDate(t.exit_date)}</div>
+          </div>
+          <div style="text-align:right">
+            <div class="pos-pnl ${isWin ? 'green' : 'red'}">${isWin ? '+' : ''}${fmt(pnl)}</div>
+            <div style="font-size:11px;color:${isWin ? 'var(--green)' : 'var(--red)'}">${fmtPct(t.realized_pnl_percent)}</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:11px;margin-bottom:8px">
+          <div style="background:#111;padding:6px 8px;border-radius:3px">
+            <span style="color:var(--label)">Entry </span><span style="color:var(--bright)">${fmt(t.entry_price)}</span>
+          </div>
+          <div style="background:#111;padding:6px 8px;border-radius:3px">
+            <span style="color:var(--label)">Exit </span><span style="color:${isWin ? 'var(--green)' : 'var(--red)'}">${fmt(t.exit_price)}</span>
+          </div>
+        </div>
+        <div style="font-size:10px;color:var(--sub);border-top:1px solid #141414;padding-top:6px">
+          <span style="color:var(--label)">Entry: </span>${t.entry_reason || '—'}
+        </div>
+        <div style="font-size:10px;color:var(--sub);margin-top:4px">
+          <span style="color:var(--label)">Exit: </span>${t.exit_reason || '—'}
+        </div>
       </div>`;
     }).join('');
   }
