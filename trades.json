@@ -3,14 +3,14 @@
     "date": "2026-04-14",
     "starting_capital": 5000,
     "current_cash": -0.01,
-    "open_positions_value": 5003.84,
-    "total_account_value": 5003.83,
-    "realized_pnl": 0.0,
+    "open_positions_value": 5003.8364844,
+    "total_account_value": 5003.8264844,
+    "realized_pnl": 0,
     "unrealized_pnl": 3.83,
-    "total_pnl": 0.0,
+    "total_pnl": 3.826484399999572,
     "trades_closed": 0,
     "trades_open": 1,
-    "win_rate": 0.0,
+    "win_rate": 0,
     "wins": 0,
     "losses": 0,
     "break_even": 0
@@ -21,15 +21,15 @@
       "symbol": "BTC",
       "entry_price": 72309.85,
       "entry_date": "2026-04-13T17:21:06.797973Z",
-      "entry_reason": "BTC CRYPTO MOMENTUM (Priority 4) \u2014 Monday Apr 14. Macro gate GREEN: QQQ $614.57 above 50-day MA $600.34 \u2705 | VIX 19.5 below 25 \u2705. BTC recovering from tariff-selloff lows. Dollar weakness play after tariff pause + Iran ceasefire. Risk-on environment confirmed. Re-entering below previous $76k position for superior R/R. Entry $72,309.85 | Stop $69,706.70 (-3.6%) | Target $78,528.50 (+8.6%) | R/R 2.4:1",
+      "entry_reason": "BTC CRYPTO MOMENTUM (Priority 4) — Monday Apr 14. Macro gate GREEN: QQQ $614.57 above 50-day MA $600.34 ✅ | VIX 19.5 below 25 ✅. BTC recovering from tariff-selloff lows. Dollar weakness play after tariff pause + Iran ceasefire. Risk-on environment confirmed. Re-entering below previous $76k position for superior R/R. Entry $72,309.85 | Stop $69,706.70 (-3.6%) | Target $78,528.50 (+8.6%) | R/R 2.4:1",
       "shares": 0.069147,
       "current_price": 72365.2,
       "stop_loss": 69706.7,
       "profit_target": 78528.5,
       "unrealized_pnl": 3.83,
       "unrealized_pnl_percent": 0.08,
-      "confidence": 7.0,
-      "thesis": "Dollar weakness + risk-on macro catalyst is the core driver. Tariff pause (Apr 9) and Iran ceasefire (Apr 8) were back-to-back regime-change events that weakened the USD. BTC historically benefits from USD softening. Previous position entered at $76k was stopped at $73k during max fear; re-entry at $72.3k is a better price. BTC was trading above EMA 50/100/200 before the selloff \u2014 strong structural base. Crypto has no gap risk (trades 24/7). PLTR flagged as next entry (RSI 29.6, oversold) when capital frees up from this position.",
+      "confidence": 7,
+      "thesis": "Dollar weakness + risk-on macro catalyst is the core driver. Tariff pause (Apr 9) and Iran ceasefire (Apr 8) were back-to-back regime-change events that weakened the USD. BTC historically benefits from USD softening. Previous position entered at $76k was stopped at $73k during max fear; re-entry at $72.3k is a better price. BTC was trading above EMA 50/100/200 before the selloff — strong structural base. Crypto has no gap risk (trades 24/7). PLTR flagged as next entry (RSI 29.6, oversold) when capital frees up from this position.",
       "days_held": 0
     }
   ],
@@ -50,9 +50,9 @@
       "current_price": 134.16,
       "confidence": 7.5,
       "entry_signal": false,
-      "entry_target": 134.0,
+      "entry_target": 134,
       "priority": 3,
-      "reason": "OVERSOLD BOUNCE (Priority 3) \u2014 RSI 29.6, well below oversold threshold of 35. Down 31% from ATH ($207 \u2192 $134). Maven Smart System being used in US military/Iran conflict \u2014 government AI tailwind. Tariff pause removes macro headwind. Entry target: $134 | Stop: $128.70 (-4%) | Target: $143.70 (+7.2%) | R/R 1.8:1. Capital currently committed to BTC. HIGH PRIORITY next entry when BTC position closes. Confidence 7.5/10 \u2014 above threshold. Waiting for cash.",
+      "reason": "OVERSOLD BOUNCE (Priority 3) — RSI 29.6, well below oversold threshold of 35. Down 31% from ATH ($207 → $134). Maven Smart System being used in US military/Iran conflict — government AI tailwind. Tariff pause removes macro headwind. Entry target: $134 | Stop: $128.70 (-4%) | Target: $143.70 (+7.2%) | R/R 1.8:1. Capital currently committed to BTC. HIGH PRIORITY next entry when BTC position closes. Confidence 7.5/10 — above threshold. Waiting for cash.",
       "last_updated": "2026-04-13T17:21:06.797973Z"
     },
     {
@@ -72,7 +72,7 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 2,
-      "reason": "WATCH \u2014 Wolfe Research + Morgan Stanley top pick. +6% Friday. Below MA50 ($407). RSI 47 (neutral). Entry trigger: breakout + close above $407 on volume. Target: $430 (+7%) | Stop: $388 (-3.5%) | Confidence: 6.8/10.",
+      "reason": "WATCH — Wolfe Research + Morgan Stanley top pick. +6% Friday. Below MA50 ($407). RSI 47 (neutral). Entry trigger: breakout + close above $407 on volume. Target: $430 (+7%) | Stop: $388 (-3.5%) | Confidence: 6.8/10.",
       "last_updated": "2026-04-13T17:21:06.797973Z"
     },
     {
@@ -82,7 +82,7 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 1,
-      "reason": "WATCH \u2014 Above MA50 ($182). RSI 65.5 \u2014 approaching overbought. AI chip dominance intact but stretched technically. Wait for pullback to $180 support or RSI reset below 55. No entry today. Confidence 6.5/10 at current levels.",
+      "reason": "WATCH — Above MA50 ($182). RSI 65.5 — approaching overbought. AI chip dominance intact but stretched technically. Wait for pullback to $180 support or RSI reset below 55. No entry today. Confidence 6.5/10 at current levels.",
       "last_updated": "2026-04-13T17:21:06.797973Z"
     },
     {
@@ -108,7 +108,7 @@
     {
       "symbol": "BTC",
       "current_price": 72365.2,
-      "confidence": 7.0,
+      "confidence": 7,
       "entry_signal": true,
       "entry_target": null,
       "priority": 4,
@@ -127,30 +127,28 @@
     }
   ],
   "macro_status": {
-    "timestamp": "2026-04-13T17:21:06.797973Z",
-    "qqq_price": 614.57,
-    "qqq_50day_ma": 600.34,
-    "qqq_above_ma": true,
-    "vix": 19.5,
-    "vix_below_25": true,
-    "gate_pass": true,
-    "override_active": false,
-    "override_reason": null
+    "qqq_price": null,
+    "qqq_50day_ma": null,
+    "qqq_above_ma": null,
+    "vix": null,
+    "vix_below_25": null,
+    "timestamp": "2026-04-13T17:35:47.503Z",
+    "gate_pass": null
   },
   "performance_metrics": {
-    "daily_pnl": 0.0,
-    "weekly_pnl": 0.0,
-    "monthly_pnl": 0.0,
+    "daily_pnl": 0,
+    "weekly_pnl": 0,
+    "monthly_pnl": 0,
     "best_trade": null,
     "worst_trade": null,
-    "avg_win": 0.0,
-    "avg_loss": 0.0,
+    "avg_win": 0,
+    "avg_loss": 0,
     "consecutive_wins": 0,
     "consecutive_losses": 0
   },
   "system_status": {
     "last_scan": "2026-04-13T17:22:26.510704Z",
-    "last_eval": "2026-04-13T17:22:26.510704Z",
+    "last_eval": "2026-04-13T17:35:55.161Z",
     "market_status": "open",
     "bot_version": "1.0.0",
     "trades_json_version": 1
