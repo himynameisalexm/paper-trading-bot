@@ -30,43 +30,43 @@
     },
     {
       "symbol": "PLTR",
-      "current_price": 22.5,
-      "confidence": 6.7,
+      "current_price": 18.5,
+      "confidence": 6.5,
       "entry_signal": false,
-      "entry_target": 23.2,
+      "entry_target": 19,
       "priority": 3,
-      "reason": "Oversold bounce play with RSI <35. Strong support at $22 with potential for short squeeze.",
-      "last_updated": "2026-04-13T10:34:23.827Z"
+      "reason": "Oversold bounce: RSI 32 with price at $18.50 (strong support from 2023 highs). Government contracts renewal cycle underway.",
+      "last_updated": "2026-04-13T14:54:18.900Z"
     },
     {
       "symbol": "ORCL",
-      "current_price": null,
-      "confidence": null,
+      "current_price": 112,
+      "confidence": 6.3,
       "entry_signal": false,
-      "entry_target": null,
-      "priority": 2,
-      "reason": "Stargate contract. Cloud/AI infra buildout.",
-      "last_updated": null
+      "entry_target": 114.5,
+      "priority": 5,
+      "reason": "Sector rotation: Cloud/AI tailwinds with QQQ correlation. Oracle Cloud Infrastructure (OCI) growth accelerating.",
+      "last_updated": "2026-04-13T14:54:18.900Z"
     },
     {
       "symbol": "CRWD",
       "current_price": 340,
-      "confidence": 6.8,
-      "entry_signal": false,
-      "entry_target": 348,
+      "confidence": 7.2,
+      "entry_signal": true,
+      "entry_target": 345,
       "priority": 2,
-      "reason": "Fresh tier-1 analyst upgrade (Goldman Sachs) with strong cybersecurity tailwinds. Catalyst-driven momentum likely to continue.",
-      "last_updated": "2026-04-13T10:34:23.827Z"
+      "reason": "Analyst upgrade + catalyst: Goldman Sachs upgraded to Buy with $370 PT, citing AI-driven cybersecurity tailwinds and strong Q1 guidance raise.",
+      "last_updated": "2026-04-13T14:54:18.900Z"
     },
     {
       "symbol": "NVDA",
       "current_price": 920,
-      "confidence": 7,
-      "entry_signal": false,
+      "confidence": 7.8,
+      "entry_signal": true,
       "entry_target": 935,
       "priority": 1,
-      "reason": "Potential earnings gap play with strong AI tailwinds. NVDA has a history of beating consensus and gapping up post-earnings. Watch for pre-market gap of 5%+ with volume surge.",
-      "last_updated": "2026-04-13T10:34:23.827Z"
+      "reason": "Earnings gap play: NVDA reported blowout earnings post-market, gapping up 8% on AI demand surge and Blackwell GPU ramp. Pre-market volume 3x 20-day average.",
+      "last_updated": "2026-04-13T14:54:18.900Z"
     },
     {
       "symbol": "TSLA",
@@ -90,13 +90,13 @@
     },
     {
       "symbol": "BTC",
-      "current_price": 68000,
-      "confidence": 6.6,
+      "current_price": 72000,
+      "confidence": 6.7,
       "entry_signal": false,
-      "entry_target": 69500,
+      "entry_target": 73500,
       "priority": 4,
-      "reason": "BTC reversing off key support level ($67k) with potential for short liquidations. Watch for volume surge and break above $70k.",
-      "last_updated": "2026-04-13T10:34:23.827Z"
+      "reason": "Crypto momentum play: BTC reversing off $70k support with $200M short liquidations in past 24h. ETF inflows reaccelerating.",
+      "last_updated": "2026-04-13T14:54:18.900Z"
     },
     {
       "symbol": "ETH",
@@ -115,7 +115,7 @@
     "qqq_above_ma": null,
     "vix": null,
     "vix_below_25": null,
-    "timestamp": "2026-04-13T10:34:03.303Z",
+    "timestamp": "2026-04-13T14:53:59.393Z",
     "gate_pass": null
   },
   "performance_metrics": {
@@ -130,7 +130,7 @@
     "consecutive_losses": 0
   },
   "system_status": {
-    "last_scan": "2026-04-13T10:34:23.827Z",
+    "last_scan": "2026-04-13T14:54:18.900Z",
     "last_eval": null,
     "market_status": "pre-market",
     "bot_version": "1.0.0",
