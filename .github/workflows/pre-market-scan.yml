@@ -23,9 +23,12 @@ jobs:
           MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
         run: node trading-bot.js scan
       - name: Commit & push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git config user.email "bot@paper-trading-bot.local"
-          git config user.name "Paper Trading Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}
           git add trades.json
           git diff --staged --quiet || git commit -m "bot: pre-market scan $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           git push
