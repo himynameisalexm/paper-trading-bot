@@ -43,21 +43,62 @@ function computeRSI(closes, period = 14) {
   return parseFloat((100 - 100 / (1 + avgGain / avgLoss)).toFixed(1));
 }
 
-// ─── FETCH HISTORICAL RSI FROM DAILY CHART ─────────────────────────────────
-async function fetchHistoricalRSI(symbol) {
+// ─── FETCH SYMBOL DATA FROM V8 CHART (single call returns price + history) ──
+async function fetchChartData(symbol) {
+  const encoded = symbol === 'BTC' ? 'BTC-USD' : symbol === 'ETH' ? 'ETH-USD' : symbol === '^VIX' ? '%5EVIX' : symbol;
   try {
-    const encoded = symbol === 'BTC' ? 'BTC-USD' : symbol === 'ETH' ? 'ETH-USD' : symbol;
     const res = await makeRequest({
       hostname: 'query1.finance.yahoo.com',
-      path: `/v8/finance/chart/${encoded}?interval=1d&range=45d`,
+      path: `/v8/finance/chart/${encoded}?interval=1d&range=60d`,
       method: 'GET',
       headers: { 'User-Agent': 'Mozilla/5.0 (compatible; TradingBot/1.0)' }
     });
-    const closes = res?.chart?.result?.[0]?.indicators?.quote?.[0]?.close;
-    if (!closes || closes.length < 15) return null;
-    return computeRSI(closes.filter(c => c != null));
+    const result = res?.chart?.result?.[0];
+    if (!result) return null;
+
+    const meta    = result.meta;
+    const closes  = (result.indicators?.quote?.[0]?.close || []).filter(c => c != null);
+    const volumes = (result.indicators?.quote?.[0]?.volume || []).filter(v => v != null);
+
+    const price     = meta?.regularMarketPrice ?? null;
+    const prevClose = meta?.chartPreviousClose  ?? null;
+    const chgPct    = price && prevClose ? ((price - prevClose) / prevClose * 100) : 0;
+
+    // Compute MA50 & MA200 from daily closes
+    const ma50  = closes.length >= 50  ? closes.slice(-50).reduce((a, b) => a + b, 0) / 50  : closes.length > 0 ? closes.reduce((a,b) => a+b, 0) / closes.length : null;
+    const ma200 = closes.length >= 200 ? closes.slice(-200).reduce((a, b) => a + b, 0) / 200 : null;
+
+    // Compute avg volume from last 10 days
+    const avgVol   = volumes.length >= 10 ? volumes.slice(-10).reduce((a, b) => a + b, 0) / 10 : null;
+    const todayVol = volumes[volumes.length - 1] ?? null;
+    const volRatio = todayVol && avgVol ? todayVol / avgVol : null;
+
+    // RSI(14)
+    const rsi = computeRSI(closes);
+
+    // Day high/low from meta
+    const dayHigh = meta?.regularMarketDayHigh ?? null;
+    const dayLow  = meta?.regularMarketDayLow  ?? null;
+
+    return {
+      symbol,
+      current_price: price,
+      prev_close: prevClose,
+      change_pct: parseFloat(chgPct.toFixed(2)),
+      day_high: dayHigh,
+      day_low: dayLow,
+      volume: todayVol,
+      avg_volume: avgVol ? Math.round(avgVol) : null,
+      volume_ratio: volRatio ? parseFloat(volRatio.toFixed(2)) : null,
+      ma50:  ma50  ? parseFloat(ma50.toFixed(2))  : null,
+      ma200: ma200 ? parseFloat(ma200.toFixed(2)) : null,
+      above_ma50:  price && ma50  ? price > ma50  : null,
+      above_ma200: price && ma200 ? price > ma200 : null,
+      rsi,
+      timestamp: new Date().toISOString()
+    };
   } catch (e) {
-    console.warn(`[RSI] Failed for ${symbol}: ${e.message}`);
+    console.warn(`[CHART] ${symbol}: ${e.message}`);
     return null;
   }
 }
@@ -68,57 +109,16 @@ async function fetchMarketData(symbols) {
   const result = {};
 
   for (const symbol of symbols) {
-    try {
-      const encoded = symbol === 'BTC' ? 'BTC-USD' : symbol === 'ETH' ? 'ETH-USD' : symbol;
-
-      const res = await makeRequest({
-        hostname: 'query1.finance.yahoo.com',
-        path: `/v10/finance/quoteSummary/${encoded}?modules=price,summaryDetail`,
-        method: 'GET',
-        headers: { 'User-Agent': 'Mozilla/5.0 (compatible; TradingBot/1.0)' }
-      });
-
-      const d = res?.quoteSummary?.result?.[0];
-      if (!d) { result[symbol] = { symbol, current_price: null, error: 'No data' }; continue; }
-
-      const price     = d.price?.regularMarketPrice?.raw         ?? null;
-      const prevClose = d.price?.regularMarketPreviousClose?.raw  ?? null;
-      const volume    = d.price?.regularMarketVolume?.raw         ?? null;
-      const avgVol    = d.price?.averageDailyVolume10Day?.raw     ?? null;
-      const ma50      = d.summaryDetail?.fiftyDayAverage?.raw     ?? null;
-      const ma200     = d.summaryDetail?.twoHundredDayAverage?.raw ?? null;
-      const dayHigh   = d.price?.regularMarketDayHigh?.raw        ?? null;
-      const dayLow    = d.price?.regularMarketDayLow?.raw         ?? null;
-      const chgPct    = prevClose && price ? ((price - prevClose) / prevClose * 100) : 0;
-      const volRatio  = volume && avgVol ? volume / avgVol : null;
-
-      // RSI from separate historical fetch
-      const rsi = await fetchHistoricalRSI(symbol);
-      await new Promise(r => setTimeout(r, 250)); // rate limit buffer
-
-      result[symbol] = {
-        symbol,
-        current_price: price,
-        prev_close: prevClose,
-        change_pct: parseFloat(chgPct.toFixed(2)),
-        day_high: dayHigh,
-        day_low: dayLow,
-        volume,
-        avg_volume: avgVol,
-        volume_ratio: volRatio ? parseFloat(volRatio.toFixed(2)) : null,
-        ma50,
-        ma200,
-        above_ma50:  price && ma50  ? price > ma50  : null,
-        above_ma200: price && ma200 ? price > ma200 : null,
-        rsi,
-        timestamp: new Date().toISOString()
-      };
-
-      console.log(`  ${symbol.padEnd(6)} $${(price ?? 0).toFixed(2).padStart(10)} | ${chgPct >= 0 ? '+' : ''}${chgPct.toFixed(2)}% | RSI ${rsi ?? 'n/a'} | Vol ${volRatio?.toFixed(1) ?? 'n/a'}x`);
-    } catch (e) {
-      console.warn(`[WARN] ${symbol}: ${e.message}`);
-      result[symbol] = { symbol, current_price: null, error: e.message };
+    const data = await fetchChartData(symbol);
+    if (data) {
+      result[symbol] = data;
+      const p = data.current_price;
+      console.log(`  ${symbol.padEnd(6)} $${p?.toFixed(2).padStart(10)} | ${data.change_pct >= 0 ? '+' : ''}${data.change_pct}% | RSI ${data.rsi ?? 'n/a'} | Vol ${data.volume_ratio?.toFixed(1) ?? 'n/a'}x | MA50 $${data.ma50?.toFixed(2)}`);
+    } else {
+      result[symbol] = { symbol, current_price: null, error: 'fetch failed' };
+      console.warn(`  ${symbol.padEnd(6)} failed`);
     }
+    await new Promise(r => setTimeout(r, 200)); // rate limit buffer
   }
   return result;
 }
@@ -132,31 +132,18 @@ async function fetchMacroStatus() {
     timestamp: new Date().toISOString(), gate_pass: null
   };
   try {
-    const qqq = await makeRequest({
-      hostname: 'query1.finance.yahoo.com',
-      path: '/v10/finance/quoteSummary/QQQ?modules=price,summaryDetail',
-      method: 'GET',
-      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; TradingBot/1.0)' }
-    });
-    const qd = qqq?.quoteSummary?.result?.[0];
-    if (qd) {
-      macro.qqq_price    = qd.price?.regularMarketPrice?.raw      ?? null;
-      macro.qqq_50day_ma = qd.summaryDetail?.fiftyDayAverage?.raw  ?? null;
-      macro.qqq_above_ma = macro.qqq_price && macro.qqq_50day_ma
-        ? macro.qqq_price > macro.qqq_50day_ma : null;
+    const qqq = await fetchChartData('QQQ');
+    if (qqq) {
+      macro.qqq_price    = qqq.current_price;
+      macro.qqq_50day_ma = qqq.ma50;
+      macro.qqq_above_ma = qqq.above_ma50;
     }
-    const vix = await makeRequest({
-      hostname: 'query1.finance.yahoo.com',
-      path: '/v10/finance/quoteSummary/%5EVIX?modules=price',
-      method: 'GET',
-      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; TradingBot/1.0)' }
-    });
-    const vd = vix?.quoteSummary?.result?.[0];
-    if (vd) {
-      macro.vix          = vd.price?.regularMarketPrice?.raw ?? null;
-      macro.vix_below_25 = macro.vix !== null ? macro.vix < 25 : null;
+    const vix = await fetchChartData('^VIX');
+    if (vix) {
+      macro.vix          = vix.current_price;
+      macro.vix_below_25 = vix.current_price !== null ? vix.current_price < 25 : null;
     }
-    macro.gate_pass = macro.qqq_above_ma && macro.vix_below_25;
+    macro.gate_pass = macro.qqq_above_ma === true && macro.vix_below_25 === true;
     console.log(`  QQQ $${macro.qqq_price?.toFixed(2)} | MA50 $${macro.qqq_50day_ma?.toFixed(2)} → ${macro.qqq_above_ma ? 'ABOVE ✓' : 'BELOW ✗'}`);
     console.log(`  VIX ${macro.vix?.toFixed(2)} → ${macro.vix_below_25 ? 'OK ✓' : 'HIGH ✗'}`);
     console.log(`  Gate: ${macro.gate_pass ? '✓ PASS' : '✗ FAIL'}`);
