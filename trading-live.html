@@ -217,15 +217,21 @@ body::before {
 
   <!-- TRADE HISTORY -->
   <div class="section">
-    <div class="section-title">Trade History</div>
+    <div class="section-title">Trade History — All Closed Positions</div>
     <div id="tradeHistory"><div class="empty-state">No closed trades yet.</div></div>
+  </div>
+
+  <!-- DAILY SESSION LOG -->
+  <div class="section">
+    <div class="section-title">Daily Session Log</div>
+    <div id="dailyLog"><div class="empty-state">No past sessions yet.</div></div>
   </div>
 </div>
 
 <script>
 // ── CONFIG ──
 const TRADES_URL = 'https://raw.githubusercontent.com/himynameisalexm/paper-trading-bot/main/trades.json';
-const POLL_INTERVAL = 60000; // 60 seconds
+const POLL_INTERVAL = 60000;
 let lastHash = null;
 
 // ── CLOCK ──
@@ -389,7 +395,13 @@ function render(data) {
             <div class="pos-symbol">${w.symbol} <span class="watch-signal ${signalClass}" style="margin-left:6px;font-size:10px">${signalLabel}</span></div>
             <div style="font-size:10px;color:var(--label);margin-top:2px">${confPips(w.confidence)} <span style="margin-left:4px">${w.confidence?.toFixed(1)}/10 confidence</span></div>
           </div>
-          <div style="text-align:right;font-size:13px;color:var(--bright);font-weight:bold">${w.current_price ? fmt(w.current_price) : '—'}</div>
+          <div style="text-align:right">
+            <div style="font-size:13px;color:var(--bright);font-weight:bold">${w.current_price ? fmt(w.current_price) : '—'}</div>
+            <div style="font-size:10px;color:var(--label);margin-top:2px">
+              ${w.change_pct != null ? `<span style="color:${w.change_pct >= 0 ? 'var(--green)':'var(--red)'}">${w.change_pct >= 0 ? '+' : ''}${w.change_pct?.toFixed(2)}%</span>` : ''}
+              ${w.rsi != null ? `<span style="margin-left:6px">RSI ${w.rsi}</span>` : ''}
+            </div>
+          </div>
         </div>
         <div style="font-size:11px;color:var(--label);line-height:1.7;border-top:1px solid #141414;padding-top:8px">
           ${w.reason || '—'}
@@ -435,13 +447,62 @@ function render(data) {
       </div>`;
     }).join('');
   }
+
+  // Daily Session Log
+  const logEl = document.getElementById('dailyLog');
+  const sessions = data.daily_sessions || [];
+
+  // Build today's summary row from current session
+  const todayRow = (() => {
+    const sess = data.session || {};
+    const todayPnl = (sess.realized_pnl || 0) + (sess.unrealized_pnl || 0);
+    const isUp = todayPnl >= 0;
+    const startingCap = sess.starting_capital || 5000;
+    const pnlPct = startingCap ? (todayPnl / startingCap * 100) : 0;
+    return `<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#0d0d0d;border:1px solid #3ddc8444;border-radius:4px;margin-bottom:8px">
+      <div>
+        <span style="color:var(--bright);font-weight:bold">${sess.date || 'Today'}</span>
+        <span style="color:var(--green);font-size:10px;margin-left:8px">● ACTIVE</span>
+      </div>
+      <div style="display:flex;gap:20px;font-size:11px;text-align:right">
+        <div><div style="color:var(--label)">Trades</div><div style="color:var(--bright)">${sess.trades_closed || 0}</div></div>
+        <div><div style="color:var(--label)">W/L</div><div style="color:var(--bright)">${sess.wins || 0}/${sess.losses || 0}</div></div>
+        <div><div style="color:var(--label)">Realized P&L</div><div style="color:${(sess.realized_pnl||0) >= 0 ? 'var(--green)':'var(--red)'}">${(sess.realized_pnl||0) >= 0 ? '+' : ''}${fmt(sess.realized_pnl||0)}</div></div>
+        <div><div style="color:var(--label)">Total P&L</div><div style="color:${isUp ? 'var(--green)':'var(--red)'}">${isUp ? '+' : ''}${fmt(todayPnl)} (${pnlPct >= 0 ? '+' : ''}${pnlPct.toFixed(2)}%)</div></div>
+        <div><div style="color:var(--label)">Account</div><div style="color:var(--bright)">${fmt(sess.total_account_value)}</div></div>
+      </div>
+    </div>`;
+  })();
+
+  if (sessions.length === 0) {
+    logEl.innerHTML = todayRow + '<div class="empty-state" style="margin-top:8px">No past sessions archived yet. History will appear after the first full trading day.</div>';
+  } else {
+    const histRows = sessions.map(sess => {
+      const pnl = sess.realized_pnl || 0;
+      const isUp = pnl >= 0;
+      const start = sess.starting_cash || 5000;
+      const pnlPct = start ? (pnl / start * 100) : 0;
+      const wr = sess.win_rate || (sess.trades_closed > 0 ? (sess.wins / sess.trades_closed * 100).toFixed(1) : null);
+      return `<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#0d0d0d;border:1px solid var(--border);border-radius:4px;margin-bottom:6px">
+        <div style="color:var(--text)">${sess.date}</div>
+        <div style="display:flex;gap:20px;font-size:11px;text-align:right">
+          <div><div style="color:var(--label)">Trades</div><div style="color:var(--bright)">${sess.trades_closed || 0}</div></div>
+          <div><div style="color:var(--label)">W/L</div><div style="color:var(--bright)">${sess.wins || 0}/${sess.losses || 0}</div></div>
+          <div><div style="color:var(--label)">Win Rate</div><div style="color:var(--bright)">${wr ? wr + '%' : '—'}</div></div>
+          <div><div style="color:var(--label)">P&L</div><div style="color:${isUp ? 'var(--green)':'var(--red)'}">${isUp ? '+' : ''}${fmt(pnl)} (${pnlPct >= 0 ? '+' : ''}${pnlPct.toFixed(2)}%)</div></div>
+          <div><div style="color:var(--label)">End Value</div><div style="color:var(--bright)">${fmt(sess.ending_account_value)}</div></div>
+        </div>
+      </div>`;
+    }).join('');
+    logEl.innerHTML = todayRow + histRows;
+  }
 }
 
 // ── TOGGLE THESIS ──
 function toggleThesis(el) {
   const thesis = el.nextElementSibling;
   const open = thesis.classList.toggle('open');
-  el.textContent = (open ? '▼' : '▶') + ' thesis';
+  el.textContent = (open ? '▼' : '▶') + ' full thesis & reasoning';
 }
 
 // ── FETCH DATA ──
