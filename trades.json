@@ -37,23 +37,23 @@
   "watchlist": [
     {
       "symbol": "MSFT",
-      "current_price": 442.5,
-      "confidence": 6,
+      "current_price": 438,
+      "confidence": 6.5,
       "entry_signal": false,
-      "entry_target": 450,
+      "entry_target": 445,
       "priority": 5,
-      "reason": "Strong long-term fundamentals with Azure AI tailwinds. Potential sector rotation play if macro conditions improve.",
-      "last_updated": "2026-04-14T14:53:54.457Z"
+      "reason": "Sector rotation into tech/AI. MSFT showing relative strength, potential breakout above $445 resistance.",
+      "last_updated": "2026-04-15T14:48:38.789Z"
     },
     {
       "symbol": "PLTR",
       "current_price": 155,
-      "confidence": 4.8,
+      "confidence": 6.8,
       "entry_signal": false,
-      "entry_target": 160,
+      "entry_target": 158,
       "priority": 3,
-      "reason": "Potential oversold bounce if market stabilizes. Government contract tailwinds.",
-      "last_updated": "2026-04-14T14:53:54.457Z"
+      "reason": "Oversold bounce at key support level ($150). RSI near 30, potential reversal on volume confirmation.",
+      "last_updated": "2026-04-15T14:48:38.789Z"
     },
     {
       "symbol": "ORCL",
@@ -67,23 +67,23 @@
     },
     {
       "symbol": "CRWD",
-      "current_price": 310,
-      "confidence": 5.8,
+      "current_price": 340,
+      "confidence": 7.2,
       "entry_signal": false,
-      "entry_target": 318,
-      "priority": 5,
-      "reason": "Cybersecurity leader with strong earnings growth. Potential oversold bounce if market stabilizes.",
-      "last_updated": "2026-04-14T14:53:54.457Z"
+      "entry_target": 348,
+      "priority": 2,
+      "reason": "Fresh tier-1 analyst upgrade (Goldman Sachs) with strong cybersecurity tailwinds. Potential breakout above $350 resistance.",
+      "last_updated": "2026-04-15T14:48:38.789Z"
     },
     {
       "symbol": "NVDA",
-      "current_price": 900,
-      "confidence": 5.5,
+      "current_price": 920,
+      "confidence": 7.8,
       "entry_signal": false,
-      "entry_target": 920,
-      "priority": 5,
-      "reason": "AI sector leader with strong fundamentals. Potential bounce if tech rotation resumes.",
-      "last_updated": "2026-04-14T14:53:54.457Z"
+      "entry_target": 935,
+      "priority": 1,
+      "reason": "Potential earnings gap play if NVDA beats consensus in upcoming report. AI sector leadership and strong institutional demand.",
+      "last_updated": "2026-04-15T14:48:38.789Z"
     },
     {
       "symbol": "TSLA",
@@ -107,13 +107,13 @@
     },
     {
       "symbol": "BTC",
-      "current_price": 78500,
-      "confidence": 5,
+      "current_price": 72000,
+      "confidence": 6.7,
       "entry_signal": false,
-      "entry_target": 80000,
+      "entry_target": 73500,
       "priority": 4,
-      "reason": "Leading crypto asset with potential short squeeze if macro sentiment improves.",
-      "last_updated": "2026-04-14T14:53:54.457Z"
+      "reason": "BTC reversing off $70k support with short liquidations. Potential breakout above $73.5k resistance.",
+      "last_updated": "2026-04-15T14:48:38.789Z"
     },
     {
       "symbol": "ETH",
@@ -132,7 +132,7 @@
     "qqq_above_ma": null,
     "vix": null,
     "vix_below_25": null,
-    "timestamp": "2026-04-14T21:12:36.390Z",
+    "timestamp": "2026-04-15T14:48:19.618Z",
     "gate_pass": null
   },
   "performance_metrics": {
@@ -147,9 +147,9 @@
     "consecutive_losses": 0
   },
   "system_status": {
-    "last_scan": "2026-04-14T14:53:54.457Z",
+    "last_scan": "2026-04-15T14:48:38.789Z",
     "last_eval": "2026-04-14T21:12:43.854Z",
-    "market_status": "open",
+    "market_status": "pre-market",
     "bot_version": "1.0.0",
     "trades_json_version": 1
   }
