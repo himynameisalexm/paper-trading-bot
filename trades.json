@@ -1,16 +1,16 @@
 {
   "session": {
-    "date": "2026-04-14",
+    "date": "2026-04-16",
     "starting_capital": 5000,
     "current_cash": -0.01,
-    "open_positions_value": 5003.8364844,
-    "total_account_value": 5003.8264844,
-    "realized_pnl": 0,
+    "open_positions_value": 5003.84,
+    "total_account_value": 5003.83,
+    "realized_pnl": 0.0,
     "unrealized_pnl": 3.83,
-    "total_pnl": 3.826484399999572,
+    "total_pnl": 0.0,
     "trades_closed": 0,
     "trades_open": 1,
-    "win_rate": 0,
+    "win_rate": 0.0,
     "wins": 0,
     "losses": 0,
     "break_even": 0
@@ -21,137 +21,127 @@
       "symbol": "BTC",
       "entry_price": 72309.85,
       "entry_date": "2026-04-13T17:21:06.797973Z",
-      "entry_reason": "BTC CRYPTO MOMENTUM (Priority 4) — Monday Apr 14. Macro gate GREEN: QQQ $614.57 above 50-day MA $600.34 ✅ | VIX 19.5 below 25 ✅. BTC recovering from tariff-selloff lows. Dollar weakness play after tariff pause + Iran ceasefire. Risk-on environment confirmed. Re-entering below previous $76k position for superior R/R. Entry $72,309.85 | Stop $69,706.70 (-3.6%) | Target $78,528.50 (+8.6%) | R/R 2.4:1",
+      "entry_reason": "BTC CRYPTO MOMENTUM (Priority 4) — Monday Apr 14. Macro gate GREEN: QQQ $614.57 above 50-day MA $600.34 ✅ | VIX 19.5 below 25 ✅. BTC recovering from tariff-selloff lows. Dollar weakness play after tariff pause + Iran ceasefire. Risk-on environment confirmed.",
       "shares": 0.069147,
-      "current_price": 72365.2,
+      "current_price": 75147.0,
       "stop_loss": 69706.7,
       "profit_target": 78528.5,
-      "unrealized_pnl": 3.83,
-      "unrealized_pnl_percent": 0.08,
-      "confidence": 7,
-      "thesis": "Dollar weakness + risk-on macro catalyst is the core driver. Tariff pause (Apr 9) and Iran ceasefire (Apr 8) were back-to-back regime-change events that weakened the USD. BTC historically benefits from USD softening. Previous position entered at $76k was stopped at $73k during max fear; re-entry at $72.3k is a better price. BTC was trading above EMA 50/100/200 before the selloff — strong structural base. Crypto has no gap risk (trades 24/7). PLTR flagged as next entry (RSI 29.6, oversold) when capital frees up from this position.",
-      "days_held": 0
+      "confidence": 7.0,
+      "thesis": "Dollar weakness + risk-on macro catalyst. Tariff pause (Apr 9) and Iran ceasefire (Apr 8) weakened USD. BTC benefits from USD softening. Entry at $72.3k is superior to previous $76k position. PLTR flagged as next entry (RSI 29.6, oversold) when capital frees up.",
+      "session_date": "2026-04-14"
     }
   ],
   "closed_trades": [],
   "daily_sessions": [],
   "watchlist": [
     {
-      "symbol": "MSFT",
-      "current_price": 438,
-      "confidence": 6.5,
+      "symbol": "NVDA",
+      "current_price": null,
+      "confidence": null,
       "entry_signal": false,
-      "entry_target": 445,
-      "priority": 5,
-      "reason": "Sector rotation into tech/AI. MSFT showing relative strength, potential breakout above $445 resistance.",
-      "last_updated": "2026-04-15T14:48:38.789Z"
+      "entry_target": null,
+      "priority": 1,
+      "reason": "Pending next pre-market scan",
+      "last_updated": null
     },
     {
       "symbol": "PLTR",
-      "current_price": 155,
-      "confidence": 6.8,
-      "entry_signal": false,
-      "entry_target": 158,
-      "priority": 3,
-      "reason": "Oversold bounce at key support level ($150). RSI near 30, potential reversal on volume confirmation.",
-      "last_updated": "2026-04-15T14:48:38.789Z"
-    },
-    {
-      "symbol": "ORCL",
       "current_price": null,
       "confidence": null,
       "entry_signal": false,
       "entry_target": null,
-      "priority": 2,
-      "reason": "Monitor for Stargate catalyst. No setup today.",
-      "last_updated": "2026-04-13T17:21:06.797973Z"
+      "priority": 3,
+      "reason": "Pending next pre-market scan. Previously flagged: RSI 29.6 oversold — P3 bounce candidate.",
+      "last_updated": null
     },
     {
       "symbol": "CRWD",
-      "current_price": 340,
-      "confidence": 7.2,
+      "current_price": null,
+      "confidence": null,
       "entry_signal": false,
-      "entry_target": 348,
+      "entry_target": null,
       "priority": 2,
-      "reason": "Fresh tier-1 analyst upgrade (Goldman Sachs) with strong cybersecurity tailwinds. Potential breakout above $350 resistance.",
-      "last_updated": "2026-04-15T14:48:38.789Z"
+      "reason": "Pending next pre-market scan. Previously: analyst upgrade watch, below MA50.",
+      "last_updated": null
     },
     {
-      "symbol": "NVDA",
-      "current_price": 920,
-      "confidence": 7.8,
-      "entry_signal": false,
-      "entry_target": 935,
-      "priority": 1,
-      "reason": "Potential earnings gap play if NVDA beats consensus in upcoming report. AI sector leadership and strong institutional demand.",
-      "last_updated": "2026-04-15T14:48:38.789Z"
-    },
-    {
-      "symbol": "TSLA",
+      "symbol": "META",
       "current_price": null,
       "confidence": null,
       "entry_signal": false,
       "entry_target": null,
-      "priority": 3,
-      "reason": "No setup. High volatility, needs cleaner signal.",
-      "last_updated": "2026-04-13T17:21:06.797973Z"
+      "priority": 2,
+      "reason": "New to watchlist. AI tailwind, tier-1 analyst coverage, 4-10% regular 2-day moves.",
+      "last_updated": null
     },
     {
-      "symbol": "AMD",
+      "symbol": "COIN",
       "current_price": null,
       "confidence": null,
       "entry_signal": false,
       "entry_target": null,
-      "priority": 3,
-      "reason": "No clear setup. Monitor sector strength.",
-      "last_updated": "2026-04-13T17:21:06.797973Z"
+      "priority": 4,
+      "reason": "New to watchlist. Crypto-equity bridge. 6-15% moves on macro catalysts. Complements BTC.",
+      "last_updated": null
     },
     {
       "symbol": "BTC",
-      "current_price": 72000,
-      "confidence": 6.7,
-      "entry_signal": false,
-      "entry_target": 73500,
-      "priority": 4,
-      "reason": "BTC reversing off $70k support with short liquidations. Potential breakout above $73.5k resistance.",
-      "last_updated": "2026-04-15T14:48:38.789Z"
-    },
-    {
-      "symbol": "ETH",
-      "current_price": 2226.6,
-      "confidence": 6.2,
-      "entry_signal": false,
+      "current_price": 75147.0,
+      "confidence": 7.0,
+      "entry_signal": true,
       "entry_target": null,
       "priority": 4,
-      "reason": "Following BTC. Watch for entry if BTC breaks $74k. Capital committed to BTC today.",
+      "reason": "ACTIVE POSITION. Entered $72,309.85. Current ~$75,147. Stop $69,706.70 | Target $78,528.50. Dollar weakness + risk-on macro.",
       "last_updated": "2026-04-13T17:21:06.797973Z"
+    },
+    {
+      "symbol": "HOOD",
+      "current_price": null,
+      "confidence": null,
+      "entry_signal": false,
+      "entry_target": null,
+      "priority": 3,
+      "reason": "New to watchlist. Retail sentiment driver. RSI < 35 frequent. 5-12% moves.",
+      "last_updated": null
+    },
+    {
+      "symbol": "MSFT",
+      "current_price": null,
+      "confidence": null,
+      "entry_signal": false,
+      "entry_target": null,
+      "priority": 5,
+      "reason": "Defensive anchor. Tier-1 analyst coverage. Lower volatility backup.",
+      "last_updated": null
     }
   ],
   "macro_status": {
+    "timestamp": "2026-04-16T00:00:00.000Z",
     "qqq_price": null,
     "qqq_50day_ma": null,
     "qqq_above_ma": null,
     "vix": null,
     "vix_below_25": null,
-    "timestamp": "2026-04-15T20:14:01.383Z",
-    "gate_pass": null
+    "gate_pass": null,
+    "override_active": false,
+    "override_reason": null
   },
   "performance_metrics": {
-    "daily_pnl": 0,
-    "weekly_pnl": 0,
-    "monthly_pnl": 0,
+    "daily_pnl": 0.0,
+    "weekly_pnl": 0.0,
+    "monthly_pnl": 0.0,
     "best_trade": null,
     "worst_trade": null,
-    "avg_win": 0,
-    "avg_loss": 0,
+    "avg_win": 0.0,
+    "avg_loss": 0.0,
     "consecutive_wins": 0,
     "consecutive_losses": 0
   },
   "system_status": {
-    "last_scan": "2026-04-15T14:48:38.789Z",
-    "last_eval": "2026-04-15T20:14:10.313Z",
-    "market_status": "open",
-    "bot_version": "1.0.0",
-    "trades_json_version": 1
+    "last_scan": null,
+    "last_eval": null,
+    "market_status": "closed",
+    "bot_version": "2.0.0",
+    "trades_json_version": 2
   }
 }

@@ -9,6 +9,13 @@ const RULES_PROMPT  = fs.readFileSync('./rules-prompt.txt', 'utf8');
 const TRADES_FILE   = './trades.json';
 const MISTRAL_API_KEY = process.env.MISTRAL_API_KEY;
 
+// ─── SAFEGUARD CONSTANTS (from config) ────────────────────────────────────
+const DAILY_LOSS_LIMIT_PCT  = CONFIG.trading_rules?.safeguards?.daily_loss_limit_percent  ?? 5.0;
+const EARNINGS_BLACKOUT_DAYS = CONFIG.trading_rules?.safeguards?.earnings_blackout_days   ?? 7;
+const MIN_VOLUME_RATIO       = CONFIG.trading_rules?.safeguards?.min_volume_ratio         ?? 1.5;
+const NO_ENTRY_OPEN_MIN      = CONFIG.trading_rules?.safeguards?.no_entry_before_minutes  ?? 10;
+const NO_ENTRY_CLOSE_MIN     = CONFIG.trading_rules?.safeguards?.no_entry_after_minutes_before_close ?? 30;
+
 // ─── HTTP HELPER ───────────────────────────────────────────────────────────
 function makeRequest(options, body = null) {
   return new Promise((resolve, reject) => {
@@ -41,6 +48,110 @@ function computeRSI(closes, period = 14) {
   const avgLoss = losses / period;
   if (avgLoss === 0) return 100;
   return parseFloat((100 - 100 / (1 + avgGain / avgLoss)).toFixed(1));
+}
+
+// ─── TRADING WINDOW GATE ───────────────────────────────────────────────────
+function isWithinTradingWindow() {
+  const now = new Date();
+  const etTime = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
+  const hour = etTime.getHours();
+  const minute = etTime.getMinutes();
+  const totalMin = hour * 60 + minute;
+
+  const marketOpen  = 9 * 60 + 30;   // 9:30 AM ET
+  const entryStart  = marketOpen + NO_ENTRY_OPEN_MIN;  // 9:40 AM
+  const entryEnd    = 16 * 60 - NO_ENTRY_CLOSE_MIN;    // 3:30 PM
+  const marketClose = 16 * 60;        // 4:00 PM
+
+  if (totalMin < entryStart) {
+    console.log(`[GATE] Trading window: too early (${etTime.toLocaleTimeString('en-US')} ET). No entries before 9:40 AM.`);
+    return false;
+  }
+  if (totalMin > entryEnd) {
+    console.log(`[GATE] Trading window: too late (${etTime.toLocaleTimeString('en-US')} ET). No entries after 3:30 PM.`);
+    return false;
+  }
+  console.log(`[GATE] Trading window: OPEN (${etTime.toLocaleTimeString('en-US')} ET)`);
+  return true;
+}
+
+// ─── DAILY LOSS LIMIT CHECK ────────────────────────────────────────────────
+function isDailyLossLimitHit(session) {
+  const startCap = session.starting_capital || 5000;
+  const currentVal = session.current_cash + (session.open_positions_value || 0);
+  const lossAmt = startCap - currentVal;
+  const lossPct = (lossAmt / startCap) * 100;
+
+  if (lossPct >= DAILY_LOSS_LIMIT_PCT) {
+    console.log(`[CIRCUIT BREAKER] Daily loss limit hit: -$${lossAmt.toFixed(2)} (-${lossPct.toFixed(2)}%) ≥ ${DAILY_LOSS_LIMIT_PCT}%`);
+    console.log('[CIRCUIT BREAKER] No new entries for remainder of session.');
+    return true;
+  }
+  console.log(`[GATE] Daily P&L: -$${Math.max(0, lossAmt).toFixed(2)} (-${Math.max(0, lossPct).toFixed(2)}%) — within limit`);
+  return false;
+}
+
+// ─── FETCH EARNINGS DATE ───────────────────────────────────────────────────
+async function fetchEarningsDate(symbol) {
+  if (['BTC', 'ETH', 'COIN'].includes(symbol)) return null; // crypto has no earnings
+  try {
+    const encoded = symbol;
+    const res = await makeRequest({
+      hostname: 'query1.finance.yahoo.com',
+      path: `/v8/finance/chart/${encoded}?events=earnings&interval=1d&range=90d`,
+      method: 'GET',
+      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; TradingBot/1.0)' }
+    });
+    const events = res?.chart?.result?.[0]?.events?.earnings;
+    if (!events) return null;
+
+    const nowSec = Date.now() / 1000;
+    const upcoming = Object.values(events)
+      .filter(e => e.date > nowSec)
+      .sort((a, b) => a.date - b.date);
+
+    if (upcoming.length === 0) return null;
+    return Math.floor((upcoming[0].date - nowSec) / 86400);
+  } catch (e) {
+    console.warn(`[EARNINGS] ${symbol}: ${e.message}`);
+    return null; // unknown → don't block trade
+  }
+}
+
+// ─── FETCH REDDIT SENTIMENT ────────────────────────────────────────────────
+async function fetchRedditSentiment(symbols) {
+  console.log('[REDDIT] Fetching sentiment for watchlist...');
+  const sentiment = {};
+
+  for (const symbol of symbols) {
+    const posts = [];
+    try {
+      const res = await makeRequest({
+        hostname: 'www.reddit.com',
+        path: `/search.json?q=${encodeURIComponent(symbol)}&sort=hot&limit=5&t=day`,
+        method: 'GET',
+        headers: { 'User-Agent': 'TradingBot/1.0 (paper trading research — not for commercial use)' }
+      });
+      for (const child of res?.data?.children || []) {
+        const d = child.data;
+        if (d?.title && d.ups > 10) {
+          posts.push(`"${d.title.substring(0, 120)}" (${d.ups} upvotes, ${d.num_comments} comments)`);
+        }
+      }
+    } catch (e) {
+      // Reddit unavailable — skip gracefully
+    }
+
+    sentiment[symbol] = posts.length > 0
+      ? posts.slice(0, 3)
+      : ['No significant Reddit discussion in last 24h'];
+
+    await new Promise(r => setTimeout(r, 600)); // rate limit buffer
+  }
+
+  const total = Object.values(sentiment).flat().filter(s => !s.includes('No significant')).length;
+  console.log(`[REDDIT] Found ${total} relevant posts across ${symbols.length} symbols`);
+  return sentiment;
 }
 
 // ─── FETCH SYMBOL DATA FROM V8 CHART (single call returns price + history) ──
@@ -251,13 +362,18 @@ async function preMarketScan() {
   handleDayReset(trades);
 
   const marketData = await fetchMarketData(CONFIG.watchlist);
-  const macro = await fetchMacroStatus();
+  const macro      = await fetchMacroStatus();
+  const reddit     = await fetchRedditSentiment(CONFIG.watchlist);
 
   // Build market summary — real prices only, AI provides analysis only
   let mktSummary = 'LIVE MARKET DATA (use EXACTLY these prices — never invent or guess prices):\n\n';
   for (const sym of CONFIG.watchlist) {
     const d = marketData[sym];
     if (!d?.current_price) { mktSummary += `${sym}: unavailable\n\n`; continue; }
+    const earnings = await fetchEarningsDate(sym);
+    await new Promise(r => setTimeout(r, 200));
+    const earningsStr = earnings !== null ? `${earnings} days away` : 'unknown';
+
     mktSummary += `${sym}:
   Current price: $${d.current_price.toFixed(2)} (use this exactly as current_price)
   Change vs prev close: ${d.change_pct >= 0 ? '+' : ''}${d.change_pct}%
@@ -265,7 +381,9 @@ async function preMarketScan() {
   50-day MA: $${d.ma50?.toFixed(2) ?? 'N/A'} → price is ${d.above_ma50 ? 'ABOVE' : 'BELOW'} MA
   200-day MA: $${d.ma200?.toFixed(2) ?? 'N/A'} → price is ${d.above_ma200 ? 'ABOVE' : 'BELOW'} MA
   Volume ratio: ${d.volume_ratio ?? 'N/A'}x vs 10-day avg
-  Day range: $${d.day_low?.toFixed(2) ?? '?'} – $${d.day_high?.toFixed(2) ?? '?'}\n\n`;
+  Day range: $${d.day_low?.toFixed(2) ?? '?'} – $${d.day_high?.toFixed(2) ?? '?'}
+  Next earnings: ${earningsStr}${earnings !== null && earnings < 7 ? ' ⚠️ EARNINGS BLACKOUT — do not enter' : ''}
+  Reddit (24h): ${(reddit[sym] || ['No data']).join(' | ')}\n\n`;
   }
 
   const macroStr = `MACRO GATE:
@@ -455,15 +573,18 @@ ${posLines}
 CASH: $${trades.session.current_cash.toFixed(2)} | DATE (ET): ${todayET()}
 
 DECISIONS NEEDED:
-1. Close any open positions? (discretionary — stops/targets already enforced)
-2. Open any new positions? (only if confidence ≥ 6.5, macro gate allows, cash available)
+1. Close any open positions? (discretionary — stops/targets already enforced by code)
+2. Open any new positions? (only if confidence ≥ 7.0, macro gate allows, cash available)
 3. Hold reasoning for any remaining positions
 
 RULES:
 - entry_price must equal the EXACT current price shown above
 - stop_loss = entry × 0.965, profit_target = entry × 1.07
 - Max 2 open positions total (currently ${trades.open_positions.length})
-- If no good setups available, explain in holds section
+- Min confidence 7.0 — never round up
+- Volume ratio must be ≥ 1.5x — code will also enforce this
+- Never enter if earnings within 7 days — code will also enforce this
+- If no good setups available, set new_entries to [] and explain in holds
 
 Return ONLY valid JSON in intraday_evaluation format.`;
 
@@ -485,27 +606,63 @@ Return ONLY valid JSON in intraday_evaluation format.`;
     }
   }
 
-  // ── PROCESS NEW ENTRIES ───────────────────────────────────────────────
-  if (decisions?.new_entries?.length) {
-    for (const entry of decisions.new_entries) {
-      if (trades.open_positions.length >= 2) { console.log(`[SKIP] ${entry.symbol}: max positions`); continue; }
-      const real = marketData[entry.symbol];
-      const ep   = real?.current_price; // always use real price
-      if (!ep) { console.warn(`[SKIP] ${entry.symbol}: no price`); continue; }
+  // ── GATE: Daily loss limit ────────────────────────────────────────────
+  const lossLimitHit = isDailyLossLimitHit(trades.session);
 
-      const shares = entry.shares || 10;
-      const cost   = ep * shares;
-      if (cost > trades.session.current_cash) {
-        console.warn(`[SKIP] ${entry.symbol}: need $${cost.toFixed(2)}, have $${trades.session.current_cash.toFixed(2)}`);
+  // ── GATE: Trading window (time of day) ───────────────────────────────
+  const inTradingWindow = isWithinTradingWindow();
+
+  // ── PROCESS NEW ENTRIES ───────────────────────────────────────────────
+  if (!lossLimitHit && inTradingWindow && decisions?.new_entries?.length) {
+    for (const entry of decisions.new_entries) {
+      const sym = entry.symbol;
+
+      // Max positions
+      if (trades.open_positions.length >= 2) {
+        console.log(`[SKIP] ${sym}: max positions (2/2)`); continue;
+      }
+
+      // Real price (never trust AI price)
+      const real = marketData[sym];
+      const ep   = real?.current_price;
+      if (!ep) { console.warn(`[SKIP] ${sym}: no real price data`); continue; }
+
+      // Volume gate (code-enforced)
+      const volRatio = real?.volume_ratio;
+      if (volRatio !== null && volRatio < MIN_VOLUME_RATIO) {
+        console.log(`[SKIP] ${sym}: volume gate failed (${volRatio?.toFixed(2)}x < ${MIN_VOLUME_RATIO}x required)`);
         continue;
       }
 
-      const stopL  = parseFloat((ep * 0.965).toFixed(2));
-      const targP  = parseFloat((ep * 1.07).toFixed(2));
+      // Earnings blackout (code-enforced)
+      const earningsDays = await fetchEarningsDate(sym);
+      await new Promise(r => setTimeout(r, 200));
+      if (earningsDays !== null && earningsDays < EARNINGS_BLACKOUT_DAYS) {
+        console.log(`[SKIP] ${sym}: earnings blackout — ${earningsDays} days away (need >${EARNINGS_BLACKOUT_DAYS})`);
+        continue;
+      }
+
+      // Confidence gate (min 7.0)
+      const confidence = entry.confidence || 0;
+      if (confidence < 7.0) {
+        console.log(`[SKIP] ${sym}: confidence ${confidence} < 7.0 minimum`);
+        continue;
+      }
+
+      // Cash gate
+      const shares = entry.shares || 10;
+      const cost   = ep * shares;
+      if (cost > trades.session.current_cash) {
+        console.warn(`[SKIP] ${sym}: insufficient cash ($${trades.session.current_cash.toFixed(2)} < $${cost.toFixed(2)})`);
+        continue;
+      }
+
+      const stopL = parseFloat((ep * (1 - 0.035)).toFixed(2));
+      const targP = parseFloat((ep * (1 + 0.07)).toFixed(2));
 
       trades.open_positions.push({
-        id: `trade_${Date.now()}_${entry.symbol}`,
-        symbol: entry.symbol,
+        id: `trade_${Date.now()}_${sym}`,
+        symbol: sym,
         entry_price: ep,
         entry_date: now.toISOString(),
         entry_reason: entry.thesis || entry.reasoning || entry.reason,
@@ -514,18 +671,26 @@ Return ONLY valid JSON in intraday_evaluation format.`;
         current_price: ep,
         stop_loss: stopL,
         profit_target: targP,
-        confidence: entry.confidence,
+        confidence,
         priority: entry.priority,
         rsi_at_entry: real?.rsi ?? null,
+        volume_ratio_at_entry: volRatio ?? null,
+        earnings_days_away: earningsDays,
+        macro_gate_pass: macro.gate_pass,
         session_date: todayET()
       });
 
       trades.session.current_cash -= cost;
       trades.session.trades_open   = trades.open_positions.length;
 
-      console.log(`[ENTRY] ${entry.symbol}: ${shares}sh @ $${ep.toFixed(2)} | stop $${stopL} | target $${targP}`);
-      console.log(`  Reason: ${(entry.thesis || '').substring(0, 120)}`);
+      console.log(`[ENTRY] ${sym}: ${shares}sh @ $${ep.toFixed(2)} | stop $${stopL} | target $${targP} | confidence ${confidence}`);
+      console.log(`  Vol: ${volRatio?.toFixed(2)}x | RSI: ${real?.rsi} | Earnings: ${earningsDays ?? 'unknown'} days`);
+      console.log(`  Reason: ${(entry.thesis || '').substring(0, 140)}`);
     }
+  } else if (lossLimitHit) {
+    console.log('[SKIP ALL] Daily loss limit — no new entries');
+  } else if (!inTradingWindow) {
+    console.log('[SKIP ALL] Outside trading window — no new entries');
   }
 
   // ── REFRESH WATCHLIST PRICES ──────────────────────────────────────────

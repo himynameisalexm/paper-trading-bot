@@ -5,19 +5,18 @@
   },
 
   "watchlist": [
-    "MSFT",
-    "PLTR",
-    "ORCL",
-    "CRWD",
     "NVDA",
-    "TSLA",
-    "AMD",
+    "PLTR",
+    "CRWD",
+    "META",
+    "COIN",
     "BTC",
-    "ETH"
+    "HOOD",
+    "MSFT"
   ],
 
   "trading_rules": {
-    "min_confidence": 6.5,
+    "min_confidence": 7.0,
     "max_hold_days_stocks": 2,
     "max_hold_days_crypto": 2,
     "position_size": {
@@ -30,6 +29,13 @@
       "min_reward_risk_ratio": 2.0,
       "trail_stop_trigger_percent": 5.0,
       "trail_stop_move_percent": 0.0
+    },
+    "safeguards": {
+      "daily_loss_limit_percent": 5.0,
+      "earnings_blackout_days": 7,
+      "no_entry_before_minutes": 10,
+      "no_entry_after_minutes_before_close": 30,
+      "min_volume_ratio": 1.5
     }
   },
 
@@ -37,16 +43,17 @@
     "qqq_symbol": "QQQ",
     "qqq_sma_period": 50,
     "vix_symbol": "^VIX",
-    "vix_threshold": 25,
+    "vix_threshold": 30,
     "both_required": true,
     "allow_override": true,
     "override_sizing": 0.75
   },
 
   "data_sources": {
-    "primary": "yfinance",
-    "secondary": "alpha_vantage",
-    "crypto": "yfinance"
+    "primary": "yahoo_finance_v8",
+    "reddit_sentiment": true,
+    "reddit_search_limit": 5,
+    "earnings_check": true
   },
 
   "scheduling": {
@@ -54,17 +61,16 @@
     "pre_market_scan_time": "08:00",
     "market_hours_start": "09:30",
     "market_hours_end": "16:00",
-    "intraday_eval_interval_minutes": 60
+    "intraday_eval_interval_minutes": 60,
+    "no_entry_open_minutes": 10,
+    "no_entry_close_minutes": 30
   },
 
   "api": {
     "mistral": {
       "model": "mistral-large-latest",
       "max_tokens": 2000,
-      "temperature": 0.7
-    },
-    "alpha_vantage": {
-      "api_url": "https://www.alphavantage.co/query"
+      "temperature": 0.2
     }
   }
 }
