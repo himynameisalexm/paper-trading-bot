@@ -45,7 +45,7 @@
       "last_updated": "2026-04-16T15:02:01.272Z",
       "rsi": 83.6,
       "change_pct": 11.39,
-      "volume_ratio": 0.9
+      "volume_ratio": 0.94
     },
     {
       "symbol": "PLTR",
@@ -71,7 +71,7 @@
       "last_updated": "2026-04-16T15:02:01.272Z",
       "rsi": 57.3,
       "change_pct": -5.54,
-      "volume_ratio": 0.7
+      "volume_ratio": 0.73
     },
     {
       "symbol": "META",
@@ -101,7 +101,7 @@
     },
     {
       "symbol": "BTC",
-      "current_price": 75261.25,
+      "current_price": 75270.01,
       "confidence": 7,
       "entry_signal": true,
       "entry_target": null,
@@ -109,7 +109,7 @@
       "reason": "ACTIVE POSITION. Entered $72,309.85. Current ~$75,147. Stop $69,706.70 | Target $78,528.50. Dollar weakness + risk-on macro.",
       "last_updated": "2026-04-16T15:02:01.272Z",
       "rsi": 77.1,
-      "change_pct": 9.32,
+      "change_pct": 9.34,
       "volume_ratio": 1.05
     },
     {
@@ -123,7 +123,7 @@
       "last_updated": "2026-04-16T15:02:01.272Z",
       "rsi": 73.1,
       "change_pct": -17.9,
-      "volume_ratio": 1.47
+      "volume_ratio": 1.49
     },
     {
       "symbol": "MSFT",
@@ -136,16 +136,16 @@
       "last_updated": "2026-04-16T15:02:01.272Z",
       "rsi": 82.5,
       "change_pct": -7.54,
-      "volume_ratio": 1.27
+      "volume_ratio": 1.31
     }
   ],
   "macro_status": {
     "qqq_price": 640.47,
     "qqq_50day_ma": 601.24,
     "qqq_above_ma": true,
-    "vix": 17.8,
+    "vix": 17.94,
     "vix_below_25": true,
-    "timestamp": "2026-04-16T20:09:26.911Z",
+    "timestamp": "2026-04-16T21:08:55.181Z",
     "gate_pass": true
   },
   "performance_metrics": {
@@ -161,7 +161,7 @@
   },
   "system_status": {
     "last_scan": "2026-04-16T15:02:01.272Z",
-    "last_eval": "2026-04-16T20:09:27.012Z",
+    "last_eval": "2026-04-16T21:08:55.267Z",
     "market_status": "open",
     "bot_version": "2.0.0",
     "trades_json_version": 2
