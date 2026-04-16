@@ -36,59 +36,59 @@
   "watchlist": [
     {
       "symbol": "NVDA",
-      "current_price": 198.415,
+      "current_price": 198.35,
       "confidence": null,
       "entry_signal": false,
       "entry_target": null,
       "priority": 1,
       "reason": "Pending next pre-market scan",
       "last_updated": "2026-04-16T15:02:01.272Z",
-      "rsi": 83.8,
-      "change_pct": 11.43,
-      "volume_ratio": 0.78
+      "rsi": 83.6,
+      "change_pct": 11.39,
+      "volume_ratio": 0.9
     },
     {
       "symbol": "PLTR",
-      "current_price": 142.17,
+      "current_price": 142.76,
       "confidence": null,
       "entry_signal": false,
       "entry_target": null,
       "priority": 3,
       "reason": "Pending next pre-market scan. Previously flagged: RSI 29.6 oversold — P3 bounce candidate.",
       "last_updated": "2026-04-16T15:02:01.272Z",
-      "rsi": 45.5,
-      "change_pct": -15.64,
-      "volume_ratio": 0.68
+      "rsi": 46,
+      "change_pct": -15.29,
+      "volume_ratio": 0.75
     },
     {
       "symbol": "CRWD",
-      "current_price": 416.515,
+      "current_price": 418.2,
       "confidence": null,
       "entry_signal": false,
       "entry_target": null,
       "priority": 2,
       "reason": "Pending next pre-market scan. Previously: analyst upgrade watch, below MA50.",
       "last_updated": "2026-04-16T15:02:01.272Z",
-      "rsi": 56.9,
-      "change_pct": -5.92,
-      "volume_ratio": 0.55
+      "rsi": 57.3,
+      "change_pct": -5.54,
+      "volume_ratio": 0.7
     },
     {
       "symbol": "META",
-      "current_price": 675.415,
+      "current_price": 676.87,
       "confidence": null,
       "entry_signal": false,
       "entry_target": null,
       "priority": 2,
       "reason": "New to watchlist. AI tailwind, tier-1 analyst coverage, 4-10% regular 2-day moves.",
       "last_updated": "2026-04-16T15:02:01.272Z",
-      "rsi": 84.8,
-      "change_pct": 11.8,
-      "volume_ratio": 0.45
+      "rsi": 84.9,
+      "change_pct": 12.04,
+      "volume_ratio": 0.6
     },
     {
       "symbol": "COIN",
-      "current_price": 199.68,
+      "current_price": 199.825,
       "confidence": null,
       "entry_signal": false,
       "entry_target": null,
@@ -96,12 +96,12 @@
       "reason": "New to watchlist. Crypto-equity bridge. 6-15% moves on macro catalysts. Complements BTC.",
       "last_updated": "2026-04-16T15:02:01.272Z",
       "rsi": 68.2,
-      "change_pct": -12.32,
-      "volume_ratio": 1.05
+      "change_pct": -12.25,
+      "volume_ratio": 1.17
     },
     {
       "symbol": "BTC",
-      "current_price": 75254.96,
+      "current_price": 75261.25,
       "confidence": 7,
       "entry_signal": true,
       "entry_target": null,
@@ -109,25 +109,25 @@
       "reason": "ACTIVE POSITION. Entered $72,309.85. Current ~$75,147. Stop $69,706.70 | Target $78,528.50. Dollar weakness + risk-on macro.",
       "last_updated": "2026-04-16T15:02:01.272Z",
       "rsi": 77.1,
-      "change_pct": 9.31,
-      "volume_ratio": 1.04
+      "change_pct": 9.32,
+      "volume_ratio": 1.05
     },
     {
       "symbol": "HOOD",
-      "current_price": 87.26,
+      "current_price": 86.85,
       "confidence": null,
       "entry_signal": false,
       "entry_target": null,
       "priority": 3,
       "reason": "New to watchlist. Retail sentiment driver. RSI < 35 frequent. 5-12% moves.",
       "last_updated": "2026-04-16T15:02:01.272Z",
-      "rsi": 73.9,
-      "change_pct": -17.51,
-      "volume_ratio": 1.39
+      "rsi": 73.1,
+      "change_pct": -17.9,
+      "volume_ratio": 1.47
     },
     {
       "symbol": "MSFT",
-      "current_price": 420.275,
+      "current_price": 420.26,
       "confidence": null,
       "entry_signal": false,
       "entry_target": null,
@@ -135,17 +135,17 @@
       "reason": "Defensive anchor. Tier-1 analyst coverage. Lower volatility backup.",
       "last_updated": "2026-04-16T15:02:01.272Z",
       "rsi": 82.5,
-      "change_pct": -7.53,
-      "volume_ratio": 1.04
+      "change_pct": -7.54,
+      "volume_ratio": 1.27
     }
   ],
   "macro_status": {
-    "qqq_price": 640.15,
-    "qqq_50day_ma": 601.23,
+    "qqq_price": 640.47,
+    "qqq_50day_ma": 601.24,
     "qqq_above_ma": true,
-    "vix": 17.94,
+    "vix": 17.8,
     "vix_below_25": true,
-    "timestamp": "2026-04-16T19:45:56.687Z",
+    "timestamp": "2026-04-16T20:09:26.911Z",
     "gate_pass": true
   },
   "performance_metrics": {
@@ -161,7 +161,7 @@
   },
   "system_status": {
     "last_scan": "2026-04-16T15:02:01.272Z",
-    "last_eval": "2026-04-16T19:45:56.817Z",
+    "last_eval": "2026-04-16T20:09:27.012Z",
     "market_status": "open",
     "bot_version": "2.0.0",
     "trades_json_version": 2
