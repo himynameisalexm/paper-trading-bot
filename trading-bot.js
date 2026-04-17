@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const https = require('https');
+const { execSync } = require('child_process');
 
 // ─── CONFIG ────────────────────────────────────────────────────────────────
 const CONFIG        = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
@@ -32,6 +33,39 @@ function makeRequest(options, body = null) {
     if (body) req.write(JSON.stringify(body));
     req.end();
   });
+}
+
+// ─── GIT COMMIT & PUSH ──────────────────────────────────────────────────────
+function commitAndPushTrades() {
+  try {
+    // Configure git if running in GitHub Actions
+    if (process.env.GITHUB_ACTIONS) {
+      execSync('git config user.email "github-actions[bot]@users.noreply.github.com"', { stdio: 'pipe' });
+      execSync('git config user.name "github-actions[bot]"', { stdio: 'pipe' });
+    }
+
+    // Check if there are changes to commit
+    const status = execSync('git status --porcelain trades.json', { encoding: 'utf8' });
+    if (!status.trim()) {
+      console.log('[GIT] No changes to trades.json — skipping commit');
+      return;
+    }
+
+    // Stage, commit, and push
+    execSync('git add trades.json', { stdio: 'pipe' });
+    const timestamp = new Date().toISOString().split('T')[0] + ' ' + new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York' });
+    execSync(`git commit -m "bot: update trades.json (${timestamp})"`, { stdio: 'pipe' });
+    execSync('git push origin main', { stdio: 'pipe' });
+
+    console.log('[GIT] ✓ Committed and pushed trades.json to GitHub');
+  } catch (e) {
+    if (e.message.includes('nothing to commit')) {
+      console.log('[GIT] No changes to trades.json — skipping commit');
+    } else {
+      console.error('[GIT] Error during commit/push:', e.message);
+      // Don't fail the bot run if git fails — continue trading
+    }
+  }
 }
 
 // ─── RSI(14) CALCULATOR ────────────────────────────────────────────────────
@@ -77,17 +111,22 @@ function isWithinTradingWindow() {
 
 // ─── DAILY LOSS LIMIT CHECK ────────────────────────────────────────────────
 function isDailyLossLimitHit(session) {
-  const startCap = session.starting_capital || 5000;
-  const currentVal = session.current_cash + (session.open_positions_value || 0);
-  const lossAmt = startCap - currentVal;
-  const lossPct = (lossAmt / startCap) * 100;
+  // Daily loss limit is calculated against the daily trading capital allocation ($5k)
+  // not against total account value ($20k)
+  const dailyAlloc = session.daily_trading_capital || CONFIG.account?.daily_trading_capital || 5000;
+  const dailyUsed = session.daily_trading_used || 0;
+
+  // Current profit/loss on positions entered today
+  const positionsPnL = (session.unrealized_pnl || 0) + (session.realized_pnl || 0);
+  const totalDailyPnL = -positionsPnL; // negative if loss
+  const lossPct = (totalDailyPnL / dailyAlloc) * 100;
 
   if (lossPct >= DAILY_LOSS_LIMIT_PCT) {
-    console.log(`[CIRCUIT BREAKER] Daily loss limit hit: -$${lossAmt.toFixed(2)} (-${lossPct.toFixed(2)}%) ≥ ${DAILY_LOSS_LIMIT_PCT}%`);
+    console.log(`[CIRCUIT BREAKER] Daily loss limit hit on $${dailyAlloc.toFixed(2)} allocation: -$${totalDailyPnL.toFixed(2)} (-${lossPct.toFixed(2)}%) ≥ ${DAILY_LOSS_LIMIT_PCT}%`);
     console.log('[CIRCUIT BREAKER] No new entries for remainder of session.');
     return true;
   }
-  console.log(`[GATE] Daily P&L: -$${Math.max(0, lossAmt).toFixed(2)} (-${Math.max(0, lossPct).toFixed(2)}%) — within limit`);
+  console.log(`[GATE] Daily P&L: -$${Math.max(0, totalDailyPnL).toFixed(2)} (-${Math.max(0, lossPct).toFixed(2)}%) on $${dailyAlloc.toFixed(2)} daily allocation — within limit`);
   return false;
 }
 
@@ -319,12 +358,14 @@ function handleDayReset(trades) {
   if (!trades.daily_sessions) trades.daily_sessions = [];
 
   if (trades.session?.date) {
+    // Archive yesterday's session summary
     trades.daily_sessions.unshift({
       date: trades.session.date,
-      starting_cash: trades.session.starting_capital || 5000,
-      ending_cash: trades.session.current_cash,
+      total_account_before_day: trades.session.total_account_value || 20000,
+      daily_trading_capital_used: trades.session.daily_trading_used || 0,
       ending_account_value: trades.session.total_account_value,
       realized_pnl: trades.session.realized_pnl,
+      unrealized_pnl: trades.session.unrealized_pnl,
       trades_closed: trades.session.trades_closed,
       wins: trades.session.wins,
       losses: trades.session.losses,
@@ -333,13 +374,17 @@ function handleDayReset(trades) {
     if (trades.daily_sessions.length > 30) trades.daily_sessions.pop();
   }
 
-  const carryForward = trades.session?.current_cash ?? 5000;
+  // Get current account values (carry forward from previous session)
+  const totalAcct = trades.session?.total_account_value ?? CONFIG.account?.total_account_value ?? 20000;
+  const dailyTradeAlloc = CONFIG.account?.daily_trading_capital ?? 5000;
+
   trades.session = {
     date: today,
-    starting_capital: carryForward,
-    current_cash: carryForward,
+    total_account_value: totalAcct,           // Carries across days
+    daily_trading_capital: dailyTradeAlloc,   // Resets to $5k each day
+    daily_trading_used: 0,                    // Fresh allocation each day
+    current_cash: totalAcct,                  // Total cash (not session-locked)
     open_positions_value: 0,
-    total_account_value: carryForward,
     realized_pnl: 0,
     unrealized_pnl: 0,
     total_pnl: 0,
@@ -348,7 +393,7 @@ function handleDayReset(trades) {
     win_rate: 0, wins: 0, losses: 0, break_even: 0
   };
 
-  console.log(`[DAY RESET] New session starts with $${carryForward.toFixed(2)}`);
+  console.log(`[DAY RESET] New session: Total account $${totalAcct.toFixed(2)} | Daily trading capital reset to $${dailyTradeAlloc.toFixed(2)}`);
   return true;
 }
 
@@ -420,6 +465,8 @@ Return ONLY valid JSON in the watchlist_generation format from your instructions
   trades.macro_status = { ...macro };
 
   if (analysis?.candidates && Array.isArray(analysis.candidates)) {
+    // ALL symbols should appear in candidates per the updated prompt
+    let updatedCount = 0;
     for (const c of analysis.candidates) {
       const real = marketData[c.symbol];
       const item = trades.watchlist.find(w => w.symbol === c.symbol);
@@ -432,12 +479,35 @@ Return ONLY valid JSON in the watchlist_generation format from your instructions
         item.profit_target = c.profit_target     ?? null;
         item.priority      = c.priority          ?? 5;
         item.reason        = c.thesis            ?? c.reason ?? null;
+        item.technical_setup = c.technical_setup ?? null;
         item.rsi           = real?.rsi           ?? null;
         item.change_pct    = real?.change_pct    ?? null;
         item.volume_ratio  = real?.volume_ratio  ?? null;
         item.last_updated  = new Date().toISOString();
+        updatedCount++;
       }
     }
+
+    // For any symbol NOT returned by AI, still update its price data
+    const aiSymbols = new Set(analysis.candidates.map(c => c.symbol));
+    for (const item of trades.watchlist) {
+      if (!aiSymbols.has(item.symbol)) {
+        const real = marketData[item.symbol];
+        if (real?.current_price != null) {
+          item.current_price = real.current_price;
+          item.rsi           = real.rsi;
+          item.change_pct    = real.change_pct;
+          item.volume_ratio  = real.volume_ratio;
+          item.confidence    = null;
+          item.entry_signal  = false;
+          item.reason        = 'Not rated in today\'s scan';
+          item.last_updated  = new Date().toISOString();
+        }
+      }
+    }
+
+    const signalCount = trades.watchlist.filter(w => w.confidence != null).length;
+    console.log(`[SCAN] ${updatedCount} symbols rated by AI | ${signalCount} with confidence scores | ${trades.watchlist.filter(w => w.entry_signal).length} entry signals`);
   } else {
     // Fallback: price-only update if AI fails
     console.warn('[WARN] No candidates from AI — refreshing prices only');
@@ -457,6 +527,7 @@ Return ONLY valid JSON in the watchlist_generation format from your instructions
   trades.system_status.market_status = 'pre-market';
 
   fs.writeFileSync(TRADES_FILE, JSON.stringify(trades, null, 2));
+  commitAndPushTrades();
   console.log('\n[✓] Pre-market scan complete.\n');
 }
 
@@ -649,11 +720,23 @@ Return ONLY valid JSON in intraday_evaluation format.`;
         continue;
       }
 
-      // Cash gate
+      // Position sizing and capital gates
       const shares = entry.shares || 10;
       const cost   = ep * shares;
+
+      // Check total account cash available
       if (cost > trades.session.current_cash) {
-        console.warn(`[SKIP] ${sym}: insufficient cash ($${trades.session.current_cash.toFixed(2)} < $${cost.toFixed(2)})`);
+        console.warn(`[SKIP] ${sym}: insufficient account cash ($${trades.session.current_cash.toFixed(2)} < $${cost.toFixed(2)})`);
+        continue;
+      }
+
+      // Check daily trading capital allocation ($5k per day)
+      const dailyTradeCapital = trades.session.daily_trading_capital || CONFIG.account?.daily_trading_capital || 5000;
+      const dailyUsed = trades.session.daily_trading_used || 0;
+      const dailyRemaining = dailyTradeCapital - dailyUsed;
+
+      if (cost > dailyRemaining) {
+        console.warn(`[SKIP] ${sym}: exceeds daily trading capital ($${cost.toFixed(2)} > $${dailyRemaining.toFixed(2)} remaining of $${dailyTradeCapital.toFixed(2)} daily allocation)`);
         continue;
       }
 
@@ -680,7 +763,9 @@ Return ONLY valid JSON in intraday_evaluation format.`;
         session_date: todayET()
       });
 
+      // Deduct from both total account cash and daily trading allocation
       trades.session.current_cash -= cost;
+      trades.session.daily_trading_used = (trades.session.daily_trading_used || 0) + cost;
       trades.session.trades_open   = trades.open_positions.length;
 
       console.log(`[ENTRY] ${sym}: ${shares}sh @ $${ep.toFixed(2)} | stop $${stopL} | target $${targP} | confidence ${confidence}`);
@@ -725,6 +810,7 @@ Return ONLY valid JSON in intraday_evaluation format.`;
   trades.system_status.market_status = 'open';
 
   fs.writeFileSync(TRADES_FILE, JSON.stringify(trades, null, 2));
+  commitAndPushTrades();
 
   console.log('\n────────────────────────────────────────────────');
   console.log(`  Cash:          $${trades.session.current_cash.toFixed(2)}`);

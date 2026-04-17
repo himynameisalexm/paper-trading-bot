@@ -1,10 +1,11 @@
 {
   "session": {
     "date": "2026-04-17",
-    "starting_capital": 5168.17919795,
-    "current_cash": 5168.17919795,
+    "total_account_value": 20168.18,
+    "daily_trading_capital": 5000,
+    "daily_trading_used": 0,
+    "current_cash": 20168.18,
     "open_positions_value": 0,
-    "total_account_value": 5168.18,
     "realized_pnl": 0,
     "unrealized_pnl": 0,
     "total_pnl": 0,

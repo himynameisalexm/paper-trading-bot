@@ -1,6 +1,7 @@
 {
   "account": {
-    "starting_capital": 5000,
+    "total_account_value": 20000,
+    "daily_trading_capital": 5000,
     "base_currency": "USD"
   },
 
@@ -35,7 +36,7 @@
       "earnings_blackout_days": 7,
       "no_entry_before_minutes": 10,
       "no_entry_after_minutes_before_close": 30,
-      "min_volume_ratio": 1.5
+      "min_volume_ratio": 1.2
     }
   },
 

@@ -103,7 +103,7 @@ If QQQ below MA50 → Amber light, same override conditions as above
 
 - **RSI (14)**: Overbought >70 (avoid entering), Oversold <35 (bounce candidate), Momentum 40-60 (neutral)
 - **Moving Averages**: Support at 50-day MA, Resistance at 200-day MA
-- **Volume**: Entry MUST have volume surge (>150% of 10-day avg). If volume_ratio < 1.5, confidence should reflect this — the bot will also enforce this in code.
+- **Volume**: Strong entry prefers volume surge (>120% of 10-day avg). If volume_ratio < 1.2, lower confidence by 0.5–1.0 points. The bot will enforce this in code as well.
 - **Support/Resistance**: Historical swing levels, round numbers ($50, $100, $200, etc)
 - **Trend**: Higher highs/lows = uptrend (favour), Lower highs/lows = downtrend (avoid unless oversold bounce)
 
@@ -124,6 +124,9 @@ Watchlist is NOT fixed. Symbols are added/removed based on catalyst availability
 ## RESPONSE FORMAT (VERY IMPORTANT - return structured JSON only)
 
 For WATCHLIST GENERATION (pre-market scan):
+
+IMPORTANT: You MUST rate EVERY symbol in the watchlist — not just top picks. This is required so the website always shows analysis for every symbol. Minimum 3 symbols must have entry_signal: true OR a confidence score ≥ 6.0 (as "watching" candidates). If no symbols have genuine entry setups, still rate all of them and set entry_signal: false with a clear thesis explaining why.
+
 ```json
 {
   "analysis_type": "watchlist_generation",
@@ -146,13 +149,30 @@ For WATCHLIST GENERATION (pre-market scan):
       "profit_target": 212.79,
       "thesis": "Fresh Goldman Sachs upgrade targeting $230. RSI 71 approaching overbought but strong volume surge 2.1x avg confirms institutional buying. Wait for brief pullback to $197 support.",
       "technical_setup": "RSI 71.4 (elevated), above 50-day MA $182, volume ratio 2.1x, day high $199.50",
-      "entry_signal": false,
+      "entry_signal": true,
       "reason_for_confidence": "Tier-1 upgrade + institutional volume + AI sector leadership",
       "earnings_days_away": 45
+    },
+    {
+      "rank": 2,
+      "symbol": "PLTR",
+      "confidence": 5.5,
+      "priority": 3,
+      "current_price": 146.25,
+      "entry_target": null,
+      "stop_loss": null,
+      "profit_target": null,
+      "thesis": "RSI 52 neutral, volume low at 0.66x. No entry signal today — watching for volume pickup and break above $150 resistance.",
+      "technical_setup": "RSI 52.7, below MA50, volume ratio 0.66x",
+      "entry_signal": false,
+      "reason_for_confidence": "Low volume, no catalyst today",
+      "earnings_days_away": 30
     }
   ]
 }
 ```
+
+ALL watchlist symbols must appear in the candidates array every day, even if entry_signal is false.
 
 For INTRADAY EVALUATION (hourly trading):
 ```json
