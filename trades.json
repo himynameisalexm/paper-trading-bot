@@ -4,7 +4,7 @@
     "starting_capital": 5168.17919795,
     "current_cash": 5168.17919795,
     "open_positions_value": 0,
-    "total_account_value": 5168.17919795,
+    "total_account_value": 5168.18,
     "realized_pnl": 0,
     "unrealized_pnl": 0,
     "total_pnl": 0,
@@ -48,7 +48,7 @@
   "watchlist": [
     {
       "symbol": "NVDA",
-      "current_price": 200.63,
+      "current_price": 200.76,
       "confidence": null,
       "entry_signal": false,
       "entry_target": null,
@@ -56,38 +56,38 @@
       "reason": "Pending next pre-market scan",
       "last_updated": "2026-04-17T14:23:17.930Z",
       "rsi": 92.6,
-      "change_pct": 9.44,
-      "volume_ratio": 0.38
+      "change_pct": 9.51,
+      "volume_ratio": 0.54
     },
     {
       "symbol": "PLTR",
-      "current_price": 146.865,
+      "current_price": 148,
       "confidence": null,
       "entry_signal": false,
       "entry_target": null,
       "priority": 3,
       "reason": "Pending next pre-market scan. Previously flagged: RSI 29.6 oversold — P3 bounce candidate.",
       "last_updated": "2026-04-17T14:23:17.930Z",
-      "rsi": 53.2,
-      "change_pct": -11.17,
-      "volume_ratio": 0.25
+      "rsi": 54,
+      "change_pct": -10.48,
+      "volume_ratio": 0.41
     },
     {
       "symbol": "CRWD",
-      "current_price": 423.78,
+      "current_price": 423.55,
       "confidence": null,
       "entry_signal": false,
       "entry_target": null,
       "priority": 2,
       "reason": "Pending next pre-market scan. Previously: analyst upgrade watch, below MA50.",
       "last_updated": "2026-04-17T14:23:17.930Z",
-      "rsi": 67.2,
-      "change_pct": -4.96,
-      "volume_ratio": 0.28
+      "rsi": 67.1,
+      "change_pct": -5.01,
+      "volume_ratio": 0.36
     },
     {
       "symbol": "META",
-      "current_price": 683.87,
+      "current_price": 684.92,
       "confidence": null,
       "entry_signal": false,
       "entry_target": null,
@@ -95,69 +95,69 @@
       "reason": "New to watchlist. AI tailwind, tier-1 analyst coverage, 4-10% regular 2-day moves.",
       "last_updated": "2026-04-17T14:23:17.930Z",
       "rsi": 96.4,
-      "change_pct": 11.57,
-      "volume_ratio": 0.27
+      "change_pct": 11.74,
+      "volume_ratio": 0.42
     },
     {
       "symbol": "COIN",
-      "current_price": 208.985,
+      "current_price": 211.72,
       "confidence": null,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
       "reason": "New to watchlist. Crypto-equity bridge. 6-15% moves on macro catalysts. Complements BTC.",
       "last_updated": "2026-04-17T14:23:17.930Z",
-      "rsi": 84.4,
-      "change_pct": -7.91,
-      "volume_ratio": 0.41
+      "rsi": 85,
+      "change_pct": -6.7,
+      "volume_ratio": 0.84
     },
     {
       "symbol": "BTC",
-      "current_price": 77537.02,
+      "current_price": 77786.25,
       "confidence": 7,
       "entry_signal": true,
       "entry_target": null,
       "priority": 4,
       "reason": "ACTIVE POSITION. Entered $72,309.85. Current ~$75,147. Stop $69,706.70 | Target $78,528.50. Dollar weakness + risk-on macro.",
       "last_updated": "2026-04-17T14:23:17.930Z",
-      "rsi": 80,
-      "change_pct": 14.88,
-      "volume_ratio": 1.21
+      "rsi": 80.3,
+      "change_pct": 15.25,
+      "volume_ratio": 1.29
     },
     {
       "symbol": "HOOD",
-      "current_price": 91.55,
+      "current_price": 92.179,
       "confidence": null,
       "entry_signal": false,
       "entry_target": null,
       "priority": 3,
       "reason": "New to watchlist. Retail sentiment driver. RSI < 35 frequent. 5-12% moves.",
       "last_updated": "2026-04-17T14:23:17.930Z",
-      "rsi": 85.3,
-      "change_pct": -13.57,
-      "volume_ratio": 0.44
+      "rsi": 85.6,
+      "change_pct": -12.97,
+      "volume_ratio": 0.74
     },
     {
       "symbol": "MSFT",
-      "current_price": 424.61,
+      "current_price": 430.333,
       "confidence": null,
       "entry_signal": false,
       "entry_target": null,
       "priority": 5,
       "reason": "Defensive anchor. Tier-1 analyst coverage. Lower volatility backup.",
       "last_updated": "2026-04-17T14:23:17.930Z",
-      "rsi": 93.1,
-      "change_pct": -4.39,
-      "volume_ratio": 0.38
+      "rsi": 93.6,
+      "change_pct": -3.1,
+      "volume_ratio": 0.67
     }
   ],
   "macro_status": {
-    "qqq_price": 646.89,
-    "qqq_50day_ma": 602.06,
+    "qqq_price": 649.45,
+    "qqq_50day_ma": 602.11,
     "qqq_above_ma": true,
-    "vix": 17.59,
+    "vix": 17.21,
     "vix_below_25": true,
-    "timestamp": "2026-04-17T14:22:51.059Z",
+    "timestamp": "2026-04-17T15:34:26.337Z",
     "gate_pass": true
   },
   "performance_metrics": {
@@ -173,8 +173,8 @@
   },
   "system_status": {
     "last_scan": "2026-04-17T14:23:17.930Z",
-    "last_eval": "2026-04-16T21:08:55.267Z",
-    "market_status": "pre-market",
+    "last_eval": "2026-04-17T15:34:26.555Z",
+    "market_status": "open",
     "bot_version": "2.0.0",
     "trades_json_version": 2
   }
