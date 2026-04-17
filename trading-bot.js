@@ -29,7 +29,7 @@ function makeRequest(options, body = null) {
       });
     });
     req.on('error', reject);
-    req.setTimeout(20000, () => { req.destroy(new Error('Request timeout')); });
+    req.setTimeout(55000, () => { req.destroy(new Error('Request timeout')); });
     if (body) req.write(JSON.stringify(body));
     req.end();
   });
