@@ -84,25 +84,63 @@ function computeRSI(closes, period = 14) {
   return parseFloat((100 - 100 / (1 + avgGain / avgLoss)).toFixed(1));
 }
 
+// ─── CRYPTO SYMBOLS ────────────────────────────────────────────────────────
+const CRYPTO_SYMBOLS = new Set(['BTC', 'ETH', 'SOL', 'COIN']);
+
+function isCrypto(symbol) {
+  return CRYPTO_SYMBOLS.has(symbol);
+}
+
+// ─── WEEKEND DETECTION ────────────────────────────────────────────────────
+function isWeekend() {
+  const etTime = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }));
+  const day = etTime.getDay(); // 0 = Sunday, 6 = Saturday
+  return day === 0 || day === 6;
+}
+
+// Returns only the symbols that are tradeable right now
+// Weekends: crypto only (stocks market is closed)
+// Weekdays: everything
+function getActiveSymbols(symbolList) {
+  if (isWeekend()) {
+    const cryptoOnly = symbolList.filter(s => isCrypto(s));
+    console.log(`[WEEKEND] Stock markets closed — scanning crypto only: ${cryptoOnly.join(', ')}`);
+    return cryptoOnly;
+  }
+  return symbolList;
+}
+
 // ─── TRADING WINDOW GATE ───────────────────────────────────────────────────
-function isWithinTradingWindow() {
+// symbol param: crypto bypasses the stock market open/close window
+function isWithinTradingWindow(symbol = null) {
+  // Crypto trades 24/7 — no time restriction
+  if (symbol && isCrypto(symbol)) {
+    console.log(`[GATE] Trading window: OPEN (crypto trades 24/7)`);
+    return true;
+  }
+
+  // On weekends, no stock entries at all
+  if (isWeekend()) {
+    console.log(`[GATE] Trading window: CLOSED — weekend, stock markets closed`);
+    return false;
+  }
+
   const now = new Date();
   const etTime = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
   const hour = etTime.getHours();
   const minute = etTime.getMinutes();
   const totalMin = hour * 60 + minute;
 
-  const marketOpen  = 9 * 60 + 30;   // 9:30 AM ET
+  const marketOpen  = 9 * 60 + 30;
   const entryStart  = marketOpen + NO_ENTRY_OPEN_MIN;  // 9:40 AM
   const entryEnd    = 16 * 60 - NO_ENTRY_CLOSE_MIN;    // 3:30 PM
-  const marketClose = 16 * 60;        // 4:00 PM
 
   if (totalMin < entryStart) {
-    console.log(`[GATE] Trading window: too early (${etTime.toLocaleTimeString('en-US')} ET). No entries before 9:40 AM.`);
+    console.log(`[GATE] Trading window: too early (${etTime.toLocaleTimeString('en-US')} ET). No stock entries before 9:40 AM.`);
     return false;
   }
   if (totalMin > entryEnd) {
-    console.log(`[GATE] Trading window: too late (${etTime.toLocaleTimeString('en-US')} ET). No entries after 3:30 PM.`);
+    console.log(`[GATE] Trading window: too late (${etTime.toLocaleTimeString('en-US')} ET). No stock entries after 3:30 PM.`);
     return false;
   }
   console.log(`[GATE] Trading window: OPEN (${etTime.toLocaleTimeString('en-US')} ET)`);
@@ -406,9 +444,10 @@ async function preMarketScan() {
   const trades = JSON.parse(fs.readFileSync(TRADES_FILE, 'utf8'));
   handleDayReset(trades);
 
-  const marketData = await fetchMarketData(CONFIG.watchlist);
-  const macro      = await fetchMacroStatus();
-  const reddit     = await fetchRedditSentiment(CONFIG.watchlist);
+  const activeSymbols = getActiveSymbols(CONFIG.watchlist);
+  const marketData = await fetchMarketData(activeSymbols);
+  const macro      = isWeekend() ? { gate_pass: true, qqq_above_ma: null, vix_below_25: null, weekend: true } : await fetchMacroStatus();
+  const reddit     = await fetchRedditSentiment(activeSymbols);
 
   // Build market summary — real prices only, AI provides analysis only
   let mktSummary = 'LIVE MARKET DATA (use EXACTLY these prices — never invent or guess prices):\n\n';
@@ -540,9 +579,14 @@ async function intradayEvaluation() {
   const trades = JSON.parse(fs.readFileSync(TRADES_FILE, 'utf8'));
   handleDayReset(trades);
 
-  const allSymbols = [...new Set([...CONFIG.watchlist, ...trades.open_positions.map(p => p.symbol)])];
+  const weekend = isWeekend();
+  const activeWatchlist = getActiveSymbols(CONFIG.watchlist);
+  // Always include open position symbols so we can manage/exit them even on weekends
+  const allSymbols = [...new Set([...activeWatchlist, ...trades.open_positions.map(p => p.symbol)])];
   const marketData = await fetchMarketData(allSymbols);
-  const macro      = await fetchMacroStatus();
+  const macro      = weekend
+    ? { gate_pass: true, qqq_above_ma: null, vix_below_25: null, weekend: true, gate_note: 'Weekend — crypto only, macro gate N/A' }
+    : await fetchMacroStatus();
 
   // Update position prices from real data
   for (const pos of trades.open_positions) {
@@ -613,26 +657,28 @@ async function intradayEvaluation() {
     }
   }
 
-  // ── BUILD AI PROMPT ───────────────────────────────────────────────────
-  const mktLines = CONFIG.watchlist.map(s => {
-    const d = marketData[s];
-    return d?.current_price
-      ? `${s}: $${d.current_price.toFixed(2)} | RSI ${d.rsi ?? 'N/A'} | ${d.change_pct >= 0 ? '+' : ''}${d.change_pct}% | Vol ${d.volume_ratio?.toFixed(1) ?? 'N/A'}x | MA50 ${d.above_ma50 ? 'ABOVE' : 'BELOW'}`
-      : `${s}: unavailable`;
-  }).join('\n');
+  // ── BUILD AI PROMPT (combined watchlist scoring + position decisions) ──
+  let mktSummary = 'LIVE MARKET DATA (use EXACTLY these prices — never invent or guess):\n\n';
+  for (const sym of CONFIG.watchlist) {
+    const d = marketData[sym];
+    if (!d?.current_price) { mktSummary += `${sym}: unavailable\n\n`; continue; }
+    mktSummary += `${sym}:
+  Price: $${d.current_price.toFixed(2)} | Change: ${d.change_pct >= 0 ? '+' : ''}${d.change_pct}%
+  RSI(14): ${d.rsi ?? 'N/A'} | Vol ratio: ${d.volume_ratio?.toFixed(2) ?? 'N/A'}x vs 10-day avg
+  MA50: $${d.ma50?.toFixed(2) ?? 'N/A'} (${d.above_ma50 ? 'ABOVE ✓' : 'BELOW ✗'}) | MA200: $${d.ma200?.toFixed(2) ?? 'N/A'} (${d.above_ma200 ? 'ABOVE ✓' : 'BELOW ✗'})
+  Day range: $${d.day_low?.toFixed(2) ?? '?'} – $${d.day_high?.toFixed(2) ?? '?'}\n\n`;
+  }
 
   const posLines = trades.open_positions.length
     ? trades.open_positions.map(pos => {
         const pnl = (pos.current_price - pos.entry_price) * pos.shares;
         const pct = ((pos.current_price - pos.entry_price) / pos.entry_price * 100).toFixed(2);
         const days = ((now - new Date(pos.entry_date)) / 86400000).toFixed(1);
-        return `${pos.symbol}: ${pos.shares}sh @ $${pos.entry_price.toFixed(2)} | now $${pos.current_price.toFixed(2)} | P&L $${pnl.toFixed(2)} (${pct}%) | stop $${pos.stop_loss.toFixed(2)} | target $${pos.profit_target.toFixed(2)} | days ${days}`;
+        return `  ${pos.symbol}: ${pos.shares}sh @ $${pos.entry_price.toFixed(2)} | now $${pos.current_price.toFixed(2)} | P&L $${pnl.toFixed(2)} (${pct}%) | stop $${pos.stop_loss.toFixed(2)} | target $${pos.profit_target.toFixed(2)} | held ${days} days`;
       }).join('\n')
-    : 'None';
+    : '  None';
 
-  const prompt = `LIVE MARKET DATA (use exact prices — never guess):
-${mktLines}
-
+  const prompt = `${mktSummary}
 MACRO GATE:
   QQQ $${macro.qqq_price?.toFixed(2) ?? 'N/A'} vs MA50 $${macro.qqq_50day_ma?.toFixed(2) ?? 'N/A'} → ${macro.qqq_above_ma ? 'ABOVE ✓' : 'BELOW ✗'}
   VIX ${macro.vix?.toFixed(2) ?? 'N/A'} → ${macro.vix_below_25 ? 'OK ✓' : 'HIGH ✗'}
@@ -641,23 +687,22 @@ MACRO GATE:
 OPEN POSITIONS (${trades.open_positions.length}/2):
 ${posLines}
 
-CASH: $${trades.session.current_cash.toFixed(2)} | DATE (ET): ${todayET()}
+CASH: $${trades.session.current_cash.toFixed(2)} | DATE/TIME (ET): ${todayET()} ${new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York' })}
+DAILY TRADING CAPITAL: $${(trades.session.daily_trading_capital || 5000).toFixed(2)} | Used today: $${(trades.session.daily_trading_used || 0).toFixed(2)}
 
-DECISIONS NEEDED:
-1. Close any open positions? (discretionary — stops/targets already enforced by code)
-2. Open any new positions? (only if confidence ≥ 7.0, macro gate allows, cash available)
-3. Hold reasoning for any remaining positions
+TASKS — return BOTH sections:
+1. WATCHLIST: Rate EVERY symbol above with a confidence score. All symbols must appear in the watchlist array. At least 3 must have a confidence score (even if entry_signal is false). Be honest — if no setup is there, say so with a clear thesis.
+2. POSITIONS: Should any open position be closed early (discretionary)? Any new entries that meet all rules?
 
 RULES:
-- entry_price must equal the EXACT current price shown above
+- entry_price = EXACT current price listed above (never guess)
 - stop_loss = entry × 0.965, profit_target = entry × 1.07
-- Max 2 open positions total (currently ${trades.open_positions.length})
-- Min confidence 7.0 — never round up
-- Volume ratio must be ≥ 1.5x — code will also enforce this
-- Never enter if earnings within 7 days — code will also enforce this
-- If no good setups available, set new_entries to [] and explain in holds
+- Max 2 open positions (currently ${trades.open_positions.length})
+- Min confidence 7.0 to enter — never round up
+- Volume ratio ≥ 1.2x required (code enforces this)
+- No entries if earnings within 7 days (code enforces this)
 
-Return ONLY valid JSON in intraday_evaluation format.`;
+Return ONLY valid JSON in hourly_evaluation format.`;
 
   let decisions = null;
   try {
@@ -665,6 +710,33 @@ Return ONLY valid JSON in intraday_evaluation format.`;
     decisions = parseAI(aiText);
   } catch (e) {
     console.error('[ERROR] Mistral failed:', e.message);
+  }
+
+  // ── UPDATE WATCHLIST CONFIDENCE SCORES (every hourly run) ────────────
+  if (decisions?.watchlist && Array.isArray(decisions.watchlist)) {
+    let scored = 0;
+    for (const c of decisions.watchlist) {
+      const real = marketData[c.symbol];
+      const item = trades.watchlist.find(w => w.symbol === c.symbol);
+      if (item) {
+        item.current_price   = real?.current_price ?? item.current_price;
+        item.confidence      = c.confidence        ?? null;
+        item.entry_signal    = c.entry_signal      ?? false;
+        item.entry_target    = c.entry_target      ?? null;
+        item.stop_loss       = c.stop_loss         ?? null;
+        item.profit_target   = c.profit_target     ?? null;
+        item.priority        = c.priority          ?? item.priority;
+        item.reason          = c.thesis            ?? c.reason ?? item.reason;
+        item.technical_setup = c.technical_setup   ?? null;
+        item.rsi             = real?.rsi           ?? item.rsi;
+        item.change_pct      = real?.change_pct    ?? item.change_pct;
+        item.volume_ratio    = real?.volume_ratio  ?? item.volume_ratio;
+        item.last_updated    = new Date().toISOString();
+        if (c.confidence != null) scored++;
+      }
+    }
+    const signals = trades.watchlist.filter(w => w.entry_signal).length;
+    console.log(`[WATCHLIST] ${scored}/${trades.watchlist.length} symbols scored | ${signals} entry signals`);
   }
 
   // ── PROCESS AI EXITS ──────────────────────────────────────────────────
@@ -680,13 +752,16 @@ Return ONLY valid JSON in intraday_evaluation format.`;
   // ── GATE: Daily loss limit ────────────────────────────────────────────
   const lossLimitHit = isDailyLossLimitHit(trades.session);
 
-  // ── GATE: Trading window (time of day) ───────────────────────────────
-  const inTradingWindow = isWithinTradingWindow();
-
   // ── PROCESS NEW ENTRIES ───────────────────────────────────────────────
-  if (!lossLimitHit && inTradingWindow && decisions?.new_entries?.length) {
+  if (!lossLimitHit && decisions?.new_entries?.length) {
     for (const entry of decisions.new_entries) {
       const sym = entry.symbol;
+
+      // Trading window gate — checked per symbol (crypto is 24/7, stocks are weekday market hours only)
+      if (!isWithinTradingWindow(sym)) {
+        console.log(`[SKIP] ${sym}: outside trading window`);
+        continue;
+      }
 
       // Max positions
       if (trades.open_positions.length >= 2) {

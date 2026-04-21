@@ -2,7 +2,7 @@ name: Pre-Market Scan
 
 on:
   schedule:
-    - cron: '0 13 * * 1-5'
+    - cron: '0 12 * * *'   # 8:00 AM ET — deep pre-market analysis
   workflow_dispatch:
 
 jobs:

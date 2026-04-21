@@ -1,18 +1,20 @@
-name: Intraday Evaluation
+name: Hourly Market Scan
 
 on:
   schedule:
-    - cron: '30 14 * * 1-5'
-    - cron: '30 15 * * 1-5'
-    - cron: '30 16 * * 1-5'
-    - cron: '30 17 * * 1-5'
-    - cron: '30 18 * * 1-5'
-    - cron: '30 19 * * 1-5'
-    - cron: '30 20 * * 1-5'
+    - cron: '0 12 * * *'   # 8:00 AM ET  — pre-market
+    - cron: '0 13 * * *'   # 9:00 AM ET  — pre-open
+    - cron: '0 14 * * *'   # 10:00 AM ET — market open
+    - cron: '0 15 * * *'   # 11:00 AM ET
+    - cron: '0 16 * * *'   # 12:00 PM ET
+    - cron: '0 17 * * *'   # 1:00 PM ET
+    - cron: '0 18 * * *'   # 2:00 PM ET
+    - cron: '0 19 * * *'   # 3:00 PM ET
+    - cron: '0 20 * * *'   # 4:00 PM ET  — market close
   workflow_dispatch:
 
 jobs:
-  intraday-eval:
+  hourly-scan:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -24,7 +26,7 @@ jobs:
         with:
           node-version: '20'
       - run: npm install
-      - name: Run Intraday Evaluation
+      - name: Run Hourly Scan
         env:
           MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
         run: node trading-bot.js eval
@@ -36,5 +38,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}
           git add trades.json
-          git diff --staged --quiet || git commit -m "bot: intraday eval $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git diff --staged --quiet || git commit -m "bot: hourly scan $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           git push
