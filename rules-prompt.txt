@@ -174,11 +174,13 @@ IMPORTANT: You MUST rate EVERY symbol in the watchlist — not just top picks. T
 
 ALL watchlist symbols must appear in the candidates array every day, even if entry_signal is false.
 
-For INTRADAY EVALUATION (hourly trading):
+For HOURLY EVALUATION (runs every hour during market hours — combines watchlist scoring + position decisions):
+
+CRITICAL: The `watchlist` array MUST include ALL symbols. Every symbol gets a confidence score every hour. This is how the website stays live and useful throughout the day.
+
 ```json
 {
-  "analysis_type": "intraday_evaluation",
-  "timestamp": "2026-04-16T14:30:00Z",
+  "analysis_type": "hourly_evaluation",
   "macro_gate": {
     "qqq_above_ma": true,
     "vix_below_30": true,
@@ -186,17 +188,35 @@ For INTRADAY EVALUATION (hourly trading):
     "override_active": false,
     "reasoning": "brief"
   },
-  "portfolio_check": {
-    "current_cash": 3250.50,
-    "open_positions_count": 1,
-    "open_positions_value": 1749.50,
-    "total_value": 5000.00
-  },
-  "position_exits": [
+  "watchlist": [
+    {
+      "symbol": "NVDA",
+      "confidence": 7.5,
+      "entry_signal": true,
+      "priority": 1,
+      "entry_target": 200.50,
+      "stop_loss": 193.48,
+      "profit_target": 214.54,
+      "thesis": "RSI 65 (healthy momentum), above MA50, volume 1.6x average. Goldman upgrade still in play. Clean long setup.",
+      "technical_setup": "RSI 65, above MA50 $182, vol 1.6x"
+    },
     {
       "symbol": "PLTR",
+      "confidence": 5.5,
+      "entry_signal": false,
+      "priority": 3,
+      "entry_target": null,
+      "stop_loss": null,
+      "profit_target": null,
+      "thesis": "RSI 52 neutral, volume 0.66x — below 1.2x minimum. No catalyst visible. Watch for volume pickup and break above $150.",
+      "technical_setup": "RSI 52.7, below MA50, vol 0.66x"
+    }
+  ],
+  "position_exits": [
+    {
+      "symbol": "BTC",
       "action": "CLOSE",
-      "reason": "Profit target hit. RSI now 72 (overbought). Volume declining. Close to lock gains.",
+      "reason": "RSI 85 — overbought. Volume declining. Target within 1% — close to lock gains.",
       "exit_confidence": 8.0
     }
   ],
@@ -206,22 +226,12 @@ For INTRADAY EVALUATION (hourly trading):
       "action": "BUY",
       "confidence": 7.5,
       "shares": 10,
-      "entry_price": 402.03,
-      "stop_loss": 387.96,
-      "profit_target": 430.17,
+      "entry_price": 423.25,
+      "stop_loss": 408.43,
+      "profit_target": 452.88,
       "priority": 2,
-      "thesis": "Goldman Sachs upgrade to Buy + cybersecurity sector rotation. RSI 47 (neutral), above MA50, volume 1.8x average. Clean setup.",
-      "risk_reward_ratio": 2.0,
-      "reasoning": "Priority 2 setup. Tier-1 upgrade confirmed. RSI not overbought. Volume confirms. Macro gate GREEN."
-    }
-  ],
-  "holds": [
-    {
-      "symbol": "BTC",
-      "action": "HOLD",
-      "current_price": 75000,
-      "unrealized_pnl_percent": 3.7,
-      "next_check": "Watch for break above $76k resistance. Trail stop now at break-even."
+      "thesis": "Cybersecurity sector rotation. RSI 47 neutral, above MA50, volume 1.8x. Clean setup.",
+      "risk_reward_ratio": 2.0
     }
   ]
 }
