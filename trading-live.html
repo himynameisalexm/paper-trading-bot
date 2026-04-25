@@ -277,15 +277,22 @@ function render(data) {
   const macro = data.macro_status || {};
 
   // Macro gate
-  if (macro.qqq_price != null) {
-    const qEl = document.getElementById('macroBadgeQQQ');
+  const qEl = document.getElementById('macroBadgeQQQ');
+  if (macro.weekend) {
+    qEl.textContent = 'N/A';
+    qEl.className = 'macro-badge';
+    qEl.style.color = 'var(--label)';
+  } else if (macro.qqq_above_ma != null) {
     qEl.textContent = macro.qqq_above_ma ? 'PASS' : 'FAIL';
     qEl.className = 'macro-badge ' + (macro.qqq_above_ma ? 'pass' : 'fail');
-    qEl.title = `QQQ $${macro.qqq_price?.toFixed(2)} vs MA50 $${macro.qqq_50day_ma?.toFixed(2)}`;
   }
-  if (macro.vix != null) {
-    const vEl = document.getElementById('macroBadgeVIX');
-    vEl.textContent = `${macro.vix?.toFixed(1)} — ${macro.vix_below_25 ? 'PASS' : 'FAIL'}`;
+  const vEl = document.getElementById('macroBadgeVIX');
+  if (macro.weekend) {
+    vEl.textContent = 'N/A';
+    vEl.className = 'macro-badge';
+    vEl.style.color = 'var(--label)';
+  } else if (macro.vix_below_25 != null) {
+    vEl.textContent = macro.vix_below_25 ? 'PASS' : 'FAIL';
     vEl.className = 'macro-badge ' + (macro.vix_below_25 ? 'pass' : 'fail');
   }
   if (macro.gate_pass != null) {
@@ -293,13 +300,16 @@ function render(data) {
     if (macro.override_active) {
       gEl.textContent = 'OVERRIDE';
       gEl.className = 'macro-badge override';
+    } else if (macro.weekend) {
+      gEl.textContent = 'CRYPTO ONLY';
+      gEl.className = 'macro-badge override';
     } else {
       gEl.textContent = macro.gate_pass ? 'GREEN' : 'RED';
       gEl.className = 'macro-badge ' + (macro.gate_pass ? 'pass' : 'fail');
     }
   }
   const overEl = document.getElementById('macroOverride');
-  overEl.textContent = macro.override_reason ? `Override: ${macro.override_reason}` : '';
+  overEl.textContent = macro.gate_note || (macro.override_reason ? `Override: ${macro.override_reason}` : '');
 
   // Stats — use closed_trades array for all-time realized P&L to avoid daily reset
   const allTradesPnl = (data.closed_trades || []).reduce((sum, t) => sum + (t.realized_pnl || 0), 0);
@@ -462,7 +472,8 @@ function render(data) {
     const sess = data.session || {};
     const todayPnl = (sess.realized_pnl || 0) + (sess.unrealized_pnl || 0);
     const isUp = todayPnl >= 0;
-    const startingCap = sess.starting_capital || 5000;
+    // Use account value to compute daily P&L % (starting_capital not in trades.json)
+    const startingCap = sess.total_account_value ? (sess.total_account_value - todayPnl) : (sess.daily_trading_capital || 5000);
     const pnlPct = startingCap ? (todayPnl / startingCap * 100) : 0;
     return `<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#0d0d0d;border:1px solid #3ddc8444;border-radius:4px;margin-bottom:8px">
       <div>
@@ -529,9 +540,18 @@ async function fetchData() {
     const lastEval = data.system_status?.last_eval;
     const marketStatus = data.system_status?.market_status || 'unknown';
 
-    dot.className = 'dot ' + (marketStatus === 'open' ? 'green' : '');
+    // Determine real market status based on current time (ET) and day
+    const etNow = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }));
+    const etDay = etNow.getDay(); // 0=Sun, 6=Sat
+    const etHour = etNow.getHours();
+    const etMin = etNow.getMinutes();
+    const etMins = etHour * 60 + etMin;
+    const isWeekend = etDay === 0 || etDay === 6;
+    const isMarketHours = !isWeekend && etMins >= 570 && etMins < 960; // 9:30–4:00 PM ET
+    const realStatus = isWeekend ? 'weekend' : (isMarketHours ? 'open' : 'closed');
+    dot.className = 'dot ' + (realStatus === 'open' ? 'green' : realStatus === 'weekend' ? 'gold' : '');
     const lastUpdate = lastEval || lastScan;
-    statusText.textContent = `Market: ${marketStatus.toUpperCase()} · Last update: ${lastUpdate ? fmtDate(lastUpdate) : 'Pending first run'}`;
+    statusText.textContent = `Market: ${realStatus.toUpperCase()} · Last update: ${lastUpdate ? fmtDate(lastUpdate) : 'Pending first run'}`;
   } catch (e) {
     dot.className = 'dot red';
     statusText.textContent = 'Error loading data: ' + e.message;
