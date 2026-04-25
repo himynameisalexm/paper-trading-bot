@@ -85,7 +85,7 @@ function computeRSI(closes, period = 14) {
 }
 
 // ─── CRYPTO SYMBOLS ────────────────────────────────────────────────────────
-const CRYPTO_SYMBOLS = new Set(['BTC', 'ETH', 'SOL', 'COIN']);
+const CRYPTO_SYMBOLS = new Set(['BTC', 'ETH']);
 
 function isCrypto(symbol) {
   return CRYPTO_SYMBOLS.has(symbol);

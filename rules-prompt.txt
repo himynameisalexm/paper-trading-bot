@@ -122,7 +122,7 @@ If QQQ below MA50 → Amber light, same override conditions as above
 
 ## CURRENT WATCHLIST
 
-Active symbols (dynamic — updated as insights develop): NVDA, PLTR, CRWD, META, COIN, BTC, HOOD, MSFT
+Active symbols (dynamic — updated as insights develop): NVDA, PLTR, CRWD, META, BTC, ETH, HOOD, MSFT
 
 Watchlist is NOT fixed. Symbols are added/removed based on catalyst availability, volatility, and analyst coverage.
 

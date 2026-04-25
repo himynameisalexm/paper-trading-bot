@@ -198,20 +198,20 @@
       "technical_setup": "N/A"
     },
     {
-      "symbol": "COIN",
-      "current_price": 199.77,
-      "confidence": 4.5,
+      "symbol": "ETH",
+      "current_price": null,
+      "confidence": null,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
-      "reason": "Price down 4.61% with RSI 64.3 (neutral), but volume ratio only 0.53x — well below required 1.2x minimum. No support confirmation visible. Macro gate also closed. No entry signal.",
-      "last_updated": "2026-04-25T19:56:03.960Z",
-      "rsi": 64.3,
-      "change_pct": -4.61,
-      "volume_ratio": 0.53,
+      "reason": "Added to watchlist. Ethereum — crypto momentum, trades 24/7 alongside BTC.",
+      "last_updated": null,
+      "rsi": null,
+      "change_pct": null,
+      "volume_ratio": null,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "RSI 64.3, MA50 support at $184.54 (price above), volume ratio 0.53x, day low $196.55"
+      "technical_setup": null
     },
     {
       "symbol": "BTC",
