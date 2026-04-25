@@ -2,8 +2,7 @@ name: Hourly Market Scan
 
 on:
   schedule:
-    - cron: '0 12 * * *'   # 8:00 AM ET  — pre-market
-    - cron: '0 13 * * *'   # 9:00 AM ET  — pre-open
+    - cron: '30 12 * * *'  # 8:30 AM ET  — after pre-market scan
     - cron: '0 14 * * *'   # 10:00 AM ET — market open
     - cron: '0 15 * * *'   # 11:00 AM ET
     - cron: '0 16 * * *'   # 12:00 PM ET

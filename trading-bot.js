@@ -341,10 +341,10 @@ async function fetchMacroStatus() {
   return macro;
 }
 
-// ─── CALL MISTRAL AI ───────────────────────────────────────────────────────
-async function callMistral(prompt) {
-  if (!MISTRAL_API_KEY) throw new Error('MISTRAL_API_KEY not set');
-  console.log('[MISTRAL] Calling API...');
+// ─── CALL MISTRAL AI (with retry) ─────────────────────────────────────────
+async function callMistral(prompt, attempt = 1) {
+  if (!MISTRAL_API_KEY) throw new Error('MISTRAL_API_KEY not set — add it as a GitHub repository secret');
+  console.log(`[MISTRAL] Calling API... (attempt ${attempt}/2)`);
   const res = await makeRequest({
     hostname: 'api.mistral.ai',
     path: '/v1/chat/completions',
@@ -366,6 +366,17 @@ async function callMistral(prompt) {
   const content = res?.choices?.[0]?.message?.content;
   if (!content) throw new Error(`Bad Mistral response: ${JSON.stringify(res).substring(0, 200)}`);
   return content;
+}
+
+// Wrapper with 1 automatic retry on timeout/failure
+async function callMistralWithRetry(prompt) {
+  try {
+    return await callMistral(prompt, 1);
+  } catch (e) {
+    console.warn(`[MISTRAL] Attempt 1 failed (${e.message}) — retrying in 10s...`);
+    await new Promise(r => setTimeout(r, 10000));
+    return await callMistral(prompt, 2);
+  }
 }
 
 // ─── PARSE AI JSON ─────────────────────────────────────────────────────────
@@ -495,7 +506,7 @@ Return ONLY valid JSON in the watchlist_generation format from your instructions
   console.log('[MISTRAL] Pre-market scan prompt sent...');
   let analysis = null;
   try {
-    const aiText = await callMistral(prompt);
+    const aiText = await callMistralWithRetry(prompt);
     analysis = parseAI(aiText);
   } catch (e) {
     console.error('[ERROR] Mistral failed:', e.message);
@@ -706,7 +717,7 @@ Return ONLY valid JSON in hourly_evaluation format.`;
 
   let decisions = null;
   try {
-    const aiText = await callMistral(prompt);
+    const aiText = await callMistralWithRetry(prompt);
     decisions = parseAI(aiText);
   } catch (e) {
     console.error('[ERROR] Mistral failed:', e.message);
@@ -795,23 +806,33 @@ Return ONLY valid JSON in hourly_evaluation format.`;
         continue;
       }
 
-      // Position sizing and capital gates
-      const shares = entry.shares || 10;
-      const cost   = ep * shares;
-
-      // Check total account cash available
-      if (cost > trades.session.current_cash) {
-        console.warn(`[SKIP] ${sym}: insufficient account cash ($${trades.session.current_cash.toFixed(2)} < $${cost.toFixed(2)})`);
-        continue;
-      }
-
-      // Check daily trading capital allocation ($5k per day)
+      // Position sizing — dollar-based, max 50% of daily capital per position
       const dailyTradeCapital = trades.session.daily_trading_capital || CONFIG.account?.daily_trading_capital || 5000;
       const dailyUsed = trades.session.daily_trading_used || 0;
       const dailyRemaining = dailyTradeCapital - dailyUsed;
 
-      if (cost > dailyRemaining) {
-        console.warn(`[SKIP] ${sym}: exceeds daily trading capital ($${cost.toFixed(2)} > $${dailyRemaining.toFixed(2)} remaining of $${dailyTradeCapital.toFixed(2)} daily allocation)`);
+      if (dailyRemaining <= 0) {
+        console.warn(`[SKIP] ${sym}: daily trading capital fully used ($${dailyTradeCapital.toFixed(2)})`);
+        continue;
+      }
+
+      // Each position gets at most half the daily capital (so 2 positions fit per day)
+      const maxPositionDollars = Math.min(dailyRemaining, dailyTradeCapital / 2);
+
+      let shares;
+      if (isCrypto(sym)) {
+        // Crypto: dollar-based fractional shares (e.g. 0.032 BTC)
+        shares = parseFloat((maxPositionDollars / ep).toFixed(6));
+      } else {
+        // Stocks: whole shares, dollar-capped
+        shares = Math.max(1, Math.floor(maxPositionDollars / ep));
+      }
+
+      const cost = parseFloat((ep * shares).toFixed(2));
+
+      // Check total account cash available
+      if (cost > trades.session.current_cash) {
+        console.warn(`[SKIP] ${sym}: insufficient account cash ($${trades.session.current_cash.toFixed(2)} < $${cost.toFixed(2)})`);
         continue;
       }
 
