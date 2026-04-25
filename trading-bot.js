@@ -849,8 +849,6 @@ Return ONLY valid JSON in hourly_evaluation format.`;
     }
   } else if (lossLimitHit) {
     console.log('[SKIP ALL] Daily loss limit — no new entries');
-  } else if (!inTradingWindow) {
-    console.log('[SKIP ALL] Outside trading window — no new entries');
   }
 
   // ── REFRESH WATCHLIST PRICES ──────────────────────────────────────────
