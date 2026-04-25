@@ -784,11 +784,11 @@ Return ONLY valid JSON in hourly_evaluation format.`;
       const ep   = real?.current_price;
       if (!ep) { console.warn(`[SKIP] ${sym}: no real price data`); continue; }
 
-      // Volume gate (code-enforced)
+      // Volume — logged for audit trail, NOT a hard gate
+      // AI already factors volume into confidence score — confidence is the driver
       const volRatio = real?.volume_ratio;
       if (volRatio !== null && volRatio < MIN_VOLUME_RATIO) {
-        console.log(`[SKIP] ${sym}: volume gate failed (${volRatio?.toFixed(2)}x < ${MIN_VOLUME_RATIO}x required)`);
-        continue;
+        console.log(`[NOTE] ${sym}: low volume (${volRatio?.toFixed(2)}x) — AI confidence ${confidence} still clears 7.0, proceeding`);
       }
 
       // Earnings blackout (code-enforced)
