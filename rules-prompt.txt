@@ -103,7 +103,7 @@ If QQQ below MA50 → Amber light, same override conditions as above
 
 - **RSI (14)**: Overbought >70 (avoid entering), Oversold <35 (bounce candidate), Momentum 40-60 (neutral)
 - **Moving Averages**: Support at 50-day MA, Resistance at 200-day MA
-- **Volume**: Strong entry prefers volume surge (>120% of 10-day avg). If volume_ratio < 1.2, lower confidence by 0.5–1.0 points. The bot will enforce this in code as well.
+- **Volume**: Entry requires at least average volume (≥100% of 10-day avg, i.e. volume_ratio ≥ 1.0). If volume_ratio < 1.0, set entry_signal: false — do not recommend entry on below-average volume days. Above 1.5x is ideal and should boost confidence by 0.5 points. The bot will enforce the 1.0x minimum in code as well.
 - **Support/Resistance**: Historical swing levels, round numbers ($50, $100, $200, etc)
 - **Trend**: Higher highs/lows = uptrend (favour), Lower highs/lows = downtrend (avoid unless oversold bounce)
 
