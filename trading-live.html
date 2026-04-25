@@ -301,8 +301,9 @@ function render(data) {
   const overEl = document.getElementById('macroOverride');
   overEl.textContent = macro.override_reason ? `Override: ${macro.override_reason}` : '';
 
-  // Stats
-  const totalPnl = (s.realized_pnl || 0) + (s.unrealized_pnl || 0);
+  // Stats — use closed_trades array for all-time realized P&L to avoid daily reset
+  const allTradesPnl = (data.closed_trades || []).reduce((sum, t) => sum + (t.realized_pnl || 0), 0);
+  const totalPnl = allTradesPnl + (s.unrealized_pnl || 0);
   const pnlEl = document.getElementById('statTotalPnl');
   pnlEl.textContent = (totalPnl >= 0 ? '+' : '') + fmt(totalPnl);
   pnlEl.className = 'stat-value ' + (totalPnl > 0 ? 'green' : totalPnl < 0 ? 'red' : '');
@@ -310,12 +311,16 @@ function render(data) {
   document.getElementById('statAccountValue').textContent = fmt(s.total_account_value);
   document.getElementById('statCash').textContent = fmt(s.current_cash);
   document.getElementById('statOpenPositions').textContent = (data.open_positions || []).length;
-  document.getElementById('statClosedTrades').textContent = s.trades_closed || 0;
+  // All-time stats from closed_trades array (session counters reset daily)
+  const allTrades = data.closed_trades || [];
+  const allWins = allTrades.filter(t => t.realized_pnl > 0).length;
+  const allTimeWinRate = allTrades.length > 0 ? (allWins / allTrades.length * 100).toFixed(1) : null;
 
-  const wr = s.win_rate;
+  document.getElementById('statClosedTrades').textContent = allTrades.length;
+
   const wrEl = document.getElementById('statWinRate');
-  wrEl.textContent = wr ? wr + '%' : '—';
-  wrEl.className = 'stat-value ' + (wr > 50 ? 'green' : wr < 50 && wr > 0 ? 'red' : '');
+  wrEl.textContent = allTimeWinRate !== null ? allTimeWinRate + '%' : '—';
+  wrEl.className = 'stat-value ' + (allTimeWinRate > 50 ? 'green' : allTimeWinRate < 50 && allTimeWinRate > 0 ? 'red' : '');
 
   // Open Positions
   const posEl = document.getElementById('openPositions');
