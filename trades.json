@@ -153,13 +153,13 @@
       "entry_target": null,
       "priority": 5,
       "reason": "Price data unavailable — no recommendation made.",
-      "last_updated": "2026-04-26T19:49:18.202Z",
+      "last_updated": "2026-04-26T20:38:03.075Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "N/A"
+      "technical_setup": "Data unavailable"
     },
     {
       "symbol": "PLTR",
@@ -169,13 +169,13 @@
       "entry_target": null,
       "priority": 5,
       "reason": "Price data unavailable — no recommendation made.",
-      "last_updated": "2026-04-26T19:49:18.202Z",
+      "last_updated": "2026-04-26T20:38:03.075Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "N/A"
+      "technical_setup": "Data unavailable"
     },
     {
       "symbol": "CRWD",
@@ -185,13 +185,13 @@
       "entry_target": null,
       "priority": 5,
       "reason": "Price data unavailable — no recommendation made.",
-      "last_updated": "2026-04-26T19:49:18.202Z",
+      "last_updated": "2026-04-26T20:38:03.075Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "N/A"
+      "technical_setup": "Data unavailable"
     },
     {
       "symbol": "META",
@@ -201,45 +201,45 @@
       "entry_target": null,
       "priority": 5,
       "reason": "Price data unavailable — no recommendation made.",
-      "last_updated": "2026-04-26T19:49:18.202Z",
+      "last_updated": "2026-04-26T20:38:03.075Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "N/A"
+      "technical_setup": "Data unavailable"
     },
     {
       "symbol": "ETH",
-      "current_price": 2366.51,
+      "current_price": 2369.32,
       "confidence": 5.5,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
-      "reason": "RSI 62 is neutral, but volume ratio 0.52x is extremely low. No clear catalyst or breakout. Macro gate failure adds risk. Watching for volume pickup or support hold at $2300.",
-      "last_updated": "2026-04-26T19:49:18.202Z",
-      "rsi": 62,
-      "change_pct": 16.76,
-      "volume_ratio": 0.52,
+      "reason": "ETH RSI 62.2 (neutral), volume ratio 0.53x (low). No entry signal — volume too weak for momentum trade. Watching for break above $2370 resistance with volume confirmation.",
+      "last_updated": "2026-04-26T20:38:03.075Z",
+      "rsi": 62.2,
+      "change_pct": 16.9,
+      "volume_ratio": 0.53,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "RSI 62, above MA50 $2180, vol ratio 0.52x, day high $2369.92"
+      "technical_setup": "RSI 62.2, above MA50, vol ratio 0.53x (weak), day high $2370.99"
     },
     {
       "symbol": "BTC",
-      "current_price": 78226.05,
+      "current_price": 78332.96,
       "confidence": 5,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
-      "reason": "RSI 73 is elevated, approaching overbought. Volume ratio 0.52x is extremely low, indicating weak participation. No clear support/resistance breakout. Macro gate failure adds risk. Avoid until volume confirms.",
-      "last_updated": "2026-04-26T19:49:18.202Z",
-      "rsi": 73,
-      "change_pct": 15.97,
+      "reason": "Price data unavailable for NVDA/PLTR/MSFT — focusing on crypto. BTC RSI 73.2 (elevated), volume ratio 0.52x (extremely low). No entry signal — overbought with weak volume. Watching for pullback to MA50 $71562 for potential bounce.",
+      "last_updated": "2026-04-26T20:38:03.075Z",
+      "rsi": 73.2,
+      "change_pct": 16.13,
       "volume_ratio": 0.52,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "RSI 73, above MA50 $71560, vol ratio 0.52x, day high $78407.98"
+      "technical_setup": "RSI 73.2 (overbought), above MA50, vol ratio 0.52x (very weak), day high $78407.98"
     },
     {
       "symbol": "HOOD",
@@ -249,13 +249,13 @@
       "entry_target": null,
       "priority": 5,
       "reason": "Price data unavailable — no recommendation made.",
-      "last_updated": "2026-04-26T19:49:18.202Z",
+      "last_updated": "2026-04-26T20:38:03.075Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "N/A"
+      "technical_setup": "Data unavailable"
     },
     {
       "symbol": "MSFT",
@@ -265,13 +265,13 @@
       "entry_target": null,
       "priority": 5,
       "reason": "Price data unavailable — no recommendation made.",
-      "last_updated": "2026-04-26T19:49:18.202Z",
+      "last_updated": "2026-04-26T20:38:03.075Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "N/A"
+      "technical_setup": "Data unavailable"
     }
   ],
   "macro_status": {
@@ -294,7 +294,7 @@
   },
   "system_status": {
     "last_scan": "2026-04-26T12:57:21.223Z",
-    "last_eval": "2026-04-26T19:49:04.596Z",
+    "last_eval": "2026-04-26T20:37:49.567Z",
     "market_status": "open",
     "bot_version": "2.0.0",
     "trades_json_version": 2
