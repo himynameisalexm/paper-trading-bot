@@ -644,9 +644,10 @@ async function intradayEvaluation() {
       session_date: todayET()
     });
 
-    trades.session.realized_pnl  += pnl;
-    trades.session.current_cash  += pos.entry_price * pos.shares + pnl;
-    trades.session.trades_closed += 1;
+    trades.session.realized_pnl      += pnl;
+    trades.session.current_cash      += pos.entry_price * pos.shares + pnl;
+    trades.session.daily_trading_used = Math.max(0, (trades.session.daily_trading_used || 0) - (pos.entry_price * pos.shares));
+    trades.session.trades_closed     += 1;
     if (pnl > 0) trades.session.wins++;
     else if (pnl < 0) trades.session.losses++;
     else trades.session.break_even++;
@@ -784,6 +785,13 @@ Return ONLY valid JSON in hourly_evaluation format.`;
       const ep   = real?.current_price;
       if (!ep) { console.warn(`[SKIP] ${sym}: no real price data`); continue; }
 
+      // Confidence gate (min 7.0) — declared first to avoid temporal dead zone
+      const confidence = entry.confidence || 0;
+      if (confidence < 7.0) {
+        console.log(`[SKIP] ${sym}: confidence ${confidence} < 7.0 minimum`);
+        continue;
+      }
+
       // Volume — logged for audit trail, NOT a hard gate
       // AI already factors volume into confidence score — confidence is the driver
       const volRatio = real?.volume_ratio;
@@ -796,13 +804,6 @@ Return ONLY valid JSON in hourly_evaluation format.`;
       await new Promise(r => setTimeout(r, 200));
       if (earningsDays !== null && earningsDays < EARNINGS_BLACKOUT_DAYS) {
         console.log(`[SKIP] ${sym}: earnings blackout — ${earningsDays} days away (need >${EARNINGS_BLACKOUT_DAYS})`);
-        continue;
-      }
-
-      // Confidence gate (min 7.0)
-      const confidence = entry.confidence || 0;
-      if (confidence < 7.0) {
-        console.log(`[SKIP] ${sym}: confidence ${confidence} < 7.0 minimum`);
         continue;
       }
 
@@ -829,6 +830,12 @@ Return ONLY valid JSON in hourly_evaluation format.`;
       }
 
       const cost = parseFloat((ep * shares).toFixed(2));
+
+      // Guard: never enter a zero-share or zero-cost position
+      if (shares <= 0 || cost <= 0) {
+        console.warn(`[SKIP] ${sym}: position size is zero (shares=${shares}, cost=$${cost}) — daily budget likely exhausted`);
+        continue;
+      }
 
       // Check total account cash available
       if (cost > trades.session.current_cash) {
