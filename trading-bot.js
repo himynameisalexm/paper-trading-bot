@@ -752,11 +752,24 @@ Return ONLY valid JSON in hourly_evaluation format.`;
   }
 
   // ── PROCESS AI EXITS ──────────────────────────────────────────────────
+  // Hard gate: AI can only close early if position is close to stop OR close to target.
+  // This prevents Mistral from exiting at +0.2% / -0.3% after just one hour.
+  // Hard stops and max-hold are already enforced by the auto-exit block above.
   if (decisions?.position_exits?.length) {
     for (const ex of decisions.position_exits) {
       const real = marketData[ex.symbol]?.current_price;
-      if (real && trades.open_positions.find(p => p.symbol === ex.symbol)) {
+      const pos  = trades.open_positions.find(p => p.symbol === ex.symbol);
+      if (!real || !pos) continue;
+
+      const pnlPct = (real - pos.entry_price) / pos.entry_price * 100;
+      const nearStop   = pnlPct <= -2.5;   // within 1% of 3.5% stop
+      const nearTarget = pnlPct >= 6.0;    // within 1% of 7% target
+      const canExit    = nearStop || nearTarget;
+
+      if (canExit) {
         closePosition(ex.symbol, real, ex.reason || 'AI discretionary exit');
+      } else {
+        console.log(`[HOLD] ${ex.symbol}: AI suggested exit but position is ${pnlPct >= 0 ? '+' : ''}${pnlPct.toFixed(2)}% — not near stop (-3.5%) or target (+7%). Holding.`);
       }
     }
   }

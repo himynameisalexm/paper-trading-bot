@@ -118,7 +118,21 @@ If QQQ below MA50 → Amber light, same override conditions as above
 - **Profit Target** (Take profit): 7% above entry price. Close when target hit if exhaustion signals present.
 - **Trail Stop**: Once position is +5% in profit, move stop loss to break-even (+0.5%). Let winners run.
 - **Max Hold**: Close if position reaches 2 trading days (stocks) / 2 calendar days (crypto) — whichever comes first.
-- **Early Exit**: If target hit AND exhaustion signals (bearish divergence, volume decline, reversal candle), close intraday.
+- **Early Exit**: ONLY valid if position is ≥6% profit AND there are clear exhaustion signals (RSI >75 AND volume declining). Do NOT exit early just because a position is flat or slightly up/down.
+
+## HOLD DISCIPLINE — CRITICAL
+
+**DEFAULT ACTION IS ALWAYS HOLD.** Do NOT recommend closing a position unless one of these is true:
+1. Price is within 1% of stop loss (down ≥2.5%) → recommend close to limit further loss
+2. Price is within 1% of profit target (up ≥6%) → recommend close to lock in gains
+3. Max hold period has been reached (2 trading days for stocks, 2 calendar days for crypto)
+4. There is a specific, named catalyst event that invalidates the trade thesis (e.g. earnings miss, sector news)
+
+**If none of the above apply → set position_exits: [] (empty). Do not include the position in position_exits at all.**
+
+Positions that are +0.1% to +2% are WORKING. They need time to reach +7%. Do not cut them early.
+Positions that are -0.1% to -2% are within normal noise. The stop is at -3.5% — let the stop do its job.
+Exiting at small gains (<3%) defeats the entire 2:1 reward:risk strategy. Hold until target or stop.
 
 ## CURRENT WATCHLIST
 
