@@ -322,9 +322,11 @@ function render(data) {
   document.getElementById('statCash').textContent = fmt(s.current_cash);
   document.getElementById('statOpenPositions').textContent = (data.open_positions || []).length;
   // All-time stats from closed_trades array (session counters reset daily)
+  // Exclude $0 P&L trades (break-even / legacy bug artifacts) from win rate
   const allTrades = data.closed_trades || [];
-  const allWins = allTrades.filter(t => t.realized_pnl > 0).length;
-  const allTimeWinRate = allTrades.length > 0 ? (allWins / allTrades.length * 100).toFixed(1) : null;
+  const decidedTrades = allTrades.filter(t => t.realized_pnl !== 0);
+  const allWins = decidedTrades.filter(t => t.realized_pnl > 0).length;
+  const allTimeWinRate = decidedTrades.length > 0 ? (allWins / decidedTrades.length * 100).toFixed(1) : null;
 
   document.getElementById('statClosedTrades').textContent = allTrades.length;
 
