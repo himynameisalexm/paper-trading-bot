@@ -501,6 +501,16 @@ OPEN POSITIONS: ${trades.open_positions?.length ?? 0}/2 slots used
 CRITICAL: In your response, set current_price to EXACTLY the values I listed above.
 DO NOT change or hallucinate prices. Only provide analysis, confidence, entry targets, and thesis.
 
+THESIS REQUIREMENT — MANDATORY: Every thesis field MUST cover ALL of these in 4–7 sentences:
+  (a) RSI value + interpretation (overbought/oversold/neutral momentum)
+  (b) Volume ratio + what it signals (institutional flow, thin trading, etc.)
+  (c) Price vs MA50 and MA200 — above/below and what that means for support/resistance
+  (d) Macro alignment — does QQQ/VIX backdrop support or work against this trade?
+  (e) Reddit/social sentiment — what is the retail narrative? Does it reinforce or contradict the technical setup?
+  (f) Bull case (one sentence) + Bear case (one sentence)
+  (g) Entry/no-entry decision with confidence level stated explicitly
+One-liner theses are NOT acceptable. Write a complete analyst note for every symbol.
+
 Return ONLY valid JSON in the watchlist_generation format from your instructions.`;
 
   console.log('[MISTRAL] Pre-market scan prompt sent...');
@@ -595,6 +605,7 @@ async function intradayEvaluation() {
   // Always include open position symbols so we can manage/exit them even on weekends
   const allSymbols = [...new Set([...activeWatchlist, ...trades.open_positions.map(p => p.symbol)])];
   const marketData = await fetchMarketData(allSymbols);
+  const reddit     = await fetchRedditSentiment(activeWatchlist);
   const macro      = weekend
     ? { gate_pass: true, qqq_above_ma: null, vix_below_25: null, weekend: true, gate_note: 'Weekend — crypto only, macro gate N/A' }
     : await fetchMacroStatus();
@@ -678,7 +689,8 @@ async function intradayEvaluation() {
   Price: $${d.current_price.toFixed(2)} | Change: ${d.change_pct >= 0 ? '+' : ''}${d.change_pct}%
   RSI(14): ${d.rsi ?? 'N/A'} | Vol ratio: ${d.volume_ratio?.toFixed(2) ?? 'N/A'}x vs 10-day avg
   MA50: $${d.ma50?.toFixed(2) ?? 'N/A'} (${d.above_ma50 ? 'ABOVE ✓' : 'BELOW ✗'}) | MA200: $${d.ma200?.toFixed(2) ?? 'N/A'} (${d.above_ma200 ? 'ABOVE ✓' : 'BELOW ✗'})
-  Day range: $${d.day_low?.toFixed(2) ?? '?'} – $${d.day_high?.toFixed(2) ?? '?'}\n\n`;
+  Day range: $${d.day_low?.toFixed(2) ?? '?'} – $${d.day_high?.toFixed(2) ?? '?'}
+  Reddit (24h): ${(reddit[sym] || ['No significant Reddit discussion']).join(' | ')}\n\n`;
   }
 
   const posLines = trades.open_positions.length
@@ -703,8 +715,18 @@ CASH: $${trades.session.current_cash.toFixed(2)} | DATE/TIME (ET): ${todayET()} 
 DAILY TRADING CAPITAL: $${(trades.session.daily_trading_capital || 5000).toFixed(2)} | Used today: $${(trades.session.daily_trading_used || 0).toFixed(2)}
 
 TASKS — return BOTH sections:
-1. WATCHLIST: Rate EVERY symbol above with a confidence score. All symbols must appear in the watchlist array. At least 3 must have a confidence score (even if entry_signal is false). Be honest — if no setup is there, say so with a clear thesis.
+1. WATCHLIST: Rate EVERY symbol above with a confidence score. All symbols must appear in the watchlist array. At least 3 must have a confidence score (even if entry_signal is false). Be honest — if no setup is there, say so with a detailed thesis explaining why.
 2. POSITIONS: Should any open position be closed early (discretionary)? Any new entries that meet all rules?
+
+THESIS REQUIREMENT — MANDATORY: Every thesis field MUST cover ALL of these in 4–7 sentences:
+  (a) RSI value + interpretation (overbought/oversold/neutral momentum)
+  (b) Volume ratio + what it signals (institutional flow, thin trading, etc.)
+  (c) Price vs MA50 and MA200 — above/below and what that means for support/resistance
+  (d) Macro alignment — does QQQ/VIX backdrop support or work against this trade?
+  (e) Reddit/social sentiment — what is the retail narrative? Does it align with the technical setup?
+  (f) Bull case (one sentence) + Bear case (one sentence)
+  (g) Entry/no-entry decision with confidence level
+One-liner theses are NOT acceptable. Each thesis must read like a complete analyst note.
 
 RULES:
 - entry_price = EXACT current price listed above (never guess)
