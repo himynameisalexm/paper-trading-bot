@@ -215,16 +215,10 @@ body::before {
     <div id="watchlist"><div class="empty-state">Watchlist pending next scan.</div></div>
   </div>
 
-  <!-- TRADE HISTORY -->
+  <!-- HISTORY -->
   <div class="section">
-    <div class="section-title">Trade History — All Closed Positions</div>
-    <div id="tradeHistory"><div class="empty-state">No closed trades yet.</div></div>
-  </div>
-
-  <!-- DAILY SESSION LOG -->
-  <div class="section">
-    <div class="section-title">Daily Session Log</div>
-    <div id="dailyLog"><div class="empty-state">No past sessions yet.</div></div>
+    <div class="section-title">History</div>
+    <div id="history"><div class="empty-state">No history yet.</div></div>
   </div>
 </div>
 
@@ -427,93 +421,114 @@ function render(data) {
     }).join('');
   }
 
-  // Trade History — rich rows
-  const histEl = document.getElementById('tradeHistory');
-  const closed = (data.closed_trades || []).slice().reverse();
-  if (closed.length === 0) {
-    histEl.innerHTML = '<div class="empty-state">No closed trades yet. First trade in progress.</div>';
-  } else {
-    histEl.innerHTML = closed.map(t => {
-      const pnl = t.realized_pnl || 0;
-      const isWin = pnl >= 0;
-      return `<div class="position-card" style="margin-bottom:8px">
-        <div class="pos-header" style="margin-bottom:8px">
-          <div>
-            <div class="pos-symbol">${t.symbol} <span style="font-size:10px;color:var(--label);font-weight:normal">${isWin ? '✓ WIN' : '✗ LOSS'}</span></div>
-            <div style="font-size:10px;color:var(--label);margin-top:2px">${fmtDate(t.entry_date)} → ${fmtDate(t.exit_date)}</div>
-          </div>
-          <div style="text-align:right">
-            <div class="pos-pnl ${isWin ? 'green' : 'red'}">${isWin ? '+' : ''}${fmt(pnl)}</div>
-            <div style="font-size:11px;color:${isWin ? 'var(--green)' : 'var(--red)'}">${fmtPct(t.realized_pnl_percent)}</div>
-          </div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:11px;margin-bottom:8px">
-          <div style="background:#111;padding:6px 8px;border-radius:3px">
-            <span style="color:var(--label)">Entry </span><span style="color:var(--bright)">${fmt(t.entry_price)}</span>
-          </div>
-          <div style="background:#111;padding:6px 8px;border-radius:3px">
-            <span style="color:var(--label)">Exit </span><span style="color:${isWin ? 'var(--green)' : 'var(--red)'}">${fmt(t.exit_price)}</span>
-          </div>
-        </div>
-        <div style="font-size:10px;color:var(--sub);border-top:1px solid #141414;padding-top:6px">
-          <span style="color:var(--label)">Entry: </span>${t.entry_reason || '—'}
-        </div>
-        <div style="font-size:10px;color:var(--sub);margin-top:4px">
-          <span style="color:var(--label)">Exit: </span>${t.exit_reason || '—'}
-        </div>
-      </div>`;
-    }).join('');
+  // ── HISTORY — grouped by day, expandable ──────────────────────────────
+  const historyEl = document.getElementById('history');
+
+  // Group closed trades by session_date
+  const tradesByDay = {};
+  for (const t of data.closed_trades || []) {
+    const day = t.session_date || (t.exit_date || '').split('T')[0];
+    if (!tradesByDay[day]) tradesByDay[day] = [];
+    tradesByDay[day].push(t);
   }
 
-  // Daily Session Log
-  const logEl = document.getElementById('dailyLog');
-  const sessions = data.daily_sessions || [];
+  // Map daily_sessions by date for aggregate stats
+  const sessionByDate = {};
+  for (const s of data.daily_sessions || []) sessionByDate[s.date] = s;
 
-  // Build today's summary row from current session
-  const todayRow = (() => {
-    const sess = data.session || {};
-    const todayPnl = (sess.realized_pnl || 0) + (sess.unrealized_pnl || 0);
-    const isUp = todayPnl >= 0;
-    // Use account value to compute daily P&L % (starting_capital not in trades.json)
-    const startingCap = sess.total_account_value ? (sess.total_account_value - todayPnl) : (sess.daily_trading_capital || 5000);
-    const pnlPct = startingCap ? (todayPnl / startingCap * 100) : 0;
-    return `<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#0d0d0d;border:1px solid #3ddc8444;border-radius:4px;margin-bottom:8px">
-      <div>
-        <span style="color:var(--bright);font-weight:bold">${sess.date || 'Today'}</span>
-        <span style="color:var(--green);font-size:10px;margin-left:8px">● ACTIVE</span>
+  // All unique dates, newest first; always include today
+  const today = data.session?.date || new Date().toISOString().split('T')[0];
+  const allDates = [...new Set([today, ...Object.keys(tradesByDay), ...Object.keys(sessionByDate)])]
+    .sort().reverse();
+
+  function renderTradeCard(t) {
+    const pnl    = t.realized_pnl || 0;
+    const isWin  = pnl > 0;
+    const isLoss = pnl < 0;
+    const label  = isWin ? '✓ WIN' : (isLoss ? '✗ LOSS' : '· EVEN');
+    const col    = isWin ? 'var(--green)' : (isLoss ? 'var(--red)' : 'var(--label)');
+    const entryDt = fmtDate(t.entry_date);
+    const exitDt  = fmtDate(t.exit_date);
+    // hold duration
+    let hold = '';
+    if (t.entry_date && t.exit_date) {
+      const mins = (new Date(t.exit_date) - new Date(t.entry_date)) / 60000;
+      hold = mins < 60 ? `${Math.round(mins)}m` : `${(mins/60).toFixed(1)}h`;
+    }
+    return `<div style="background:#111;border-radius:3px;padding:10px 12px;margin-bottom:6px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+        <div>
+          <span style="color:var(--bright);font-weight:bold;font-size:13px">${t.symbol}</span>
+          <span style="font-size:10px;color:${col};margin-left:6px">${label}</span>
+          ${hold ? `<span style="font-size:10px;color:var(--sub);margin-left:6px">held ${hold}</span>` : ''}
+        </div>
+        <div style="text-align:right">
+          <span style="font-weight:bold;color:${col}">${isWin?'+':''}${fmt(pnl)}</span>
+          <span style="font-size:10px;color:${col};margin-left:6px">${fmtPct(t.realized_pnl_percent)}</span>
+        </div>
       </div>
-      <div style="display:flex;gap:20px;font-size:11px;text-align:right">
-        <div><div style="color:var(--label)">Trades</div><div style="color:var(--bright)">${sess.trades_closed || 0}</div></div>
-        <div><div style="color:var(--label)">W/L</div><div style="color:var(--bright)">${sess.wins || 0}/${sess.losses || 0}</div></div>
-        <div><div style="color:var(--label)">Realized P&L</div><div style="color:${(sess.realized_pnl||0) >= 0 ? 'var(--green)':'var(--red)'}">${(sess.realized_pnl||0) >= 0 ? '+' : ''}${fmt(sess.realized_pnl||0)}</div></div>
-        <div><div style="color:var(--label)">Total P&L</div><div style="color:${isUp ? 'var(--green)':'var(--red)'}">${isUp ? '+' : ''}${fmt(todayPnl)} (${pnlPct >= 0 ? '+' : ''}${pnlPct.toFixed(2)}%)</div></div>
-        <div><div style="color:var(--label)">Account</div><div style="color:var(--bright)">${fmt(sess.total_account_value)}</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;font-size:10px;margin-bottom:6px">
+        <div style="color:var(--label)">Entry <span style="color:var(--bright)">${fmt(t.entry_price)}</span></div>
+        <div style="color:var(--label)">Exit <span style="color:${col}">${fmt(t.exit_price)}</span></div>
+        <div style="color:var(--label)">${entryDt} → ${exitDt}</div>
+      </div>
+      <div style="font-size:10px;color:var(--sub);line-height:1.6">
+        <span style="color:var(--label)">Exit: </span>${t.exit_reason || '—'}
       </div>
     </div>`;
-  })();
-
-  if (sessions.length === 0) {
-    logEl.innerHTML = todayRow + '<div class="empty-state" style="margin-top:8px">No past sessions archived yet. History will appear after the first full trading day.</div>';
-  } else {
-    const histRows = sessions.map(sess => {
-      const pnl = sess.realized_pnl || 0;
-      const isUp = pnl >= 0;
-      const start = sess.starting_cash || 5000;
-      const pnlPct = start ? (pnl / start * 100) : 0;
-      const wr = sess.win_rate || (sess.trades_closed > 0 ? (sess.wins / sess.trades_closed * 100).toFixed(1) : null);
-      return `<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#0d0d0d;border:1px solid var(--border);border-radius:4px;margin-bottom:6px">
-        <div style="color:var(--text)">${sess.date}</div>
-        <div style="display:flex;gap:20px;font-size:11px;text-align:right">
-          <div><div style="color:var(--label)">Trades</div><div style="color:var(--bright)">${sess.trades_closed || 0}</div></div>
-          <div><div style="color:var(--label)">W/L</div><div style="color:var(--bright)">${sess.wins || 0}/${sess.losses || 0}</div></div>
-          <div><div style="color:var(--label)">Win Rate</div><div style="color:var(--bright)">${wr ? wr + '%' : '—'}</div></div>
-          <div><div style="color:var(--label)">P&L</div><div style="color:${isUp ? 'var(--green)':'var(--red)'}">${isUp ? '+' : ''}${fmt(pnl)} (${pnlPct >= 0 ? '+' : ''}${pnlPct.toFixed(2)}%)</div></div>
-          <div><div style="color:var(--label)">End Value</div><div style="color:var(--bright)">${fmt(sess.ending_account_value)}</div></div>
-        </div>
-      </div>`;
-    }).join('');
-    logEl.innerHTML = todayRow + histRows;
   }
+
+  function renderDayRow(date, isToday) {
+    const sess   = isToday ? data.session : sessionByDate[date];
+    const trades = tradesByDay[date] || [];
+    const pnl    = isToday
+      ? (data.session?.realized_pnl || 0) + (data.session?.unrealized_pnl || 0)
+      : (sess?.realized_pnl || 0);
+    const wins   = isToday ? (data.session?.wins || 0) : (sess?.wins || 0);
+    const losses = isToday ? (data.session?.losses || 0) : (sess?.losses || 0);
+    const acct   = isToday ? data.session?.total_account_value : sess?.ending_account_value;
+    const tradeCount = trades.length;
+    const isUp   = pnl >= 0;
+    const id     = `day-${date.replace(/-/g,'')}`; // unique id for toggle
+
+    const header = `<div class="day-row" onclick="toggleDay('${id}')" style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#0d0d0d;border:1px solid ${isToday ? '#3ddc8444' : 'var(--border)'};border-radius:4px;margin-bottom:2px;cursor:pointer">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="day-chevron" id="chev-${id}" style="color:var(--sub);font-size:10px;transition:transform 0.2s;display:inline-block">${isToday ? '▼' : '▶'}</span>
+        <span style="color:var(--bright);font-weight:bold">${date}</span>
+        ${isToday ? '<span style="color:var(--green);font-size:10px">● ACTIVE</span>' : ''}
+        ${tradeCount > 0 ? `<span style="font-size:10px;color:var(--sub)">${tradeCount} trade${tradeCount!==1?'s':''}</span>` : '<span style="font-size:10px;color:var(--sub)">no trades</span>'}
+      </div>
+      <div style="display:flex;gap:16px;font-size:11px;text-align:right">
+        <div><span style="color:var(--label)">W/L </span><span style="color:var(--bright)">${wins}/${losses}</span></div>
+        <div style="color:${isUp?'var(--green)':'var(--red)'}">${isUp?'+':''}${fmt(pnl)}</div>
+        ${acct != null ? `<div style="color:var(--label)">acct <span style="color:var(--bright)">${fmt(acct)}</span></div>` : ''}
+      </div>
+    </div>`;
+
+    const body = `<div id="${id}" style="display:${isToday?'block':'none'};padding:8px 4px 6px;margin-bottom:6px">
+      ${tradeCount > 0
+        ? trades.slice().reverse().map(renderTradeCard).join('')
+        : '<div style="color:var(--sub);font-size:11px;padding:8px 12px">No trades this day.</div>'}
+    </div>`;
+
+    return header + body;
+  }
+
+  if (allDates.length === 0) {
+    historyEl.innerHTML = '<div class="empty-state">No history yet.</div>';
+  } else {
+    historyEl.innerHTML = allDates.map(d => renderDayRow(d, d === today)).join('');
+  }
+}
+
+// ── TOGGLE DAY ROW ──
+function toggleDay(id) {
+  const body  = document.getElementById(id);
+  const chev  = document.getElementById('chev-' + id);
+  if (!body) return;
+  const open  = body.style.display === 'none';
+  body.style.display = open ? 'block' : 'none';
+  if (chev) chev.style.transform = open ? 'rotate(90deg)' : '';
 }
 
 // ── TOGGLE THESIS ──
