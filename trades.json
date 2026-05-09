@@ -630,14 +630,14 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 3,
-      "reason": "Price data unavailable for NVDA — no technical analysis possible. Without current price, RSI, volume, or moving average data, we cannot assess momentum, institutional participation, or support/resistance levels. Macro gate is red due to missing QQQ data and high VIX, which would work against any long setup regardless. Reddit sentiment is unknown due to missing data. Bull case: N/A. Bear case: N/A. Not entering: Price data unavailable — no recommendation made.",
-      "last_updated": "2026-05-09T14:00:42.567Z",
+      "reason": "Price data unavailable — no recommendation made. Without real-time price, RSI, volume, or moving average data, no technical analysis is possible. Macro gate is red, which further reduces the likelihood of a valid setup even if data were available. Reddit sentiment cannot be assessed due to missing price context. Bull case: N/A. Bear case: N/A. Not entering: data unavailable, confidence null.",
+      "last_updated": "2026-05-09T14:52:34.243Z",
       "rsi": 60.3,
       "change_pct": 13.23,
       "volume_ratio": 0.85,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "Price data unavailable"
+      "technical_setup": "Data unavailable"
     },
     {
       "symbol": "PLTR",
@@ -646,14 +646,14 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 5,
-      "reason": "Price data unavailable for PLTR — no technical analysis possible. Without current price, RSI, volume, or moving average data, we cannot evaluate momentum, institutional flow, or key support/resistance levels. Macro gate is red due to missing QQQ data and high VIX, which would create a hostile environment for risk assets. Reddit sentiment is unknown. Bull case: N/A. Bear case: N/A. Not entering: Price data unavailable — no recommendation made.",
-      "last_updated": "2026-05-09T14:00:42.567Z",
+      "reason": "Price data unavailable — no recommendation made. Without real-time price, RSI, volume, or moving average data, no technical analysis is possible. Macro gate is red, which further reduces the likelihood of a valid setup even if data were available. Reddit sentiment cannot be assessed due to missing price context. Bull case: N/A. Bear case: N/A. Not entering: data unavailable, confidence null.",
+      "last_updated": "2026-05-09T14:52:34.243Z",
       "rsi": 41.7,
       "change_pct": 1.56,
       "volume_ratio": 0.88,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "Price data unavailable"
+      "technical_setup": "Data unavailable"
     },
     {
       "symbol": "CRWD",
@@ -662,14 +662,14 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 2,
-      "reason": "Price data unavailable for CRWD — no technical analysis possible. Without current price, RSI, volume, or moving average data, we cannot assess the technical setup or institutional participation. Macro gate is red due to missing QQQ data and high VIX, which would work against any long entry. Reddit sentiment is unknown. Bull case: N/A. Bear case: N/A. Not entering: Price data unavailable — no recommendation made.",
-      "last_updated": "2026-05-09T14:00:42.567Z",
+      "reason": "Price data unavailable — no recommendation made. Without real-time price, RSI, volume, or moving average data, no technical analysis is possible. Macro gate is red, which further reduces the likelihood of a valid setup even if data were available. Reddit sentiment cannot be assessed due to missing price context. Bull case: N/A. Bear case: N/A. Not entering: data unavailable, confidence null.",
+      "last_updated": "2026-05-09T14:52:34.243Z",
       "rsi": 77.4,
       "change_pct": 26.93,
       "volume_ratio": 1.55,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "Price data unavailable"
+      "technical_setup": "Data unavailable"
     },
     {
       "symbol": "META",
@@ -678,46 +678,46 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 3,
-      "reason": "Price data unavailable for META — no technical analysis possible. Without current price, RSI, volume, or moving average data, we cannot evaluate momentum, institutional flow, or support/resistance levels. Macro gate is red due to missing QQQ data and high VIX, which would create a challenging backdrop for risk assets. Reddit sentiment is unknown. Bull case: N/A. Bear case: N/A. Not entering: Price data unavailable — no recommendation made.",
-      "last_updated": "2026-05-09T14:00:42.567Z",
+      "reason": "Price data unavailable — no recommendation made. Without real-time price, RSI, volume, or moving average data, no technical analysis is possible. Macro gate is red, which further reduces the likelihood of a valid setup even if data were available. Reddit sentiment cannot be assessed due to missing price context. Bull case: N/A. Bear case: N/A. Not entering: data unavailable, confidence null.",
+      "last_updated": "2026-05-09T14:52:34.243Z",
       "rsi": 28,
       "change_pct": -8.83,
       "volume_ratio": 0.68,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "Price data unavailable"
+      "technical_setup": "Data unavailable"
     },
     {
       "symbol": "ETH",
-      "current_price": 2314.33,
-      "confidence": 5.5,
+      "current_price": 2307.48,
+      "confidence": 5.2,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
-      "reason": "RSI at 49.4 is neutral — momentum is balanced with no clear directional bias, meaning the current price action is more noise than signal. Volume ratio at 0.94x the 10-day average is below average, indicating weak institutional participation and a lack of conviction behind the move. Price is above its 50-day MA ($2,228), which provides support, but like BTC, the absence of MA200 data limits our ability to assess the long-term trend. Macro gate is red due to missing QQQ data and high VIX, creating a headwind for risk assets. Reddit sentiment is quiet, with no notable discussion in the last 24 hours, so retail is not amplifying the move. Bull case: A break above $2,350 with volume >1.2x could signal a continuation toward $2,500. Bear case: Weak volume and macro headwinds could push ETH back toward the 50-day MA. Not entering: volume below threshold (0.94x < 1.2x) and macro gate failure — confidence 5.5, below the 7.0 minimum.",
-      "last_updated": "2026-05-09T14:00:42.567Z",
-      "rsi": 49.4,
-      "change_pct": 12.81,
-      "volume_ratio": 0.94,
+      "reason": "RSI at 48.4 is neutral — momentum is flat, with no clear directional bias. Volume ratio at 0.90x the 10-day average is below average, indicating weak participation and no institutional conviction behind today's move. Price is above its 50-day MA ($2,228), which is acting as support, but like BTC, the lack of MA200 data removes a key long-term reference. Macro gate is red due to missing QQQ data and elevated VIX — this is a headwind for risk assets. Reddit sentiment is quiet, with no notable discussion in the last 24h — retail is not engaged, which limits the potential for a sentiment-driven rally. Bull case: a close above $2,350 with volume >1.2x could set up a breakout toward $2,500. Bear case: continued macro uncertainty and thin volume risk a drift back toward $2,200 support. Not entering: volume 0.90x is below threshold, macro gate is red, and confidence is 5.2 — well below the 7.0 minimum.",
+      "last_updated": "2026-05-09T14:52:34.243Z",
+      "rsi": 48.4,
+      "change_pct": 12.47,
+      "volume_ratio": 0.9,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "RSI 49.4 (neutral), above MA50 $2,228, vol 0.94x"
+      "technical_setup": "RSI 48.4, above MA50 $2,228, vol 0.90x"
     },
     {
       "symbol": "BTC",
-      "current_price": 80397.13,
+      "current_price": 80306.52,
       "confidence": 5.8,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
-      "reason": "RSI at 62 is neutral to slightly bullish — momentum is positive but not overbought, so room to run exists if volume supports it. Volume ratio at 0.72x the 10-day average is weak, signaling thin trading and low institutional participation, which increases the risk of a sharp reversal. Price is well above its 50-day MA ($73,639), which acts as strong support, but the lack of MA200 data means we cannot assess long-term trend alignment. Macro gate is red due to missing QQQ data and high VIX, which works against risk assets like BTC. Reddit shows no significant discussion in the last 24 hours, suggesting retail sentiment is quiet and not contributing to momentum. Bull case: If volume picks up and macro conditions improve, BTC could extend its rally toward $86,000. Bear case: Thin volume and high VIX could lead to a sharp pullback to the 50-day MA. Not entering: volume below threshold (0.72x < 1.2x) and macro gate failure — confidence 5.8, below the 7.0 minimum.",
-      "last_updated": "2026-05-09T14:00:42.567Z",
-      "rsi": 62,
-      "change_pct": 14.52,
-      "volume_ratio": 0.72,
+      "reason": "RSI at 61.7 is neutral to slightly bullish — momentum is positive but not overbought, leaving room for further upside if volume improves. Volume ratio at 0.69x the 10-day average is concerning: thin trading with no institutional conviction, suggesting this move may lack staying power. Price is above its 50-day MA ($73,637), which is acting as support, but the absence of MA200 data removes a key long-term reference point. Macro gate is red due to missing QQQ data and elevated VIX — this backdrop works against high-beta assets like BTC. Reddit sentiment is quiet, with no significant discussion in the last 24h — retail is not participating, which reduces the likelihood of a sustained rally. Bull case: a break above $80,600 with volume >1.2x could signal a short squeeze or liquidation cascade. Bear case: thin volume and macro uncertainty risk a sharp reversal if support at $78,000 fails. Not entering: volume 0.69x is well below the 1.2x threshold, macro gate is red, and confidence is 5.8 — below the 7.0 minimum.",
+      "last_updated": "2026-05-09T14:52:34.243Z",
+      "rsi": 61.7,
+      "change_pct": 14.39,
+      "volume_ratio": 0.69,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "RSI 62 (neutral), above MA50 $73,639, vol 0.72x"
+      "technical_setup": "RSI 61.7, above MA50 $73,637, vol 0.69x"
     },
     {
       "symbol": "HOOD",
@@ -726,14 +726,14 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 5,
-      "reason": "Price data unavailable for HOOD — no technical analysis possible. Without current price, RSI, volume, or moving average data, we cannot assess the setup or institutional participation. Macro gate is red due to missing QQQ data and high VIX, which would work against any long entry. Reddit sentiment is unknown. Bull case: N/A. Bear case: N/A. Not entering: Price data unavailable — no recommendation made.",
-      "last_updated": "2026-05-09T14:00:42.567Z",
+      "reason": "Price data unavailable — no recommendation made. Without real-time price, RSI, volume, or moving average data, no technical analysis is possible. Macro gate is red, which further reduces the likelihood of a valid setup even if data were available. Reddit sentiment cannot be assessed due to missing price context. Bull case: N/A. Bear case: N/A. Not entering: data unavailable, confidence null.",
+      "last_updated": "2026-05-09T14:52:34.243Z",
       "rsi": 31.1,
       "change_pct": -1.21,
       "volume_ratio": 0.58,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "Price data unavailable"
+      "technical_setup": "Data unavailable"
     },
     {
       "symbol": "MSFT",
@@ -742,14 +742,14 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 5,
-      "reason": "Price data unavailable for MSFT — no technical analysis possible. Without current price, RSI, volume, or moving average data, we cannot evaluate momentum, institutional flow, or key support/resistance levels. Macro gate is red due to missing QQQ data and high VIX, which would create a hostile environment for risk assets. Reddit sentiment is unknown. Bull case: N/A. Bear case: N/A. Not entering: Price data unavailable — no recommendation made.",
-      "last_updated": "2026-05-09T14:00:42.567Z",
+      "reason": "Price data unavailable — no recommendation made. Without real-time price, RSI, volume, or moving average data, no technical analysis is possible. Macro gate is red, which further reduces the likelihood of a valid setup even if data were available. Reddit sentiment cannot be assessed due to missing price context. Bull case: N/A. Bear case: N/A. Not entering: data unavailable, confidence null.",
+      "last_updated": "2026-05-09T14:52:34.243Z",
       "rsi": 48.4,
       "change_pct": 2.66,
       "volume_ratio": 0.93,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "Price data unavailable"
+      "technical_setup": "Data unavailable"
     }
   ],
   "macro_status": {
@@ -772,7 +772,7 @@
   },
   "system_status": {
     "last_scan": "2026-05-09T13:08:10.919Z",
-    "last_eval": "2026-05-09T14:00:13.502Z",
+    "last_eval": "2026-05-09T14:52:10.355Z",
     "market_status": "open",
     "bot_version": "2.0.0",
     "trades_json_version": 2
