@@ -1,6 +1,6 @@
 {
   "session": {
-    "date": "2026-05-09",
+    "date": "2026-05-10",
     "total_account_value": 35156.78,
     "daily_trading_capital": 5000,
     "daily_trading_used": 0,
@@ -371,6 +371,18 @@
   ],
   "daily_sessions": [
     {
+      "date": "2026-05-09",
+      "total_account_before_day": 35156.78,
+      "daily_trading_capital_used": 0,
+      "ending_account_value": 35156.78,
+      "realized_pnl": 0,
+      "unrealized_pnl": 0,
+      "trades_closed": 0,
+      "wins": 0,
+      "losses": 0,
+      "win_rate": 0
+    },
+    {
       "date": "2026-05-08",
       "total_account_before_day": 35156.78,
       "daily_trading_capital_used": 0,
@@ -689,32 +701,32 @@
     },
     {
       "symbol": "ETH",
-      "current_price": 2329.67,
+      "current_price": 2324.84,
       "confidence": 4.5,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
       "reason": "RSI at 51.4 is neutral — no directional momentum edge, the price move is not supported by strong buying pressure. Volume ratio at 0.80x the 10-day average is below average, indicating weak institutional participation and a lack of conviction behind the 13.5% gain. Price is above its 50-day MA ($2,229), which is acting as support, but like BTC, the absence of MA200 data removes a key long-term reference. Macro gate is red due to QQQ/VIX data issues, which is a major headwind for any crypto trade — sector strength alone is not enough. Reddit shows no significant discussion, meaning retail is not engaged and the move is likely driven by thin, speculative flow. Bull case: A volume surge above 1.5x could confirm institutional interest and drive ETH toward $2,500. Bear case: Without volume or macro support, the move risks fizzling out or reversing sharply. Not entering: volume ratio 0.80x is below the 1.2x threshold, macro gate is red, and confidence is only 4.5 — well below the 7.0 minimum.",
-      "last_updated": "2026-05-09T20:42:38.829Z",
-      "rsi": 51.4,
-      "change_pct": 13.56,
-      "volume_ratio": 0.8,
+      "last_updated": "2026-05-10T13:08:21.154Z",
+      "rsi": 43.2,
+      "change_pct": 12.14,
+      "volume_ratio": 0.68,
       "stop_loss": null,
       "profit_target": null,
       "technical_setup": "RSI 51.4 (neutral), above MA50 $2,229, vol ratio 0.80x"
     },
     {
       "symbol": "BTC",
-      "current_price": 80777.13,
+      "current_price": 80859.33,
       "confidence": 5,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
       "reason": "RSI at 63.2 is neutral to slightly bullish — momentum is positive but not overbought, so there is room for further upside if volume supports it. Volume ratio at 0.57x the 10-day average is extremely weak, signaling thin trading and lack of institutional participation despite the 15% price surge today. Price is well above its 50-day MA ($73,647), which is acting as support, but the absence of MA200 data removes a key long-term reference point. Macro gate is red due to QQQ/VIX data unavailability, which is a critical headwind — even strong crypto setups are risky without macro confirmation. Reddit shows no significant discussion in the last 24 hours, meaning retail sentiment is quiet and not amplifying the move. Bull case: If volume picks up and macro conditions improve, the breakout could extend toward $85,000. Bear case: Thin volume and macro uncertainty make this move highly susceptible to a sharp reversal. Not entering: volume ratio 0.57x is well below the 1.2x threshold, macro gate is red, and confidence is only 5.0 — far below the 7.0 minimum.",
-      "last_updated": "2026-05-09T20:42:38.829Z",
-      "rsi": 63.2,
-      "change_pct": 15.06,
-      "volume_ratio": 0.57,
+      "last_updated": "2026-05-10T13:08:21.154Z",
+      "rsi": 60,
+      "change_pct": 14.7,
+      "volume_ratio": 0.52,
       "stop_loss": null,
       "profit_target": null,
       "technical_setup": "RSI 63.2 (neutral), above MA50 $73,647, vol ratio 0.57x"
@@ -756,8 +768,7 @@
     "gate_pass": true,
     "qqq_above_ma": null,
     "vix_below_25": null,
-    "weekend": true,
-    "gate_note": "Weekend — crypto only, macro gate N/A"
+    "weekend": true
   },
   "performance_metrics": {
     "daily_pnl": 0,
@@ -771,9 +782,9 @@
     "consecutive_losses": 0
   },
   "system_status": {
-    "last_scan": "2026-05-09T13:08:10.919Z",
+    "last_scan": "2026-05-10T13:08:21.154Z",
     "last_eval": "2026-05-09T20:42:16.351Z",
-    "market_status": "open",
+    "market_status": "pre-market",
     "bot_version": "2.0.0",
     "trades_json_version": 2
   }
