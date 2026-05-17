@@ -1,6 +1,6 @@
 {
   "session": {
-    "date": "2026-05-16",
+    "date": "2026-05-17",
     "total_account_value": 35156.78,
     "daily_trading_capital": 5000,
     "daily_trading_used": 0,
@@ -370,6 +370,18 @@
     }
   ],
   "daily_sessions": [
+    {
+      "date": "2026-05-16",
+      "total_account_before_day": 35156.78,
+      "daily_trading_capital_used": 0,
+      "ending_account_value": 35156.78,
+      "realized_pnl": 0,
+      "unrealized_pnl": 0,
+      "trades_closed": 0,
+      "wins": 0,
+      "losses": 0,
+      "win_rate": 0
+    },
     {
       "date": "2026-05-15",
       "total_account_before_day": 35156.78,
@@ -773,32 +785,32 @@
     },
     {
       "symbol": "ETH",
-      "current_price": 2179.99,
+      "current_price": 2192.76,
       "confidence": 6.2,
       "entry_signal": false,
       "entry_target": null,
       "priority": 3,
       "reason": "RSI at 34.1 is oversold — a potential bounce candidate if support holds, but momentum is weak and the downtrend is intact. Volume ratio at 0.70x is well below the 10-day average, indicating thin trading and a lack of institutional conviction; any move could reverse easily. Price is below its 50-day MA ($2,254), which is now acting as resistance, and MA200 data is unavailable — structural support is weak. Macro gate is red (QQQ below MA50, VIX high), which works against risk assets like ETH. Reddit sentiment is quiet, with no notable discussion in the last 24 hours — retail is not engaged, reducing the chance of a sentiment-driven rebound. Bull case: A reclaim of $2,254 (MA50) with volume >1.5x would set up a potential oversold bounce. Bear case: Continued drift below MA50 risks a move to $2,100 or lower. Not entering: volume 0.70x is far below threshold, macro backdrop is unfavorable, confidence 6.2 — below the 7.0 minimum.",
-      "last_updated": "2026-05-16T20:46:21.168Z",
-      "rsi": 34.1,
-      "change_pct": -1.07,
-      "volume_ratio": 0.7,
+      "last_updated": "2026-05-17T13:09:50.211Z",
+      "rsi": 35.2,
+      "change_pct": 2.59,
+      "volume_ratio": 0.51,
       "stop_loss": null,
       "profit_target": null,
       "technical_setup": "RSI 34.1 (oversold), below MA50 $2,254, vol 0.70x"
     },
     {
       "symbol": "BTC",
-      "current_price": 78191.81,
+      "current_price": 78262.59,
       "confidence": 5.8,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
       "reason": "RSI at 48.3 is neutral — no clear directional momentum, though the recent +9.75% move suggests short-term exhaustion rather than a sustained trend. Volume ratio at 0.85x is below the 10-day average, signaling thin trading and a lack of strong institutional participation to confirm the rally. Price is above its 50-day MA ($75,195), which is a positive, but the absence of MA200 data and the macro gate failure (QQQ below MA50, VIX high) create a high-risk backdrop for new entries. Reddit sentiment is quiet, with no significant discussion in the last 24 hours — retail is not amplifying the move, which reduces the likelihood of a sentiment-driven continuation. Bull case: A break above $79,159 with volume >1.2x could signal a resumption of the uptrend. Bear case: Thin volume and macro headwinds risk a sharp reversal if broader risk assets sell off. Not entering: volume below threshold, macro gate red, confidence 5.8 — well below the 7.0 minimum.",
-      "last_updated": "2026-05-16T20:46:21.168Z",
-      "rsi": 48.3,
-      "change_pct": 9.75,
-      "volume_ratio": 0.85,
+      "last_updated": "2026-05-17T13:09:50.211Z",
+      "rsi": 49,
+      "change_pct": 11.94,
+      "volume_ratio": 0.61,
       "stop_loss": null,
       "profit_target": null,
       "technical_setup": "RSI 48.3 (neutral), above MA50 $75,195, vol 0.85x"
@@ -840,8 +852,7 @@
     "gate_pass": true,
     "qqq_above_ma": null,
     "vix_below_25": null,
-    "weekend": true,
-    "gate_note": "Weekend — crypto only, macro gate N/A"
+    "weekend": true
   },
   "performance_metrics": {
     "daily_pnl": 0,
@@ -855,9 +866,9 @@
     "consecutive_losses": 0
   },
   "system_status": {
-    "last_scan": "2026-05-16T13:13:10.089Z",
+    "last_scan": "2026-05-17T13:09:50.211Z",
     "last_eval": "2026-05-16T20:46:00.883Z",
-    "market_status": "open",
+    "market_status": "pre-market",
     "bot_version": "2.0.0",
     "trades_json_version": 2
   }
