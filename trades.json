@@ -1,6 +1,6 @@
 {
   "session": {
-    "date": "2026-05-23",
+    "date": "2026-05-24",
     "total_account_value": 35156.78,
     "daily_trading_capital": 5000,
     "daily_trading_used": 0,
@@ -371,6 +371,18 @@
   ],
   "daily_sessions": [
     {
+      "date": "2026-05-23",
+      "total_account_before_day": 35156.78,
+      "daily_trading_capital_used": 0,
+      "ending_account_value": 35156.78,
+      "realized_pnl": 0,
+      "unrealized_pnl": 0,
+      "trades_closed": 0,
+      "wins": 0,
+      "losses": 0,
+      "win_rate": 0
+    },
+    {
       "date": "2026-05-22",
       "total_account_before_day": 35156.78,
       "daily_trading_capital_used": 0,
@@ -717,18 +729,6 @@
       "wins": 0,
       "losses": 0,
       "win_rate": 0
-    },
-    {
-      "date": "2026-04-23",
-      "total_account_before_day": 20285.28,
-      "daily_trading_capital_used": 0,
-      "ending_account_value": 20285.28,
-      "realized_pnl": 0,
-      "unrealized_pnl": 0,
-      "trades_closed": 0,
-      "wins": 0,
-      "losses": 0,
-      "win_rate": 0
     }
   ],
   "watchlist": [
@@ -798,32 +798,32 @@
     },
     {
       "symbol": "ETH",
-      "current_price": 2127.58,
+      "current_price": 2116.38,
       "confidence": 5,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
       "reason": "RSI at 30.1 is deeply oversold — momentum is weak and could be due for a technical bounce if support is found. Volume ratio at 1.03x is neutral but not strong enough to confirm institutional interest, leaving the bounce vulnerable to failure. Price is well below the 50-day MA ($2,263.60), which is now acting as resistance, and MA200 data is unavailable, removing a key support reference. Macro gate is red due to missing QQQ data and elevated VIX, which is a headwind for risk assets like ETH. Reddit sentiment is quiet, with no notable discussion in the last 24 hours — retail is not engaged, reducing the chance of a sentiment-driven rebound. Bull case: A reclaim of $2,150 with volume could set up a bounce toward MA50. Bear case: Continued weakness below $2,100 could target the $2,000 level. Not entering: confidence 5.0 is well below the 7.0 threshold, volume is neutral, and macro conditions are unfavorable.",
-      "last_updated": "2026-05-23T20:51:48.657Z",
-      "rsi": 30.1,
-      "change_pct": -1.87,
-      "volume_ratio": 1.03,
+      "last_updated": "2026-05-24T13:15:52.548Z",
+      "rsi": 21.8,
+      "change_pct": 2.76,
+      "volume_ratio": 0.99,
       "stop_loss": null,
       "profit_target": null,
       "technical_setup": "RSI 30.1 (oversold), below MA50 $2,263.60, vol ratio 1.03x"
     },
     {
       "symbol": "BTC",
-      "current_price": 76686.62,
+      "current_price": 76963.36,
       "confidence": 6.5,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
       "reason": "RSI at 36.2 is oversold but not deeply so — momentum is weak but could stabilize for a bounce if support holds. Volume ratio at 0.92x is below average, signaling thin trading and lack of strong institutional participation, which increases the risk of a false bounce. Price is just above the 50-day MA ($76,577.97), which is acting as near-term support, but the absence of MA200 data removes a key structural reference point. Macro gate is red due to missing QQQ data and elevated VIX, which works against risk assets like BTC. Reddit sentiment is quiet, with no significant discussion in the last 24 hours — retail is not engaged, reducing the likelihood of a sentiment-driven rebound. Bull case: A hold above $76,500 with volume could set up a bounce toward $80,000. Bear case: Thin volume and macro headwinds could lead to a breakdown below MA50, targeting $74,300. Not entering: confidence 6.5 is below the 7.0 threshold, volume is weak, and macro conditions are unfavorable.",
-      "last_updated": "2026-05-23T20:51:48.657Z",
-      "rsi": 36.2,
-      "change_pct": 7.54,
-      "volume_ratio": 0.92,
+      "last_updated": "2026-05-24T13:15:52.548Z",
+      "rsi": 30.5,
+      "change_pct": 11.88,
+      "volume_ratio": 1.02,
       "stop_loss": null,
       "profit_target": null,
       "technical_setup": "RSI 36.2 (oversold), above MA50 $76,577.97, vol ratio 0.92x"
@@ -865,8 +865,7 @@
     "gate_pass": true,
     "qqq_above_ma": null,
     "vix_below_25": null,
-    "weekend": true,
-    "gate_note": "Weekend — crypto only, macro gate N/A"
+    "weekend": true
   },
   "performance_metrics": {
     "daily_pnl": 0,
@@ -880,9 +879,9 @@
     "consecutive_losses": 0
   },
   "system_status": {
-    "last_scan": "2026-05-23T13:15:10.630Z",
+    "last_scan": "2026-05-24T13:15:52.548Z",
     "last_eval": "2026-05-23T20:51:25.436Z",
-    "market_status": "open",
+    "market_status": "pre-market",
     "bot_version": "2.0.0",
     "trades_json_version": 2
   }
