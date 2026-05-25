@@ -798,7 +798,7 @@
     },
     {
       "symbol": "ETH",
-      "current_price": 2129.47,
+      "current_price": 2129.35,
       "confidence": 6,
       "entry_signal": false,
       "entry_target": null,
@@ -806,7 +806,7 @@
       "reason": "RSI at 20.6 is extremely oversold — even more so than BTC, suggesting a potential short-term reversal is due. Volume at 0.91x the 10-day average is slightly better than BTC but still below average, indicating weak institutional participation and a higher risk of a failed bounce. Price is well below its 50-day MA ($2,263.93), which is now a clear resistance level, and the 200-day MA is unavailable, leaving no strong support reference. The macro gate is red due to missing QQQ data and high VIX, which is a headwind for risk assets. Reddit sentiment is quiet, with no notable discussion in the last 24 hours — retail is not providing any tailwind. Bull case: Extreme oversold RSI could spark a relief rally toward $2,150 if volume improves. Bear case: Weak volume and macro conditions could lead to a breakdown toward $2,000 support. Not entering: confidence 6.0 is below the 7.0 threshold, volume is weak, and macro backdrop is unfavorable.",
       "last_updated": "2026-05-25T14:46:30.008Z",
       "rsi": 27.5,
-      "change_pct": 6.94,
+      "change_pct": 6.93,
       "volume_ratio": 0.84,
       "stop_loss": null,
       "profit_target": null,
@@ -814,15 +814,15 @@
     },
     {
       "symbol": "BTC",
-      "current_price": 77498.12,
+      "current_price": 77561.04,
       "confidence": 6.5,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
       "reason": "RSI at 28.7 is deeply oversold — a level that historically precedes short-term bounces in crypto markets. However, volume at 0.79x the 10-day average is weak, signaling thin participation and raising the risk of a false bounce or continued drift. Price is below its 50-day MA ($76,763.69), which is now acting as resistance rather than support, and the 200-day MA is unavailable, leaving no clear longer-term support level. The macro gate is red due to missing QQQ data and high VIX, which works against risk assets like BTC. Reddit sentiment is quiet, with no significant discussion in the last 24 hours — retail is not engaged, reducing the likelihood of a sentiment-driven rebound. Bull case: Oversold RSI could trigger a short-term bounce toward $78,000 if volume picks up. Bear case: Thin volume and macro headwinds could lead to a retest of the day's lows near $76,256. Not entering: confidence 6.5 is below the 7.0 threshold, volume is weak, and macro conditions are unfavorable.",
       "last_updated": "2026-05-25T14:46:30.008Z",
-      "rsi": 34.2,
-      "change_pct": 16.82,
+      "rsi": 34.5,
+      "change_pct": 16.92,
       "volume_ratio": 0.8,
       "stop_loss": null,
       "profit_target": null,
@@ -867,7 +867,7 @@
     "qqq_above_ma": true,
     "vix": 16.59,
     "vix_below_25": true,
-    "timestamp": "2026-05-25T17:48:45.734Z",
+    "timestamp": "2026-05-25T18:21:53.457Z",
     "gate_pass": true
   },
   "performance_metrics": {
@@ -883,7 +883,7 @@
   },
   "system_status": {
     "last_scan": "2026-05-25T14:46:30.008Z",
-    "last_eval": "2026-05-25T17:48:45.831Z",
+    "last_eval": "2026-05-25T18:21:53.579Z",
     "market_status": "open",
     "bot_version": "2.0.0",
     "trades_json_version": 2
