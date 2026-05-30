@@ -739,14 +739,14 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 3,
-      "reason": "Price data unavailable — no recommendation made. Without real-time price, RSI, volume, or moving average data, it is impossible to assess the technical setup or market conditions. Any attempt to generate a thesis would be based on estimation or guesswork, which violates the data integrity rules. Confidence set to null.",
-      "last_updated": "2026-05-30T17:58:10.811Z",
+      "reason": "Price data unavailable — no recommendation made. Without current price, RSI, volume, or moving average context, it is impossible to assess the technical setup or macro alignment. Earnings date and Reddit sentiment are also unknown. No entry or analysis possible until data integrity is restored.",
+      "last_updated": "2026-05-30T19:27:16.917Z",
       "rsi": 46.3,
       "change_pct": 15.35,
       "volume_ratio": 1.31,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "Price data unavailable"
+      "technical_setup": "Data unavailable"
     },
     {
       "symbol": "PLTR",
@@ -755,14 +755,14 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. Without real-time price, RSI, volume, or moving average data, it is impossible to assess the technical setup or market conditions. Any attempt to generate a thesis would be based on estimation or guesswork, which violates the data integrity rules. Confidence set to null.",
-      "last_updated": "2026-05-30T17:58:10.811Z",
+      "reason": "Price data unavailable — no recommendation made. Without current price, RSI, volume, or moving average context, it is impossible to assess the technical setup or macro alignment. Earnings date and Reddit sentiment are also unknown. No entry or analysis possible until data integrity is restored.",
+      "last_updated": "2026-05-30T19:27:16.917Z",
       "rsi": 71.3,
       "change_pct": 2.19,
       "volume_ratio": 2.36,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "Price data unavailable"
+      "technical_setup": "Data unavailable"
     },
     {
       "symbol": "CRWD",
@@ -771,14 +771,14 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 2,
-      "reason": "Price data unavailable — no recommendation made. Without real-time price, RSI, volume, or moving average data, it is impossible to assess the technical setup or market conditions. Any attempt to generate a thesis would be based on estimation or guesswork, which violates the data integrity rules. Confidence set to null.",
-      "last_updated": "2026-05-30T17:58:10.811Z",
+      "reason": "Price data unavailable — no recommendation made. Without current price, RSI, volume, or moving average context, it is impossible to assess the technical setup or macro alignment. Earnings date and Reddit sentiment are also unknown. No entry or analysis possible until data integrity is restored.",
+      "last_updated": "2026-05-30T19:27:16.917Z",
       "rsi": 88.6,
       "change_pct": 79.31,
       "volume_ratio": 1.23,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "Price data unavailable"
+      "technical_setup": "Data unavailable"
     },
     {
       "symbol": "META",
@@ -787,46 +787,46 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 3,
-      "reason": "Price data unavailable — no recommendation made. Without real-time price, RSI, volume, or moving average data, it is impossible to assess the technical setup or market conditions. Any attempt to generate a thesis would be based on estimation or guesswork, which violates the data integrity rules. Confidence set to null.",
-      "last_updated": "2026-05-30T17:58:10.811Z",
+      "reason": "Price data unavailable — no recommendation made. Without current price, RSI, volume, or moving average context, it is impossible to assess the technical setup or macro alignment. Earnings date and Reddit sentiment are also unknown. No entry or analysis possible until data integrity is restored.",
+      "last_updated": "2026-05-30T19:27:16.917Z",
       "rsi": 64,
       "change_pct": -5.27,
       "volume_ratio": 1.34,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "Price data unavailable"
+      "technical_setup": "Data unavailable"
     },
     {
       "symbol": "ETH",
-      "current_price": 2024.39,
+      "current_price": 2023.34,
       "confidence": 6,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
-      "reason": "RSI at 28.6 is deeply oversold, nearing extreme levels that often precede short-term reversals in ETH. Volume ratio of 0.65x is even weaker than BTC's, indicating a lack of institutional conviction and thin trading that increases the risk of a failed bounce. Price is well below its 50-day MA ($2,247.32), which is now a clear resistance level, and the 200-day MA is unavailable, leaving no major support reference. The macro environment is hostile: QQQ is below its MA50 (data unavailable) and VIX is high, signaling broad market risk aversion that typically spills over into crypto. Reddit sentiment is muted, with no notable discussion in the last 24 hours, suggesting retail traders are sidelined or capitulating. Bull case: Oversold RSI could spark a relief rally toward $2,100 if volume improves. Bear case: Weak volume and macro pressure could push ETH toward $1,900 support. Not entering: confidence 6.0 is below the 7.0 threshold, volume is critically low, and macro conditions are unfavorable.",
-      "last_updated": "2026-05-30T17:58:10.811Z",
-      "rsi": 28.6,
-      "change_pct": -5.35,
-      "volume_ratio": 0.65,
+      "reason": "RSI at 28.4 is deeply oversold, nearing extreme levels that often precede short-term reversals in ETH. Volume at 0.60x the 10-day average is concerning — this is thin trading with no institutional conviction, making any bounce vulnerable to failure. Price is well below its 50-day MA ($2,247), which is now acting as resistance, and no 200-day MA data is available for additional support context. The macro environment is hostile: QQQ data is missing and VIX is high, indicating broad market risk aversion that typically spills over into crypto. Reddit sentiment is quiet, with no notable discussion in the last 24 hours — retail is absent, reducing the odds of a sentiment-driven rally. Bull case: oversold RSI could spark a relief bounce toward $2,100 if volume improves. Bear case: weak volume and macro headwinds risk a continuation of the downtrend toward $1,900. Not entering: macro gate failure, volume well below threshold (0.60x < 1.2x), and no catalyst — confidence 6.0, below the 7.0 minimum.",
+      "last_updated": "2026-05-30T19:27:16.917Z",
+      "rsi": 28.4,
+      "change_pct": -5.4,
+      "volume_ratio": 0.6,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "RSI 28.6 (oversold), below MA50 $2,247.32, vol 0.65x"
+      "technical_setup": "RSI 28.4 (oversold), below MA50 $2,247, vol 0.60x"
     },
     {
       "symbol": "BTC",
-      "current_price": 73904.63,
+      "current_price": 73902.87,
       "confidence": 6.5,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
-      "reason": "RSI at 29.8 is deeply oversold — a level that historically precedes short-term bounces in BTC. However, the volume ratio of 0.76x is well below the 10-day average, signaling weak institutional participation and thin trading conditions that could lead to false reversals. Price is significantly below its 50-day MA ($77,223.74), which is now acting as strong resistance rather than support, and the 200-day MA is unavailable, removing a key structural reference point. The macro backdrop is unfavorable: QQQ data is missing and VIX is high, suggesting a risk-off environment that typically pressures crypto assets. Reddit sentiment is quiet, with no significant discussion in the last 24 hours, indicating retail apathy or exhaustion rather than a contrarian buying opportunity. Bull case: Oversold RSI could trigger a short-term bounce toward $75,000 if volume improves. Bear case: Weak volume and macro headwinds risk a continuation of the downtrend toward $70,000 support. Not entering: confidence 6.5 is below the 7.0 threshold, volume is too low, and macro conditions are unfavorable.",
-      "last_updated": "2026-05-30T17:58:10.811Z",
+      "reason": "RSI at 29.8 is deeply oversold — a level that historically precedes short-term bounces in crypto markets. However, volume at 0.71x the 10-day average is weak, signaling thin participation and raising the risk of a false bounce or continued drift lower. Price is well below its 50-day MA ($77,223), which is now acting as strong resistance rather than support, and no 200-day MA data is available for additional context. The macro backdrop is unfavorable: QQQ data is missing and VIX is high, suggesting broader market risk-off sentiment that typically drags crypto lower. Reddit sentiment is quiet, with no significant discussion in the last 24 hours — retail is disengaged, reducing the likelihood of a sentiment-driven rebound. Bull case: oversold RSI could trigger a short-term bounce toward $75,000 if volume picks up. Bear case: weak volume and macro headwinds risk a continuation of the downtrend toward $70,000. Not entering: macro gate failure, volume below threshold (0.71x < 1.2x), and no catalyst present — confidence 6.5, below the 7.0 minimum.",
+      "last_updated": "2026-05-30T19:27:16.917Z",
       "rsi": 29.8,
       "change_pct": 8.56,
-      "volume_ratio": 0.76,
+      "volume_ratio": 0.71,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "RSI 29.8 (oversold), below MA50 $77,223.74, vol 0.76x"
+      "technical_setup": "RSI 29.8 (oversold), below MA50 $77,223, vol 0.71x"
     },
     {
       "symbol": "HOOD",
@@ -835,14 +835,14 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. Without real-time price, RSI, volume, or moving average data, it is impossible to assess the technical setup or market conditions. Any attempt to generate a thesis would be based on estimation or guesswork, which violates the data integrity rules. Confidence set to null.",
-      "last_updated": "2026-05-30T17:58:10.811Z",
+      "reason": "Price data unavailable — no recommendation made. Without current price, RSI, volume, or moving average context, it is impossible to assess the technical setup or macro alignment. Earnings date and Reddit sentiment are also unknown. No entry or analysis possible until data integrity is restored.",
+      "last_updated": "2026-05-30T19:27:16.917Z",
       "rsi": 70.1,
       "change_pct": 14.71,
       "volume_ratio": 2.38,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "Price data unavailable"
+      "technical_setup": "Data unavailable"
     },
     {
       "symbol": "MSFT",
@@ -851,14 +851,14 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. Without real-time price, RSI, volume, or moving average data, it is impossible to assess the technical setup or market conditions. Any attempt to generate a thesis would be based on estimation or guesswork, which violates the data integrity rules. Confidence set to null.",
-      "last_updated": "2026-05-30T17:58:10.811Z",
+      "reason": "Price data unavailable — no recommendation made. Without current price, RSI, volume, or moving average context, it is impossible to assess the technical setup or macro alignment. Earnings date and Reddit sentiment are also unknown. No entry or analysis possible until data integrity is restored.",
+      "last_updated": "2026-05-30T19:27:16.917Z",
       "rsi": 70.9,
       "change_pct": 11.12,
       "volume_ratio": 2.02,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "Price data unavailable"
+      "technical_setup": "Data unavailable"
     }
   ],
   "macro_status": {
@@ -881,7 +881,7 @@
   },
   "system_status": {
     "last_scan": "2026-05-30T13:19:21.939Z",
-    "last_eval": "2026-05-30T17:57:48.096Z",
+    "last_eval": "2026-05-30T19:26:55.762Z",
     "market_status": "open",
     "bot_version": "2.0.0",
     "trades_json_version": 2
