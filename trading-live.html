@@ -400,10 +400,12 @@ function render(data) {
     watchEl.innerHTML = watchlist.map(w => {
       const signalClass = w.entry_signal ? 'active' : 'waiting';
       const signalLabel = w.entry_signal ? '▶ ENTRY SIGNAL' : '◦ WATCHING';
+      const isNew = w.is_new || (w.added_date && ((Date.now() - new Date(w.added_date).getTime()) / 86400000) < 7);
+      const newBadge = isNew ? `<span style="font-size:9px;color:var(--gold);border:1px solid var(--gold);padding:1px 5px;border-radius:2px;margin-left:6px;letter-spacing:0.06em;vertical-align:middle">NEW</span>` : '';
       return `<div class="position-card" style="margin-bottom:8px">
         <div class="pos-header" style="margin-bottom:8px">
           <div>
-            <div class="pos-symbol">${w.symbol} <span class="watch-signal ${signalClass}" style="margin-left:6px;font-size:10px">${signalLabel}</span></div>
+            <div class="pos-symbol">${w.symbol}${newBadge} <span class="watch-signal ${signalClass}" style="margin-left:6px;font-size:10px">${signalLabel}</span></div>
             <div style="font-size:10px;color:var(--label);margin-top:2px">${confPips(w.confidence)} <span style="margin-left:4px">${w.confidence?.toFixed(1)}/10 confidence</span></div>
           </div>
           <div style="text-align:right">

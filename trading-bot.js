@@ -85,7 +85,7 @@ function computeRSI(closes, period = 14) {
 }
 
 // ─── CRYPTO SYMBOLS ────────────────────────────────────────────────────────
-const CRYPTO_SYMBOLS = new Set(['BTC', 'ETH']);
+const CRYPTO_SYMBOLS = new Set(['BTC']);
 
 function isCrypto(symbol) {
   return CRYPTO_SYMBOLS.has(symbol);
@@ -455,6 +455,71 @@ function handleDayReset(trades) {
   return true;
 }
 
+// ─── WATCHLIST SYNC ────────────────────────────────────────────────────────
+// Keeps trades.json watchlist in sync with config.json on every run.
+// - Adds any symbol in config that's missing from trades.watchlist (is_new: true)
+// - Removes symbols no longer in config (unless they have an open position)
+// - Auto-expires the is_new flag after 7 days
+function syncWatchlist(trades) {
+  const today = todayET();
+  if (!Array.isArray(trades.watchlist)) trades.watchlist = [];
+
+  const existingSymbols = new Set(trades.watchlist.map(w => w.symbol));
+  const configSymbols   = new Set(CONFIG.watchlist);
+  const openSymbols     = new Set((trades.open_positions || []).map(p => p.symbol));
+
+  let added = 0, removed = 0;
+
+  // Add symbols present in config but missing from trades.watchlist
+  for (const sym of CONFIG.watchlist) {
+    if (!existingSymbols.has(sym)) {
+      trades.watchlist.push({
+        symbol:          sym,
+        current_price:   null,
+        confidence:      null,
+        entry_signal:    false,
+        entry_target:    null,
+        stop_loss:       null,
+        profit_target:   null,
+        priority:        5,
+        reason:          'Newly added to watchlist — pending first scan',
+        technical_setup: null,
+        rsi:             null,
+        change_pct:      null,
+        volume_ratio:    null,
+        added_date:      today,
+        is_new:          true,
+        last_updated:    new Date().toISOString()
+      });
+      console.log(`[WATCHLIST SYNC] ✦ Added new symbol: ${sym}`);
+      added++;
+    }
+  }
+
+  // Remove symbols no longer in config (keep if there's an open position to manage)
+  trades.watchlist = trades.watchlist.filter(w => {
+    if (configSymbols.has(w.symbol)) return true;
+    if (openSymbols.has(w.symbol))   return true; // keep until position closes
+    console.log(`[WATCHLIST SYNC] ✕ Removed symbol: ${w.symbol}`);
+    removed++;
+    return false;
+  });
+
+  // Auto-expire is_new flag after 7 calendar days
+  for (const item of trades.watchlist) {
+    if (item.is_new && item.added_date) {
+      const daysSince = (new Date(today) - new Date(item.added_date)) / 86400000;
+      if (daysSince >= 7) item.is_new = false;
+    }
+  }
+
+  if (added > 0 || removed > 0) {
+    console.log(`[WATCHLIST SYNC] Done — ${added} added, ${removed} removed. Total: ${trades.watchlist.length} symbols`);
+  } else {
+    console.log(`[WATCHLIST SYNC] In sync (${trades.watchlist.length} symbols)`);
+  }
+}
+
 // ─── PRE-MARKET SCAN ───────────────────────────────────────────────────────
 async function preMarketScan() {
   console.log('\n═══════════════════════════════════════════════');
@@ -463,6 +528,7 @@ async function preMarketScan() {
 
   const trades = JSON.parse(fs.readFileSync(TRADES_FILE, 'utf8'));
   handleDayReset(trades);
+  syncWatchlist(trades);
 
   const activeSymbols = getActiveSymbols(CONFIG.watchlist);
   const marketData = await fetchMarketData(activeSymbols);
@@ -610,6 +676,7 @@ async function intradayEvaluation() {
 
   const trades = JSON.parse(fs.readFileSync(TRADES_FILE, 'utf8'));
   handleDayReset(trades);
+  syncWatchlist(trades);
 
   const weekend = isWeekend();
   const activeWatchlist = getActiveSymbols(CONFIG.watchlist);
