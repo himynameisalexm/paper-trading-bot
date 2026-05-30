@@ -638,7 +638,10 @@ async function intradayEvaluation() {
       autoExits.push({ symbol: pos.symbol, price: p, reason: `Profit target reached at $${p.toFixed(2)} (target $${pos.profit_target.toFixed(2)})` });
     } else {
       const daysHeld = (now - new Date(pos.entry_date)) / 86400000;
-      if (daysHeld >= 2) {
+      const maxHold  = isCrypto(pos.symbol)
+        ? (CONFIG.trading_rules?.max_hold_days_crypto ?? 3)
+        : (CONFIG.trading_rules?.max_hold_days_stocks ?? 3);
+      if (daysHeld >= maxHold) {
         autoExits.push({ symbol: pos.symbol, price: p, reason: `Max hold reached (${daysHeld.toFixed(1)} days)` });
       }
     }
@@ -681,13 +684,22 @@ async function intradayEvaluation() {
 
   for (const ex of autoExits) closePosition(ex.symbol, ex.price, ex.reason);
 
-  // ── TRAIL STOPS: move to break-even once +5% ──────────────────────────
+  // ── TRAIL STOPS ─────────────────────────────────────────────────────────
+  // Stage 1: +4% profit → lock stop at +2% (was: +5% → break-even +0.5%)
+  //   Rationale: locking in 2% at +4% is better than waiting until +5% to
+  //   lock in 0.5%. The old approach gave back 4.5% of profit on a reversal.
+  // Stage 2: +6% profit → lock stop at +4% (protect near-target gains)
   for (const pos of trades.open_positions) {
-    const pnlPct = (pos.current_price - pos.entry_price) / pos.entry_price * 100;
-    const beStop = pos.entry_price * 1.005;
-    if (pnlPct >= 5 && pos.stop_loss < beStop) {
-      console.log(`[TRAIL] ${pos.symbol}: stop $${pos.stop_loss.toFixed(2)} → $${beStop.toFixed(2)} (break-even)`);
-      pos.stop_loss = parseFloat(beStop.toFixed(2));
+    const pnlPct     = (pos.current_price - pos.entry_price) / pos.entry_price * 100;
+    const lock2pct   = parseFloat((pos.entry_price * 1.02).toFixed(2));  // +2% lock
+    const lock4pct   = parseFloat((pos.entry_price * 1.04).toFixed(2));  // +4% lock
+
+    if (pnlPct >= 6.0 && pos.stop_loss < lock4pct) {
+      console.log(`[TRAIL] ${pos.symbol}: +${pnlPct.toFixed(2)}% → stop locked at +4% ($${lock4pct})`);
+      pos.stop_loss = lock4pct;
+    } else if (pnlPct >= 4.0 && pos.stop_loss < lock2pct) {
+      console.log(`[TRAIL] ${pos.symbol}: +${pnlPct.toFixed(2)}% → stop locked at +2% ($${lock2pct})`);
+      pos.stop_loss = lock2pct;
     }
   }
 

@@ -18,8 +18,8 @@
 
   "trading_rules": {
     "min_confidence": 7.0,
-    "max_hold_days_stocks": 2,
-    "max_hold_days_crypto": 2,
+    "max_hold_days_stocks": 3,
+    "max_hold_days_crypto": 3,
     "position_size": {
       "type": "fixed",
       "shares_per_trade": 10
