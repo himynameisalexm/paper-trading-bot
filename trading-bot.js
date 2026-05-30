@@ -460,6 +460,9 @@ async function preMarketScan() {
   const macro      = isWeekend() ? { gate_pass: true, qqq_above_ma: null, vix_below_25: null, weekend: true } : await fetchMacroStatus();
   const reddit     = await fetchRedditSentiment(activeSymbols);
 
+  // Check if any Reddit data exists (Reddit often blocks unauthenticated scraping)
+  const hasRedditData = Object.values(reddit).some(posts => posts.some(p => !p.includes('No significant')));
+
   // Build market summary — real prices only, AI provides analysis only
   let mktSummary = 'LIVE MARKET DATA (use EXACTLY these prices — never invent or guess prices):\n\n';
   for (const sym of CONFIG.watchlist) {
@@ -468,6 +471,7 @@ async function preMarketScan() {
     const earnings = await fetchEarningsDate(sym);
     await new Promise(r => setTimeout(r, 200));
     const earningsStr = earnings !== null ? `${earnings} days away` : 'unknown';
+    const symReddit = (reddit[sym] || []).filter(p => !p.includes('No significant'));
 
     mktSummary += `${sym}:
   Current price: $${d.current_price.toFixed(2)} (use this exactly as current_price)
@@ -477,9 +481,9 @@ async function preMarketScan() {
   200-day MA: $${d.ma200?.toFixed(2) ?? 'N/A'} → price is ${d.above_ma200 ? 'ABOVE' : 'BELOW'} MA
   Volume ratio: ${d.volume_ratio ?? 'N/A'}x vs 10-day avg
   Day range: $${d.day_low?.toFixed(2) ?? '?'} – $${d.day_high?.toFixed(2) ?? '?'}
-  Next earnings: ${earningsStr}${earnings !== null && earnings < 7 ? ' ⚠️ EARNINGS BLACKOUT — do not enter' : ''}
-  Reddit (24h): ${(reddit[sym] || ['No data']).join(' | ')}\n\n`;
+  Next earnings: ${earningsStr}${earnings !== null && earnings < 7 ? ' ⚠️ EARNINGS BLACKOUT — do not enter' : ''}${symReddit.length > 0 ? `\n  Reddit (24h): ${symReddit.join(' | ')}` : ''}\n\n`;
   }
+  if (!hasRedditData) mktSummary += 'NOTE: Reddit data unavailable today (API blocked) — omit sentiment from thesis.\n\n';
 
   const macroStr = `MACRO GATE:
   QQQ: $${macro.qqq_price?.toFixed(2) ?? 'N/A'} vs MA50 $${macro.qqq_50day_ma?.toFixed(2) ?? 'N/A'} → ${macro.qqq_above_ma ? 'ABOVE ✓' : 'BELOW ✗'}
@@ -501,15 +505,13 @@ OPEN POSITIONS: ${trades.open_positions?.length ?? 0}/2 slots used
 CRITICAL: In your response, set current_price to EXACTLY the values I listed above.
 DO NOT change or hallucinate prices. Only provide analysis, confidence, entry targets, and thesis.
 
-THESIS REQUIREMENT — MANDATORY: Every thesis field MUST cover ALL of these in 4–7 sentences:
-  (a) RSI value + interpretation (overbought/oversold/neutral momentum)
-  (b) Volume ratio + what it signals (institutional flow, thin trading, etc.)
-  (c) Price vs MA50 and MA200 — above/below and what that means for support/resistance
-  (d) Macro alignment — does QQQ/VIX backdrop support or work against this trade?
-  (e) Reddit/social sentiment — what is the retail narrative? Does it reinforce or contradict the technical setup?
-  (f) Bull case (one sentence) + Bear case (one sentence)
-  (g) Entry/no-entry decision with confidence level stated explicitly
-One-liner theses are NOT acceptable. Write a complete analyst note for every symbol.
+THESIS REQUIREMENT — MANDATORY: Every thesis field MUST cover these in 3–5 sentences:
+  (a) RSI + volume: state both numbers and interpret them (momentum direction, institutional vs retail flow)
+  (b) Key levels: where is price vs MA50 and MA200? What does that mean for support/resistance?
+  (c) Macro + sentiment: does QQQ/VIX backdrop support this trade? Include Reddit data only if it was provided above; omit sentiment if Reddit data is unavailable.
+  (d) Bull vs bear: one sentence each
+  (e) Decision: entering or not, and why, with confidence stated explicitly
+Keep each thesis concise — 3–5 sentences total. No padding, no filler.
 
 Return ONLY valid JSON in the watchlist_generation format from your instructions.`;
 
@@ -680,18 +682,22 @@ async function intradayEvaluation() {
     }
   }
 
+  // Check if Reddit returned any real data
+  const hasRedditData = Object.values(reddit).some(posts => posts.some(p => !p.includes('No significant')));
+
   // ── BUILD AI PROMPT (combined watchlist scoring + position decisions) ──
   let mktSummary = 'LIVE MARKET DATA (use EXACTLY these prices — never invent or guess):\n\n';
   for (const sym of CONFIG.watchlist) {
     const d = marketData[sym];
     if (!d?.current_price) { mktSummary += `${sym}: unavailable\n\n`; continue; }
+    const symReddit = (reddit[sym] || []).filter(p => !p.includes('No significant'));
     mktSummary += `${sym}:
   Price: $${d.current_price.toFixed(2)} | Change: ${d.change_pct >= 0 ? '+' : ''}${d.change_pct}%
   RSI(14): ${d.rsi ?? 'N/A'} | Vol ratio: ${d.volume_ratio?.toFixed(2) ?? 'N/A'}x vs 10-day avg
   MA50: $${d.ma50?.toFixed(2) ?? 'N/A'} (${d.above_ma50 ? 'ABOVE ✓' : 'BELOW ✗'}) | MA200: $${d.ma200?.toFixed(2) ?? 'N/A'} (${d.above_ma200 ? 'ABOVE ✓' : 'BELOW ✗'})
-  Day range: $${d.day_low?.toFixed(2) ?? '?'} – $${d.day_high?.toFixed(2) ?? '?'}
-  Reddit (24h): ${(reddit[sym] || ['No significant Reddit discussion']).join(' | ')}\n\n`;
+  Day range: $${d.day_low?.toFixed(2) ?? '?'} – $${d.day_high?.toFixed(2) ?? '?'}${symReddit.length > 0 ? `\n  Reddit (24h): ${symReddit.join(' | ')}` : ''}\n\n`;
   }
+  if (!hasRedditData) mktSummary += 'NOTE: Reddit data unavailable today (API blocked) — omit sentiment from thesis.\n\n';
 
   const posLines = trades.open_positions.length
     ? trades.open_positions.map(pos => {
@@ -718,15 +724,13 @@ TASKS — return BOTH sections:
 1. WATCHLIST: Rate EVERY symbol above with a confidence score. All symbols must appear in the watchlist array. At least 3 must have a confidence score (even if entry_signal is false). Be honest — if no setup is there, say so with a detailed thesis explaining why.
 2. POSITIONS: Should any open position be closed early (discretionary)? Any new entries that meet all rules?
 
-THESIS REQUIREMENT — MANDATORY: Every thesis field MUST cover ALL of these in 4–7 sentences:
-  (a) RSI value + interpretation (overbought/oversold/neutral momentum)
-  (b) Volume ratio + what it signals (institutional flow, thin trading, etc.)
-  (c) Price vs MA50 and MA200 — above/below and what that means for support/resistance
-  (d) Macro alignment — does QQQ/VIX backdrop support or work against this trade?
-  (e) Reddit/social sentiment — what is the retail narrative? Does it align with the technical setup?
-  (f) Bull case (one sentence) + Bear case (one sentence)
-  (g) Entry/no-entry decision with confidence level
-One-liner theses are NOT acceptable. Each thesis must read like a complete analyst note.
+THESIS REQUIREMENT — MANDATORY: Every thesis field MUST cover these in 3–5 sentences:
+  (a) RSI + volume: state both numbers and interpret them (momentum, institutional flow, thin/heavy)
+  (b) Key levels: price vs MA50 and MA200 — what do they mean for support/resistance right now?
+  (c) Macro + sentiment: does QQQ/VIX support this trade? If Reddit data was provided, include it; if not, skip sentiment.
+  (d) Bull vs bear: one sentence each
+  (e) Decision: why entering or not, confidence stated explicitly
+Keep each thesis concise — 3–5 sentences total. Do NOT write paragraphs. No fluff.
 
 RULES:
 - entry_price = EXACT current price listed above (never guess)

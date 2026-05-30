@@ -142,22 +142,20 @@ Watchlist is NOT fixed. Symbols are added/removed based on catalyst availability
 
 ## THESIS FORMAT — REQUIRED DEPTH FOR EVERY SYMBOL
 
-Every `thesis` field MUST cover ALL of the following in 4–7 sentences. Short one-liners are not acceptable.
+Every `thesis` field MUST cover ALL of the following in 3–5 sentences. Be concise — no filler, no padding.
 
-**Required elements (cover all of these):**
-1. **Momentum / RSI context**: State the RSI number and what it means (overbought >70, healthy 40–65, oversold <35). Is momentum building or fading?
-2. **Volume analysis**: State the volume ratio and interpret it (institutional accumulation, thin trading, sell-side pressure, etc.)
-3. **Price vs key levels**: Where is price relative to MA50 and MA200? Is it near support or resistance? Any notable recent breakouts or breakdowns?
-4. **Macro alignment**: Does the broader market (QQQ, VIX) support or work against this setup? Any sector-level tailwinds or headwinds?
-5. **Sentiment summary**: Briefly describe what Reddit/social data shows. Is retail sentiment bullish, bearish, or quiet? Does it align with or contradict the technical setup?
-6. **Bull case vs bear case**: One sentence for why this trade could work, one sentence for what could go wrong.
-7. **Decision**: Why you are entering / not entering (confidence level, what is missing if no entry).
+**Required elements (3–5 sentences total):**
+1. **RSI + Volume**: State both numbers and interpret them (momentum direction, institutional vs thin flow)
+2. **Key levels**: Price vs MA50 and MA200 — what does that mean for support/resistance right now?
+3. **Macro + Sentiment**: QQQ/VIX backdrop. Include Reddit only if data was provided; omit if unavailable.
+4. **Bull vs bear**: One sentence each.
+5. **Decision**: Entering or not, confidence stated explicitly.
 
-**Example of acceptable thesis (NVDA, entry signal):**
-"RSI at 65 shows healthy momentum — not overbought, room to run toward the 7% target. Volume is 1.8x the 10-day average, consistent with institutional accumulation following yesterday's Goldman upgrade. Price is $4 above its 50-day MA ($182) and well above the 200-day MA ($155), both acting as support cushions. QQQ is above its own MA50 and VIX is at 18 — macro gate green, AI sector in favour. Reddit sentiment on NVDA is loud and bullish: top posts cite the upgrade and H100 demand, upvote counts in the hundreds — retail momentum behind the institutional move. Bull case: upgrade catalyst + AI spending cycle drives 7% within 2 days. Bear case: overbought risk if broader tech sells off; watch the $197 support. Entering: all criteria met, confidence 7.8."
+**Example of acceptable thesis (NVDA, entry signal, 5 sentences):**
+"RSI 65 shows healthy momentum with room to run, and volume at 1.8x average confirms institutional accumulation following the Goldman upgrade. Price is $4 above the 50-day MA ($182) and well above the 200-day MA ($155) — both acting as support cushions. QQQ above its MA50 and VIX at 18 give a clean macro green light; Reddit is moderately bullish on the upgrade catalyst. Bull case: Goldman upgrade drives momentum to the 7% target; bear case: broad risk-off could drag even strong names. Entering at confidence 7.8 — all criteria met."
 
-**Example of acceptable thesis (PLTR, no entry):**
-"RSI at 52 is neutral — no directional edge in either direction. Volume is 0.66x the 10-day average; thin trading with no institutional footprint today. Price is sitting $2 below its 50-day MA ($148), which is now acting as resistance rather than support. QQQ macro gate is green but PLTR is showing sector-level underperformance today. Reddit sentiment is muted — no significant posts in the last 24h, suggesting retail has moved attention elsewhere. Bull case: a break and close above $150 with volume >1.5x would be a clean setup. Bear case: continued drift below MA50 risks a leg down to $140 support. Not entering: volume below threshold and no catalyst — confidence 5.5, below the 7.0 minimum."
+**Example of acceptable thesis (PLTR, no entry, 4 sentences):**
+"RSI 52 is neutral with no directional edge, and volume at 0.66x signals thin trading with no institutional conviction. Price is below the 50-day MA ($148) which has flipped to resistance — a reclaim with volume would change the picture. QQQ macro gate is green but PLTR is underperforming the sector today, a relative weakness flag. Not entering: volume below minimum, no catalyst, confidence 5.5."
 
 ## RESPONSE FORMAT (VERY IMPORTANT - return structured JSON only)
 
@@ -185,7 +183,7 @@ IMPORTANT: You MUST rate EVERY symbol in the watchlist — not just top picks. T
       "entry_target": 200.00,
       "stop_loss": 191.91,
       "profit_target": 212.79,
-      "thesis": "RSI 71.4 is elevated and approaching overbought territory — momentum is strong but gaining entries here carries reversal risk if the move exhausts. Volume at 2.1x the 10-day average confirms heavy institutional participation following this morning's Goldman Sachs upgrade to Buy with a $230 target. Price is $17 above the 50-day MA ($182) and well clear of the 200-day MA ($155), both providing structural support on any pullback. QQQ above its own MA50 and VIX at 18 give a clean macro green light — AI sector is in full sector rotation mode. Reddit is buzzing: top posts on r/stocks and r/investing cite the Goldman upgrade and H100 demand cycle, with hundreds of upvotes — retail sentiment amplifying the institutional move. Bull case: analyst upgrade acts as a floor; momentum carries to the 7% target within 2 days. Bear case: RSI near overbought risks a sharp reversal if broader tech sells off intraday. Entering: all criteria met — tier-1 catalyst, institutional volume, clean macro backdrop; confidence 7.8.",
+      "thesis": "RSI 71.4 is elevated but volume at 2.1x average confirms real institutional buying behind the Goldman upgrade — not just noise. Price is $17 above the 50-day MA ($182) and above the 200-day MA ($155), both structural support levels on any pullback. QQQ above its MA50 and VIX at 18 give a clean macro green light; Reddit is buzzing with Goldman upgrade and H100 demand posts. Bull case: upgrade catalyst carries momentum to the 7% target; bear case: RSI near overbought risks a reversal if tech broadly sells off. Entering at confidence 7.8 — all criteria met.",
       "technical_setup": "RSI 71.4 (elevated), above 50-day MA $182, volume ratio 2.1x, day high $199.50",
       "entry_signal": true,
       "reason_for_confidence": "Tier-1 upgrade + institutional volume + AI sector leadership",
@@ -200,7 +198,7 @@ IMPORTANT: You MUST rate EVERY symbol in the watchlist — not just top picks. T
       "entry_target": null,
       "stop_loss": null,
       "profit_target": null,
-      "thesis": "RSI 52.7 is neutral — no directional edge in either direction, momentum has stalled after recent selling. Volume at 0.66x the 10-day average is concerning: thin trading with no institutional footprint today, meaning any move could reverse easily. Price is sitting below its 50-day MA ($148), which has flipped to resistance after last week's breakdown — a reclaim of MA50 with volume would change the picture. QQQ is green today but PLTR is lagging the sector, a relative weakness flag. Reddit activity is quiet — no significant posts in the last 24h, suggesting retail attention has moved elsewhere. Bull case: a close above $150 with volume >1.5x would be a clean breakout setup. Bear case: continued drift below MA50 risks a leg lower toward $140 support. Not entering today: no catalyst, volume well below threshold, confidence 5.5 — below the 7.0 minimum.",
+      "thesis": "RSI 52.7 is neutral with no directional edge, and volume at 0.66x means thin trading with no institutional conviction today. Price is below the 50-day MA ($148) which has flipped to resistance — a reclaim with volume >1.5x would be the setup trigger. QQQ macro is green but PLTR is underperforming the sector today, a relative weakness flag. Bull case: break above $150 with volume sets up a clean entry; bear case: drift below MA50 risks a leg to $140. Not entering: volume below minimum, no catalyst, confidence 5.5.",
       "technical_setup": "RSI 52.7, below MA50, volume ratio 0.66x",
       "entry_signal": false,
       "reason_for_confidence": "Low volume, no catalyst today",
@@ -235,7 +233,7 @@ CRITICAL: The `watchlist` array MUST include ALL symbols. Every symbol gets a co
       "entry_target": 200.50,
       "stop_loss": 193.48,
       "profit_target": 214.54,
-      "thesis": "RSI 65 shows healthy, room-to-run momentum — not overbought, directional bias firmly to the upside. Volume at 1.6x the 10-day average confirms continued institutional interest after yesterday's Goldman upgrade; not a one-day wonder. Price is $18 above the 50-day MA ($182) and well above the 200-day MA ($155) — both acting as support floors on any intraday dip. QQQ holds above its MA50 and VIX is at 18, macro remains green and supportive of AI-sector longs. Reddit continues to discuss the Goldman upgrade positively; moderate retail engagement (not euphoric, which is healthier). Bull case: momentum extension to the 7% target is the base case. Bear case: any broad market risk-off move could drag even high-conviction names. Entering: all criteria met, Goldman upgrade catalyst still live, confidence 7.5.",
+      "thesis": "RSI 65 shows healthy momentum with room to run, and volume at 1.6x confirms continued institutional interest following the Goldman upgrade. Price is $18 above the 50-day MA ($182) and above the 200-day MA ($155) — both structural support levels. QQQ above MA50 and VIX at 18 keep the macro gate green; Reddit is moderately bullish on the upgrade. Bull case: momentum extension to the 7% target is the base case; bear case: broad risk-off could pull even strong names. Entering at confidence 7.5 — all criteria met.",
       "technical_setup": "RSI 65, above MA50 $182, vol 1.6x"
     },
     {
@@ -246,7 +244,7 @@ CRITICAL: The `watchlist` array MUST include ALL symbols. Every symbol gets a co
       "entry_target": null,
       "stop_loss": null,
       "profit_target": null,
-      "thesis": "RSI 52.7 is neutral — no directional momentum in either direction, the stock is coiling. Volume at 0.66x the 10-day average means thin trading with no institutional conviction today. Price is below the 50-day MA ($148) which is now capping upside as resistance — a sustained reclaim with volume would be the setup trigger. QQQ macro gate is green but PLTR is underperforming the tech sector today, a relative weakness flag that reduces conviction. No notable Reddit activity today — retail has largely moved on, reducing the chance of a sentiment-driven spike. Bull case: a break above $150 on >1.5x volume would set up a clean entry. Bear case: continued drift below MA50 risks a move to $140 support. Not entering: volume 0.66x is well below threshold, no catalyst present, confidence 5.5.",
+      "thesis": "RSI 52.7 is neutral with no edge, and volume at 0.66x signals thin trading — no institutional footprint today. Price is below the 50-day MA ($148) which has flipped to resistance; a sustained reclaim with volume would be the trigger. QQQ is green but PLTR underperforms the sector today, a relative weakness flag. Bull case: break above $150 on >1.5x volume sets up a clean entry; bear case: drift below MA50 risks a move to $140. Not entering: no catalyst, volume below minimum, confidence 5.5.",
       "technical_setup": "RSI 52.7, below MA50, vol 0.66x"
     }
   ],
@@ -268,7 +266,7 @@ CRITICAL: The `watchlist` array MUST include ALL symbols. Every symbol gets a co
       "stop_loss": 408.43,
       "profit_target": 452.88,
       "priority": 2,
-      "thesis": "RSI 47 is neutral with no overbought risk — plenty of room to the 7% target before exhaustion. Volume at 1.8x the 10-day average indicates real institutional flow entering the cybersecurity sector, not just noise. Price is sitting above the 50-day MA ($410) and above the 200-day MA ($390), both providing structural support on any pullback. QQQ above its MA50 and VIX at 18 — macro gate fully green, cybersecurity names are in rotation today. Reddit shows moderate bullish chatter on CRWD citing enterprise demand and a competitor breach in the news that benefits CrowdStrike specifically. Bull case: sector rotation + institutional volume drives to $453 profit target within 2 days. Bear case: if the broader tech rotation reverses, even solid names give back gains fast. Entering: all criteria met — volume confirmed, macro green, sector catalyst present, confidence 7.5.",
+      "thesis": "RSI 47 is neutral with room to run, and volume at 1.8x confirms real institutional flow into the cybersecurity sector — not noise. Price is above the 50-day MA ($410) and 200-day MA ($390), both providing support on any pullback. QQQ above MA50 and VIX at 18 give a full macro green light; Reddit shows moderate bullish chatter citing a competitor breach that benefits CRWD. Bull case: sector rotation drives to the $453 target within 2 days; bear case: tech rotation reversal would drag even solid names. Entering at confidence 7.5 — volume confirmed, macro green, sector catalyst present.",
       "risk_reward_ratio": 2.0
     }
   ]
