@@ -108,7 +108,7 @@ body::before {
 }
 .glitching { animation: glitch 0.3s steps(1) forwards; }
 
-/* ── POSITION CARDS (CRT expand) ── */
+/* ── POSITION CARDS ── */
 .position-card { background: #0d0d0d; border: 1px solid var(--border); border-radius: 4px; margin-bottom: 10px; overflow: hidden; }
 .position-card:hover { border-color: var(--sub); }
 .pos-card-header { padding: 14px 16px; display: flex; justify-content: space-between; align-items: flex-start; }
@@ -119,14 +119,38 @@ body::before {
 .pos-progress { position: relative; height: 3px; background: #1a1a1a; margin: 0 16px 10px; border-radius: 2px; }
 .pos-progress-bar { height: 100%; border-radius: 2px; background: var(--green); transition: width 0.6s ease; }
 .pos-progress-bar.red { background: var(--red); }
-.pos-stops { display: flex; justify-content: space-between; font-size: 10px; color: var(--label); padding: 0 16px 10px; }
-/* CRT phosphor expand */
-.crt-glow { height: 2px; background: var(--green); box-shadow: 0 0 10px var(--green), 0 0 24px rgba(61,220,132,0.3); transform: scaleX(0); }
-.crt-body { max-height: 0; overflow: hidden; border-top: 0px solid #1a1a1a; }
-.crt-body.open { max-height: 500px; border-top-width: 1px; }
-.crt-inner { padding: 14px 16px; }
-.crt-toggle { font-size: 10px; color: var(--sub); cursor: pointer; user-select: none; padding: 0 16px 12px; display: block; }
-.crt-toggle:hover { color: var(--text); }
+.pos-stops { display: flex; justify-content: space-between; font-size: 10px; color: var(--label); padding: 0 16px 12px; }
+.pos-inner { padding: 0 16px 16px; border-top: 1px solid #141414; padding-top: 14px; margin-top: 0; }
+
+/* ── WATCHLIST ANALYSIS CARDS ── */
+.analysis-card {
+  background: #0a0a0a; border: 1px solid var(--border);
+  border-radius: 4px; margin-bottom: 10px; padding: 16px;
+  transition: border-color 0.2s;
+}
+.analysis-card:hover { border-color: var(--sub); }
+.analysis-card.entry-signal { border-left: 2px solid var(--green); }
+.analysis-card.no-signal    { border-left: 2px solid #1e1e1e; }
+.analysis-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+.analysis-sym { font-size: 15px; color: var(--bright); font-weight: bold; }
+.analysis-levels {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+  margin-bottom: 12px; font-size: 11px;
+}
+.analysis-level { background: #111; padding: 7px 10px; border-radius: 3px; }
+.analysis-level-label { font-size: 9px; color: var(--label); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px; }
+.analysis-level-val { font-weight: bold; color: var(--bright); }
+.analysis-thesis {
+  font-size: 11px; color: var(--text); line-height: 1.85;
+  border-top: 1px solid #141414; padding-top: 10px;
+}
+.analysis-thesis-label { font-size: 9px; color: var(--label); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+
+/* history thesis — always visible */
+.trade-thesis-always {
+  font-size: 10px; color: var(--sub); line-height: 1.7;
+  margin-top: 6px; padding-top: 6px; border-top: 1px solid #0f0f0f;
+}
 
 /* ── RADAR ── */
 #radar-layout {
@@ -293,6 +317,15 @@ body::before {
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- WATCHLIST ANALYSIS -->
+  <div class="section">
+    <div class="section-title">
+      Watchlist Analysis
+      <span class="section-sub">current price · target · stop · thesis — always visible</span>
+    </div>
+    <div id="watchlistAnalysis"><div class="empty-state">Loading watchlist...</div></div>
   </div>
 
   <!-- HISTORY -->
@@ -727,6 +760,71 @@ function showRadarDetail(sym) {
 }
 
 // ═══════════════════════════════════════
+// WATCHLIST ANALYSIS
+// ═══════════════════════════════════════
+function renderWatchlistAnalysis(watchlist) {
+  const el = document.getElementById('watchlistAnalysis');
+  if (!el) return;
+  if (!watchlist || watchlist.length === 0) {
+    el.innerHTML = '<div class="empty-state">No watchlist data yet — pending first scan.</div>';
+    return;
+  }
+  // Sort: entry signals first, then by confidence desc
+  const sorted = [...watchlist].sort((a, b) => {
+    if (a.entry_signal && !b.entry_signal) return -1;
+    if (!a.entry_signal && b.entry_signal) return 1;
+    return (b.confidence || 0) - (a.confidence || 0);
+  });
+  el.innerHTML = sorted.map(sym => {
+    const isNew   = sym.is_new || (sym.added_date && (Date.now() - new Date(sym.added_date).getTime()) / 86400000 < 7);
+    const isEntry = !!sym.entry_signal;
+    const chg     = sym.change_pct;
+    const volCol  = sym.volume_ratio >= 1.5 ? 'var(--green)' : sym.volume_ratio < 0.8 ? 'var(--red)' : 'var(--bright)';
+    const rsiCol  = sym.rsi > 70 ? 'var(--red)' : sym.rsi < 35 ? 'var(--green)' : 'var(--bright)';
+    return `<div class="analysis-card ${isEntry ? 'entry-signal' : 'no-signal'}">
+      <div class="analysis-header">
+        <div>
+          <div class="analysis-sym">${sym.symbol}${isNew ? '<span class="sig-badge new-sym" style="margin-left:8px;vertical-align:middle;font-size:8px">NEW</span>' : ''}</div>
+          <div style="font-size:10px;color:var(--label);margin-top:3px">
+            ${isEntry ? '<span style="color:var(--green);font-weight:bold">▶ ENTRY SIGNAL</span> · ' : '<span style="color:var(--sub)">◦ WATCHING</span> · '}
+            ${sym.confidence != null ? `Conf ${sym.confidence.toFixed(1)}/10` : ''}
+            ${sym.technical_setup ? ' · ' + sym.technical_setup : ''}
+          </div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:15px;color:var(--bright);font-weight:bold">${sym.current_price ? fmt(sym.current_price) : '—'}</div>
+          <div style="font-size:11px;color:${chg != null ? (chg >= 0 ? 'var(--green)' : 'var(--red)') : 'var(--sub)'}">
+            ${chg != null ? (chg >= 0 ? '+' : '') + chg.toFixed(2) + '%' : '—'}
+          </div>
+        </div>
+      </div>
+      <div class="analysis-levels">
+        <div class="analysis-level">
+          <div class="analysis-level-label">Current</div>
+          <div class="analysis-level-val">${sym.current_price ? fmt(sym.current_price) : '—'}</div>
+        </div>
+        <div class="analysis-level">
+          <div class="analysis-level-label">Target (+5%)</div>
+          <div class="analysis-level-val" style="color:var(--green)">${sym.profit_target ? fmt(sym.profit_target) : '—'}</div>
+        </div>
+        <div class="analysis-level">
+          <div class="analysis-level-label">Stop (−2.5%)</div>
+          <div class="analysis-level-val" style="color:var(--red)">${sym.stop_loss ? fmt(sym.stop_loss) : '—'}</div>
+        </div>
+        <div class="analysis-level">
+          <div class="analysis-level-label">RSI · Vol</div>
+          <div class="analysis-level-val" style="color:${rsiCol}">${sym.rsi ?? '—'}<span style="color:${volCol};font-size:9px;margin-left:5px">${sym.volume_ratio != null ? sym.volume_ratio.toFixed(1)+'x' : ''}</span></div>
+        </div>
+      </div>
+      <div class="analysis-thesis">
+        <div class="analysis-thesis-label">Thesis</div>
+        ${sym.reason || '<span style="color:var(--sub)">Pending next scan — no analysis yet.</span>'}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════
 // RENDER
 // ═══════════════════════════════════════
 let firstRender = true;
@@ -808,27 +906,26 @@ function render(data) {
           <span style="color:var(--red)">▼ Stop ${fmt(pos.stop_loss)} (−${toStop}%)</span>
           <span style="color:var(--green)">▲ Target ${fmt(pos.profit_target)} (+${toTarget}%)</span>
         </div>
-        <div class="crt-glow" id="crt-glow-${cardId}"></div>
-        <div class="crt-body" id="crt-body-${cardId}">
-          <div class="crt-inner">
-            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;font-size:11px">
-              <div style="background:#111;padding:8px;border-radius:3px"><div style="color:var(--label);margin-bottom:3px">ENTRY</div><div style="color:var(--bright);font-weight:bold">${fmt(pos.entry_price)}</div><div style="color:var(--label);font-size:10px">${sizeLabel}</div></div>
-              <div style="background:#111;padding:8px;border-radius:3px"><div style="color:var(--label);margin-bottom:3px">CURRENT</div><div style="color:${isUp?'var(--green)':'var(--red)'};font-weight:bold">${fmt(pos.current_price)}</div><div style="color:var(--label);font-size:10px">${isUp?'+':''}${fmtPct(pnlPct)} vs entry</div></div>
-              <div style="background:#111;padding:8px;border-radius:3px"><div style="color:var(--label);margin-bottom:3px">TARGET</div><div style="color:var(--green);font-weight:bold">${fmt(pos.profit_target)}</div><div style="color:var(--label);font-size:10px">+${toTarget}% to go</div></div>
-            </div>
-            <div style="font-size:11px;color:var(--label);line-height:1.75;border-top:1px solid #141414;padding-top:10px">
-              <div style="color:var(--text);margin-bottom:5px;font-weight:bold">Thesis:</div>
-              ${pos.entry_reason || pos.thesis || '—'}
-            </div>
+        <div class="pos-inner">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;font-size:11px">
+            <div style="background:#111;padding:8px;border-radius:3px"><div style="color:var(--label);margin-bottom:3px">ENTRY</div><div style="color:var(--bright);font-weight:bold">${fmt(pos.entry_price)}</div><div style="color:var(--label);font-size:10px">${sizeLabel}</div></div>
+            <div style="background:#111;padding:8px;border-radius:3px"><div style="color:var(--label);margin-bottom:3px">CURRENT</div><div style="color:${isUp?'var(--green)':'var(--red)'};font-weight:bold">${fmt(pos.current_price)}</div><div style="color:var(--label);font-size:10px">${isUp?'+':''}${fmtPct(pnlPct)} vs entry</div></div>
+            <div style="background:#111;padding:8px;border-radius:3px"><div style="color:var(--label);margin-bottom:3px">TARGET</div><div style="color:var(--green);font-weight:bold">${fmt(pos.profit_target)}</div><div style="color:var(--label);font-size:10px">+${toTarget}% away</div></div>
+          </div>
+          <div style="font-size:11px;color:var(--label);line-height:1.75;border-top:1px solid #141414;padding-top:10px">
+            <div style="font-size:9px;color:var(--label);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px">Thesis</div>
+            <div style="color:var(--text)">${pos.entry_reason || pos.thesis || 'Pending first scan — no thesis yet.'}</div>
           </div>
         </div>
-        <div class="crt-toggle" onclick="toggleCRT('${cardId}')">▶ full thesis &amp; levels</div>
       </div>`;
     }).join('');
   }
 
   // ── Radar ──
   renderRadar(data.watchlist || []);
+
+  // ── Watchlist Analysis ──
+  renderWatchlistAnalysis(data.watchlist || []);
 
   // ── History ──
   const historyEl = document.getElementById('history');
@@ -868,7 +965,8 @@ function render(data) {
         <div style="color:var(--label)">Exit <span style="color:${col}">${fmt(t.exit_price)}</span></div>
         <div style="color:var(--label)">${fmtDate(t.entry_date)} → ${fmtDate(t.exit_date)}</div>
       </div>
-      <div style="font-size:10px;color:var(--sub);line-height:1.6"><span style="color:var(--label)">Exit: </span>${t.exit_reason||'—'}</div>
+      ${t.entry_reason ? `<div class="trade-thesis-always"><span style="color:var(--label)">Entry thesis: </span>${t.entry_reason}</div>` : ''}
+      <div style="font-size:10px;color:var(--sub);line-height:1.6;margin-top:${t.entry_reason?'4px':'0'}"><span style="color:var(--label)">Exit: </span>${t.exit_reason||'—'}</div>
     </div>`;
   }
 
