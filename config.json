@@ -30,11 +30,11 @@
       "shares_per_trade": 10
     },
     "risk_management": {
-      "stop_loss_percent": 3.5,
-      "profit_target_percent": 7.0,
+      "stop_loss_percent": 2.5,
+      "profit_target_percent": 5.0,
       "min_reward_risk_ratio": 2.0,
-      "trail_stop_trigger_percent": 5.0,
-      "trail_stop_move_percent": 0.0
+      "trail_stop_trigger_percent": 3.0,
+      "trail_stop_move_percent": 1.5
     },
     "safeguards": {
       "daily_loss_limit_percent": 5.0,

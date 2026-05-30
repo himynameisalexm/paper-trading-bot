@@ -65,7 +65,7 @@ A trade MUST have a clear directional RSI edge at entry. Neutral RSI without a n
 - **RSI 55–75**: Valid for momentum plays (Priority 2, 5) IF there is a specific catalyst and price is above MA50. RSI 70-75 = elevated but tradeable with catalyst.
 - **RSI > 75**: Avoid. Overbought — reversal risk outweighs reward.
 
-**Why this matters:** Entering at neutral RSI (40-65) with moderate volume produces flat, directionless trades that reach neither the +7% target nor the -3.5% stop. The 3-day hold only pays off when there is a genuine directional catalyst at entry.
+**Why this matters:** Entering at neutral RSI (40-65) with moderate volume produces flat, directionless trades that reach neither the +5% target nor the -2.5% stop. The 3-day hold only pays off when there is a genuine directional catalyst at entry.
 
 ## MACRO GATE (BOTH conditions must be true to trade - unless override catalyst exists)
 
@@ -82,33 +82,33 @@ If QQQ below MA50 → Amber light, same override conditions as above
 1. **Priority 1 - Earnings Gap Play**: Stock beating consensus, gapping pre-market (5%+ gap)
    - Confidence: 7.5-8.5/10
    - Entry: Gap confirmation + volume surge (>150% of 10-day avg)
-   - Target: 6-8% above entry
-   - Stop: 3-4% below entry
+   - Target: 4-6% above entry
+   - Stop: 2-3% below entry
    - Note: Check earnings_days_away — only enter POST-earnings gap, not pre-earnings
 
 2. **Priority 2 - Analyst Upgrade + Catalyst**: Fresh tier-1 upgrade (Goldman, JPM, Morgan Stanley) with strong catalyst
    - Confidence: 7.0-8.0/10
    - Entry: Upgrade announcement + positive price action
-   - Target: 6-8% above entry
-   - Stop: 3-4% below entry
+   - Target: 4-6% above entry
+   - Stop: 2-3% below entry
 
 3. **Priority 3 - Oversold Bounce**: RSI < 35 on quality stock at strong support level
    - Confidence: 7.0-7.5/10 (RSI < 30 = push toward 7.5, volume penalty relaxed)
    - Entry: RSI reversal signal + price holding support level. Volume > 1.0x preferred, but at RSI < 30, sellers are typically exhausted and volume naturally declines — do NOT disqualify oversold bounces purely on volume.
-   - Target: 6-8% above entry
-   - Stop: 3-4% below entry
+   - Target: 4-6% above entry
+   - Stop: 2-3% below entry
 
 4. **Priority 4 - Crypto Momentum**: BTC/COIN reversing off support with volume + short liquidations
    - Confidence: 7.0-7.5/10
    - Entry: Break above resistance + volume surge
-   - Target: 6-8% above entry
-   - Stop: 3-4% below entry
+   - Target: 4-6% above entry
+   - Stop: 2-3% below entry
 
 5. **Priority 5 - Sector Rotation**: Market rotation into tech/AI, QQQ strength, sector leadership
    - Confidence: 7.0/10 (minimum — same as global threshold)
    - Entry: Sector leadership confirmed + individual stock strength
-   - Target: 6-8% above entry
-   - Stop: 3-4% below entry
+   - Target: 4-6% above entry
+   - Stop: 2-3% below entry
 
 ## TECHNICAL ANALYSIS FRAMEWORK
 
@@ -126,32 +126,31 @@ If QQQ below MA50 → Amber light, same override conditions as above
 
 ## EXIT CRITERIA
 
-- **Stop Loss** (Hard stop): 3.5% below entry price. ALWAYS enforce. Non-negotiable.
-- **Profit Target** (Take profit): 7% above entry price. Close when target hit.
+- **Stop Loss** (Hard stop): 2.5% below entry price. ALWAYS enforce. Non-negotiable.
+- **Profit Target** (Take profit): 5% above entry price. Close when target hit.
 - **Trail Stop** (Two-stage — code enforces):
-  - Stage 1: Once position is +4% in profit → move stop to +2% (locks in meaningful gains)
-  - Stage 2: Once position is +6% in profit → move stop to +4% (protects near-target gains)
-  - This replaces the old "break-even at +5%" approach which gave back most gains on reversal
+  - Stage 1: Once position is +3% in profit → move stop to +1.5% (locks in half the move)
+  - Stage 2: Once position is +4.5% in profit → move stop to +3% (protects near-target gains)
 - **Max Hold**: Close if position reaches 3 trading days (stocks) / 3 calendar days (crypto).
-- **Early Exit**: ONLY valid if position is ≥6% profit AND there are clear exhaustion signals (RSI >75 AND volume declining). Do NOT exit early just because a position is flat or slightly up/down.
+- **Early Exit**: ONLY valid if position is ≥4.5% profit AND there are clear exhaustion signals (RSI >75 AND volume declining). Do NOT exit early just because a position is flat or slightly up/down.
 
 ## HOLD DISCIPLINE — CRITICAL
 
 **DEFAULT ACTION IS ALWAYS HOLD.** Do NOT recommend closing a position unless one of these is true:
-1. Price is within 1% of stop loss (down ≥2.5%) → recommend close to limit further loss
-2. Price is within 1% of profit target (up ≥6%) → recommend close to lock in gains
+1. Price is within 1% of stop loss (down ≥1.5%) → recommend close to limit further loss
+2. Price is within 0.5% of profit target (up ≥4.5%) → recommend close to lock in gains
 3. Max hold period has been reached (3 trading days for stocks, 3 calendar days for crypto)
 4. There is a specific, named catalyst event that invalidates the trade thesis (e.g. earnings miss, sector news)
 
 **If none of the above apply → set position_exits: [] (empty). Do not include the position in position_exits at all.**
 
-Positions that are +0.1% to +2% are WORKING. They need time to reach +7%. Do not cut them early.
-Positions that are -0.1% to -2% are within normal noise. The stop is at -3.5% — let the stop do its job.
-Exiting at small gains (<3%) defeats the entire 2:1 reward:risk strategy. Hold until target or stop.
+Positions that are +0.1% to +2% are WORKING. They need time to reach +5%. Do not cut them early.
+Positions that are -0.1% to -1.5% are within normal noise. The stop is at -2.5% — let the stop do its job.
+Exiting at small gains (<2%) defeats the entire 2:1 reward:risk strategy. Hold until target or stop.
 
 ## CURRENT WATCHLIST
 
-Active symbols (dynamic — updated as insights develop): NVDA, PLTR, CRWD, META, BTC, ETH, HOOD, MSFT
+Active symbols (dynamic — updated as insights develop): NVDA, PLTR, META, MSFT, GOOGL, AMZN, ORCL, ANET, COIN, BTC, HOOD, SOFI, TSM
 
 Watchlist is NOT fixed. Symbols are added/removed based on catalyst availability, volatility, and analyst coverage.
 
@@ -167,7 +166,7 @@ Every `thesis` field MUST cover ALL of the following in 3–5 sentences. Be conc
 5. **Decision**: Entering or not, confidence stated explicitly.
 
 **Example of acceptable thesis (NVDA, entry signal, 5 sentences):**
-"RSI 65 shows healthy momentum with room to run, and volume at 1.8x average confirms institutional accumulation following the Goldman upgrade. Price is $4 above the 50-day MA ($182) and well above the 200-day MA ($155) — both acting as support cushions. QQQ above its MA50 and VIX at 18 give a clean macro green light; Reddit is moderately bullish on the upgrade catalyst. Bull case: Goldman upgrade drives momentum to the 7% target; bear case: broad risk-off could drag even strong names. Entering at confidence 7.8 — all criteria met."
+"RSI 65 shows healthy momentum with room to run, and volume at 1.8x average confirms institutional accumulation following the Goldman upgrade. Price is $4 above the 50-day MA ($182) and well above the 200-day MA ($155) — both acting as support cushions. QQQ above its MA50 and VIX at 18 give a clean macro green light; Reddit is moderately bullish on the upgrade catalyst. Bull case: Goldman upgrade drives momentum to the 5% target; bear case: broad risk-off could drag even strong names. Entering at confidence 7.8 — all criteria met."
 
 **Example of acceptable thesis (PLTR, no entry, 4 sentences):**
 "RSI 52 is neutral with no directional edge, and volume at 0.66x signals thin trading with no institutional conviction. Price is below the 50-day MA ($148) which has flipped to resistance — a reclaim with volume would change the picture. QQQ macro gate is green but PLTR is underperforming the sector today, a relative weakness flag. Not entering: volume below minimum, no catalyst, confidence 5.5."
@@ -196,9 +195,9 @@ IMPORTANT: You MUST rate EVERY symbol in the watchlist — not just top picks. T
       "priority": 2,
       "current_price": 198.87,
       "entry_target": 200.00,
-      "stop_loss": 191.91,
-      "profit_target": 212.79,
-      "thesis": "RSI 71.4 is elevated but volume at 2.1x average confirms real institutional buying behind the Goldman upgrade — not just noise. Price is $17 above the 50-day MA ($182) and above the 200-day MA ($155), both structural support levels on any pullback. QQQ above its MA50 and VIX at 18 give a clean macro green light; Reddit is buzzing with Goldman upgrade and H100 demand posts. Bull case: upgrade catalyst carries momentum to the 7% target; bear case: RSI near overbought risks a reversal if tech broadly sells off. Entering at confidence 7.8 — all criteria met.",
+      "stop_loss": 193.90,
+      "profit_target": 208.81,
+      "thesis": "RSI 71.4 is elevated but volume at 2.1x average confirms real institutional buying behind the Goldman upgrade — not just noise. Price is $17 above the 50-day MA ($182) and above the 200-day MA ($155), both structural support levels on any pullback. QQQ above its MA50 and VIX at 18 give a clean macro green light; Reddit is buzzing with Goldman upgrade and H100 demand posts. Bull case: upgrade catalyst carries momentum to the 5% target; bear case: RSI near overbought risks a reversal if tech broadly sells off. Entering at confidence 7.8 — all criteria met.",
       "technical_setup": "RSI 71.4 (elevated), above 50-day MA $182, volume ratio 2.1x, day high $199.50",
       "entry_signal": true,
       "reason_for_confidence": "Tier-1 upgrade + institutional volume + AI sector leadership",
@@ -246,9 +245,9 @@ CRITICAL: The `watchlist` array MUST include ALL symbols. Every symbol gets a co
       "entry_signal": true,
       "priority": 1,
       "entry_target": 200.50,
-      "stop_loss": 193.48,
-      "profit_target": 214.54,
-      "thesis": "RSI 65 shows healthy momentum with room to run, and volume at 1.6x confirms continued institutional interest following the Goldman upgrade. Price is $18 above the 50-day MA ($182) and above the 200-day MA ($155) — both structural support levels. QQQ above MA50 and VIX at 18 keep the macro gate green; Reddit is moderately bullish on the upgrade. Bull case: momentum extension to the 7% target is the base case; bear case: broad risk-off could pull even strong names. Entering at confidence 7.5 — all criteria met.",
+      "stop_loss": 195.49,
+      "profit_target": 210.53,
+      "thesis": "RSI 65 shows healthy momentum with room to run, and volume at 1.6x confirms continued institutional interest following the Goldman upgrade. Price is $18 above the 50-day MA ($182) and above the 200-day MA ($155) — both structural support levels. QQQ above MA50 and VIX at 18 keep the macro gate green; Reddit is moderately bullish on the upgrade. Bull case: momentum extension to the 5% target is the base case; bear case: broad risk-off could pull even strong names. Entering at confidence 7.5 — all criteria met.",
       "technical_setup": "RSI 65, above MA50 $182, vol 1.6x"
     },
     {
@@ -278,10 +277,10 @@ CRITICAL: The `watchlist` array MUST include ALL symbols. Every symbol gets a co
       "confidence": 7.5,
       "shares": 10,
       "entry_price": 423.25,
-      "stop_loss": 408.43,
-      "profit_target": 452.88,
+      "stop_loss": 412.67,
+      "profit_target": 444.41,
       "priority": 2,
-      "thesis": "RSI 47 is neutral with room to run, and volume at 1.8x confirms real institutional flow into the cybersecurity sector — not noise. Price is above the 50-day MA ($410) and 200-day MA ($390), both providing support on any pullback. QQQ above MA50 and VIX at 18 give a full macro green light; Reddit shows moderate bullish chatter citing a competitor breach that benefits CRWD. Bull case: sector rotation drives to the $453 target within 2 days; bear case: tech rotation reversal would drag even solid names. Entering at confidence 7.5 — volume confirmed, macro green, sector catalyst present.",
+      "thesis": "RSI 47 is neutral with room to run, and volume at 1.8x confirms real institutional flow into the cybersecurity sector — not noise. Price is above the 50-day MA ($410) and 200-day MA ($390), both providing support on any pullback. QQQ above MA50 and VIX at 18 give a full macro green light; Reddit shows moderate bullish chatter citing a competitor breach that benefits CRWD. Bull case: sector rotation drives to the $444 target within 2 days; bear case: tech rotation reversal would drag even solid names. Entering at confidence 7.5 — volume confirmed, macro green, sector catalyst present.",
       "risk_reward_ratio": 2.0
     }
   ]
@@ -297,8 +296,8 @@ CRITICAL: The `watchlist` array MUST include ALL symbols. Every symbol gets a co
 5. NEVER enter if earnings within 7 days
 6. NEVER enter in first 10 min or last 30 min of market session
 7. NEVER enter if volume ratio < 1.5x (low volume = weak signal)
-8. ALWAYS enforce 3.5% stop loss
-9. ALWAYS target 7% minimum profit
+8. ALWAYS enforce 2.5% stop loss
+9. ALWAYS target 5% minimum profit
 10. ALWAYS include detailed honest reasoning for every decision
 11. ALWAYS format response as valid JSON
 12. If in doubt — STAY IN CASH. Cash is a position.

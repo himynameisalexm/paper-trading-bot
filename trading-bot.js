@@ -752,21 +752,20 @@ async function intradayEvaluation() {
   for (const ex of autoExits) closePosition(ex.symbol, ex.price, ex.reason);
 
   // ── TRAIL STOPS ─────────────────────────────────────────────────────────
-  // Stage 1: +4% profit → lock stop at +2% (was: +5% → break-even +0.5%)
-  //   Rationale: locking in 2% at +4% is better than waiting until +5% to
-  //   lock in 0.5%. The old approach gave back 4.5% of profit on a reversal.
-  // Stage 2: +6% profit → lock stop at +4% (protect near-target gains)
+  // Scaled to 5% profit target / 2.5% stop:
+  // Stage 1: +3% profit  → lock stop at +1.5% (captures half the move)
+  // Stage 2: +4.5% profit → lock stop at +3%  (protects near-target gains)
   for (const pos of trades.open_positions) {
-    const pnlPct     = (pos.current_price - pos.entry_price) / pos.entry_price * 100;
-    const lock2pct   = parseFloat((pos.entry_price * 1.02).toFixed(2));  // +2% lock
-    const lock4pct   = parseFloat((pos.entry_price * 1.04).toFixed(2));  // +4% lock
+    const pnlPct       = (pos.current_price - pos.entry_price) / pos.entry_price * 100;
+    const lock1_5pct   = parseFloat((pos.entry_price * 1.015).toFixed(2)); // +1.5% lock
+    const lock3pct     = parseFloat((pos.entry_price * 1.03).toFixed(2));  // +3% lock
 
-    if (pnlPct >= 6.0 && pos.stop_loss < lock4pct) {
-      console.log(`[TRAIL] ${pos.symbol}: +${pnlPct.toFixed(2)}% → stop locked at +4% ($${lock4pct})`);
-      pos.stop_loss = lock4pct;
-    } else if (pnlPct >= 4.0 && pos.stop_loss < lock2pct) {
-      console.log(`[TRAIL] ${pos.symbol}: +${pnlPct.toFixed(2)}% → stop locked at +2% ($${lock2pct})`);
-      pos.stop_loss = lock2pct;
+    if (pnlPct >= 4.5 && pos.stop_loss < lock3pct) {
+      console.log(`[TRAIL] ${pos.symbol}: +${pnlPct.toFixed(2)}% → stop locked at +3% ($${lock3pct})`);
+      pos.stop_loss = lock3pct;
+    } else if (pnlPct >= 3.0 && pos.stop_loss < lock1_5pct) {
+      console.log(`[TRAIL] ${pos.symbol}: +${pnlPct.toFixed(2)}% → stop locked at +1.5% ($${lock1_5pct})`);
+      pos.stop_loss = lock1_5pct;
     }
   }
 
@@ -876,8 +875,8 @@ Return ONLY valid JSON in hourly_evaluation format.`;
       if (!real || !pos) continue;
 
       const pnlPct = (real - pos.entry_price) / pos.entry_price * 100;
-      const nearStop   = pnlPct <= -2.5;   // within 1% of 3.5% stop
-      const nearTarget = pnlPct >= 6.0;    // within 1% of 7% target
+      const nearStop   = pnlPct <= -1.5;   // within 1% of 2.5% stop
+      const nearTarget = pnlPct >= 4.5;    // within 0.5% of 5% target
       const canExit    = nearStop || nearTarget;
 
       if (canExit) {
@@ -970,8 +969,8 @@ Return ONLY valid JSON in hourly_evaluation format.`;
         continue;
       }
 
-      const stopL = parseFloat((ep * (1 - 0.035)).toFixed(2));
-      const targP = parseFloat((ep * (1 + 0.07)).toFixed(2));
+      const stopL = parseFloat((ep * (1 - 0.025)).toFixed(2));
+      const targP = parseFloat((ep * (1 + 0.05)).toFixed(2));
 
       trades.open_positions.push({
         id: `trade_${Date.now()}_${sym}`,
