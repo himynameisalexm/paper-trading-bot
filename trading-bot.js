@@ -248,17 +248,26 @@ async function fetchChartData(symbol) {
     const closes  = (result.indicators?.quote?.[0]?.close || []).filter(c => c != null);
     const volumes = (result.indicators?.quote?.[0]?.volume || []).filter(v => v != null);
 
-    const price     = meta?.regularMarketPrice ?? null;
-    const prevClose = meta?.chartPreviousClose  ?? null;
+    const price = meta?.regularMarketPrice ?? null;
+
+    // Use the last completed daily close as prevClose (not chartPreviousClose which is start-of-range)
+    // During market hours: closes[-1] = yesterday's close (today hasn't closed yet)
+    // After market close: closes[-1] = today's close, so delta is ~0 (correct for after-hours)
+    const prevClose = closes.length >= 1 ? closes[closes.length - 1] : null;
     const chgPct    = price && prevClose ? ((price - prevClose) / prevClose * 100) : 0;
 
     // Compute MA50 & MA200 from daily closes
     const ma50  = closes.length >= 50  ? closes.slice(-50).reduce((a, b) => a + b, 0) / 50  : closes.length > 0 ? closes.reduce((a,b) => a+b, 0) / closes.length : null;
     const ma200 = closes.length >= 200 ? closes.slice(-200).reduce((a, b) => a + b, 0) / 200 : null;
 
-    // Compute avg volume from last 10 days
-    const avgVol   = volumes.length >= 10 ? volumes.slice(-10).reduce((a, b) => a + b, 0) / 10 : null;
-    const todayVol = volumes[volumes.length - 1] ?? null;
+    // Volume ratio: compare today's volume against the last 10 COMPLETED trading days.
+    // Exclude today (last element) from the average — today's session is partial during market hours,
+    // which would artificially deflate the avg and distort the ratio.
+    const todayVol        = volumes.length > 0 ? volumes[volumes.length - 1] : null;
+    const completedVols   = volumes.slice(0, -1); // all except today's partial
+    const avgVol = completedVols.length >= 10
+      ? completedVols.slice(-10).reduce((a, b) => a + b, 0) / 10
+      : completedVols.length > 0 ? completedVols.reduce((a, b) => a + b, 0) / completedVols.length : null;
     const volRatio = todayVol && avgVol ? todayVol / avgVol : null;
 
     // RSI(14)
@@ -737,7 +746,7 @@ RULES:
 - stop_loss = entry × 0.965, profit_target = entry × 1.07
 - Max 2 open positions (currently ${trades.open_positions.length})
 - Min confidence 7.0 to enter — never round up
-- Volume ratio ≥ 1.2x required (code enforces this)
+- Volume is a CONFIDENCE MODIFIER, not a hard veto: ≥1.5x adds +0.5 to confidence; 1.0-1.5x neutral; <1.0x subtracts 0.3-0.5. Low volume alone cannot block an entry if confidence ≥7.0.
 - No entries if earnings within 7 days (code enforces this)
 
 Return ONLY valid JSON in hourly_evaluation format.`;

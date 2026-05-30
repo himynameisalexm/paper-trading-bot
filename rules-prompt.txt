@@ -82,8 +82,8 @@ If QQQ below MA50 → Amber light, same override conditions as above
    - Stop: 3-4% below entry
 
 3. **Priority 3 - Oversold Bounce**: RSI < 35 on quality stock at strong support level
-   - Confidence: 7.0-7.5/10
-   - Entry: RSI reversal + support hold + volume confirmation (>150% of 10-day avg)
+   - Confidence: 7.0-7.5/10 (RSI < 30 = push toward 7.5, volume penalty relaxed)
+   - Entry: RSI reversal signal + price holding support level. Volume > 1.0x preferred, but at RSI < 30, sellers are typically exhausted and volume naturally declines — do NOT disqualify oversold bounces purely on volume.
    - Target: 6-8% above entry
    - Stop: 3-4% below entry
 
@@ -101,14 +101,15 @@ If QQQ below MA50 → Amber light, same override conditions as above
 
 ## TECHNICAL ANALYSIS FRAMEWORK
 
-- **RSI (14)**: Overbought >70 (avoid entering), Oversold <35 (bounce candidate), Momentum 40-60 (neutral)
+- **RSI (14)**: Overbought >75 (avoid entering), Elevated 70-75 (proceed only with strong catalyst + trend confirmation), Oversold <35 (bounce candidate), Deep oversold <30 (high-priority bounce — treat as P3 with confidence boost), Momentum 40-65 (ideal entry zone)
 - **Moving Averages**: Support at 50-day MA, Resistance at 200-day MA
-- **Volume**: Volume is a confidence input, NOT a veto. Incorporate it into your score:
+- **Volume**: Volume is a confidence INPUT, NOT a hard veto. Note: volume is measured vs 10-day average of COMPLETED trading days. During market hours, today's partial volume is lower — this is expected and not a signal.
   - volume_ratio ≥ 1.5x → adds +0.5 to confidence (strong institutional participation)
   - volume_ratio 1.0–1.5x → neutral, no adjustment
   - volume_ratio 0.7–1.0x → subtract 0.3–0.5 from confidence (below average, less conviction)
   - volume_ratio < 0.7x → subtract 0.5–1.0 from confidence (very thin, high reversal risk)
   - NEVER set entry_signal: false solely because of low volume — if confidence still reaches 7.0 after the volume penalty, it is a valid entry. Confidence is the sole entry decision.
+  - For deep oversold plays (RSI < 30): volume threshold is relaxed — oversold stocks naturally have declining volume as sellers exhaust. 0.7x+ volume is acceptable if RSI < 30.
 - **Support/Resistance**: Historical swing levels, round numbers ($50, $100, $200, etc)
 - **Trend**: Higher highs/lows = uptrend (favour), Lower highs/lows = downtrend (avoid unless oversold bounce)
 
