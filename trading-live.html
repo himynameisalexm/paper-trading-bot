@@ -209,11 +209,53 @@ body::before {
 .refresh-btn { background: none; border: 1px solid var(--sub); color: var(--sub); padding: 4px 10px; border-radius: 2px; font-family: inherit; font-size: 11px; cursor: pointer; transition: all 0.2s; }
 .refresh-btn:hover { border-color: var(--text); color: var(--text); }
 
-/* history */
-.pos-thesis-toggle { font-size: 10px; color: var(--sub); cursor: pointer; user-select: none; }
-.pos-thesis-toggle:hover { color: var(--text); }
-.pos-thesis { font-size: 11px; color: var(--label); margin-top: 8px; padding-top: 8px; border-top: 1px solid #141414; display: none; line-height: 1.7; }
-.pos-thesis.open { display: block; }
+/* ── HISTORY TABS ── */
+.hist-tab-bar { display:flex; gap:0; border-bottom:1px solid #141414; margin-bottom:16px; }
+.hist-tab { padding:6px 16px; font-size:10px; color:var(--label); cursor:pointer;
+  border:1px solid transparent; border-bottom:none; border-radius:3px 3px 0 0;
+  letter-spacing:0.06em; text-transform:uppercase; transition:all 0.15s; margin-bottom:-1px; }
+.hist-tab:hover { color:var(--text); border-color:var(--border); }
+.hist-tab.active { color:var(--bright); border-color:var(--border); background:#0d0d0d; }
+.hist-panel { display:none; }
+.hist-panel.active { display:block; }
+
+/* ── HISTORY SCORECARD ── */
+.hist-sc-summary { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:14px; }
+.hist-sc-box { background:#0a0a0a; border:1px solid #161616; border-radius:3px; padding:10px 12px; text-align:center; }
+.hist-sc-val { font-size:18px; font-weight:bold; margin-bottom:3px; }
+.hist-sc-label { font-size:9px; color:var(--label); text-transform:uppercase; letter-spacing:0.06em; }
+.hist-sc-row { background:#0a0a0a; border:1px solid var(--border); border-radius:3px; margin-bottom:4px; cursor:pointer; transition:border-color 0.15s; overflow:hidden; }
+.hist-sc-row:hover { border-color:var(--sub); }
+.hist-sc-inner { display:grid; grid-template-columns:1fr 80px 90px 80px 80px; gap:8px; align-items:center; padding:12px 14px; }
+.hist-sc-name { font-size:11px; font-weight:bold; margin-bottom:4px; }
+.hist-sc-wr-wrap { height:3px; background:#141414; border-radius:2px; }
+.hist-sc-wr-fill { height:100%; border-radius:2px; }
+.hist-sc-expand { display:none; padding:10px 14px 12px; border-top:1px solid #0d0d0d; }
+.hist-sc-expand.open { display:block; }
+.hist-sc-chips { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:10px; }
+.hist-sc-chip { font-size:9px; padding:2px 7px; border-radius:2px; border:1px solid; }
+.hist-sc-chip.win { color:var(--green); border-color:rgba(61,220,132,0.25); }
+.hist-sc-chip.loss { color:var(--red); border-color:rgba(255,85,85,0.2); }
+.hist-sc-thesis { font-size:10px; color:var(--sub); line-height:1.65; border-top:1px solid #0d0d0d; padding-top:8px; }
+
+/* ── HISTORY TICKER CARDS ── */
+.hist-ticker-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+.hist-ticker-card { background:#0a0a0a; border:1px solid var(--border); border-radius:3px; overflow:hidden; cursor:pointer; transition:border-color 0.15s; }
+.hist-ticker-card:hover { border-color:var(--sub); }
+.hist-ticker-card.tc-profit { border-left:2px solid rgba(61,220,132,0.35); }
+.hist-ticker-card.tc-loss   { border-left:2px solid rgba(255,85,85,0.3); }
+.hist-tc-header { padding:12px 14px; }
+.hist-tc-sym { font-size:13px; color:var(--bright); font-weight:bold; display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px; }
+.hist-tc-meta { font-size:9px; color:var(--label); display:flex; gap:10px; margin-bottom:7px; }
+.hist-tc-wr-wrap { height:2px; background:#141414; border-radius:1px; margin-bottom:8px; }
+.hist-tc-wr-fill { height:100%; border-radius:1px; }
+.hist-tc-sparks { display:flex; align-items:flex-end; gap:2px; height:22px; }
+.hist-tc-spark-bar { flex:1; min-width:3px; border-radius:1px 1px 0 0; }
+.hist-tc-trades { border-top:1px solid #141414; display:none; }
+.hist-tc-trades.open { display:block; }
+.hist-tc-trade { padding:9px 14px; border-bottom:1px solid #0c0c0c; font-size:10px; }
+.hist-tc-trade:last-child { border-bottom:none; }
+.hist-tc-trade-thesis { font-size:9px; color:var(--sub); line-height:1.6; margin-top:3px; }
 </style>
 </head>
 <body>
@@ -331,7 +373,14 @@ body::before {
   <!-- HISTORY -->
   <div class="section">
     <div class="section-title">History</div>
-    <div id="history"><div class="empty-state">No history yet.</div></div>
+    <div class="hist-tab-bar">
+      <div class="hist-tab active" data-tab="scorecard" onclick="switchHistTab('scorecard')">Scorecard</div>
+      <div class="hist-tab" data-tab="symbols" onclick="switchHistTab('symbols')">By Symbol</div>
+      <div class="hist-tab" data-tab="log" onclick="switchHistTab('log')">Log</div>
+    </div>
+    <div id="hist-scorecard" class="hist-panel active"><div class="empty-state">No history yet.</div></div>
+    <div id="hist-symbols"   class="hist-panel"><div class="empty-state">No history yet.</div></div>
+    <div id="hist-log"       class="hist-panel"><div class="empty-state">No history yet.</div></div>
   </div>
 </div>
 
@@ -825,6 +874,207 @@ function renderWatchlistAnalysis(watchlist) {
 }
 
 // ═══════════════════════════════════════
+// HISTORY — INSIGHT VIEWS
+// ═══════════════════════════════════════
+const SETUP_LABELS = {
+  'momentum-breakout':   'Momentum Breakout',
+  'crypto-continuation': 'Crypto Continuation',
+  'ai-infrastructure':   'AI Infrastructure',
+  'pre-earnings':        'Pre-Earnings Play',
+  'oversold-bounce':     'Oversold Bounce',
+  'general':             'General',
+};
+const SETUP_COLOR = {
+  'momentum-breakout':   'var(--blue)',
+  'crypto-continuation': '#b58fe0',
+  'ai-infrastructure':   'var(--gold)',
+  'pre-earnings':        'var(--text)',
+  'oversold-bounce':     'var(--green)',
+  'general':             'var(--sub)',
+};
+
+function detectSetup(reason = '', exit = '') {
+  const t = (reason + ' ' + exit).toLowerCase();
+  if (/breakout|cup.and.handle/.test(t) && !/ai |cloud|gpu|aws|azure/.test(t)) return 'momentum-breakout';
+  if (/btc|bitcoin|crypto|etf inflow|halving|coin leveraged|crypto revenue/.test(t)) return 'crypto-continuation';
+  if (/pre.earnings|into catalyst/.test(t)) return 'pre-earnings';
+  if (/oversold|post.sell.?off|bounce.*rsi [34]|rsi [34].*bounce|recovery play/.test(t)) return 'oversold-bounce';
+  if (/\bai\b|cloud|gpu|semiconductor|hyperscal|copilot|aws|azure|llama|gemini/.test(t)) return 'ai-infrastructure';
+  return 'general';
+}
+
+// ── History tab switcher ──
+let histTab = 'scorecard';
+function switchHistTab(tab) {
+  histTab = tab;
+  document.querySelectorAll('.hist-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.hist-panel').forEach(p => p.classList.remove('active'));
+  document.querySelector(`.hist-tab[data-tab="${tab}"]`)?.classList.add('active');
+  document.getElementById('hist-' + tab)?.classList.add('active');
+}
+
+// ── Scorecard view ──
+function renderHistoryScorecard(trades) {
+  const el = document.getElementById('hist-scorecard');
+  if (!el) return;
+  if (!trades.length) { el.innerHTML = '<div class="empty-state">No closed trades yet.</div>'; return; }
+
+  const bySetup = {};
+  for (const t of trades) {
+    const s = detectSetup(t.entry_reason, t.exit_reason);
+    if (!bySetup[s]) bySetup[s] = [];
+    bySetup[s].push(t);
+  }
+
+  const totalWins = trades.filter(t => (t.realized_pnl || 0) > 0).length;
+  const totalPnl  = trades.reduce((s, t) => s + (t.realized_pnl || 0), 0);
+  const bestEntry = Object.entries(bySetup)
+    .map(([k, v]) => ({ k, wr: v.filter(t => t.realized_pnl > 0).length / v.length }))
+    .sort((a, b) => b.wr - a.wr)[0];
+
+  let h = `<div class="hist-sc-summary">
+    <div class="hist-sc-box"><div class="hist-sc-val" style="color:var(--bright)">${trades.length}</div><div class="hist-sc-label">Closed</div></div>
+    <div class="hist-sc-box"><div class="hist-sc-val" style="color:${totalWins/trades.length>=0.5?'var(--green)':'var(--red)'}">${Math.round(totalWins/trades.length*100)}%</div><div class="hist-sc-label">Win Rate</div></div>
+    <div class="hist-sc-box"><div class="hist-sc-val" style="color:${totalPnl>=0?'var(--green)':'var(--red)'}">${totalPnl>=0?'+':''}${fmt(totalPnl,0)}</div><div class="hist-sc-label">Total P&L</div></div>
+    <div class="hist-sc-box"><div class="hist-sc-val" style="color:var(--gold);font-size:11px;padding-top:4px">${bestEntry?SETUP_LABELS[bestEntry.k]:'—'}</div><div class="hist-sc-label">Best Setup</div></div>
+  </div>`;
+
+  const sorted = Object.entries(bySetup).sort((a, b) => {
+    const wa = a[1].filter(t => t.realized_pnl > 0).length / a[1].length;
+    const wb = b[1].filter(t => t.realized_pnl > 0).length / b[1].length;
+    return wb - wa;
+  });
+
+  sorted.forEach(([setupKey, strades], idx) => {
+    const label = SETUP_LABELS[setupKey] || setupKey;
+    const col   = SETUP_COLOR[setupKey]  || 'var(--text)';
+    const wins   = strades.filter(t => (t.realized_pnl || 0) > 0);
+    const losses = strades.filter(t => (t.realized_pnl || 0) < 0);
+    const wr     = wins.length / strades.length;
+    const totalP = strades.reduce((s, t) => s + (t.realized_pnl || 0), 0);
+    const avgP   = totalP / strades.length;
+    const wrCol  = wr >= 0.6 ? 'var(--green)' : wr >= 0.4 ? 'var(--gold)' : 'var(--red)';
+    const eid    = `hsc-x-${idx}`;
+
+    const chips = strades.map(t => {
+      const w = (t.realized_pnl || 0) > 0;
+      return `<span class="hist-sc-chip ${w?'win':'loss'}">${t.symbol} ${w?'+':''}${fmt(t.realized_pnl,0)}</span>`;
+    }).join('');
+
+    const sW = wins[0], sL = losses[0];
+    const thesis = [
+      sW ? `<span style="color:var(--green)">Win: </span>${(sW.entry_reason||'').slice(0,110)}…` : '',
+      sL ? `<span style="color:var(--red)">Loss: </span>${sL.exit_reason||'—'}` : '',
+    ].filter(Boolean).join('<br>');
+
+    h += `<div class="hist-sc-row" onclick="document.getElementById('${eid}').classList.toggle('open')">
+      <div class="hist-sc-inner">
+        <div>
+          <div class="hist-sc-name" style="color:${col}">${label}</div>
+          <div class="hist-sc-wr-wrap"><div class="hist-sc-wr-fill" style="width:${Math.round(wr*100)}%;background:${wrCol}"></div></div>
+        </div>
+        <div style="display:flex;gap:4px;flex-wrap:wrap;align-items:center">
+          <span style="font-size:9px;color:var(--green);border:1px solid rgba(61,220,132,0.25);padding:1px 6px;border-radius:2px">${wins.length}W</span>
+          <span style="font-size:9px;color:var(--red);border:1px solid rgba(255,85,85,0.2);padding:1px 6px;border-radius:2px">${losses.length}L</span>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:13px;font-weight:bold;color:${wrCol}">${Math.round(wr*100)}%</div>
+          <div style="font-size:8px;color:var(--label);margin-top:1px">WIN RATE</div>
+        </div>
+        <div style="font-weight:bold;font-size:12px;color:${avgP>=0?'var(--green)':'var(--red)'}">${avgP>=0?'+':''}${fmt(avgP,0)}</div>
+        <div style="font-size:11px;color:${totalP>=0?'var(--green)':'var(--red)'}">${totalP>=0?'+':''}${fmt(totalP,0)}</div>
+      </div>
+      <div class="hist-sc-expand" id="${eid}">
+        <div class="hist-sc-chips">${chips}</div>
+        ${thesis ? `<div class="hist-sc-thesis">${thesis}</div>` : ''}
+      </div>
+    </div>`;
+  });
+
+  el.innerHTML = h;
+}
+
+// ── By Symbol view ──
+function renderHistoryBySymbol(trades) {
+  const el = document.getElementById('hist-symbols');
+  if (!el) return;
+  if (!trades.length) { el.innerHTML = '<div class="empty-state">No closed trades yet.</div>'; return; }
+
+  const bySymbol = {};
+  for (const t of trades) {
+    if (!bySymbol[t.symbol]) bySymbol[t.symbol] = [];
+    bySymbol[t.symbol].push(t);
+  }
+
+  const symbols = Object.keys(bySymbol).sort((a, b) => {
+    return bySymbol[b].reduce((s,t)=>s+(t.realized_pnl||0),0) - bySymbol[a].reduce((s,t)=>s+(t.realized_pnl||0),0);
+  });
+
+  let h = '<div class="hist-ticker-grid">';
+  for (const sym of symbols) {
+    const st     = bySymbol[sym].sort((a,b)=>(b.exit_date||'').localeCompare(a.exit_date||''));
+    const totalP = st.reduce((s,t)=>s+(t.realized_pnl||0),0);
+    const wins   = st.filter(t=>(t.realized_pnl||0)>0);
+    const losses = st.filter(t=>(t.realized_pnl||0)<0);
+    const wr     = st.length > 0 ? wins.length/st.length : 0;
+    const avgP   = totalP/st.length;
+    const maxAbs = Math.max(...st.map(t=>Math.abs(t.realized_pnl||0)),1);
+    const cid    = `htc-${sym}`;
+
+    const sparks = st.slice().reverse().map(t => {
+      const hh = Math.max(18, Math.abs(t.realized_pnl||0)/maxAbs*22);
+      const c  = (t.realized_pnl||0) > 0 ? 'rgba(61,220,132,0.65)' : 'rgba(255,85,85,0.6)';
+      return `<div class="hist-tc-spark-bar" style="height:${hh}px;background:${c}"></div>`;
+    }).join('');
+
+    const tradeRows = st.map(t => {
+      const isW = (t.realized_pnl||0) > 0;
+      let hold = '—';
+      if (t.entry_date && t.exit_date) {
+        const m = (new Date(t.exit_date)-new Date(t.entry_date))/60000;
+        hold = m < 60 ? Math.round(m)+'m' : (m/60).toFixed(1)+'h';
+      }
+      return `<div class="hist-tc-trade">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px">
+          <div style="display:flex;gap:8px;align-items:baseline">
+            <span style="font-size:9px;font-weight:bold;color:${isW?'var(--green)':'var(--red)'}">${isW?'WIN':'LOSS'}</span>
+            <span style="font-size:9px;color:var(--sub)">${fmtDate(t.exit_date)}</span>
+            <span style="font-size:9px;color:var(--label)">${hold}</span>
+          </div>
+          <span style="font-weight:bold;font-size:11px;color:${isW?'var(--green)':'var(--red)'}">${isW?'+':''}${fmt(t.realized_pnl)}</span>
+        </div>
+        <div style="font-size:9px;color:var(--label)">${fmt(t.entry_price)} → ${fmt(t.exit_price)} · ${fmtPct(t.realized_pnl_percent)}</div>
+        ${t.entry_reason?`<div class="hist-tc-trade-thesis">${t.entry_reason.slice(0,110)}${t.entry_reason.length>110?'…':''}</div>`:''}
+        <div style="font-size:9px;color:var(--sub);margin-top:2px"><span style="color:var(--label)">Exit: </span>${t.exit_reason||'—'}</div>
+      </div>`;
+    }).join('');
+
+    h += `<div class="hist-ticker-card ${totalP>=0?'tc-profit':'tc-loss'}">
+      <div class="hist-tc-header" onclick="document.getElementById('${cid}').classList.toggle('open')">
+        <div class="hist-tc-sym">
+          <span>${sym}</span>
+          <span style="font-size:12px;font-weight:bold;color:${totalP>=0?'var(--green)':'var(--red)'}">${totalP>=0?'+':''}${fmt(totalP)}</span>
+        </div>
+        <div class="hist-tc-meta">
+          <span>${st.length} trade${st.length!==1?'s':''}</span>
+          <span style="color:var(--green)">${wins.length}W</span>
+          <span style="color:var(--red)">${losses.length}L</span>
+          <span>avg ${avgP>=0?'+':''}${fmt(avgP,0)}</span>
+        </div>
+        <div class="hist-tc-wr-wrap"><div class="hist-tc-wr-fill" style="width:${Math.round(wr*100)}%;background:${wr>=0.5?'var(--green)':'var(--red)'}"></div></div>
+        <div style="display:flex;align-items:flex-end;justify-content:space-between">
+          <div class="hist-tc-sparks">${sparks}</div>
+          <div style="font-size:9px;color:${wr>=0.5?'var(--green)':'var(--red)'}">${Math.round(wr*100)}% win</div>
+        </div>
+      </div>
+      <div class="hist-tc-trades" id="${cid}">${tradeRows}</div>
+    </div>`;
+  }
+  h += '</div>';
+  el.innerHTML = h;
+}
+
+// ═══════════════════════════════════════
 // RENDER
 // ═══════════════════════════════════════
 let firstRender = true;
@@ -927,8 +1177,13 @@ function render(data) {
   // ── Watchlist Analysis ──
   renderWatchlistAnalysis(data.watchlist || []);
 
-  // ── History ──
-  const historyEl = document.getElementById('history');
+  // ── History: insight views ──
+  const closedTrades = data.closed_trades || [];
+  renderHistoryScorecard(closedTrades);
+  renderHistoryBySymbol(closedTrades);
+
+  // ── History: Log (chronological accordion → hist-log) ──
+  const historyEl = document.getElementById('hist-log');
   const today     = s.date || new Date().toISOString().split('T')[0];
   const todayMonth = today.slice(0, 7);
   const tradesByDay = {};
@@ -1021,7 +1276,7 @@ function render(data) {
       <div id="${mid}" style="display:${isCurrent?'block':'none'};margin-bottom:8px">${days.map(d=>renderDayRow(d)).join('')}</div>`;
   }
 
-  historyEl.innerHTML = allMonths.length ? allMonths.map(renderMonthRow).join('') : '<div class="empty-state">No history yet.</div>';
+  if (historyEl) historyEl.innerHTML = allMonths.length ? allMonths.map(renderMonthRow).join('') : '<div class="empty-state">No history yet.</div>';
 
   firstRender = false;
 }
