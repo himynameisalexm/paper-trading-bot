@@ -146,6 +146,63 @@ body::before {
 }
 .analysis-thesis-label { font-size: 9px; color: var(--label); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
 
+/* ── DAILY REVIEW PANEL ── */
+.review-panel {
+  background: #050505; border: 1px solid var(--border);
+  border-radius: 4px; padding: 18px; margin-bottom: 10px;
+}
+.review-assessment {
+  font-size: 12px; color: var(--text); line-height: 1.8;
+  margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid #141414;
+}
+.review-regime {
+  font-size: 11px; color: var(--sub); margin-bottom: 14px;
+  padding: 8px 12px; background: #0a0a0a; border-radius: 3px;
+  border-left: 2px solid var(--sub);
+}
+.review-meta { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; font-size: 11px; color: var(--label); }
+.review-changes-list { margin-bottom: 14px; }
+.review-change {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 8px 10px; margin-bottom: 6px; border-radius: 3px;
+  font-size: 11px;
+}
+.review-change.add    { background: rgba(61,220,132,0.06); border: 1px solid rgba(61,220,132,0.15); }
+.review-change.remove { background: rgba(255,85,85,0.06);  border: 1px solid rgba(255,85,85,0.15); }
+.review-change-action { font-weight: bold; width: 60px; flex-shrink: 0; }
+.review-change.add    .review-change-action { color: var(--green); }
+.review-change.remove .review-change-action { color: var(--red); }
+.review-change-sym  { color: var(--bright); font-weight: bold; width: 54px; flex-shrink: 0; }
+.review-change-reason { color: var(--sub); flex: 1; }
+.review-notes-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 6px; margin-top: 6px;
+}
+.review-note-item {
+  background: #0a0a0a; padding: 7px 10px; border-radius: 3px;
+  font-size: 10px;
+}
+.review-note-sym   { color: var(--bright); font-weight: bold; margin-bottom: 3px; }
+.review-note-text  { color: var(--sub); line-height: 1.6; }
+.review-flag {
+  display: flex; align-items: flex-start; gap: 8px;
+  padding: 7px 10px; margin-bottom: 5px; border-radius: 3px;
+  background: rgba(200,150,58,0.08); border: 1px solid rgba(200,150,58,0.2);
+  font-size: 11px; color: var(--gold);
+}
+.review-history-row {
+  display: flex; gap: 8px; align-items: center;
+  font-size: 10px; color: var(--sub); padding: 6px 0;
+  border-bottom: 1px solid #141414;
+}
+.review-history-date { color: var(--label); width: 80px; flex-shrink: 0; }
+.review-history-text { flex: 1; }
+.review-history-badge {
+  font-size: 9px; padding: 2px 6px; border-radius: 2px;
+  background: #141414; color: var(--label); flex-shrink: 0;
+}
+.review-history-badge.changed { background: rgba(61,220,132,0.12); color: var(--green); }
+
 /* history thesis — always visible */
 .trade-thesis-always {
   font-size: 10px; color: var(--sub); line-height: 1.7;
@@ -370,6 +427,15 @@ body::before {
     <div id="watchlistAnalysis"><div class="empty-state">Loading watchlist...</div></div>
   </div>
 
+  <!-- DAILY REVIEW -->
+  <div class="section">
+    <div class="section-title">
+      Daily Review
+      <span class="section-sub">AI-powered watchlist audit · runs 7:30 AM ET weekdays</span>
+    </div>
+    <div id="reviewPanel"><div class="empty-state">Loading review...</div></div>
+  </div>
+
   <!-- HISTORY -->
   <div class="section">
     <div class="section-title">History</div>
@@ -387,6 +453,7 @@ body::before {
 <script>
 // ── CONFIG ──
 const TRADES_URL    = 'https://raw.githubusercontent.com/himynameisalexm/paper-trading-bot/main/trades.json';
+const REVIEW_URL    = 'https://raw.githubusercontent.com/himynameisalexm/paper-trading-bot/main/review-log.json';
 const POLL_INTERVAL = 60000;
 const BASELINE      = 20000;
 
@@ -1310,6 +1377,108 @@ function toggleCRT(cardId) {
   crtStates[cardId] = !isOpen;
 }
 
+// ── REVIEW PANEL ──
+function renderReviewPanel(reviewLog) {
+  const el = document.getElementById('reviewPanel');
+  if (!el) return;
+
+  if (!Array.isArray(reviewLog) || reviewLog.length === 0) {
+    el.innerHTML = '<div class="empty-state">No review data yet — runs weekdays at 7:30 AM ET before the market scan.</div>';
+    return;
+  }
+
+  const latest  = reviewLog[0];
+  const history = reviewLog.slice(1, 6); // last 5 previous reviews
+
+  const changes = latest.changes_applied || [];
+  const flags   = latest.flags           || [];
+  const notes   = latest.symbol_notes    || {};
+  const noData  = latest.data_health?.no_price_data || [];
+  const ruleIss = latest.rule_issues     || [];
+
+  // Build flags from data health if not explicitly in flags
+  const allFlags = [...flags];
+  if (noData.length > 0 && !allFlags.some(f => f.includes('price data'))) {
+    allFlags.push(`${noData.join(', ')} returned no price data in last scan — Yahoo Finance may be rate-limiting`);
+  }
+  if (ruleIss.length > 0) {
+    ruleIss.forEach(i => allFlags.push(`⚙ Config drift: ${i}`));
+  }
+
+  let html = `<div class="review-panel">`;
+
+  // Date + meta row
+  html += `<div class="review-meta">
+    <span>📅 ${latest.date}</span>
+    <span style="color:var(--sub)">${new Date(latest.timestamp).toLocaleString('en-AU',{timeZone:'Australia/Brisbane',day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'})}</span>
+    <span>${latest.watchlist_after?.length ?? '—'} symbols on watchlist</span>
+    ${changes.length > 0 ? `<span style="color:var(--green)">✦ ${changes.length} change${changes.length>1?'s':''} applied</span>` : `<span style="color:var(--sub)">No changes</span>`}
+  </div>`;
+
+  // Assessment
+  if (latest.assessment && latest.assessment !== 'AI review unavailable') {
+    html += `<div class="review-assessment">${latest.assessment}</div>`;
+  }
+
+  // Market regime note
+  if (latest.market_regime_note) {
+    html += `<div class="review-regime">📡 ${latest.market_regime_note}</div>`;
+  }
+
+  // Flags / warnings
+  if (allFlags.length > 0) {
+    html += `<div style="margin-bottom:14px">` +
+      allFlags.map(f => `<div class="review-flag">⚑ ${f}</div>`).join('') +
+    `</div>`;
+  }
+
+  // Changes applied
+  if (changes.length > 0) {
+    html += `<div style="font-size:9px;color:var(--label);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px">Changes Applied</div>`;
+    html += `<div class="review-changes-list">` +
+      changes.map(c => `
+        <div class="review-change ${c.action === 'ADD' ? 'add' : 'remove'}">
+          <span class="review-change-action">${c.action === 'ADD' ? '✦ ADD' : '✕ REMOVE'}</span>
+          <span class="review-change-sym">${c.symbol}</span>
+          <span class="review-change-reason">${c.reason || '—'}</span>
+        </div>`).join('') +
+    `</div>`;
+  }
+
+  // Symbol notes (top 8)
+  const noteEntries = Object.entries(notes).slice(0, 8);
+  if (noteEntries.length > 0) {
+    html += `<div style="font-size:9px;color:var(--label);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;margin-top:6px">Symbol Notes</div>`;
+    html += `<div class="review-notes-grid">` +
+      noteEntries.map(([sym, note]) => `
+        <div class="review-note-item">
+          <div class="review-note-sym">${sym}</div>
+          <div class="review-note-text">${note}</div>
+        </div>`).join('') +
+    `</div>`;
+  }
+
+  html += `</div>`; // end review-panel
+
+  // Review history (last 5)
+  if (history.length > 0) {
+    html += `<div style="font-size:9px;color:var(--label);text-transform:uppercase;letter-spacing:0.08em;margin:14px 0 8px">Previous Reviews</div>`;
+    html += history.map(r => {
+      const ch = (r.changes_applied || []);
+      const summary = ch.length > 0
+        ? ch.map(c => `${c.action === 'ADD' ? '✦' : '✕'} ${c.symbol}`).join(' ')
+        : 'No changes';
+      return `<div class="review-history-row">
+        <span class="review-history-date">${r.date}</span>
+        <span class="review-history-text">${(r.assessment || '—').substring(0, 110)}${(r.assessment||'').length > 110 ? '…' : ''}</span>
+        <span class="review-history-badge ${ch.length > 0 ? 'changed' : ''}">${summary}</span>
+      </div>`;
+    }).join('');
+  }
+
+  el.innerHTML = html;
+}
+
 // ── TOGGLE HISTORY ──
 function toggleHist(id) {
   const body = document.getElementById(id), chev = document.getElementById('chev-' + id);
@@ -1324,10 +1493,22 @@ async function fetchData() {
   const dot = document.getElementById('statusDot'), st = document.getElementById('statusText');
   dot.className = 'dot gold'; st.textContent = 'Fetching latest data...';
   try {
-    const res  = await fetch(TRADES_URL + '?t=' + Date.now());
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const data = await res.json();
+    const ts = Date.now();
+    const [tradesRes, reviewRes] = await Promise.allSettled([
+      fetch(TRADES_URL  + '?t=' + ts),
+      fetch(REVIEW_URL  + '?t=' + ts)
+    ]);
+
+    if (tradesRes.status !== 'fulfilled' || !tradesRes.value.ok) throw new Error('Trades fetch failed');
+    const data = await tradesRes.value.json();
+
+    let reviewLog = null;
+    if (reviewRes.status === 'fulfilled' && reviewRes.value.ok) {
+      try { reviewLog = await reviewRes.value.json(); } catch {}
+    }
+
     render(data);
+    renderReviewPanel(reviewLog);
     const etNow  = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }));
     const etDay  = etNow.getDay(), etMins = etNow.getHours() * 60 + etNow.getMinutes();
     const isWknd = etDay === 0 || etDay === 6;
