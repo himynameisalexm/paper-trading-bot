@@ -170,7 +170,7 @@ function isDailyLossLimitHit(session) {
 
 // ─── FETCH EARNINGS DATE ───────────────────────────────────────────────────
 async function fetchEarningsDate(symbol) {
-  if (['BTC', 'ETH', 'COIN'].includes(symbol)) return null; // crypto has no earnings
+  if (['BTC', 'ETH'].includes(symbol)) return null; // only real crypto has no earnings (COIN is NASDAQ stock — needs blackout check)
   try {
     const encoded = symbol;
     const res = await makeRequest({
@@ -233,7 +233,7 @@ async function fetchRedditSentiment(symbols) {
 
 // ─── FETCH SYMBOL DATA FROM V8 CHART (single call returns price + history) ──
 async function fetchChartData(symbol) {
-  const encoded = symbol === 'BTC' ? 'BTC-USD' : symbol === 'ETH' ? 'ETH-USD' : symbol === '^VIX' ? '%5EVIX' : symbol;
+  const encoded = symbol === 'BTC' ? 'BTC-USD' : symbol === '^VIX' ? '%5EVIX' : symbol;
   try {
     const res = await makeRequest({
       hostname: 'query1.finance.yahoo.com',
@@ -338,7 +338,7 @@ async function fetchMacroStatus() {
     const vix = await fetchChartData('^VIX');
     if (vix) {
       macro.vix          = vix.current_price;
-      macro.vix_below_25 = vix.current_price !== null ? vix.current_price < 25 : null;
+      macro.vix_below_25 = vix.current_price !== null ? vix.current_price < 30 : null; // policy threshold is VIX < 30 (matches config + rules-prompt)
     }
     macro.gate_pass = macro.qqq_above_ma === true && macro.vix_below_25 === true;
     console.log(`  QQQ $${macro.qqq_price?.toFixed(2)} | MA50 $${macro.qqq_50day_ma?.toFixed(2)} → ${macro.qqq_above_ma ? 'ABOVE ✓' : 'BELOW ✗'}`);
@@ -821,7 +821,7 @@ Keep each thesis concise — 3–5 sentences total. Do NOT write paragraphs. No 
 
 RULES:
 - entry_price = EXACT current price listed above (never guess)
-- stop_loss = entry × 0.965, profit_target = entry × 1.07
+- stop_loss = entry × 0.975, profit_target = entry × 1.05 (−2.5% stop / +5% target — code enforces these exactly)
 - Max 2 open positions (currently ${trades.open_positions.length})
 - Min confidence 7.0 to enter — never round up
 - Volume is a CONFIDENCE MODIFIER, not a hard veto: ≥1.5x adds +0.5 to confidence; 1.0-1.5x neutral; <1.0x subtracts 0.3-0.5. Low volume alone cannot block an entry if confidence ≥7.0.
@@ -882,7 +882,7 @@ Return ONLY valid JSON in hourly_evaluation format.`;
       if (canExit) {
         closePosition(ex.symbol, real, ex.reason || 'AI discretionary exit');
       } else {
-        console.log(`[HOLD] ${ex.symbol}: AI suggested exit but position is ${pnlPct >= 0 ? '+' : ''}${pnlPct.toFixed(2)}% — not near stop (-3.5%) or target (+7%). Holding.`);
+        console.log(`[HOLD] ${ex.symbol}: AI suggested exit but position is ${pnlPct >= 0 ? '+' : ''}${pnlPct.toFixed(2)}% — not near stop (≤−1.5%) or target (≥+4.5%). Holding.`);
       }
     }
   }
