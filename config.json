@@ -4,7 +4,6 @@
     "daily_trading_capital": 5000,
     "base_currency": "USD"
   },
-
   "watchlist": [
     "NVDA",
     "PLTR",
@@ -16,13 +15,12 @@
     "ANET",
     "COIN",
     "BTC",
-    "HOOD",
-    "SOFI",
-    "TSM"
+    "TSM",
+    "CRWD",
+    "SMCI"
   ],
-
   "trading_rules": {
-    "min_confidence": 7.0,
+    "min_confidence": 7,
     "max_hold_days_stocks": 3,
     "max_hold_days_crypto": 3,
     "position_size": {
@@ -31,20 +29,19 @@
     },
     "risk_management": {
       "stop_loss_percent": 2.5,
-      "profit_target_percent": 5.0,
-      "min_reward_risk_ratio": 2.0,
-      "trail_stop_trigger_percent": 3.0,
+      "profit_target_percent": 5,
+      "min_reward_risk_ratio": 2,
+      "trail_stop_trigger_percent": 3,
       "trail_stop_move_percent": 1.5
     },
     "safeguards": {
-      "daily_loss_limit_percent": 5.0,
+      "daily_loss_limit_percent": 5,
       "earnings_blackout_days": 7,
       "no_entry_before_minutes": 10,
       "no_entry_after_minutes_before_close": 30,
-      "min_volume_ratio": 1.0
+      "min_volume_ratio": 1
     }
   },
-
   "macro_gate": {
     "qqq_symbol": "QQQ",
     "qqq_sma_period": 50,
@@ -54,14 +51,12 @@
     "allow_override": true,
     "override_sizing": 0.75
   },
-
   "data_sources": {
     "primary": "yahoo_finance_v8",
     "reddit_sentiment": true,
     "reddit_search_limit": 5,
     "earnings_check": true
   },
-
   "scheduling": {
     "timezone": "US/Eastern",
     "pre_market_scan_time": "08:00",
@@ -71,7 +66,6 @@
     "no_entry_open_minutes": 10,
     "no_entry_close_minutes": 30
   },
-
   "api": {
     "mistral": {
       "model": "mistral-large-latest",

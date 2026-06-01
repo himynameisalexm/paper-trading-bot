@@ -1,0 +1,109 @@
+[
+  {
+    "date": "2026-06-01",
+    "timestamp": "2026-06-01T16:59:42.255Z",
+    "rule_issues": [],
+    "assessment": "Watchlist quality is currently poor due to widespread price data unavailability, limiting actionable signals. The bot's strategy is best suited for high-momentum AI/tech/fintech names, but most symbols lack fresh data to evaluate setups.",
+    "market_regime_note": "AI/tech sector shows mixed momentum with BTC oversold but thin volume, suggesting cautious breakout potential and higher likelihood of oversold bounces in the near term.",
+    "flags": [
+      "Widespread API/data fetch failures for most watchlist symbols; investigate data pipeline health.",
+      "BTC oversold but volume is weak; watch for confirmation before entry."
+    ],
+    "changes_applied": [
+      {
+        "action": "REMOVE",
+        "symbol": "HOOD",
+        "reason": "Consistently unavailable price data with no trade history or signals."
+      },
+      {
+        "action": "REMOVE",
+        "symbol": "SOFI",
+        "reason": "Consistently unavailable price data with no trade history or signals."
+      },
+      {
+        "action": "ADD",
+        "symbol": "CRWD",
+        "reason": "Strong AI/tech cybersecurity leader with high volatility, liquidity, and institutional coverage; fits momentum breakout and oversold bounce setups."
+      },
+      {
+        "action": "ADD",
+        "symbol": "SMCI",
+        "reason": "High-momentum AI infrastructure play with frequent 5%+ daily ranges and active options market; aligns with bot's strategy."
+      }
+    ],
+    "watchlist_after": [
+      "NVDA",
+      "PLTR",
+      "META",
+      "MSFT",
+      "GOOGL",
+      "AMZN",
+      "ORCL",
+      "ANET",
+      "COIN",
+      "BTC",
+      "TSM",
+      "CRWD",
+      "SMCI"
+    ],
+    "symbol_notes": {
+      "NVDA": "Price data unavailable; monitor for recovery to assess momentum resumption.",
+      "PLTR": "Price data unavailable; no actionable thesis until data resumes.",
+      "META": "Price data unavailable; historically strong performer, but currently untradeable.",
+      "MSFT": "Price data unavailable; core AI/tech holding with no signals.",
+      "BTC": "Oversold with thin volume; high-priority bounce candidate if volume confirms participation.",
+      "COIN": "Price data unavailable; single win suggests potential but needs fresh data.",
+      "ANET": "Price data unavailable; no trade history to evaluate.",
+      "ORCL": "Price data unavailable; no trade history to evaluate.",
+      "AMZN": "Price data unavailable; no trade history to evaluate.",
+      "GOOGL": "Price data unavailable; no trade history to evaluate.",
+      "TSM": "Price data unavailable; no trade history to evaluate."
+    },
+    "data_health": {
+      "no_price_data": [
+        "NVDA",
+        "PLTR",
+        "META",
+        "MSFT",
+        "HOOD"
+      ],
+      "no_confidence_score": [
+        "NVDA",
+        "PLTR",
+        "META",
+        "MSFT",
+        "HOOD"
+      ]
+    },
+    "performance_snapshot": {
+      "BTC": {
+        "trades": 7,
+        "wins": 2,
+        "losses": 5,
+        "win_rate": 29,
+        "avg_pnl_pct": -0.17
+      },
+      "COIN": {
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_rate": 100,
+        "avg_pnl_pct": 5.98
+      },
+      "ETH": {
+        "trades": 6,
+        "wins": 3,
+        "losses": 2,
+        "win_rate": 60,
+        "avg_pnl_pct": 0.05
+      },
+      "META": {
+        "trades": 6,
+        "wins": 4,
+        "losses": 2,
+        "win_rate": 67,
+        "avg_pnl_pct": 0.63
+      }
+    }
+  }
+]
