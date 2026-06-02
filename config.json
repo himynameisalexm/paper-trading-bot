@@ -12,12 +12,12 @@
     "GOOGL",
     "AMZN",
     "ORCL",
-    "ANET",
     "COIN",
     "BTC",
     "TSM",
     "CRWD",
-    "SMCI"
+    "AMD",
+    "PANW"
   ],
   "trading_rules": {
     "min_confidence": 7,

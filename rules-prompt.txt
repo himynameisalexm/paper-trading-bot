@@ -153,7 +153,7 @@ Exiting at small gains (<2%) defeats the entire 2:1 reward:risk strategy. Hold u
 
 ## CURRENT WATCHLIST
 
-Active symbols (dynamic — updated as insights develop): NVDA, PLTR, META, MSFT, GOOGL, AMZN, ORCL, ANET, COIN, BTC, TSM, CRWD, SMCI
+Active symbols (dynamic — updated as insights develop): NVDA, PLTR, META, MSFT, GOOGL, AMZN, ORCL, COIN, BTC, TSM, CRWD, AMD, PANW
 
 Watchlist is NOT fixed. Symbols are added/removed based on catalyst availability, volatility, and analyst coverage.
 
