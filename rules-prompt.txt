@@ -129,27 +129,53 @@ If QQQ below MA50 → Amber light, same override conditions as above
 
 ## EXIT CRITERIA
 
-- **Stop Loss** (Hard stop): 2.5% below entry price. ALWAYS enforce. Non-negotiable.
-- **Profit Target** (Take profit): 5% above entry price. Close when target hit.
-- **Trail Stop** (Two-stage — code enforces):
-  - Stage 1: Once position is +3% in profit → move stop to +1.5% (locks in half the move)
-  - Stage 2: Once position is +4.5% in profit → move stop to +3% (protects near-target gains)
-- **Max Hold**: Close if position reaches 3 trading days (stocks) / 3 calendar days (crypto).
-- **Early Exit**: ONLY valid if position is ≥4.5% profit AND there are clear exhaustion signals (RSI >75 AND volume declining). Do NOT exit early just because a position is flat or slightly up/down.
+The code automatically enforces all exits — you rarely need to populate position_exits[].
+
+### Stocks
+- **Stop Loss**: −2.5% below entry. Hard stop — code enforces, non-negotiable.
+- **Profit Target**: +5% above entry. Code auto-closes at this level.
+- **Trail Stop** (code enforces, two-stage):
+  - Stage 1: At +3.0% → stop moves to +1.5% (captures 60% of the move)
+  - Stage 2: At +4.0% → stop moves to +3.0% (protects near-target gains)
+
+### Crypto (BTC only)
+- **Stop Loss**: −3.5% below entry. Wider stop required — BTC moves 2–3% on normal intraday volatility; a 2.5% stop is noise-level and guarantees premature exits.
+- **Profit Target**: +7% above entry. Maintains the 2:1 reward-to-risk ratio.
+- **Trail Stop** (code enforces, two-stage):
+  - Stage 1: At +3.5% → stop moves to +1.5%
+  - Stage 2: At +5.5% → stop moves to +3.5%
+- **Minimum hold**: 20 hours before any AI discretionary exit. Crypto moves require time.
+
+### All assets
+- **Max Hold**: 3 trading days (stocks) / 3 calendar days (crypto) — code enforces.
+- **Early Exit**: Almost never recommend. See HOLD DISCIPLINE below.
 
 ## HOLD DISCIPLINE — CRITICAL
 
-**DEFAULT ACTION IS ALWAYS HOLD.** Do NOT recommend closing a position unless one of these is true:
-1. Price is within 1% of stop loss (down ≥1.5%) → recommend close to limit further loss
-2. Price is within 0.5% of profit target (up ≥4.5%) → recommend close to lock in gains
-3. Max hold period has been reached (3 trading days for stocks, 3 calendar days for crypto)
-4. There is a specific, named catalyst event that invalidates the trade thesis (e.g. earnings miss, sector news)
+**THE DEFAULT IS ALWAYS HOLD. position_exits[] should almost always be empty.**
 
-**If none of the above apply → set position_exits: [] (empty). Do not include the position in position_exits at all.**
+The code handles stops, targets, trail stops, and max hold automatically. You do not need to manage these.
 
-Positions that are +0.1% to +2% are WORKING. They need time to reach +5%. Do not cut them early.
-Positions that are -0.1% to -1.5% are within normal noise. The stop is at -2.5% — let the stop do its job.
-Exiting at small gains (<2%) defeats the entire 2:1 reward:risk strategy. Hold until target or stop.
+### The ONLY valid reasons to populate position_exits[]:
+1. **Near stop + minimum hold met**: Position is down ≥2.2% (stocks) or ≥3.2% (crypto) AND has been held ≥8h (stocks) or ≥20h (crypto). This indicates genuine directional failure — the stop will fire soon anyway, so flagging it is OK.
+2. **Catalyst invalidation**: A specific, named event has fundamentally changed the trade thesis — examples: earnings miss reported, FDA rejection announced, fraud disclosed, major tier-1 downgrade, regulatory shutdown. This must be a real event, not a prediction or concern.
+
+### NEVER recommend exit for these (code gate will block them anyway):
+- "RSI moved to neutral" — not a reason
+- "Volume declined" — not a reason
+- "No catalyst visible" — not a reason
+- "Slightly underwater / flat" — not a reason, this is normal noise
+- "Approaching overbought" — not a reason
+- Position held < 8 hours (stocks) or < 20 hours (crypto) — too new, ignore
+- Any position between −2.2% and +6.5% that has been held < 3 days — working normally, hold
+
+### Why this matters (actual performance data):
+- AI discretionary exits averaged **+0.17% P&L** (barely breakeven)
+- Code max-hold exits averaged **+1.75% P&L** (10× better)
+- The three best trades (+3.36%, +2.92%, +0.82%) were ALL held to max hold
+- The pattern is clear: **holding almost always outperforms early AI exits**
+
+**If you are unsure → position_exits: []. Default to hold, every time.**
 
 ## CURRENT WATCHLIST
 
@@ -299,8 +325,8 @@ CRITICAL: The `watchlist` array MUST include ALL symbols. Every symbol gets a co
 5. NEVER enter if earnings within 7 days
 6. NEVER enter in first 10 min or last 30 min of market session
 7. Volume is a CONFIDENCE MODIFIER, not a hard gate — low volume penalises confidence but cannot alone block an entry. If confidence reaches 7.0 after applying the volume penalty, the entry is valid. See TECHNICAL ANALYSIS FRAMEWORK for exact adjustments.
-8. ALWAYS enforce 2.5% stop loss (stop_loss = entry × 0.975)
-9. ALWAYS target 5% profit (profit_target = entry × 1.05)
+8. ALWAYS enforce correct stop loss: stocks = entry × 0.975 (−2.5%), crypto = entry × 0.965 (−3.5%)
+9. ALWAYS target correct profit: stocks = entry × 1.05 (+5%), crypto = entry × 1.07 (+7%)
 10. ALWAYS include detailed honest reasoning for every decision
 11. ALWAYS format response as valid JSON
 12. If in doubt — STAY IN CASH. Cash is a position.

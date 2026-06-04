@@ -882,20 +882,35 @@ async function intradayEvaluation() {
   for (const ex of autoExits) closePosition(ex.symbol, ex.price, ex.reason);
 
   // ── TRAIL STOPS ─────────────────────────────────────────────────────────
-  // Scaled to 5% profit target / 2.5% stop:
-  // Stage 1: +3% profit  → lock stop at +1.5% (captures half the move)
-  // Stage 2: +4.5% profit → lock stop at +3%  (protects near-target gains)
+  // Stocks (5% target / 2.5% stop):
+  //   Stage 1: +3.0% → lock at +1.5%  (captures 60% of the move)
+  //   Stage 2: +4.0% → lock at +3.0%  (protects near-target gains)
+  // Crypto (7% target / 3.5% stop):
+  //   Stage 1: +3.5% → lock at +1.5%  (early protection given wider volatility)
+  //   Stage 2: +5.5% → lock at +3.5%  (near-target lock)
   for (const pos of trades.open_positions) {
-    const pnlPct       = (pos.current_price - pos.entry_price) / pos.entry_price * 100;
-    const lock1_5pct   = parseFloat((pos.entry_price * 1.015).toFixed(2)); // +1.5% lock
-    const lock3pct     = parseFloat((pos.entry_price * 1.03).toFixed(2));  // +3% lock
+    const pnlPct     = (pos.current_price - pos.entry_price) / pos.entry_price * 100;
+    const crypto     = isCrypto(pos.symbol);
+    const lock1_5pct = parseFloat((pos.entry_price * 1.015).toFixed(2));
+    const lock3pct   = parseFloat((pos.entry_price * 1.030).toFixed(2));
+    const lock3_5pct = parseFloat((pos.entry_price * 1.035).toFixed(2));
 
-    if (pnlPct >= 4.5 && pos.stop_loss < lock3pct) {
-      console.log(`[TRAIL] ${pos.symbol}: +${pnlPct.toFixed(2)}% → stop locked at +3% ($${lock3pct})`);
-      pos.stop_loss = lock3pct;
-    } else if (pnlPct >= 3.0 && pos.stop_loss < lock1_5pct) {
-      console.log(`[TRAIL] ${pos.symbol}: +${pnlPct.toFixed(2)}% → stop locked at +1.5% ($${lock1_5pct})`);
-      pos.stop_loss = lock1_5pct;
+    if (crypto) {
+      if (pnlPct >= 5.5 && pos.stop_loss < lock3_5pct) {
+        console.log(`[TRAIL] ${pos.symbol}: +${pnlPct.toFixed(2)}% → crypto stop locked at +3.5% ($${lock3_5pct})`);
+        pos.stop_loss = lock3_5pct;
+      } else if (pnlPct >= 3.5 && pos.stop_loss < lock1_5pct) {
+        console.log(`[TRAIL] ${pos.symbol}: +${pnlPct.toFixed(2)}% → crypto stop locked at +1.5% ($${lock1_5pct})`);
+        pos.stop_loss = lock1_5pct;
+      }
+    } else {
+      if (pnlPct >= 4.0 && pos.stop_loss < lock3pct) {
+        console.log(`[TRAIL] ${pos.symbol}: +${pnlPct.toFixed(2)}% → stop locked at +3% ($${lock3pct})`);
+        pos.stop_loss = lock3pct;
+      } else if (pnlPct >= 3.0 && pos.stop_loss < lock1_5pct) {
+        console.log(`[TRAIL] ${pos.symbol}: +${pnlPct.toFixed(2)}% → stop locked at +1.5% ($${lock1_5pct})`);
+        pos.stop_loss = lock1_5pct;
+      }
     }
   }
 
@@ -939,7 +954,7 @@ DAILY TRADING CAPITAL: $${(trades.session.daily_trading_capital || 5000).toFixed
 
 TASKS — return BOTH sections:
 1. WATCHLIST: Rate EVERY symbol above with a confidence score. All symbols must appear in the watchlist array. At least 3 must have a confidence score (even if entry_signal is false). Be honest — if no setup is there, say so with a detailed thesis explaining why.
-2. POSITIONS: Should any open position be closed early (discretionary)? Any new entries that meet all rules?
+2. POSITIONS: See hold rules below — position_exits should almost always be empty.
 
 THESIS REQUIREMENT — MANDATORY: Every thesis field MUST cover these in 3–5 sentences:
   (a) RSI + volume: state both numbers and interpret them (momentum, institutional flow, thin/heavy)
@@ -949,9 +964,19 @@ THESIS REQUIREMENT — MANDATORY: Every thesis field MUST cover these in 3–5 s
   (e) Decision: why entering or not, confidence stated explicitly
 Keep each thesis concise — 3–5 sentences total. Do NOT write paragraphs. No fluff.
 
+HOLD DISCIPLINE — CODE ENFORCES THIS, READ CAREFULLY:
+The code already handles: stop loss at -2.5% (stocks) / -3.5% (crypto), profit target at +5% (stocks) / +7% (crypto), and max hold at 3 days. You do NOT need to close positions for any of these.
+AI discretionary exit (position_exits) is ONLY valid when ALL conditions are met:
+  1. Position has been held ≥8 hours (stocks) or ≥20 hours (crypto)
+  2. P&L is within 0.3% of the stop (≤−2.2% stocks, ≤−3.2% crypto)  OR  a named catalyst has fundamentally changed the thesis (earnings miss, FDA rejection, fraud, major downgrade)
+  3. "RSI neutral", "no catalyst", "volume declining", "slightly underwater", or "flat" are NOT valid exit reasons — the code stop will handle it
+If none of these conditions apply → write "position_exits": [] — do NOT add the position.
+Historical data shows: AI exits averaged only +0.17% P&L. Max-hold exits averaged +1.75%. Holding is almost always correct.
+
 RULES:
 - entry_price = EXACT current price listed above (never guess)
-- stop_loss = entry × 0.975, profit_target = entry × 1.05 (−2.5% stop / +5% target — code enforces these exactly)
+- STOCKS: stop_loss = entry × 0.975, profit_target = entry × 1.05 (−2.5% stop / +5% target)
+- CRYPTO (BTC): stop_loss = entry × 0.965, profit_target = entry × 1.07 (−3.5% stop / +7% target — wider needed for crypto daily volatility)
 - Max 2 open positions (currently ${trades.open_positions.length})
 - Min confidence 7.0 to enter — never round up
 - Volume is a CONFIDENCE MODIFIER, not a hard veto: ≥1.5x adds +0.5 to confidence; 1.0-1.5x neutral; <1.0x subtracts 0.3-0.5. Low volume alone cannot block an entry if confidence ≥7.0.
@@ -998,21 +1023,47 @@ Return ONLY valid JSON in hourly_evaluation format.`;
   // Hard gate: AI can only close early if position is close to stop OR close to target.
   // This prevents Mistral from exiting at +0.2% / -0.3% after just one hour.
   // Hard stops and max-hold are already enforced by the auto-exit block above.
+  //
+  // AI discretionary exit gate — three requirements must ALL be met:
+  //   1. Minimum hold time: 8h for stocks, 20h for crypto (positions need time to develop)
+  //   2. P&L is actually near the stop (-2.2% for stocks, -3.2% for crypto)
+  //      OR a specific catalyst has invalidated the thesis (AI reports it in reason)
+  //   3. NOT used to exit profitable positions — the +5%/+7% auto-exit handles those
+  //
+  // Data showed AI was closing at +0.17%, +0.27%, -0.40% after <2 hours.
+  // Those exits averaged +0.17% vs max-hold trades averaging +1.75%.
   if (decisions?.position_exits?.length) {
     for (const ex of decisions.position_exits) {
       const real = marketData[ex.symbol]?.current_price;
       const pos  = trades.open_positions.find(p => p.symbol === ex.symbol);
       if (!real || !pos) continue;
 
-      const pnlPct = (real - pos.entry_price) / pos.entry_price * 100;
-      const nearStop   = pnlPct <= -1.5;   // within 1% of 2.5% stop
-      const nearTarget = pnlPct >= 4.5;    // within 0.5% of 5% target
-      const canExit    = nearStop || nearTarget;
+      const pnlPct       = (real - pos.entry_price) / pos.entry_price * 100;
+      const hoursHeld    = (now - new Date(pos.entry_date)) / 3600000;
+      const crypto       = isCrypto(pos.symbol);
 
-      if (canExit) {
-        closePosition(ex.symbol, real, ex.reason || 'AI discretionary exit');
+      // Minimum hold: stocks 8h, crypto 20h — positions need time to develop
+      const minHoldHours = crypto ? 20 : 8;
+      const heldLongEnough = hoursHeld >= minHoldHours;
+
+      // Near-stop threshold: tightened to reduce noise exits
+      // Stocks: -2.2% (within 0.3% of the -2.5% hard stop)
+      // Crypto: -3.2% (within 0.3% of the -3.5% hard stop)
+      const stopThreshold = crypto ? -3.2 : -2.2;
+      const nearStop = pnlPct <= stopThreshold;
+
+      // Catalyst invalidation: AI clearly states a fundamental reason (not just RSI/price)
+      const reason = (ex.reason || '').toLowerCase();
+      const catalystInvalidation = /earnings miss|fda reject|fraud|recall|downgrad|sector collapse|macro shock|ceo resign/.test(reason);
+
+      const canExit = heldLongEnough && (nearStop || catalystInvalidation);
+
+      if (!heldLongEnough) {
+        console.log(`[HOLD] ${ex.symbol}: only ${hoursHeld.toFixed(1)}h held (min ${minHoldHours}h). Ignoring AI exit suggestion.`);
+      } else if (!nearStop && !catalystInvalidation) {
+        console.log(`[HOLD] ${ex.symbol}: ${pnlPct >= 0 ? '+' : ''}${pnlPct.toFixed(2)}% — not near stop (≤${stopThreshold}%) and no catalyst. Holding.`);
       } else {
-        console.log(`[HOLD] ${ex.symbol}: AI suggested exit but position is ${pnlPct >= 0 ? '+' : ''}${pnlPct.toFixed(2)}% — not near stop (≤−1.5%) or target (≥+4.5%). Holding.`);
+        closePosition(ex.symbol, real, ex.reason || 'AI discretionary exit');
       }
     }
   }
@@ -1099,8 +1150,12 @@ Return ONLY valid JSON in hourly_evaluation format.`;
         continue;
       }
 
-      const stopL = parseFloat((ep * (1 - 0.025)).toFixed(2));
-      const targP = parseFloat((ep * (1 + 0.05)).toFixed(2));
+      // Crypto needs wider stops — BTC moves 2-3% on normal volatility,
+      // making a 2.5% stop noise-level. Use 3.5%/7% for 2:1 R:R on crypto.
+      const stopPct = isCrypto(sym) ? 0.035 : 0.025;
+      const tgtPct  = isCrypto(sym) ? 0.07  : 0.05;
+      const stopL = parseFloat((ep * (1 - stopPct)).toFixed(2));
+      const targP = parseFloat((ep * (1 + tgtPct)).toFixed(2));
 
       trades.open_positions.push({
         id: `trade_${Date.now()}_${sym}`,
