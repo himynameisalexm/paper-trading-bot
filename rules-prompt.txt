@@ -144,7 +144,7 @@ The code automatically enforces all exits — you rarely need to populate positi
 - **Trail Stop** (code enforces, two-stage):
   - Stage 1: At +3.5% → stop moves to +1.5%
   - Stage 2: At +5.5% → stop moves to +3.5%
-- **Minimum hold**: 20 hours before any AI discretionary exit. Crypto moves require time.
+- **Minimum hold**: 8 hours before any AI discretionary exit. Crypto moves require time.
 
 ### All assets
 - **Max Hold**: 3 trading days (stocks) / 3 calendar days (crypto) — code enforces.
@@ -157,7 +157,7 @@ The code automatically enforces all exits — you rarely need to populate positi
 The code handles stops, targets, trail stops, and max hold automatically. You do not need to manage these.
 
 ### The ONLY valid reasons to populate position_exits[]:
-1. **Near stop + minimum hold met**: Position is down ≥2.2% (stocks) or ≥3.2% (crypto) AND has been held ≥8h (stocks) or ≥20h (crypto). This indicates genuine directional failure — the stop will fire soon anyway, so flagging it is OK.
+1. **Near stop + minimum hold met**: Position is down ≥2.2% (stocks) or ≥3.2% (crypto) AND has been held ≥2h (stocks) or ≥8h (crypto). This indicates genuine directional failure — the stop will fire soon anyway, so flagging it is OK.
 2. **Catalyst invalidation**: A specific, named event has fundamentally changed the trade thesis — examples: earnings miss reported, FDA rejection announced, fraud disclosed, major tier-1 downgrade, regulatory shutdown. This must be a real event, not a prediction or concern.
 
 ### NEVER recommend exit for these (code gate will block them anyway):
@@ -166,7 +166,7 @@ The code handles stops, targets, trail stops, and max hold automatically. You do
 - "No catalyst visible" — not a reason
 - "Slightly underwater / flat" — not a reason, this is normal noise
 - "Approaching overbought" — not a reason
-- Position held < 8 hours (stocks) or < 20 hours (crypto) — too new, ignore
+- Position held < 2 hours (stocks) or < 8 hours (crypto) — too new, ignore
 - Any position between −2.2% and +6.5% that has been held < 3 days — working normally, hold
 
 ### Why this matters (actual performance data):

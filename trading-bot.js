@@ -1042,8 +1042,10 @@ Return ONLY valid JSON in hourly_evaluation format.`;
       const hoursHeld    = (now - new Date(pos.entry_date)) / 3600000;
       const crypto       = isCrypto(pos.symbol);
 
-      // Minimum hold: stocks 8h, crypto 20h — positions need time to develop
-      const minHoldHours = crypto ? 20 : 8;
+      // Minimum hold: stocks 2h, crypto 8h — long enough to filter noise exits
+      // but short enough to exit if something genuinely breaks.
+      // Data: all 14 bad AI exits happened < 3h (avg +0.24%). Good trades ran 48-72h.
+      const minHoldHours = crypto ? 8 : 2;
       const heldLongEnough = hoursHeld >= minHoldHours;
 
       // Near-stop threshold: tightened to reduce noise exits
