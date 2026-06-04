@@ -330,6 +330,65 @@ async function fetchRedditSentiment(symbols) {
   return sentiment;
 }
 
+// ─── FETCH ANALYST UPGRADES / DOWNGRADES ──────────────────────────────────
+// Yahoo Finance quoteSummary with crumb auth — same session, no extra API key.
+// Returns a compact string of analyst grade changes from the last 30 days.
+// Example: "Goldman Sachs Neutral→Buy↑ (May 28), BofA Hold→ (May 25)"
+// Returns null if crypto (no analyst coverage) or no data available.
+async function fetchAnalystUpgrades(symbol) {
+  if (isCrypto(symbol)) return null;
+  try {
+    const crumbParam = YAHOO_CRUMB ? `&crumb=${encodeURIComponent(YAHOO_CRUMB)}` : '';
+    const res = await makeRequest({
+      hostname: 'query2.finance.yahoo.com',
+      path:     `/v10/finance/quoteSummary/${symbol}?modules=upgradeDowngradeHistory${crumbParam}`,
+      method:   'GET',
+      headers: {
+        'User-Agent': YAHOO_UA,
+        'Accept':     'application/json, text/plain, */*',
+        'Referer':    'https://finance.yahoo.com/',
+        ...(YAHOO_COOKIES ? { 'Cookie': YAHOO_COOKIES } : {})
+      }
+    });
+
+    const history = res?.quoteSummary?.result?.[0]?.upgradeDowngradeHistory?.history;
+    if (!Array.isArray(history) || history.length === 0) return null;
+
+    const cutoffSec = Date.now() / 1000 - 30 * 86400; // last 30 days
+    const recent = history
+      .filter(h => h.epochGradeDate > cutoffSec)
+      .slice(0, 5)
+      .map(h => {
+        const date   = new Date(h.epochGradeDate * 1000).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        const arrow  = h.action === 'up' ? '↑' : h.action === 'down' ? '↓' : '→';
+        const from   = h.fromGrade ? `${h.fromGrade}→` : '';
+        return `${h.firm} ${from}${h.toGrade}${arrow} (${date})`;
+      });
+
+    return recent.length > 0 ? recent.join(' | ') : null;
+  } catch (e) {
+    console.warn(`[ANALYST] ${symbol}: ${e.message}`);
+    return null;
+  }
+}
+
+// Fetch analyst data for all symbols with a delay to avoid rate limiting.
+async function fetchAllAnalystData(symbols) {
+  console.log('[ANALYST] Fetching upgrade/downgrade history...');
+  const result = {};
+  let found = 0;
+  for (const sym of symbols) {
+    result[sym] = await fetchAnalystUpgrades(sym);
+    if (result[sym]) {
+      found++;
+      console.log(`  ${sym.padEnd(6)} ${result[sym].substring(0, 80)}`);
+    }
+    await new Promise(r => setTimeout(r, 500));
+  }
+  console.log(`[ANALYST] Found recent actions for ${found}/${symbols.length} symbols`);
+  return result;
+}
+
 // ─── FETCH SYMBOL DATA FROM V8 CHART (single call returns price + history) ──
 async function fetchChartData(symbol, attempt = 1) {
   const encoded    = symbol === 'BTC' ? 'BTC-USD' : symbol === '^VIX' ? '%5EVIX' : symbol;
@@ -658,12 +717,14 @@ async function preMarketScan() {
   await fetchYahooCrumb();
 
   const activeSymbols = getActiveSymbols(CONFIG.watchlist);
-  const marketData = await fetchMarketData(activeSymbols);
-  const macro      = isWeekend() ? { gate_pass: true, qqq_above_ma: null, vix_below_25: null, weekend: true } : await fetchMacroStatus();
-  const reddit     = await fetchRedditSentiment(activeSymbols);
+  const marketData   = await fetchMarketData(activeSymbols);
+  const macro        = isWeekend() ? { gate_pass: true, qqq_above_ma: null, vix_below_25: null, weekend: true } : await fetchMacroStatus();
+  const reddit       = await fetchRedditSentiment(activeSymbols);
+  const analystData  = await fetchAllAnalystData(activeSymbols);
 
   // Check if any Reddit data exists (Reddit often blocks unauthenticated scraping)
   const hasRedditData = Object.values(reddit).some(posts => posts.some(p => !p.includes('No significant')));
+  const hasAnalystData = Object.values(analystData).some(v => v !== null);
 
   // Build market summary — real prices only, AI provides analysis only
   let mktSummary = 'LIVE MARKET DATA (use EXACTLY these prices — never invent or guess prices):\n\n';
@@ -673,7 +734,8 @@ async function preMarketScan() {
     const earnings = await fetchEarningsDate(sym);
     await new Promise(r => setTimeout(r, 200));
     const earningsStr = earnings !== null ? `${earnings} days away` : 'unknown';
-    const symReddit = (reddit[sym] || []).filter(p => !p.includes('No significant'));
+    const symReddit   = (reddit[sym] || []).filter(p => !p.includes('No significant'));
+    const symAnalyst  = analystData[sym] || null;
 
     mktSummary += `${sym}:
   Current price: $${d.current_price.toFixed(2)} (use this exactly as current_price)
@@ -683,9 +745,10 @@ async function preMarketScan() {
   200-day MA: $${d.ma200?.toFixed(2) ?? 'N/A'} → price is ${d.above_ma200 ? 'ABOVE' : 'BELOW'} MA
   Volume ratio: ${d.volume_ratio ?? 'N/A'}x vs 10-day avg
   Day range: $${d.day_low?.toFixed(2) ?? '?'} – $${d.day_high?.toFixed(2) ?? '?'}
-  Next earnings: ${earningsStr}${earnings !== null && earnings < 7 ? ' ⚠️ EARNINGS BLACKOUT — do not enter' : ''}${symReddit.length > 0 ? `\n  Reddit (24h): ${symReddit.join(' | ')}` : ''}\n\n`;
+  Next earnings: ${earningsStr}${earnings !== null && earnings < 7 ? ' ⚠️ EARNINGS BLACKOUT — do not enter' : ''}${symAnalyst ? `\n  Analyst actions (30d): ${symAnalyst}` : ''}${symReddit.length > 0 ? `\n  Reddit (24h): ${symReddit.join(' | ')}` : ''}\n\n`;
   }
   if (!hasRedditData) mktSummary += 'NOTE: Reddit data unavailable today (API blocked) — omit sentiment from thesis.\n\n';
+  if (!hasAnalystData) mktSummary += 'NOTE: No analyst grade changes found in the last 30 days — omit analyst actions from thesis.\n\n';
 
   const macroStr = `MACRO GATE:
   QQQ: $${macro.qqq_price?.toFixed(2) ?? 'N/A'} vs MA50 $${macro.qqq_50day_ma?.toFixed(2) ?? 'N/A'} → ${macro.qqq_above_ma ? 'ABOVE ✓' : 'BELOW ✗'}
@@ -711,9 +774,12 @@ THESIS REQUIREMENT — MANDATORY: Every thesis field MUST cover these in 3–5 s
   (a) RSI + volume: state both numbers and interpret them (momentum direction, institutional vs retail flow)
   (b) Key levels: where is price vs MA50 and MA200? What does that mean for support/resistance?
   (c) Macro + sentiment: does QQQ/VIX backdrop support this trade? Include Reddit data only if it was provided above; omit sentiment if Reddit data is unavailable.
-  (d) Bull vs bear: one sentence each
-  (e) Decision: entering or not, and why, with confidence stated explicitly
+  (d) Analyst signals: if "Analyst actions (30d)" was listed for this symbol above, reference it (firm name, direction, date). If it was NOT listed, do NOT mention any analyst actions — do not invent, guess, or paraphrase analyst opinions.
+  (e) Bull vs bear: one sentence each
+  (f) Decision: entering or not, and why, with confidence stated explicitly
 Keep each thesis concise — 3–5 sentences total. No padding, no filler.
+
+DATA INTEGRITY RULE: Only reference information that was explicitly provided above. Never fabricate analyst upgrades, downgrades, news headlines, or catalysts. If a data source was unavailable, say nothing about it rather than guessing.
 
 Return ONLY valid JSON in the watchlist_generation format from your instructions.`;
 
@@ -812,9 +878,10 @@ async function intradayEvaluation() {
   const activeWatchlist = getActiveSymbols(CONFIG.watchlist);
   // Always include open position symbols so we can manage/exit them even on weekends
   const allSymbols = [...new Set([...activeWatchlist, ...trades.open_positions.map(p => p.symbol)])];
-  const marketData = await fetchMarketData(allSymbols);
-  const reddit     = await fetchRedditSentiment(activeWatchlist);
-  const macro      = weekend
+  const marketData  = await fetchMarketData(allSymbols);
+  const reddit      = await fetchRedditSentiment(activeWatchlist);
+  const analystData = await fetchAllAnalystData(activeWatchlist);
+  const macro       = weekend
     ? { gate_pass: true, qqq_above_ma: null, vix_below_25: null, weekend: true, gate_note: 'Weekend — crypto only, macro gate N/A' }
     : await fetchMacroStatus();
 
@@ -915,21 +982,24 @@ async function intradayEvaluation() {
   }
 
   // Check if Reddit returned any real data
-  const hasRedditData = Object.values(reddit).some(posts => posts.some(p => !p.includes('No significant')));
+  const hasRedditData  = Object.values(reddit).some(posts => posts.some(p => !p.includes('No significant')));
+  const hasAnalystData = Object.values(analystData).some(v => v !== null);
 
   // ── BUILD AI PROMPT (combined watchlist scoring + position decisions) ──
   let mktSummary = 'LIVE MARKET DATA (use EXACTLY these prices — never invent or guess):\n\n';
   for (const sym of CONFIG.watchlist) {
     const d = marketData[sym];
     if (!d?.current_price) { mktSummary += `${sym}: unavailable\n\n`; continue; }
-    const symReddit = (reddit[sym] || []).filter(p => !p.includes('No significant'));
+    const symReddit  = (reddit[sym] || []).filter(p => !p.includes('No significant'));
+    const symAnalyst = analystData[sym] || null;
     mktSummary += `${sym}:
   Price: $${d.current_price.toFixed(2)} | Change: ${d.change_pct >= 0 ? '+' : ''}${d.change_pct}%
   RSI(14): ${d.rsi ?? 'N/A'} | Vol ratio: ${d.volume_ratio?.toFixed(2) ?? 'N/A'}x vs 10-day avg
   MA50: $${d.ma50?.toFixed(2) ?? 'N/A'} (${d.above_ma50 ? 'ABOVE ✓' : 'BELOW ✗'}) | MA200: $${d.ma200?.toFixed(2) ?? 'N/A'} (${d.above_ma200 ? 'ABOVE ✓' : 'BELOW ✗'})
-  Day range: $${d.day_low?.toFixed(2) ?? '?'} – $${d.day_high?.toFixed(2) ?? '?'}${symReddit.length > 0 ? `\n  Reddit (24h): ${symReddit.join(' | ')}` : ''}\n\n`;
+  Day range: $${d.day_low?.toFixed(2) ?? '?'} – $${d.day_high?.toFixed(2) ?? '?'}${symAnalyst ? `\n  Analyst actions (30d): ${symAnalyst}` : ''}${symReddit.length > 0 ? `\n  Reddit (24h): ${symReddit.join(' | ')}` : ''}\n\n`;
   }
-  if (!hasRedditData) mktSummary += 'NOTE: Reddit data unavailable today (API blocked) — omit sentiment from thesis.\n\n';
+  if (!hasRedditData)  mktSummary += 'NOTE: Reddit data unavailable today (API blocked) — omit sentiment from thesis.\n\n';
+  if (!hasAnalystData) mktSummary += 'NOTE: No analyst grade changes found in the last 30 days — omit analyst actions from thesis.\n\n';
 
   const posLines = trades.open_positions.length
     ? trades.open_positions.map(pos => {
@@ -960,14 +1030,17 @@ THESIS REQUIREMENT — MANDATORY: Every thesis field MUST cover these in 3–5 s
   (a) RSI + volume: state both numbers and interpret them (momentum, institutional flow, thin/heavy)
   (b) Key levels: price vs MA50 and MA200 — what do they mean for support/resistance right now?
   (c) Macro + sentiment: does QQQ/VIX support this trade? If Reddit data was provided, include it; if not, skip sentiment.
-  (d) Bull vs bear: one sentence each
-  (e) Decision: why entering or not, confidence stated explicitly
+  (d) Analyst signals: if "Analyst actions (30d)" was listed for this symbol above, reference it (firm, direction, date). If it was NOT listed, do NOT mention any analyst activity — never fabricate upgrades, downgrades, or price targets.
+  (e) Bull vs bear: one sentence each
+  (f) Decision: why entering or not, confidence stated explicitly
 Keep each thesis concise — 3–5 sentences total. Do NOT write paragraphs. No fluff.
+
+DATA INTEGRITY RULE: Only reference information explicitly provided above. Never fabricate analyst upgrades, news headlines, earnings results, or catalysts. If data was unavailable, omit it entirely.
 
 HOLD DISCIPLINE — CODE ENFORCES THIS, READ CAREFULLY:
 The code already handles: stop loss at -2.5% (stocks) / -3.5% (crypto), profit target at +5% (stocks) / +7% (crypto), and max hold at 3 days. You do NOT need to close positions for any of these.
 AI discretionary exit (position_exits) is ONLY valid when ALL conditions are met:
-  1. Position has been held ≥8 hours (stocks) or ≥20 hours (crypto)
+  1. Position has been held ≥2 hours (stocks) or ≥8 hours (crypto)
   2. P&L is within 0.3% of the stop (≤−2.2% stocks, ≤−3.2% crypto)  OR  a named catalyst has fundamentally changed the thesis (earnings miss, FDA rejection, fraud, major downgrade)
   3. "RSI neutral", "no catalyst", "volume declining", "slightly underwater", or "flat" are NOT valid exit reasons — the code stop will handle it
 If none of these conditions apply → write "position_exits": [] — do NOT add the position.
