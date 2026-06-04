@@ -35,6 +35,97 @@ function makeRequest(options, body = null) {
   });
 }
 
+// Variant that returns { status, headers, body } — used for cookie/crumb capture
+function makeRequestRaw(options, body = null) {
+  return new Promise((resolve, reject) => {
+    const req = https.request(options, res => {
+      let raw = '';
+      res.on('data', c => raw += c);
+      res.on('end', () => resolve({ status: res.statusCode, headers: res.headers, body: raw }));
+    });
+    req.on('error', reject);
+    req.setTimeout(30000, () => { req.destroy(new Error('Request timeout')); });
+    if (body) req.write(JSON.stringify(body));
+    req.end();
+  });
+}
+
+// ─── YAHOO FINANCE CRUMB AUTH ──────────────────────────────────────────────
+// Yahoo Finance blocks cloud/datacenter IPs (GitHub Actions = Azure) after
+// ~4 unauthenticated requests. The crumb handshake makes requests look like
+// a real browser session and bypasses the block.
+//
+// Flow: GET finance.yahoo.com → grab Set-Cookie → GET /v1/test/getcrumb
+//       → attach crumb + cookie to every subsequent chart/earnings request.
+let YAHOO_CRUMB   = null;
+let YAHOO_COOKIES = null;
+
+// Browser-like UA — critical: generic "TradingBot" UA gets blocked on Azure IPs
+const YAHOO_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36';
+
+async function fetchYahooCrumb() {
+  try {
+    console.log('[CRUMB] Establishing Yahoo Finance session...');
+
+    // Step 1: Hit the homepage to get session cookies
+    const homeRes = await makeRequestRaw({
+      hostname: 'finance.yahoo.com',
+      path: '/',
+      method: 'GET',
+      headers: {
+        'User-Agent':      YAHOO_UA,
+        'Accept':          'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Connection':      'keep-alive',
+      }
+    });
+
+    const rawCookies = homeRes.headers['set-cookie'] || [];
+    if (rawCookies.length === 0) {
+      console.warn('[CRUMB] No cookies from Yahoo homepage — proceeding without crumb');
+      return false;
+    }
+
+    // Flatten cookies into a single Cookie header string
+    YAHOO_COOKIES = rawCookies
+      .map(c => c.split(';')[0])   // keep only name=value, strip path/expires/etc
+      .join('; ');
+
+    await new Promise(r => setTimeout(r, 800)); // brief pause before crumb fetch
+
+    // Step 2: Exchange cookies for a crumb token
+    const crumbRes = await makeRequestRaw({
+      hostname: 'query2.finance.yahoo.com',
+      path:     '/v1/test/getcrumb',
+      method:   'GET',
+      headers:  {
+        'User-Agent':      YAHOO_UA,
+        'Accept':          '*/*',
+        'Cookie':          YAHOO_COOKIES,
+        'Referer':         'https://finance.yahoo.com/',
+        'Accept-Language': 'en-US,en;q=0.9',
+      }
+    });
+
+    const crumb = crumbRes.body?.trim();
+    if (crumb && crumb.length > 0 && crumb.length < 60 && !crumb.startsWith('<') && !crumb.startsWith('{')) {
+      YAHOO_CRUMB = crumb;
+      console.log(`[CRUMB] ✓ Session established (crumb: ${crumb.substring(0, 8)}...)`);
+      return true;
+    } else {
+      console.warn(`[CRUMB] Unexpected crumb response (len=${crumb?.length ?? 0}) — falling back to no-auth`);
+      YAHOO_COOKIES = null;
+      return false;
+    }
+  } catch (e) {
+    console.warn(`[CRUMB] Failed: ${e.message} — proceeding without auth`);
+    YAHOO_CRUMB   = null;
+    YAHOO_COOKIES = null;
+    return false;
+  }
+}
+
 // ─── GIT COMMIT & PUSH ──────────────────────────────────────────────────────
 function commitAndPushTrades() {
   try {
@@ -173,11 +264,17 @@ async function fetchEarningsDate(symbol) {
   if (['BTC', 'ETH'].includes(symbol)) return null; // only real crypto has no earnings (COIN is NASDAQ stock — needs blackout check)
   try {
     const encoded = symbol;
+    const crumbParam = YAHOO_CRUMB ? `&crumb=${encodeURIComponent(YAHOO_CRUMB)}` : '';
     const res = await makeRequest({
-      hostname: 'query1.finance.yahoo.com',
-      path: `/v8/finance/chart/${encoded}?events=earnings&interval=1d&range=90d`,
+      hostname: 'query2.finance.yahoo.com',
+      path: `/v8/finance/chart/${encoded}?events=earnings&interval=1d&range=90d${crumbParam}`,
       method: 'GET',
-      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; TradingBot/1.0)' }
+      headers: {
+        'User-Agent':      YAHOO_UA,
+        'Accept':          'application/json, text/plain, */*',
+        'Referer':         'https://finance.yahoo.com/',
+        ...(YAHOO_COOKIES ? { 'Cookie': YAHOO_COOKIES } : {})
+      }
     });
     const events = res?.chart?.result?.[0]?.events?.earnings;
     if (!events) return null;
@@ -232,17 +329,38 @@ async function fetchRedditSentiment(symbols) {
 }
 
 // ─── FETCH SYMBOL DATA FROM V8 CHART (single call returns price + history) ──
-async function fetchChartData(symbol) {
-  const encoded = symbol === 'BTC' ? 'BTC-USD' : symbol === '^VIX' ? '%5EVIX' : symbol;
+async function fetchChartData(symbol, attempt = 1) {
+  const encoded    = symbol === 'BTC' ? 'BTC-USD' : symbol === '^VIX' ? '%5EVIX' : symbol;
+  const crumbParam = YAHOO_CRUMB ? `&crumb=${encodeURIComponent(YAHOO_CRUMB)}` : '';
+  const headers = {
+    'User-Agent':      YAHOO_UA,
+    'Accept':          'application/json, text/plain, */*',
+    'Accept-Language': 'en-US,en;q=0.9',
+    'Referer':         'https://finance.yahoo.com/',
+    ...(YAHOO_COOKIES ? { 'Cookie': YAHOO_COOKIES } : {})
+  };
   try {
     const res = await makeRequest({
-      hostname: 'query1.finance.yahoo.com',
-      path: `/v8/finance/chart/${encoded}?interval=1d&range=60d`,
+      hostname: 'query2.finance.yahoo.com',   // query2 is less aggressively rate-limited on cloud IPs
+      path: `/v8/finance/chart/${encoded}?interval=1d&range=60d${crumbParam}`,
       method: 'GET',
-      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; TradingBot/1.0)' }
+      headers
     });
     const result = res?.chart?.result?.[0];
-    if (!result) return null;
+    if (!result) {
+      // Log the actual Yahoo error so we know why it failed (auth vs rate limit vs bad symbol)
+      const yahooErr = res?.chart?.error;
+      const errMsg = yahooErr ? `${yahooErr.code}: ${yahooErr.description}` : 'no chart result (possible IP block or rate limit)';
+      console.warn(`[CHART] ${symbol}: ${errMsg}`);
+
+      // On auth errors, try once more — crumb may have been stale
+      if (attempt === 1 && (errMsg.includes('Unauthorized') || errMsg.includes('No fundamentals'))) {
+        console.log(`[CHART] ${symbol}: retrying after 3s...`);
+        await new Promise(r => setTimeout(r, 3000));
+        return fetchChartData(symbol, 2);
+      }
+      return null;
+    }
 
     const meta    = result.meta;
     const closes  = (result.indicators?.quote?.[0]?.close || []).filter(c => c != null);
@@ -296,6 +414,10 @@ async function fetchChartData(symbol) {
     };
   } catch (e) {
     console.warn(`[CHART] ${symbol}: ${e.message}`);
+    if (attempt === 1) {
+      await new Promise(r => setTimeout(r, 2000));
+      return fetchChartData(symbol, 2);
+    }
     return null;
   }
 }
@@ -315,7 +437,7 @@ async function fetchMarketData(symbols) {
       result[symbol] = { symbol, current_price: null, error: 'fetch failed' };
       console.warn(`  ${symbol.padEnd(6)} failed`);
     }
-    await new Promise(r => setTimeout(r, 200)); // rate limit buffer
+    await new Promise(r => setTimeout(r, 750)); // 750ms between symbols — reduces Yahoo Finance rate-limiting on cloud IPs
   }
   return result;
 }
@@ -530,6 +652,9 @@ async function preMarketScan() {
   handleDayReset(trades);
   syncWatchlist(trades);
 
+  // Establish Yahoo Finance session before any data fetching
+  await fetchYahooCrumb();
+
   const activeSymbols = getActiveSymbols(CONFIG.watchlist);
   const marketData = await fetchMarketData(activeSymbols);
   const macro      = isWeekend() ? { gate_pass: true, qqq_above_ma: null, vix_below_25: null, weekend: true } : await fetchMacroStatus();
@@ -677,6 +802,9 @@ async function intradayEvaluation() {
   const trades = JSON.parse(fs.readFileSync(TRADES_FILE, 'utf8'));
   handleDayReset(trades);
   syncWatchlist(trades);
+
+  // Establish Yahoo Finance session before any data fetching
+  await fetchYahooCrumb();
 
   const weekend = isWeekend();
   const activeWatchlist = getActiveSymbols(CONFIG.watchlist);
