@@ -1,5 +1,97 @@
 [
   {
+    "date": "2026-06-04",
+    "timestamp": "2026-06-04T14:13:30.052Z",
+    "rule_issues": [],
+    "assessment": "The current watchlist is well-balanced with a mix of oversold bounce candidates (GOOGL, AMZN, BTC) and neutral/overbought symbols. The AI/tech sector shows mixed momentum, with some oversold conditions presenting potential setups but limited breakout confirmation.",
+    "market_regime_note": "AI/tech sector is consolidating with pockets of oversold conditions, suggesting higher probability for bounce setups over momentum breakouts in the near term.",
+    "flags": [],
+    "changes_applied": [
+      {
+        "action": "REMOVE",
+        "symbol": "SMCI",
+        "reason": "Consistently overbought (RSI 79.8) with neutral volume and no trade history, poor fit for current strategy."
+      },
+      {
+        "action": "ADD",
+        "symbol": "CRWD",
+        "reason": "Strong AI/cybersecurity thesis, high volatility, and institutional coverage; fits oversold bounce/momentum breakout criteria well."
+      },
+      {
+        "action": "REMOVE",
+        "symbol": "AMD",
+        "reason": "Near overbought (RSI 74.1) with below-average volume and no trade history, lower confidence than peers."
+      },
+      {
+        "action": "ADD",
+        "symbol": "ARM",
+        "reason": "High-growth AI/tech play with strong liquidity, volatility, and institutional interest; aligns with momentum breakout potential."
+      }
+    ],
+    "watchlist_after": [
+      "NVDA",
+      "PLTR",
+      "META",
+      "MSFT",
+      "GOOGL",
+      "AMZN",
+      "ORCL",
+      "BTC",
+      "TSM",
+      "PANW",
+      "AVGO",
+      "CRWD",
+      "ARM"
+    ],
+    "symbol_notes": {
+      "NVDA": "Neutral RSI and below-average volume; lacks directional edge but remains a core AI sector hold.",
+      "PLTR": "Elevated RSI but not overbought; volume neutral, price near 50-day MA with no clear signal.",
+      "META": "Neutral RSI with slightly above-average volume; trade history shows modest profitability but no current edge.",
+      "MSFT": "Elevated RSI and below-average volume; lacks confirmation for breakout or bounce.",
+      "GOOGL": "Deeply oversold with strong volume; high-confidence bounce candidate (open position).",
+      "AMZN": "Oversold with moderate volume; potential bounce setup but less extreme than GOOGL.",
+      "ORCL": "Elevated RSI and neutral volume; no clear signal despite strong uptrend.",
+      "BTC": "Deeply oversold with strong volume; high-confidence crypto bounce candidate (open position).",
+      "TSM": "Elevated RSI and below-average volume; no trade history or edge.",
+      "PANW": "Near overbought with above-average volume; lacks breakout confirmation.",
+      "AVGO": "Near overbought with strong volume; potential breakout if momentum accelerates."
+    },
+    "data_health": {
+      "no_price_data": [],
+      "no_confidence_score": []
+    },
+    "performance_snapshot": {
+      "BTC": {
+        "trades": 9,
+        "wins": 2,
+        "losses": 7,
+        "win_rate": 22,
+        "avg_pnl_pct": -1.08
+      },
+      "COIN": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.52
+      },
+      "ETH": {
+        "trades": 6,
+        "wins": 3,
+        "losses": 2,
+        "win_rate": 60,
+        "avg_pnl_pct": 0.05
+      },
+      "META": {
+        "trades": 6,
+        "wins": 4,
+        "losses": 2,
+        "win_rate": 67,
+        "avg_pnl_pct": 0.63
+      }
+    }
+  },
+  {
     "date": "2026-06-03",
     "timestamp": "2026-06-03T15:58:00.883Z",
     "rule_issues": [],

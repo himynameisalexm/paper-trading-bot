@@ -14,10 +14,10 @@
     "ORCL",
     "BTC",
     "TSM",
-    "AMD",
     "PANW",
-    "SMCI",
-    "AVGO"
+    "AVGO",
+    "CRWD",
+    "ARM"
   ],
   "trading_rules": {
     "min_confidence": 7,
