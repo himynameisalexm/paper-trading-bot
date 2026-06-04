@@ -35,10 +35,12 @@ function makeRequest(options, body = null) {
   });
 }
 
-// Variant that returns { status, headers, body } — used for cookie/crumb capture
+// Variant that returns { status, headers, body } — used for cookie/crumb capture.
+// maxHeaderSize bumped to 64KB — Yahoo Finance sends very large cookie headers
+// that overflow Node.js's default 16KB limit.
 function makeRequestRaw(options, body = null) {
   return new Promise((resolve, reject) => {
-    const req = https.request(options, res => {
+    const req = https.request({ ...options, maxHeaderSize: 65536 }, res => {
       let raw = '';
       res.on('data', c => raw += c);
       res.on('end', () => resolve({ status: res.statusCode, headers: res.headers, body: raw }));
