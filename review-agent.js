@@ -290,7 +290,10 @@ async function main() {
 
   const candidates = CANDIDATE_POOL.filter(s => !currentWatchlist.includes(s)).join(', ');
 
-  const prompt = `You are a trading bot watchlist optimizer. Today is ${new Date().toISOString().split('T')[0]}.
+  const prompt = `ABSOLUTE RULE — ZERO FABRICATION TOLERANCE:
+Only reference data explicitly provided below. Never invent prices, analyst ratings, news, earnings, or market events from memory. Your training data has a cutoff — any "remembered" market event may be stale and must not appear in your response. If a symbol has no performance data → say so honestly; do not guess.
+
+You are a trading bot watchlist optimizer. Today is ${new Date().toISOString().split('T')[0]}.
 This is a paper trading bot focused on the AI/tech/fintech sector. It scans for momentum breakouts, oversold bounces, and crypto continuations. Stop loss: 2.5%, profit target: 5%, max hold: 3 days.
 
 CURRENT WATCHLIST (${currentWatchlist.length} symbols):

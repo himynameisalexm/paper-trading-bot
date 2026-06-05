@@ -146,6 +146,20 @@ body::before {
 }
 .analysis-thesis-label { font-size: 9px; color: var(--label); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
 
+/* ── DATA HEALTH PANEL ── */
+.data-health-bar {
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  padding: 9px 14px; margin-bottom: 8px; border-radius: 3px;
+  font-size: 10px; border: 1px solid;
+}
+.data-health-bar.good     { background: rgba(61,220,132,0.05); border-color: rgba(61,220,132,0.15); color: var(--green); }
+.data-health-bar.degraded { background: rgba(200,150,58,0.07); border-color: rgba(200,150,58,0.25); color: var(--gold); }
+.data-health-bar.critical { background: rgba(255,85,85,0.08);  border-color: rgba(255,85,85,0.3);   color: var(--red); }
+.data-health-bar.unknown  { background: #0a0a0a; border-color: var(--border); color: var(--label); }
+.dh-label { font-weight: bold; margin-right: 4px; letter-spacing: 0.05em; }
+.dh-sep   { color: var(--label); opacity: 0.4; }
+.dh-fail  { color: var(--red); font-weight: bold; }
+
 /* ── DAILY REVIEW PANEL ── */
 .review-panel {
   background: #050505; border: 1px solid var(--border);
@@ -348,6 +362,9 @@ body::before {
       <button class="refresh-btn" onclick="fetchData()">↻ Refresh</button>
     </span>
   </div>
+
+  <!-- DATA HEALTH -->
+  <div id="dataHealthBar"></div>
 
   <!-- MACRO GATE -->
   <div class="section">
@@ -878,31 +895,42 @@ function showRadarDetail(sym) {
 // ═══════════════════════════════════════
 // WATCHLIST ANALYSIS
 // ═══════════════════════════════════════
-function renderWatchlistAnalysis(watchlist) {
+function renderWatchlistAnalysis(watchlist, openPositions) {
   const el = document.getElementById('watchlistAnalysis');
   if (!el) return;
   if (!watchlist || watchlist.length === 0) {
     el.innerHTML = '<div class="empty-state">No watchlist data yet — pending first scan.</div>';
     return;
   }
-  // Sort: entry signals first, then by confidence desc
+  // Build a set of symbols that already have an open position
+  const openSymbols = new Set((openPositions || []).map(p => p.symbol));
+
+  // Sort: entry signals (not already open) first, then by confidence desc
   const sorted = [...watchlist].sort((a, b) => {
+    const aOpen = openSymbols.has(a.symbol), bOpen = openSymbols.has(b.symbol);
+    if (aOpen !== bOpen) return aOpen ? 1 : -1; // open positions sink to bottom
     if (a.entry_signal && !b.entry_signal) return -1;
     if (!a.entry_signal && b.entry_signal) return 1;
     return (b.confidence || 0) - (a.confidence || 0);
   });
   el.innerHTML = sorted.map(sym => {
-    const isNew   = sym.is_new || (sym.added_date && (Date.now() - new Date(sym.added_date).getTime()) / 86400000 < 7);
-    const isEntry = !!sym.entry_signal;
+    const isOpen  = openSymbols.has(sym.symbol);
+    const isNew   = !isOpen && (sym.is_new || (sym.added_date && (Date.now() - new Date(sym.added_date).getTime()) / 86400000 < 7));
+    const isEntry = !!sym.entry_signal && !isOpen;
     const chg     = sym.change_pct;
     const volCol  = sym.volume_ratio >= 1.5 ? 'var(--green)' : sym.volume_ratio < 0.8 ? 'var(--red)' : 'var(--bright)';
     const rsiCol  = sym.rsi > 70 ? 'var(--red)' : sym.rsi < 35 ? 'var(--green)' : 'var(--bright)';
-    return `<div class="analysis-card ${isEntry ? 'entry-signal' : 'no-signal'}">
+    const cardClass = isOpen ? 'no-signal' : isEntry ? 'entry-signal' : 'no-signal';
+    let statusLabel;
+    if (isOpen)       statusLabel = '<span style="color:var(--gold);font-weight:bold">● POSITION OPEN</span>';
+    else if (isEntry) statusLabel = '<span style="color:var(--green);font-weight:bold">▶ ENTRY SIGNAL</span>';
+    else              statusLabel = '<span style="color:var(--sub)">◦ WATCHING</span>';
+    return `<div class="analysis-card ${cardClass}" style="${isOpen ? 'opacity:0.55' : ''}">
       <div class="analysis-header">
         <div>
           <div class="analysis-sym">${sym.symbol}${isNew ? '<span class="sig-badge new-sym" style="margin-left:8px;vertical-align:middle;font-size:8px">NEW</span>' : ''}</div>
           <div style="font-size:10px;color:var(--label);margin-top:3px">
-            ${isEntry ? '<span style="color:var(--green);font-weight:bold">▶ ENTRY SIGNAL</span> · ' : '<span style="color:var(--sub)">◦ WATCHING</span> · '}
+            ${statusLabel} ·
             ${sym.confidence != null ? `Conf ${sym.confidence.toFixed(1)}/10` : ''}
             ${sym.technical_setup ? ' · ' + sym.technical_setup : ''}
           </div>
@@ -1242,7 +1270,7 @@ function render(data) {
   renderRadar(data.watchlist || []);
 
   // ── Watchlist Analysis ──
-  renderWatchlistAnalysis(data.watchlist || []);
+  renderWatchlistAnalysis(data.watchlist || [], data.open_positions || []);
 
   // ── History: insight views ──
   const closedTrades = data.closed_trades || [];
@@ -1377,6 +1405,57 @@ function toggleCRT(cardId) {
   crtStates[cardId] = !isOpen;
 }
 
+// ── DATA HEALTH PANEL ──
+function renderDataHealth(systemStatus) {
+  const el = document.getElementById('dataHealthBar');
+  if (!el) return;
+
+  const dh = systemStatus?.data_health;
+  if (!dh) {
+    el.innerHTML = '<div class="data-health-bar unknown"><span class="dh-label">DATA HEALTH</span> No health report yet — pending first bot run</div>';
+    return;
+  }
+
+  const health   = dh.overall_health || 'unknown';
+  const price    = dh.price_data;
+  const reddit   = dh.reddit;
+  const analyst  = dh.analyst;
+  const crumb    = dh.crumb_auth;
+  const ts       = dh.timestamp ? fmtDate(dh.timestamp) : '?';
+
+  const icon = health === 'good' ? '✓' : health === 'degraded' ? '⚠' : '✗';
+  const label = health.toUpperCase();
+
+  let parts = [`<span class="dh-label">${icon} DATA ${label}</span>`];
+
+  // Prices
+  if (price) {
+    const priceTxt = price.failed?.length > 0
+      ? `Prices: ${price.success}/${price.total} <span class="dh-fail">(missing: ${price.failed.join(', ')})</span>`
+      : `Prices: ${price.success}/${price.total} ✓`;
+    parts.push(priceTxt);
+  }
+
+  // Crumb auth
+  parts.push(crumb ? 'Auth: ✓' : '<span class="dh-fail">Auth: FAILED</span>');
+
+  // Analyst
+  if (analyst) {
+    parts.push(analyst.working
+      ? `Analyst: ${analyst.symbols_with_data}/${analyst.total_symbols} ✓`
+      : 'Analyst: none (30d)');
+  }
+
+  // Reddit
+  if (reddit) {
+    parts.push(reddit.working ? `Reddit: ${reddit.posts_found} posts ✓` : 'Reddit: blocked');
+  }
+
+  parts.push(`<span class="dh-sep">·</span> <span style="color:var(--label)">${ts}</span>`);
+
+  el.innerHTML = `<div class="data-health-bar ${health}">${parts.join('<span class="dh-sep"> · </span>')}</div>`;
+}
+
 // ── REVIEW PANEL ──
 function renderReviewPanel(reviewLog) {
   const el = document.getElementById('reviewPanel');
@@ -1508,6 +1587,7 @@ async function fetchData() {
     }
 
     render(data);
+    renderDataHealth(data.system_status);
     renderReviewPanel(reviewLog);
     const etNow  = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }));
     const etDay  = etNow.getDay(), etMins = etNow.getHours() * 60 + etNow.getMinutes();

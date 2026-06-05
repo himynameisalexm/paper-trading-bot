@@ -161,6 +161,52 @@ function commitAndPushTrades() {
   }
 }
 
+// ─── DATA HEALTH TRACKER ───────────────────────────────────────────────────
+// Records which data sources worked on this run. Written to trades.json so the
+// UI can show a health panel. Also prints a prominent warning block to the
+// GitHub Actions log so you can see at a glance if something broke.
+//
+// Called at the end of preMarketScan() and intradayEvaluation() before commit.
+function buildDataHealth({ crumbAuth, marketData, reddit, analystData, symbols }) {
+  const failed    = symbols.filter(s => !marketData[s]?.current_price);
+  const ok        = symbols.filter(s =>  marketData[s]?.current_price);
+  const redditOk  = Object.values(reddit || {}).some(posts => posts.some(p => !p.includes('No significant')));
+  const analystOk = Object.values(analystData || {}).some(v => v !== null);
+  const analystCount = Object.values(analystData || {}).filter(v => v !== null).length;
+
+  const overallHealth = failed.length === 0 ? 'good'
+                      : failed.length <= 2   ? 'degraded'
+                      :                        'critical';
+
+  const health = {
+    timestamp:         new Date().toISOString(),
+    crumb_auth:        crumbAuth,
+    price_data: {
+      total:        symbols.length,
+      success:      ok.length,
+      failed:       failed,
+      success_rate: symbols.length > 0 ? Math.round(ok.length / symbols.length * 100) : 0
+    },
+    reddit:     { working: redditOk, posts_found: redditOk ? Object.values(reddit).flat().filter(p => !p.includes('No significant')).length : 0 },
+    analyst:    { working: analystOk, symbols_with_data: analystCount, total_symbols: symbols.filter(s => !['BTC'].includes(s)).length },
+    overall_health: overallHealth
+  };
+
+  // ── Console report (always visible in GitHub Actions logs) ──
+  if (overallHealth !== 'good') {
+    console.log('\n⚠️  DATA HEALTH WARNING ────────────────────────────────');
+    if (!crumbAuth)       console.log('  ✗ Yahoo Finance crumb auth FAILED — price data may be missing');
+    if (failed.length)    console.log(`  ✗ No price data: ${failed.join(', ')} (${failed.length}/${symbols.length} symbols)`);
+    if (!redditOk)        console.log('  ✗ Reddit: blocked / no posts found');
+    if (!analystOk)       console.log('  ✗ Analyst data: no grade changes fetched');
+    console.log('────────────────────────────────────────────────────────\n');
+  } else {
+    console.log(`\n✓ Data health: GOOD — ${ok.length}/${symbols.length} prices | Reddit: ${redditOk ? 'OK' : 'blocked'} | Analyst data: ${analystCount} symbols\n`);
+  }
+
+  return health;
+}
+
 // ─── RSI(14) CALCULATOR ────────────────────────────────────────────────────
 function computeRSI(closes, period = 14) {
   if (!closes || closes.length < period + 1) return null;
@@ -767,19 +813,21 @@ DATE (ET): ${todayET()}
 CASH AVAILABLE: $${trades.session.current_cash.toFixed(2)}
 OPEN POSITIONS: ${trades.open_positions?.length ?? 0}/2 slots used
 
-CRITICAL: In your response, set current_price to EXACTLY the values I listed above.
-DO NOT change or hallucinate prices. Only provide analysis, confidence, entry targets, and thesis.
+ABSOLUTE RULE — ZERO FABRICATION TOLERANCE:
+You may ONLY reference data explicitly listed in this prompt. If a field was not provided → it does not exist.
+Never invent or recall from memory: prices, RSI, volume, analyst ratings, news, earnings, or any market event.
+A symbol with missing data must get: confidence: null, entry_signal: false, reason: "Data unavailable."
+
+PRICES: Set current_price to EXACTLY the value listed above for each symbol. Never change it.
 
 THESIS REQUIREMENT — MANDATORY: Every thesis field MUST cover these in 3–5 sentences:
   (a) RSI + volume: state both numbers and interpret them (momentum direction, institutional vs retail flow)
   (b) Key levels: where is price vs MA50 and MA200? What does that mean for support/resistance?
-  (c) Macro + sentiment: does QQQ/VIX backdrop support this trade? Include Reddit data only if it was provided above; omit sentiment if Reddit data is unavailable.
-  (d) Analyst signals: if "Analyst actions (30d)" was listed for this symbol above, reference it (firm name, direction, date). If it was NOT listed, do NOT mention any analyst actions — do not invent, guess, or paraphrase analyst opinions.
+  (c) Macro + sentiment: does QQQ/VIX backdrop support this trade? Include Reddit data only if it was provided above; omit if absent.
+  (d) Analyst signals: reference "Analyst actions (30d)" ONLY if that line was listed above. If absent → write nothing about analysts.
   (e) Bull vs bear: one sentence each
   (f) Decision: entering or not, and why, with confidence stated explicitly
 Keep each thesis concise — 3–5 sentences total. No padding, no filler.
-
-DATA INTEGRITY RULE: Only reference information that was explicitly provided above. Never fabricate analyst upgrades, downgrades, news headlines, or catalysts. If a data source was unavailable, say nothing about it rather than guessing.
 
 Return ONLY valid JSON in the watchlist_generation format from your instructions.`;
 
@@ -853,8 +901,10 @@ Return ONLY valid JSON in the watchlist_generation format from your instructions
     }
   }
 
-  trades.system_status.last_scan    = new Date().toISOString();
+  const dataHealth = buildDataHealth({ crumbAuth: !!YAHOO_CRUMB, marketData, reddit, analystData, symbols: activeSymbols });
+  trades.system_status.last_scan     = new Date().toISOString();
   trades.system_status.market_status = 'pre-market';
+  trades.system_status.data_health   = dataHealth;
 
   fs.writeFileSync(TRADES_FILE, JSON.stringify(trades, null, 2));
   commitAndPushTrades();
@@ -1022,6 +1072,11 @@ ${posLines}
 CASH: $${trades.session.current_cash.toFixed(2)} | DATE/TIME (ET): ${todayET()} ${new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York' })}
 DAILY TRADING CAPITAL: $${(trades.session.daily_trading_capital || 5000).toFixed(2)} | Used today: $${(trades.session.daily_trading_used || 0).toFixed(2)}
 
+ABSOLUTE RULE — ZERO FABRICATION TOLERANCE:
+You may ONLY reference data explicitly listed in this prompt. If a field was not provided → it does not exist.
+Never invent or recall from memory: prices, RSI, volume, analyst ratings, news, earnings, or any market event.
+A symbol with missing data must get: confidence: null, entry_signal: false, reason: "Data unavailable."
+
 TASKS — return BOTH sections:
 1. WATCHLIST: Rate EVERY symbol above with a confidence score. All symbols must appear in the watchlist array. At least 3 must have a confidence score (even if entry_signal is false). Be honest — if no setup is there, say so with a detailed thesis explaining why.
 2. POSITIONS: See hold rules below — position_exits should almost always be empty.
@@ -1029,13 +1084,11 @@ TASKS — return BOTH sections:
 THESIS REQUIREMENT — MANDATORY: Every thesis field MUST cover these in 3–5 sentences:
   (a) RSI + volume: state both numbers and interpret them (momentum, institutional flow, thin/heavy)
   (b) Key levels: price vs MA50 and MA200 — what do they mean for support/resistance right now?
-  (c) Macro + sentiment: does QQQ/VIX support this trade? If Reddit data was provided, include it; if not, skip sentiment.
-  (d) Analyst signals: if "Analyst actions (30d)" was listed for this symbol above, reference it (firm, direction, date). If it was NOT listed, do NOT mention any analyst activity — never fabricate upgrades, downgrades, or price targets.
+  (c) Macro + sentiment: does QQQ/VIX support this trade? If Reddit data was provided, include it; if absent, skip.
+  (d) Analyst signals: reference "Analyst actions (30d)" ONLY if that line was listed above. If absent → write nothing about analysts.
   (e) Bull vs bear: one sentence each
   (f) Decision: why entering or not, confidence stated explicitly
 Keep each thesis concise — 3–5 sentences total. Do NOT write paragraphs. No fluff.
-
-DATA INTEGRITY RULE: Only reference information explicitly provided above. Never fabricate analyst upgrades, news headlines, earnings results, or catalysts. If data was unavailable, omit it entirely.
 
 HOLD DISCIPLINE — CODE ENFORCES THIS, READ CAREFULLY:
 The code already handles: stop loss at -2.5% (stocks) / -3.5% (crypto), profit target at +5% (stocks) / +7% (crypto), and max hold at 3 days. You do NOT need to close positions for any of these.
@@ -1293,8 +1346,10 @@ Return ONLY valid JSON in hourly_evaluation format.`;
     trades.session.win_rate = parseFloat((trades.session.wins / trades.session.trades_closed * 100).toFixed(1));
   }
 
+  const dataHealth = buildDataHealth({ crumbAuth: !!YAHOO_CRUMB, marketData, reddit, analystData, symbols: activeWatchlist });
   trades.system_status.last_eval     = now.toISOString();
   trades.system_status.market_status = 'open';
+  trades.system_status.data_health   = dataHealth;
 
   fs.writeFileSync(TRADES_FILE, JSON.stringify(trades, null, 2));
   commitAndPushTrades();
