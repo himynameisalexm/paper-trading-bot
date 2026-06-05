@@ -1420,6 +1420,7 @@ function renderDataHealth(systemStatus) {
   const price    = dh.price_data;
   const reddit   = dh.reddit;
   const analyst  = dh.analyst;
+  const news     = dh.news;
   const crumb    = dh.crumb_auth;
   const ts       = dh.timestamp ? fmtDate(dh.timestamp) : '?';
 
@@ -1438,6 +1439,13 @@ function renderDataHealth(systemStatus) {
 
   // Crumb auth
   parts.push(crumb ? 'Auth: ✓' : '<span class="dh-fail">Auth: FAILED</span>');
+
+  // News (Google News RSS)
+  if (news) {
+    parts.push(news.working
+      ? `News: ${news.symbols_with_data}/${news.total_symbols} ✓`
+      : '<span class="dh-fail">News: blocked</span>');
+  }
 
   // Analyst
   if (analyst) {

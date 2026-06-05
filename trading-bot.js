@@ -167,12 +167,14 @@ function commitAndPushTrades() {
 // GitHub Actions log so you can see at a glance if something broke.
 //
 // Called at the end of preMarketScan() and intradayEvaluation() before commit.
-function buildDataHealth({ crumbAuth, marketData, reddit, analystData, symbols }) {
+function buildDataHealth({ crumbAuth, marketData, reddit, analystData, newsData, symbols }) {
   const failed    = symbols.filter(s => !marketData[s]?.current_price);
   const ok        = symbols.filter(s =>  marketData[s]?.current_price);
   const redditOk  = Object.values(reddit || {}).some(posts => posts.some(p => !p.includes('No significant')));
   const analystOk = Object.values(analystData || {}).some(v => v !== null);
   const analystCount = Object.values(analystData || {}).filter(v => v !== null).length;
+  const newsOk    = Object.values(newsData || {}).some(v => v !== null);
+  const newsCount = Object.values(newsData || {}).filter(v => v !== null).length;
 
   const overallHealth = failed.length === 0 ? 'good'
                       : failed.length <= 2   ? 'degraded'
@@ -187,8 +189,9 @@ function buildDataHealth({ crumbAuth, marketData, reddit, analystData, symbols }
       failed:       failed,
       success_rate: symbols.length > 0 ? Math.round(ok.length / symbols.length * 100) : 0
     },
-    reddit:     { working: redditOk, posts_found: redditOk ? Object.values(reddit).flat().filter(p => !p.includes('No significant')).length : 0 },
-    analyst:    { working: analystOk, symbols_with_data: analystCount, total_symbols: symbols.filter(s => !['BTC'].includes(s)).length },
+    reddit:   { working: redditOk, posts_found: redditOk ? Object.values(reddit).flat().filter(p => !p.includes('No significant')).length : 0 },
+    analyst:  { working: analystOk, symbols_with_data: analystCount, total_symbols: symbols.filter(s => !['BTC'].includes(s)).length },
+    news:     { working: newsOk, symbols_with_data: newsCount, total_symbols: symbols.length },
     overall_health: overallHealth
   };
 
@@ -197,11 +200,12 @@ function buildDataHealth({ crumbAuth, marketData, reddit, analystData, symbols }
     console.log('\n⚠️  DATA HEALTH WARNING ────────────────────────────────');
     if (!crumbAuth)       console.log('  ✗ Yahoo Finance crumb auth FAILED — price data may be missing');
     if (failed.length)    console.log(`  ✗ No price data: ${failed.join(', ')} (${failed.length}/${symbols.length} symbols)`);
+    if (!newsOk)          console.log('  ✗ News: no headlines fetched (Google News RSS blocked or empty)');
     if (!redditOk)        console.log('  ✗ Reddit: blocked / no posts found');
     if (!analystOk)       console.log('  ✗ Analyst data: no grade changes fetched');
     console.log('────────────────────────────────────────────────────────\n');
   } else {
-    console.log(`\n✓ Data health: GOOD — ${ok.length}/${symbols.length} prices | Reddit: ${redditOk ? 'OK' : 'blocked'} | Analyst data: ${analystCount} symbols\n`);
+    console.log(`\n✓ Data health: GOOD — ${ok.length}/${symbols.length} prices | News: ${newsCount} symbols | Analyst: ${analystCount} symbols | Reddit: ${redditOk ? 'OK' : 'blocked'}\n`);
   }
 
   return health;
@@ -432,6 +436,94 @@ async function fetchAllAnalystData(symbols) {
     await new Promise(r => setTimeout(r, 500));
   }
   console.log(`[ANALYST] Found recent actions for ${found}/${symbols.length} symbols`);
+  return result;
+}
+
+// ─── FETCH GOOGLE NEWS RSS ─────────────────────────────────────────────────
+// Fetches recent headlines from Google News RSS — free, no API key, works on
+// GitHub Actions (Azure IPs), sourced from major financial outlets.
+// Returns a compact pipe-separated string of the 3 most recent headlines, or
+// null if the feed fails or returns nothing relevant.
+async function fetchGoogleNewsRSS(symbol) {
+  try {
+    // Crypto gets a different query — ticker alone is ambiguous
+    const query = isCrypto(symbol)
+      ? encodeURIComponent('Bitcoin BTC crypto price')
+      : encodeURIComponent(`${symbol} stock news`);
+
+    const res = await makeRequestRaw({
+      hostname: 'news.google.com',
+      path:     `/rss/search?q=${query}&hl=en-US&gl=US&ceid=US:en`,
+      method:   'GET',
+      headers:  {
+        'User-Agent':      'Mozilla/5.0 (compatible; TradingBot/1.0)',
+        'Accept':          'application/rss+xml, application/xml, text/xml',
+        'Accept-Language': 'en-US,en;q=0.9',
+      }
+    });
+
+    if (res.status !== 200 || !res.body) return null;
+
+    // Parse RSS XML with lightweight regex — no xml2js dependency needed
+    // Each <item> has <title>, <source>, <pubDate>
+    const items = [];
+    const itemRegex = /<item>([\s\S]*?)<\/item>/g;
+    let itemMatch;
+    while ((itemMatch = itemRegex.exec(res.body)) !== null && items.length < 5) {
+      const block = itemMatch[1];
+
+      // Title — may be plain or CDATA-wrapped
+      const titleM = block.match(/<title>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/title>/);
+      const title  = titleM ? titleM[1].trim().replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'") : null;
+      if (!title || title === 'Google News') continue;
+
+      // Source outlet
+      const sourceM = block.match(/<source[^>]*>([\s\S]*?)<\/source>/);
+      const source  = sourceM ? sourceM[1].trim() : '';
+
+      // Publication date → "Jun 5" format
+      const dateM = block.match(/<pubDate>([\s\S]*?)<\/pubDate>/);
+      let dateStr = '';
+      if (dateM) {
+        const d = new Date(dateM[1].trim());
+        if (!isNaN(d)) dateStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      }
+
+      items.push({ title, source, dateStr });
+    }
+
+    if (items.length === 0) return null;
+
+    // Truncate each headline to 110 chars, format compactly
+    const lines = items.slice(0, 3).map(({ title, source, dateStr }) => {
+      const t = title.length > 110 ? title.substring(0, 107) + '…' : title;
+      const meta = [source, dateStr].filter(Boolean).join(', ');
+      return meta ? `${t} (${meta})` : t;
+    });
+
+    return lines.join(' | ');
+  } catch (e) {
+    console.warn(`[NEWS] ${symbol}: ${e.message}`);
+    return null;
+  }
+}
+
+// Fetch news for all symbols with a delay between requests.
+async function fetchAllNews(symbols) {
+  console.log('[NEWS] Fetching Google News RSS headlines...');
+  const result = {};
+  let found = 0;
+  for (const sym of symbols) {
+    result[sym] = await fetchGoogleNewsRSS(sym);
+    if (result[sym]) {
+      found++;
+      console.log(`  ${sym.padEnd(6)} ${result[sym].substring(0, 90)}`);
+    } else {
+      console.log(`  ${sym.padEnd(6)} no headlines`);
+    }
+    await new Promise(r => setTimeout(r, 400));
+  }
+  console.log(`[NEWS] Found headlines for ${found}/${symbols.length} symbols`);
   return result;
 }
 
@@ -767,10 +859,12 @@ async function preMarketScan() {
   const macro        = isWeekend() ? { gate_pass: true, qqq_above_ma: null, vix_below_25: null, weekend: true } : await fetchMacroStatus();
   const reddit       = await fetchRedditSentiment(activeSymbols);
   const analystData  = await fetchAllAnalystData(activeSymbols);
+  const newsData     = await fetchAllNews(activeSymbols);
 
-  // Check if any Reddit data exists (Reddit often blocks unauthenticated scraping)
-  const hasRedditData = Object.values(reddit).some(posts => posts.some(p => !p.includes('No significant')));
+  // Check which data sources returned anything useful
+  const hasRedditData  = Object.values(reddit).some(posts => posts.some(p => !p.includes('No significant')));
   const hasAnalystData = Object.values(analystData).some(v => v !== null);
+  const hasNewsData    = Object.values(newsData).some(v => v !== null);
 
   // Build market summary — real prices only, AI provides analysis only
   let mktSummary = 'LIVE MARKET DATA (use EXACTLY these prices — never invent or guess prices):\n\n';
@@ -782,6 +876,7 @@ async function preMarketScan() {
     const earningsStr = earnings !== null ? `${earnings} days away` : 'unknown';
     const symReddit   = (reddit[sym] || []).filter(p => !p.includes('No significant'));
     const symAnalyst  = analystData[sym] || null;
+    const symNews     = newsData[sym]    || null;
 
     mktSummary += `${sym}:
   Current price: $${d.current_price.toFixed(2)} (use this exactly as current_price)
@@ -791,9 +886,10 @@ async function preMarketScan() {
   200-day MA: $${d.ma200?.toFixed(2) ?? 'N/A'} → price is ${d.above_ma200 ? 'ABOVE' : 'BELOW'} MA
   Volume ratio: ${d.volume_ratio ?? 'N/A'}x vs 10-day avg
   Day range: $${d.day_low?.toFixed(2) ?? '?'} – $${d.day_high?.toFixed(2) ?? '?'}
-  Next earnings: ${earningsStr}${earnings !== null && earnings < 7 ? ' ⚠️ EARNINGS BLACKOUT — do not enter' : ''}${symAnalyst ? `\n  Analyst actions (30d): ${symAnalyst}` : ''}${symReddit.length > 0 ? `\n  Reddit (24h): ${symReddit.join(' | ')}` : ''}\n\n`;
+  Next earnings: ${earningsStr}${earnings !== null && earnings < 7 ? ' ⚠️ EARNINGS BLACKOUT — do not enter' : ''}${symNews ? `\n  News (24h): ${symNews}` : ''}${symAnalyst ? `\n  Analyst actions (30d): ${symAnalyst}` : ''}${symReddit.length > 0 ? `\n  Reddit (24h): ${symReddit.join(' | ')}` : ''}\n\n`;
   }
-  if (!hasRedditData) mktSummary += 'NOTE: Reddit data unavailable today (API blocked) — omit sentiment from thesis.\n\n';
+  if (!hasNewsData)    mktSummary += 'NOTE: No recent news headlines found — omit news catalysts from thesis.\n\n';
+  if (!hasRedditData)  mktSummary += 'NOTE: Reddit data unavailable today (API blocked) — omit sentiment from thesis.\n\n';
   if (!hasAnalystData) mktSummary += 'NOTE: No analyst grade changes found in the last 30 days — omit analyst actions from thesis.\n\n';
 
   const macroStr = `MACRO GATE:
@@ -901,7 +997,7 @@ Return ONLY valid JSON in the watchlist_generation format from your instructions
     }
   }
 
-  const dataHealth = buildDataHealth({ crumbAuth: !!YAHOO_CRUMB, marketData, reddit, analystData, symbols: activeSymbols });
+  const dataHealth = buildDataHealth({ crumbAuth: !!YAHOO_CRUMB, marketData, reddit, analystData, newsData, symbols: activeSymbols });
   trades.system_status.last_scan     = new Date().toISOString();
   trades.system_status.market_status = 'pre-market';
   trades.system_status.data_health   = dataHealth;
@@ -931,6 +1027,7 @@ async function intradayEvaluation() {
   const marketData  = await fetchMarketData(allSymbols);
   const reddit      = await fetchRedditSentiment(activeWatchlist);
   const analystData = await fetchAllAnalystData(activeWatchlist);
+  const newsData    = await fetchAllNews(activeWatchlist);
   const macro       = weekend
     ? { gate_pass: true, qqq_above_ma: null, vix_below_25: null, weekend: true, gate_note: 'Weekend — crypto only, macro gate N/A' }
     : await fetchMacroStatus();
@@ -1034,6 +1131,7 @@ async function intradayEvaluation() {
   // Check if Reddit returned any real data
   const hasRedditData  = Object.values(reddit).some(posts => posts.some(p => !p.includes('No significant')));
   const hasAnalystData = Object.values(analystData).some(v => v !== null);
+  const hasNewsData    = Object.values(newsData).some(v => v !== null);
 
   // ── BUILD AI PROMPT (combined watchlist scoring + position decisions) ──
   let mktSummary = 'LIVE MARKET DATA (use EXACTLY these prices — never invent or guess):\n\n';
@@ -1042,12 +1140,14 @@ async function intradayEvaluation() {
     if (!d?.current_price) { mktSummary += `${sym}: unavailable\n\n`; continue; }
     const symReddit  = (reddit[sym] || []).filter(p => !p.includes('No significant'));
     const symAnalyst = analystData[sym] || null;
+    const symNews    = newsData[sym]    || null;
     mktSummary += `${sym}:
   Price: $${d.current_price.toFixed(2)} | Change: ${d.change_pct >= 0 ? '+' : ''}${d.change_pct}%
   RSI(14): ${d.rsi ?? 'N/A'} | Vol ratio: ${d.volume_ratio?.toFixed(2) ?? 'N/A'}x vs 10-day avg
   MA50: $${d.ma50?.toFixed(2) ?? 'N/A'} (${d.above_ma50 ? 'ABOVE ✓' : 'BELOW ✗'}) | MA200: $${d.ma200?.toFixed(2) ?? 'N/A'} (${d.above_ma200 ? 'ABOVE ✓' : 'BELOW ✗'})
-  Day range: $${d.day_low?.toFixed(2) ?? '?'} – $${d.day_high?.toFixed(2) ?? '?'}${symAnalyst ? `\n  Analyst actions (30d): ${symAnalyst}` : ''}${symReddit.length > 0 ? `\n  Reddit (24h): ${symReddit.join(' | ')}` : ''}\n\n`;
+  Day range: $${d.day_low?.toFixed(2) ?? '?'} – $${d.day_high?.toFixed(2) ?? '?'}${symNews ? `\n  News (24h): ${symNews}` : ''}${symAnalyst ? `\n  Analyst actions (30d): ${symAnalyst}` : ''}${symReddit.length > 0 ? `\n  Reddit (24h): ${symReddit.join(' | ')}` : ''}\n\n`;
   }
+  if (!hasNewsData)    mktSummary += 'NOTE: No recent news headlines found — omit news catalysts from thesis.\n\n';
   if (!hasRedditData)  mktSummary += 'NOTE: Reddit data unavailable today (API blocked) — omit sentiment from thesis.\n\n';
   if (!hasAnalystData) mktSummary += 'NOTE: No analyst grade changes found in the last 30 days — omit analyst actions from thesis.\n\n';
 
@@ -1346,7 +1446,7 @@ Return ONLY valid JSON in hourly_evaluation format.`;
     trades.session.win_rate = parseFloat((trades.session.wins / trades.session.trades_closed * 100).toFixed(1));
   }
 
-  const dataHealth = buildDataHealth({ crumbAuth: !!YAHOO_CRUMB, marketData, reddit, analystData, symbols: activeWatchlist });
+  const dataHealth = buildDataHealth({ crumbAuth: !!YAHOO_CRUMB, marketData, reddit, analystData, newsData, symbols: activeWatchlist });
   trades.system_status.last_eval     = now.toISOString();
   trades.system_status.market_status = 'open';
   trades.system_status.data_health   = dataHealth;
