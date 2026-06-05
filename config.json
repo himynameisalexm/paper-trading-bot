@@ -6,18 +6,18 @@
   },
   "watchlist": [
     "NVDA",
-    "PLTR",
     "META",
     "MSFT",
     "GOOGL",
     "AMZN",
-    "ORCL",
     "BTC",
     "TSM",
     "PANW",
     "AVGO",
     "CRWD",
-    "ARM"
+    "ARM",
+    "SMCI",
+    "AMD"
   ],
   "trading_rules": {
     "min_confidence": 7,
