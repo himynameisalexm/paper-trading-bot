@@ -754,25 +754,35 @@ function handleDayReset(trades) {
   }
 
   // Get current account values (carry forward from previous session)
-  const totalAcct = trades.session?.total_account_value ?? CONFIG.account?.total_account_value ?? 20000;
+  const totalAcct       = trades.session?.total_account_value ?? CONFIG.account?.total_account_value ?? 20000;
   const dailyTradeAlloc = CONFIG.account?.daily_trading_capital ?? 5000;
+
+  // BUG FIX: current_cash must NOT equal total_account_value when positions are open.
+  // total_account_value = cash + open_positions_value, so resetting cash to total_account_value
+  // would double-count the invested capital every day.
+  // Correct cash = total_account_value minus the cost basis of all still-open positions.
+  const openPosCost = (trades.open_positions || []).reduce((sum, p) => sum + p.entry_price * p.shares, 0);
+  const currentCash = parseFloat(Math.max(0, totalAcct - openPosCost).toFixed(2));
+
+  // Recalculate open positions value using current (or entry) price for the session snapshot
+  const openPosValue = (trades.open_positions || []).reduce((sum, p) => sum + (p.current_price || p.entry_price) * p.shares, 0);
 
   trades.session = {
     date: today,
-    total_account_value: totalAcct,           // Carries across days
-    daily_trading_capital: dailyTradeAlloc,   // Resets to $5k each day
-    daily_trading_used: 0,                    // Fresh allocation each day
-    current_cash: totalAcct,                  // Total cash (not session-locked)
-    open_positions_value: 0,
+    total_account_value: totalAcct,              // Carries across days
+    daily_trading_capital: dailyTradeAlloc,      // Resets to $5k each day
+    daily_trading_used: 0,                       // Fresh allocation each day
+    current_cash: currentCash,                   // Cash = total_account - invested_capital
+    open_positions_value: parseFloat(openPosValue.toFixed(2)),
     realized_pnl: 0,
-    unrealized_pnl: 0,
+    unrealized_pnl: parseFloat(((trades.open_positions||[]).reduce((s,p)=>(s+(p.current_price||p.entry_price)-p.entry_price)*p.shares, 0)).toFixed(2)),
     total_pnl: 0,
     trades_closed: 0,
     trades_open: trades.open_positions?.length ?? 0,
     win_rate: 0, wins: 0, losses: 0, break_even: 0
   };
 
-  console.log(`[DAY RESET] New session: Total account $${totalAcct.toFixed(2)} | Daily trading capital reset to $${dailyTradeAlloc.toFixed(2)}`);
+  console.log(`[DAY RESET] New session: Total account $${totalAcct.toFixed(2)} | Cash $${currentCash.toFixed(2)} | Open positions cost $${openPosCost.toFixed(2)} | Daily capital reset to $${dailyTradeAlloc.toFixed(2)}`);
   return true;
 }
 
@@ -1251,7 +1261,7 @@ Return ONLY valid JSON in hourly_evaluation format.`;
   // Hard stops and max-hold are already enforced by the auto-exit block above.
   //
   // AI discretionary exit gate — three requirements must ALL be met:
-  //   1. Minimum hold time: 8h for stocks, 20h for crypto (positions need time to develop)
+  //   1. Minimum hold time: 2h for stocks, 8h for crypto (filters noise without blocking same-day exits)
   //   2. P&L is actually near the stop (-2.2% for stocks, -3.2% for crypto)
   //      OR a specific catalyst has invalidated the thesis (AI reports it in reason)
   //   3. NOT used to exit profitable positions — the +5%/+7% auto-exit handles those
@@ -1307,6 +1317,12 @@ Return ONLY valid JSON in hourly_evaluation format.`;
       // Trading window gate — checked per symbol (crypto is 24/7, stocks are weekday market hours only)
       if (!isWithinTradingWindow(sym)) {
         console.log(`[SKIP] ${sym}: outside trading window`);
+        continue;
+      }
+
+      // Already holding this symbol — never double-up on the same ticker
+      if (trades.open_positions.find(p => p.symbol === sym)) {
+        console.log(`[SKIP] ${sym}: already have an open position in this symbol`);
         continue;
       }
 
@@ -1447,8 +1463,16 @@ Return ONLY valid JSON in hourly_evaluation format.`;
   }
 
   const dataHealth = buildDataHealth({ crumbAuth: !!YAHOO_CRUMB, marketData, reddit, analystData, newsData, symbols: activeWatchlist });
+  // Derive real market status from current ET time
+  const etNow     = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
+  const etDay     = etNow.getDay();
+  const etMins    = etNow.getHours() * 60 + etNow.getMinutes();
+  const mktStatus = (etDay === 0 || etDay === 6) ? 'weekend'
+                  : (etMins >= 570 && etMins < 960) ? 'open'
+                  : 'closed';
+
   trades.system_status.last_eval     = now.toISOString();
-  trades.system_status.market_status = 'open';
+  trades.system_status.market_status = mktStatus;
   trades.system_status.data_health   = dataHealth;
 
   fs.writeFileSync(TRADES_FILE, JSON.stringify(trades, null, 2));

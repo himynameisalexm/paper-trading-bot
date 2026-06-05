@@ -1,19 +1,19 @@
 {
   "session": {
     "date": "2026-06-05",
-    "total_account_value": 51240.9,
+    "total_account_value": 19878.66,
     "daily_trading_capital": 5000,
-    "daily_trading_used": 0,
-    "current_cash": 46827.72,
-    "open_positions_value": 4413.18,
-    "realized_pnl": 0,
-    "unrealized_pnl": 29.91,
+    "daily_trading_used": 0.0,
+    "current_cash": 17711.91,
+    "open_positions_value": 2206.59,
+    "realized_pnl": -9.93,
+    "unrealized_pnl": 39.84,
     "total_pnl": 29.91,
-    "trades_closed": 0,
+    "trades_closed": 1,
     "trades_open": 2,
-    "win_rate": 0,
+    "win_rate": 0.0,
     "wins": 0,
-    "losses": 0,
+    "losses": 1,
     "break_even": 0
   },
   "open_positions": [
@@ -22,8 +22,8 @@
       "symbol": "GOOGL",
       "entry_price": 361.125,
       "entry_date": "2026-06-03T17:28:59.973Z",
-      "entry_reason": "RSI 14.7 is deeply oversold, a high-priority bounce candidate, and volume at 0.97x is near average, suggesting exhaustion of sellers. Price is above the 50-day MA ($351.36), which acts as strong support, and the macro gate is green. Bull case: oversold bounce to the 5% target is likely given the extreme RSI; bear case: broad market weakness could delay the bounce. Entering at confidence 7.5 — deep oversold, support confirmed, macro green.",
-      "thesis": "RSI 14.7 is deeply oversold, a high-priority bounce candidate, and volume at 0.97x is near average, suggesting exhaustion of sellers. Price is above the 50-day MA ($351.36), which acts as strong support, and the macro gate is green. Bull case: oversold bounce to the 5% target is likely given the extreme RSI; bear case: broad market weakness could delay the bounce. Entering at confidence 7.5 — deep oversold, support confirmed, macro green.",
+      "entry_reason": "RSI 14.7 is deeply oversold, a high-priority bounce candidate, and volume at 0.97x is near average, suggesting exhaustion of sellers. Price is above the 50-day MA ($351.36), which acts as strong support, and the macro gate is green. Bull case: oversold bounce to the 5% target is likely given the extreme RSI; bear case: broad market weakness could delay the bounce. Entering at confidence 7.5 \u2014 deep oversold, support confirmed, macro green.",
+      "thesis": "RSI 14.7 is deeply oversold, a high-priority bounce candidate, and volume at 0.97x is near average, suggesting exhaustion of sellers. Price is above the 50-day MA ($351.36), which acts as strong support, and the macro gate is green. Bull case: oversold bounce to the 5% target is likely given the extreme RSI; bear case: broad market weakness could delay the bounce. Entering at confidence 7.5 \u2014 deep oversold, support confirmed, macro green.",
       "shares": 6,
       "current_price": 367.765,
       "stop_loss": 366.54,
@@ -35,25 +35,6 @@
       "earnings_days_away": null,
       "macro_gate_pass": true,
       "session_date": "2026-06-03"
-    },
-    {
-      "id": "trade_1780588942064_GOOGL",
-      "symbol": "GOOGL",
-      "entry_price": 369.42,
-      "entry_date": "2026-06-04T16:01:31.552Z",
-      "entry_reason": "RSI 27.3 is deeply oversold, and volume at 0.51x is thin but acceptable for an oversold bounce play. Price is well above the 50-day MA ($352.89), which acts as strong support. Macro gate is green, and no recent downgrades are present. Bull case: Oversold bounce could carry to the 5% target; bear case: Thin volume risks a false breakout. Entering at confidence 7.5 due to deep oversold RSI and strong support.",
-      "thesis": "RSI 27.3 is deeply oversold, and volume at 0.51x is thin but acceptable for an oversold bounce play. Price is well above the 50-day MA ($352.89), which acts as strong support. Macro gate is green, and no recent downgrades are present. Bull case: Oversold bounce could carry to the 5% target; bear case: Thin volume risks a false breakout. Entering at confidence 7.5 due to deep oversold RSI and strong support.",
-      "shares": 6,
-      "current_price": 367.765,
-      "stop_loss": 360.18,
-      "profit_target": 387.89,
-      "confidence": 7.5,
-      "priority": 3,
-      "rsi_at_entry": 27.3,
-      "volume_ratio_at_entry": 0.51,
-      "earnings_days_away": null,
-      "macro_gate_pass": true,
-      "session_date": "2026-06-04"
     }
   ],
   "closed_trades": [
@@ -67,7 +48,7 @@
       "realized_pnl_percent": 3.36,
       "entry_date": "2026-04-13T17:21:06.797973Z",
       "exit_date": "2026-04-16T16:00:35.047Z",
-      "entry_reason": "BTC CRYPTO MOMENTUM (Priority 4) — Monday Apr 14. Macro gate GREEN: QQQ $614.57 above 50-day MA $600.34 ✅ | VIX 19.5 below 25 ✅. BTC recovering from tariff-selloff lows. Dollar weakness play after tariff pause + Iran ceasefire. Risk-on environment confirmed.",
+      "entry_reason": "BTC CRYPTO MOMENTUM (Priority 4) \u2014 Monday Apr 14. Macro gate GREEN: QQQ $614.57 above 50-day MA $600.34 \u2705 | VIX 19.5 below 25 \u2705. BTC recovering from tariff-selloff lows. Dollar weakness play after tariff pause + Iran ceasefire. Risk-on environment confirmed.",
       "exit_reason": "Max hold reached (2.9 days)",
       "session_date": "2026-04-16"
     },
@@ -160,7 +141,7 @@
       "symbol": "ETH",
       "entry_price": 2273.48,
       "exit_price": 2257.96,
-      "shares": 0.000013,
+      "shares": 1.3e-05,
       "realized_pnl": 0,
       "realized_pnl_percent": -0.68,
       "entry_date": "2026-04-29T17:44:14.371Z",
@@ -179,7 +160,7 @@
       "realized_pnl_percent": -0.47,
       "entry_date": "2026-04-29T18:08:02.476Z",
       "exit_date": "2026-04-29T19:45:43.198Z",
-      "entry_reason": "RSI 53.3 (neutral), volume ratio 1.08x (healthy). Strong uptrend with MA50 support. Clean setup for momentum continuation. Volume meets minimum requirement (1.08x ≥ 1.2x not strictly enforced for crypto).",
+      "entry_reason": "RSI 53.3 (neutral), volume ratio 1.08x (healthy). Strong uptrend with MA50 support. Clean setup for momentum continuation. Volume meets minimum requirement (1.08x \u2265 1.2x not strictly enforced for crypto).",
       "exit_reason": "Position is near break-even (-0.47%). RSI 52 neutral, volume 1.16x healthy. No exhaustion signals. Let it run to target.",
       "session_date": "2026-04-29"
     },
@@ -250,7 +231,7 @@
       "entry_date": "2026-04-30T15:51:34.070Z",
       "exit_date": "2026-04-30T16:11:31.366Z",
       "entry_reason": "Oversold bounce candidate with strong volume (1.99x). RSI 44.3 (neutral to oversold), price holding $600 support. Institutional participation confirmed.",
-      "exit_reason": "Position is flat (-0.00%). RSI 44.3 is oversold and volume ratio 2.05x confirms institutional interest. Support at $600 is holding. No exhaustion signals — let it run.",
+      "exit_reason": "Position is flat (-0.00%). RSI 44.3 is oversold and volume ratio 2.05x confirms institutional interest. Support at $600 is holding. No exhaustion signals \u2014 let it run.",
       "session_date": "2026-04-30"
     },
     {
@@ -417,7 +398,7 @@
       "realized_pnl_percent": -3,
       "entry_date": "2026-05-31T15:58:20.092Z",
       "exit_date": "2026-06-01T18:24:47.118Z",
-      "entry_reason": "RSI 30.2 is deeply oversold, a high-priority bounce candidate, though volume at 0.58x is thin — typical for crypto exhaustion. Price is below the 50-day MA ($77,230), which now acts as resistance; no 200-day MA data. Macro gate fails due to missing QQQ/VIX, but BTC often trades independently. Bull case: oversold bounce targets $77,213 within 3 days; bear case: breakdown below $73,454 risks a drop to $70k. Entering at confidence 7.2 — RSI edge outweighs volume penalty and macro uncertainty.",
+      "entry_reason": "RSI 30.2 is deeply oversold, a high-priority bounce candidate, though volume at 0.58x is thin \u2014 typical for crypto exhaustion. Price is below the 50-day MA ($77,230), which now acts as resistance; no 200-day MA data. Macro gate fails due to missing QQQ/VIX, but BTC often trades independently. Bull case: oversold bounce targets $77,213 within 3 days; bear case: breakdown below $73,454 risks a drop to $70k. Entering at confidence 7.2 \u2014 RSI edge outweighs volume penalty and macro uncertainty.",
       "exit_reason": "Stop loss hit at $71332.75 (stop was $71697.77)",
       "session_date": "2026-06-01"
     },
@@ -431,7 +412,7 @@
       "realized_pnl_percent": -5.52,
       "entry_date": "2026-06-01T18:24:47.118Z",
       "exit_date": "2026-06-02T17:04:47.669Z",
-      "entry_reason": "RSI 25.7 is deeply oversold, and volume at 1.46x confirms strong participation, supporting a potential bounce. Price is below the 50-day MA ($77242.84), but the oversold RSI and volume surge provide a high-conviction reversal setup. Macro gate is green, and crypto sentiment remains resilient despite the pullback. Bull case: bounce off $70,787 support with volume could drive a relief rally to $74,900; bear case: failure to hold $70,787 risks a drop to $68,000. Entering at confidence 7.5 — deeply oversold with volume confirmation.",
+      "entry_reason": "RSI 25.7 is deeply oversold, and volume at 1.46x confirms strong participation, supporting a potential bounce. Price is below the 50-day MA ($77242.84), but the oversold RSI and volume surge provide a high-conviction reversal setup. Macro gate is green, and crypto sentiment remains resilient despite the pullback. Bull case: bounce off $70,787 support with volume could drive a relief rally to $74,900; bear case: failure to hold $70,787 risks a drop to $68,000. Entering at confidence 7.5 \u2014 deeply oversold with volume confirmation.",
       "exit_reason": "Stop loss hit at $67393.25 (stop was $69549.43)",
       "session_date": "2026-06-02"
     },
@@ -445,7 +426,7 @@
       "realized_pnl_percent": -4.95,
       "entry_date": "2026-06-01T18:24:47.118Z",
       "exit_date": "2026-06-02T17:04:47.669Z",
-      "entry_reason": "RSI 33 is oversold, and volume at 0.75x is thin but acceptable for an oversold bounce play. Price is below the 50-day MA ($188.97), which now acts as resistance, but the oversold RSI provides a potential reversal setup. Macro gate is green, and the crypto sector has shown resilience. Bull case: bounce off $176 support with volume could drive a relief rally to $193; bear case: failure to hold $176 risks a drop to $170. Entering at confidence 7.0 — oversold RSI meets minimum threshold.",
+      "entry_reason": "RSI 33 is oversold, and volume at 0.75x is thin but acceptable for an oversold bounce play. Price is below the 50-day MA ($188.97), which now acts as resistance, but the oversold RSI provides a potential reversal setup. Macro gate is green, and the crypto sector has shown resilience. Bull case: bounce off $176 support with volume could drive a relief rally to $193; bear case: failure to hold $176 risks a drop to $170. Entering at confidence 7.0 \u2014 oversold RSI meets minimum threshold.",
       "exit_reason": "Stop loss hit at $174.72 (stop was $179.21)",
       "session_date": "2026-06-02"
     },
@@ -459,9 +440,23 @@
       "realized_pnl_percent": -3.07,
       "entry_date": "2026-06-03T17:28:59.973Z",
       "exit_date": "2026-06-04T16:01:31.552Z",
-      "entry_reason": "RSI 14 is deeply oversold, a high-priority bounce candidate, and volume at 1.58x confirms strong institutional participation. Price is below the 50-day MA ($76919.63), which acts as resistance, but the extreme RSI and volume surge suggest a potential reversal. Macro gate is green, and the oversold condition is a strong contrarian signal. Bull case: bounce to the 5% target is likely given the extreme RSI and volume; bear case: macro risk-off could delay the bounce. Entering at confidence 7.2 — deep oversold, volume confirmed, macro green.",
+      "entry_reason": "RSI 14 is deeply oversold, a high-priority bounce candidate, and volume at 1.58x confirms strong institutional participation. Price is below the 50-day MA ($76919.63), which acts as resistance, but the extreme RSI and volume surge suggest a potential reversal. Macro gate is green, and the oversold condition is a strong contrarian signal. Bull case: bounce to the 5% target is likely given the extreme RSI and volume; bear case: macro risk-off could delay the bounce. Entering at confidence 7.2 \u2014 deep oversold, volume confirmed, macro green.",
       "exit_reason": "Stop loss hit at $63791.74 (stop was $64169.94)",
       "session_date": "2026-06-04"
+    },
+    {
+      "id": "trade_1780588942064_GOOGL",
+      "symbol": "GOOGL",
+      "entry_price": 369.42,
+      "exit_price": 367.765,
+      "shares": 6,
+      "realized_pnl": -9.93,
+      "realized_pnl_percent": -0.45,
+      "entry_date": "2026-06-04T16:01:31.552Z",
+      "exit_date": "2026-06-05T19:56:32.470466Z",
+      "entry_reason": "RSI 27.3 is deeply oversold, and volume at 0.51x is thin but acceptable for an oversold bounce play. Price is well above the 50-day MA ($352.89), which acts as strong support. Macro gate is green, and no recent downgrades are present. Bull case: Oversold bounce could carry to the 5% target; bear case: Thin volume risks a false breakout. Entering at confidence 7.5 due to deep oversold RSI and strong support.",
+      "exit_reason": "Data correction: duplicate position closed \u2014 bot entered same symbol twice due to missing duplicate-symbol gate (now fixed)",
+      "session_date": "2026-06-05"
     }
   ],
   "daily_sessions": [
@@ -1085,7 +1080,7 @@
   "system_status": {
     "last_scan": "2026-06-05T14:41:16.327Z",
     "last_eval": "2026-06-05T18:55:16.564Z",
-    "market_status": "open",
+    "market_status": "closed",
     "bot_version": "2.0.0",
     "trades_json_version": 2
   }
