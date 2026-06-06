@@ -1,14 +1,14 @@
 {
   "session": {
     "date": "2026-06-06",
-    "total_account_value": 20043.7,
+    "total_account_value": 20050.03,
     "daily_trading_capital": 5000,
     "daily_trading_used": 0,
     "current_cash": 17526.7,
-    "open_positions_value": 2517,
+    "open_positions_value": 2523.33,
     "realized_pnl": 44.43,
-    "unrealized_pnl": 17.02,
-    "total_pnl": 61.45,
+    "unrealized_pnl": 23.35,
+    "total_pnl": 67.78,
     "trades_closed": 1,
     "trades_open": 1,
     "win_rate": 100,
@@ -25,7 +25,7 @@
       "entry_reason": "RSI 11 is extremely oversold, and volume at 1.70x confirms strong institutional interest despite the price drop. Price is well below the 50-day MA ($76363.28), but the extreme RSI and volume suggest a near-term bounce is likely. QQQ macro is green, and the 'generational opportunity' narrative could attract buyers. Bull case: oversold bounce to $64k on short covering; bear case: breakdown below $58k risks a move to $55k. Entering at confidence 7.8 — extreme oversold conditions justify the trade.",
       "thesis": "RSI 11 is extremely oversold, and volume at 1.70x confirms strong institutional interest despite the price drop. Price is well below the 50-day MA ($76363.28), but the extreme RSI and volume suggest a near-term bounce is likely. QQQ macro is green, and the 'generational opportunity' narrative could attract buyers. Bull case: oversold bounce to $64k on short covering; bear case: breakdown below $58k risks a move to $55k. Entering at confidence 7.8 — extreme oversold conditions justify the trade.",
       "shares": 0.04157,
-      "current_price": 60548.5,
+      "current_price": 60700.75,
       "stop_loss": 58034.17,
       "profit_target": 64348.77,
       "confidence": 7.8,
@@ -844,7 +844,7 @@
       "entry_target": null,
       "priority": 5,
       "reason": "Price data unavailable — no recommendation made.",
-      "last_updated": "2026-06-06T20:10:09.292Z",
+      "last_updated": "2026-06-06T21:03:49.401Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
@@ -862,7 +862,7 @@
       "entry_target": null,
       "priority": 5,
       "reason": "Price data unavailable — no recommendation made.",
-      "last_updated": "2026-06-06T20:10:09.292Z",
+      "last_updated": "2026-06-06T21:03:49.401Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
@@ -880,7 +880,7 @@
       "entry_target": null,
       "priority": 5,
       "reason": "Price data unavailable — no recommendation made.",
-      "last_updated": "2026-06-06T20:10:09.292Z",
+      "last_updated": "2026-06-06T21:03:49.401Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
@@ -904,7 +904,7 @@
       "change_pct": 0,
       "volume_ratio": 1.09,
       "priority": 3,
-      "last_updated": "2026-06-06T20:10:09.292Z",
+      "last_updated": "2026-06-06T21:03:49.401Z",
       "added_date": "2026-05-30",
       "is_new": false
     },
@@ -922,25 +922,25 @@
       "change_pct": null,
       "volume_ratio": null,
       "priority": 5,
-      "last_updated": "2026-06-06T20:10:09.292Z",
+      "last_updated": "2026-06-06T21:03:49.401Z",
       "added_date": "2026-05-30",
       "is_new": false
     },
     {
       "symbol": "BTC",
-      "current_price": 60548.5,
-      "confidence": 4.5,
+      "current_price": 60700.75,
+      "confidence": 6.5,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
-      "reason": "RSI 5.5 is deeply oversold, but volume at 0.91x signals weak institutional participation — not a strong bounce setup. Price is well below the 50-day MA ($76,047), which is now a major resistance level; no support from moving averages. Macro gate is red (QQQ below MA50, VIX unknown/high), and recent news highlights selling pressure from high-conviction holders and sector-wide weakness. Bull case: extreme oversold conditions could spark a short-term bounce; bear case: continued selling pressure risks deeper declines toward $55k. Not entering: macro gate closed, volume weak, confidence 4.5.",
-      "last_updated": "2026-06-06T20:10:09.292Z",
+      "reason": "RSI 5.5 is deeply oversold — extreme bearish momentum but historically a reversal zone. Volume at 0.86x is below average, signaling weak participation but typical for capitulation lows. Price is well below the 50-day MA ($76,050), which is now major resistance; no 200-day MA data. Macro gate is red (QQQ below MA50, VIX implied high) — no new entries allowed despite oversold RSI. Bull case: rebound off extreme lows could see a relief rally; bear case: macro crypto crash continues with no bottom in sight. Not entering: macro gate red, confidence 6.5 below threshold.",
+      "last_updated": "2026-06-06T21:03:49.401Z",
       "rsi": 5.5,
       "change_pct": 0,
-      "volume_ratio": 0.91,
+      "volume_ratio": 0.86,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "RSI 5.5 (deeply oversold), below MA50 $76,047, volume ratio 0.91x",
+      "technical_setup": "RSI 5.5 (deep oversold), below MA50 $76,050, vol 0.86x",
       "added_date": "2026-04-01",
       "is_new": false
     },
@@ -958,7 +958,7 @@
       "change_pct": null,
       "volume_ratio": null,
       "priority": 5,
-      "last_updated": "2026-06-06T20:10:09.292Z",
+      "last_updated": "2026-06-06T21:03:49.401Z",
       "added_date": "2026-05-30",
       "is_new": false
     },
@@ -978,7 +978,7 @@
       "volume_ratio": null,
       "added_date": "2026-06-02",
       "is_new": true,
-      "last_updated": "2026-06-06T20:10:09.292Z"
+      "last_updated": "2026-06-06T21:03:49.401Z"
     },
     {
       "symbol": "AVGO",
@@ -996,7 +996,7 @@
       "volume_ratio": null,
       "added_date": "2026-06-03",
       "is_new": true,
-      "last_updated": "2026-06-06T20:10:09.292Z"
+      "last_updated": "2026-06-06T21:03:49.401Z"
     },
     {
       "symbol": "CRWD",
@@ -1014,7 +1014,7 @@
       "volume_ratio": null,
       "added_date": "2026-06-04",
       "is_new": true,
-      "last_updated": "2026-06-06T20:10:09.292Z"
+      "last_updated": "2026-06-06T21:03:49.401Z"
     },
     {
       "symbol": "ARM",
@@ -1032,7 +1032,7 @@
       "volume_ratio": null,
       "added_date": "2026-06-04",
       "is_new": true,
-      "last_updated": "2026-06-06T20:10:09.292Z"
+      "last_updated": "2026-06-06T21:03:49.401Z"
     },
     {
       "symbol": "SMCI",
@@ -1050,7 +1050,7 @@
       "volume_ratio": null,
       "added_date": "2026-06-05",
       "is_new": true,
-      "last_updated": "2026-06-06T20:10:09.292Z"
+      "last_updated": "2026-06-06T21:03:49.401Z"
     },
     {
       "symbol": "AMD",
@@ -1068,7 +1068,7 @@
       "volume_ratio": null,
       "added_date": "2026-06-05",
       "is_new": true,
-      "last_updated": "2026-06-06T20:10:09.292Z"
+      "last_updated": "2026-06-06T21:03:49.401Z"
     }
   ],
   "macro_status": {
@@ -1091,12 +1091,12 @@
   },
   "system_status": {
     "last_scan": "2026-06-06T13:22:13.746Z",
-    "last_eval": "2026-06-06T20:09:52.652Z",
+    "last_eval": "2026-06-06T21:03:33.048Z",
     "market_status": "weekend",
     "bot_version": "2.0.0",
     "trades_json_version": 2,
     "data_health": {
-      "timestamp": "2026-06-06T20:10:09.292Z",
+      "timestamp": "2026-06-06T21:03:49.402Z",
       "crumb_auth": true,
       "price_data": {
         "total": 1,
