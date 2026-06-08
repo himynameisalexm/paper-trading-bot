@@ -8,8 +8,6 @@
     "NVDA",
     "META",
     "MSFT",
-    "GOOGL",
-    "AMZN",
     "BTC",
     "TSM",
     "PANW",
@@ -17,7 +15,9 @@
     "CRWD",
     "ARM",
     "SMCI",
-    "AMD"
+    "AMD",
+    "TSLA",
+    "DDOG"
   ],
   "trading_rules": {
     "min_confidence": 7,

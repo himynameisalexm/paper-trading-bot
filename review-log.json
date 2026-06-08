@@ -1,5 +1,116 @@
 [
   {
+    "date": "2026-06-08",
+    "timestamp": "2026-06-08T14:55:05.798Z",
+    "rule_issues": [],
+    "assessment": "Watchlist quality is currently poor due to widespread price data unavailability, limiting actionable signals. The only active symbol, BTC, is deeply oversold but lacks institutional volume confirmation, reducing confidence in a bounce setup.",
+    "market_regime_note": "AI/tech sector momentum appears stalled or consolidating, with low setup frequency due to missing data and weak participation signals.",
+    "flags": [
+      "Widespread price data unavailability across 10/13 watchlist symbols — API or data feed issue likely.",
+      "BTC trade history shows 80% loss rate; reassess strategy if oversold bounces continue to fail."
+    ],
+    "changes_applied": [
+      {
+        "action": "REMOVE",
+        "symbol": "GOOGL",
+        "reason": "Price data unavailable for multiple scans with no trade history or signals."
+      },
+      {
+        "action": "REMOVE",
+        "symbol": "AMZN",
+        "reason": "Price data unavailable with no trade history or signals."
+      },
+      {
+        "action": "ADD",
+        "symbol": "TSLA",
+        "reason": "High-liquidity AI/tech-adjacent name with frequent volatility and institutional coverage, fitting momentum breakout setups."
+      },
+      {
+        "action": "ADD",
+        "symbol": "DDOG",
+        "reason": "Strong AI/tech sector relevance, high volatility, and active options market for oversold bounce setups."
+      }
+    ],
+    "watchlist_after": [
+      "NVDA",
+      "META",
+      "MSFT",
+      "BTC",
+      "TSM",
+      "PANW",
+      "AVGO",
+      "CRWD",
+      "ARM",
+      "SMCI",
+      "AMD",
+      "TSLA",
+      "DDOG"
+    ],
+    "symbol_notes": {
+      "NVDA": "Price data unavailable — no momentum assessment possible.",
+      "META": "Price data unavailable — no momentum assessment possible.",
+      "MSFT": "Price data unavailable — no momentum assessment possible.",
+      "BTC": "Deeply oversold (RSI 8.6) but weak volume (0.74x) suggests low-confidence capitulation setup.",
+      "TSLA": "Candidate for momentum breakouts due to high volatility and AI/autonomous driving thesis.",
+      "DDOG": "Candidate for oversold bounces in cloud/AI monitoring space."
+    },
+    "data_health": {
+      "no_price_data": [
+        "NVDA",
+        "META",
+        "MSFT",
+        "GOOGL",
+        "AMZN",
+        "TSM"
+      ],
+      "no_confidence_score": [
+        "NVDA",
+        "META",
+        "MSFT",
+        "GOOGL",
+        "AMZN",
+        "TSM"
+      ]
+    },
+    "performance_snapshot": {
+      "BTC": {
+        "trades": 10,
+        "wins": 2,
+        "losses": 8,
+        "win_rate": 20,
+        "avg_pnl_pct": -1.28
+      },
+      "COIN": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.52
+      },
+      "ETH": {
+        "trades": 6,
+        "wins": 3,
+        "losses": 2,
+        "win_rate": 60,
+        "avg_pnl_pct": 0.05
+      },
+      "META": {
+        "trades": 6,
+        "wins": 4,
+        "losses": 2,
+        "win_rate": 67,
+        "avg_pnl_pct": 0.63
+      },
+      "GOOGL": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.8
+      }
+    }
+  },
+  {
     "date": "2026-06-05",
     "timestamp": "2026-06-05T14:05:48.478Z",
     "rule_issues": [],
