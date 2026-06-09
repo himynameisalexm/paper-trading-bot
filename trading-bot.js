@@ -775,7 +775,7 @@ function handleDayReset(trades) {
     current_cash: currentCash,                   // Cash = total_account - invested_capital
     open_positions_value: parseFloat(openPosValue.toFixed(2)),
     realized_pnl: 0,
-    unrealized_pnl: parseFloat(((trades.open_positions||[]).reduce((s,p)=>(s+(p.current_price||p.entry_price)-p.entry_price)*p.shares, 0)).toFixed(2)),
+    unrealized_pnl: parseFloat(((trades.open_positions||[]).reduce((s,p)=>s+(((p.current_price||p.entry_price)-p.entry_price)*p.shares), 0)).toFixed(2)),
     total_pnl: 0,
     trades_closed: 0,
     trades_open: trades.open_positions?.length ?? 0,
@@ -904,7 +904,7 @@ async function preMarketScan() {
 
   const macroStr = `MACRO GATE:
   QQQ: $${macro.qqq_price?.toFixed(2) ?? 'N/A'} vs MA50 $${macro.qqq_50day_ma?.toFixed(2) ?? 'N/A'} → ${macro.qqq_above_ma ? 'ABOVE ✓' : 'BELOW ✗'}
-  VIX: ${macro.vix?.toFixed(2) ?? 'N/A'} → ${macro.vix_below_25 ? 'BELOW 25 ✓' : 'ABOVE 25 ✗'}
+  VIX: ${macro.vix?.toFixed(2) ?? 'N/A'} → ${macro.vix_below_25 ? 'BELOW 30 ✓' : 'ABOVE 30 ✗'}
   Gate status: ${macro.gate_pass ? '✓ PASS — full position sizing' : '✗ FAIL — cash unless extraordinary catalyst'}`;
 
   const openStr = trades.open_positions?.length

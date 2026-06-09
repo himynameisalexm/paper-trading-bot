@@ -86,7 +86,7 @@ Rules:
 
 ## CAPITAL & POSITION SIZING
 
-- Total account: ~$35,000 USD (grows over time — exact value provided in each prompt)
+- Total account: ~$20,000 USD (grows over time — exact value provided in each prompt)
 - Daily trading capital: $5,000 USD (resets each day — the active trading budget)
 - Position size: dollar-based, max 50% of daily capital per position (~$2,500 per trade)
   - Stocks: whole shares, floor($2,500 / price). E.g. NVDA at $875 = 2 shares ($1,750)
