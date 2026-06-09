@@ -1,5 +1,104 @@
 [
   {
+    "date": "2026-06-09",
+    "timestamp": "2026-06-09T13:58:05.430Z",
+    "rule_issues": [],
+    "assessment": "The current watchlist is well-balanced with a mix of oversold bounce candidates (BTC), momentum plays (TSM, AMD), and neutral stocks. Most symbols show fresh data and align with the bot's AI/tech/fintech focus, though some lack institutional conviction due to low volume ratios.",
+    "market_regime_note": "AI/tech sector momentum appears mixed, with oversold conditions in BTC and healthy momentum in select chip stocks, suggesting setup frequency may favor bounce plays over breakouts in the near term.",
+    "flags": [],
+    "changes_applied": [
+      {
+        "action": "REMOVE",
+        "symbol": "SMCI",
+        "reason": "Elevated RSI (71.3) and extremely thin volume (0.60x) with no trade history or edge."
+      },
+      {
+        "action": "REMOVE",
+        "symbol": "PANW",
+        "reason": "Neutral RSI (57.4) and critically low volume (0.58x) with no institutional conviction."
+      },
+      {
+        "action": "ADD",
+        "symbol": "ASML",
+        "reason": "High-liquidity AI/tech leader with strong institutional coverage and volatility, fitting momentum breakout criteria."
+      },
+      {
+        "action": "ADD",
+        "symbol": "MSTR",
+        "reason": "High-beta crypto proxy with deep oversold potential and strong institutional interest, aligning with BTC's bounce thesis."
+      }
+    ],
+    "watchlist_after": [
+      "NVDA",
+      "META",
+      "MSFT",
+      "BTC",
+      "TSM",
+      "AVGO",
+      "CRWD",
+      "ARM",
+      "AMD",
+      "TSLA",
+      "DDOG",
+      "ASML",
+      "MSTR"
+    ],
+    "symbol_notes": {
+      "NVDA": "Oversold RSI (39.3) but weak volume (0.72x) limits bounce conviction; monitor for institutional participation.",
+      "META": "Neutral RSI (41.5) and thin volume (0.87x); lacks directional edge but protected status retained.",
+      "MSFT": "Neutral RSI (44.9) with weak volume (0.74x); no immediate setup but sector leader.",
+      "BTC": "Deeply oversold (RSI 16.3) with acceptable volume (0.92x); high-priority bounce candidate.",
+      "TSM": "Healthy momentum (RSI 61.4) and neutral volume (0.92x); open position justified.",
+      "AMD": "Strong momentum (RSI 62.9) with acceptable volume (0.77x); open position candidate.",
+      "TSLA": "Neutral RSI (49.6) but highest volume (1.09x) on watchlist; institutional interest present.",
+      "AVGO": "Neutral RSI (43.8) with acceptable volume (0.99x); below 50-day MA limits edge.",
+      "CRWD": "Neutral RSI (55.8) with weak volume (0.79x); no clear setup despite sector strength.",
+      "ARM": "Elevated RSI (70.6) and thin volume (0.67x); caution warranted near overbought.",
+      "DDOG": "Neutral RSI (59.2) with weak volume (0.79x); lacks institutional conviction."
+    },
+    "data_health": {
+      "no_price_data": [],
+      "no_confidence_score": []
+    },
+    "performance_snapshot": {
+      "BTC": {
+        "trades": 11,
+        "wins": 3,
+        "losses": 8,
+        "win_rate": 27,
+        "avg_pnl_pct": -0.7
+      },
+      "COIN": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.52
+      },
+      "ETH": {
+        "trades": 6,
+        "wins": 3,
+        "losses": 2,
+        "win_rate": 60,
+        "avg_pnl_pct": 0.05
+      },
+      "META": {
+        "trades": 6,
+        "wins": 4,
+        "losses": 2,
+        "win_rate": 67,
+        "avg_pnl_pct": 0.63
+      },
+      "GOOGL": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.8
+      }
+    }
+  },
+  {
     "date": "2026-06-08",
     "timestamp": "2026-06-08T14:55:05.798Z",
     "rule_issues": [],
