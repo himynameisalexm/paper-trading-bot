@@ -1,5 +1,118 @@
 [
   {
+    "date": "2026-06-11",
+    "timestamp": "2026-06-11T15:02:11.939Z",
+    "rule_issues": [],
+    "assessment": "The current watchlist is well-balanced with a mix of oversold bounce candidates (BTC, MSTR) and momentum breakouts (ASML). Most symbols lack institutional conviction due to thin volume, but the protected core (NVDA, META, MSFT, BTC) remains strategically sound. The AI/tech sector shows selective strength, favoring high-quality names with clear catalysts.",
+    "market_regime_note": "AI/tech sector momentum is uneven, with pockets of strength in semiconductor/equipment names (ASML) but weak institutional participation in broader tech, limiting setup frequency.",
+    "flags": [],
+    "changes_applied": [
+      {
+        "action": "REMOVE",
+        "symbol": "SMCI",
+        "reason": "Elevated volume driven by negative catalyst ($7B equity raise), poor risk/reward for momentum strategies."
+      },
+      {
+        "action": "REMOVE",
+        "symbol": "ARM",
+        "reason": "Consistently thin volume (0.61x) and no trade history wins despite neutral RSI, low institutional conviction."
+      },
+      {
+        "action": "ADD",
+        "symbol": "AVGO",
+        "reason": "Strong AI/tech thesis (semiconductors, AI networking), high liquidity, and institutional coverage; fits momentum breakout criteria."
+      },
+      {
+        "action": "ADD",
+        "symbol": "SNOW",
+        "reason": "Cloud/AI data play with high volatility (5%+ daily range common) and active options market; potential for oversold bounces."
+      }
+    ],
+    "watchlist_after": [
+      "NVDA",
+      "META",
+      "MSFT",
+      "BTC",
+      "TSM",
+      "CRWD",
+      "AMD",
+      "TSLA",
+      "ASML",
+      "MSTR",
+      "PANW",
+      "AVGO",
+      "SNOW"
+    ],
+    "symbol_notes": {
+      "NVDA": "Oversold (RSI 33) but weak volume (0.80x) suggests cautious bounce potential; monitor for institutional re-entry.",
+      "META": "Neutral RSI (39) with thin volume (0.77x); no edge until institutional conviction returns.",
+      "MSFT": "Neutral RSI (40.2) and weak volume (0.73x); no actionable setup.",
+      "BTC": "Deeply oversold (RSI 14.7) with open position; high-priority bounce candidate despite thin volume.",
+      "ASML": "Open position with strong volume (1.43x) and institutional buying; momentum breakout confirmed.",
+      "MSTR": "Deeply oversold (RSI 20.2) with thin volume; high-priority bounce candidate but unproven trade history.",
+      "TSM": "Neutral RSI (52.5) and weak volume (0.88x); no edge.",
+      "CRWD": "Neutral RSI (49.6) with extremely thin volume (0.57x); no institutional conviction.",
+      "AMD": "Neutral RSI (50.9) and weak volume (0.87x); no actionable setup.",
+      "TSLA": "Neutral RSI (37) with average volume (1.07x); no institutional footprint.",
+      "PANW": "Neutral RSI (56.9) with thin volume (0.59x); no edge despite sector tailwinds."
+    },
+    "data_health": {
+      "no_price_data": [],
+      "no_confidence_score": []
+    },
+    "performance_snapshot": {
+      "BTC": {
+        "trades": 12,
+        "wins": 3,
+        "losses": 9,
+        "win_rate": 25,
+        "avg_pnl_pct": -0.93
+      },
+      "COIN": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.52
+      },
+      "ETH": {
+        "trades": 6,
+        "wins": 3,
+        "losses": 2,
+        "win_rate": 60,
+        "avg_pnl_pct": 0.05
+      },
+      "META": {
+        "trades": 6,
+        "wins": 4,
+        "losses": 2,
+        "win_rate": 67,
+        "avg_pnl_pct": 0.63
+      },
+      "GOOGL": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.8
+      },
+      "TSM": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -4.42
+      },
+      "ARM": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -1.66
+      }
+    }
+  },
+  {
     "date": "2026-06-10",
     "timestamp": "2026-06-10T14:33:28.039Z",
     "rule_issues": [],
