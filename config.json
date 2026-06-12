@@ -12,12 +12,12 @@
     "TSM",
     "CRWD",
     "AMD",
-    "TSLA",
     "ASML",
     "MSTR",
     "PANW",
     "AVGO",
-    "SNOW"
+    "SMCI",
+    "DDOG"
   ],
   "trading_rules": {
     "min_confidence": 7,
