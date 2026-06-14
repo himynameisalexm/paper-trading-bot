@@ -1,14 +1,14 @@
 {
   "session": {
     "date": "2026-06-14",
-    "total_account_value": 20306.54,
+    "total_account_value": 20299.35,
     "daily_trading_capital": 5000,
     "daily_trading_used": 0,
     "current_cash": 15746.83,
-    "open_positions_value": 4559.71,
+    "open_positions_value": 4552.52,
     "realized_pnl": 0,
-    "unrealized_pnl": -16.18,
-    "total_pnl": -16.18,
+    "unrealized_pnl": -23.37,
+    "total_pnl": -23.37,
     "trades_closed": 0,
     "trades_open": 2,
     "win_rate": 0,
@@ -44,7 +44,7 @@
       "entry_reason": "RSI 25.7 is deeply oversold, and volume at 0.66x is thin but acceptable for a bounce play in crypto. Price is well below the 50-day MA ($74423.47), but BTC often finds support at key levels like $62K. Macro gate is green, and the oversold RSI provides a high-probability bounce setup. Bull case: a reclaim of $64K with volume could drive a 7% rally; bear case: failure to hold $62K risks a drop to $60K. Entering at confidence 7.0 — oversold bounce criteria met.",
       "thesis": "RSI 25.7 is deeply oversold, and volume at 0.66x is thin but acceptable for a bounce play in crypto. Price is well below the 50-day MA ($74423.47), but BTC often finds support at key levels like $62K. Macro gate is green, and the oversold RSI provides a high-probability bounce setup. Bull case: a reclaim of $64K with volume could drive a 7% rally; bear case: failure to hold $62K risks a drop to $60K. Entering at confidence 7.0 — oversold bounce criteria met.",
       "shares": 0.039197,
-      "current_price": 64068.89,
+      "current_price": 63885.59,
       "stop_loss": 61548.55,
       "profit_target": 68245.54,
       "confidence": 7,
@@ -947,7 +947,7 @@
       "entry_target": null,
       "priority": 5,
       "reason": "Price data unavailable — no analysis possible. Confidence set to null.",
-      "last_updated": "2026-06-14T16:15:40.109Z",
+      "last_updated": "2026-06-14T17:25:38.483Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
@@ -965,7 +965,7 @@
       "entry_target": null,
       "priority": 5,
       "reason": "Price data unavailable — no analysis possible. Confidence set to null.",
-      "last_updated": "2026-06-14T16:15:40.109Z",
+      "last_updated": "2026-06-14T17:25:38.483Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
@@ -983,7 +983,7 @@
       "entry_target": null,
       "priority": 5,
       "reason": "Price data unavailable — no analysis possible. Confidence set to null.",
-      "last_updated": "2026-06-14T16:15:40.109Z",
+      "last_updated": "2026-06-14T17:25:38.483Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
@@ -995,19 +995,19 @@
     },
     {
       "symbol": "BTC",
-      "current_price": 64068.89,
-      "confidence": 5,
+      "current_price": 63885.59,
+      "confidence": 6.5,
       "entry_signal": false,
       "entry_target": null,
-      "priority": 4,
-      "reason": "RSI 26.5 is deeply oversold, but volume at 0.44x signals extremely thin trading with no institutional conviction. Price is well below the 50-day MA ($73,887), which is now strong resistance; no MA200 data available. Macro gate is technically passed but QQQ below MA50 and VIX high create a high-risk backdrop. Bull case: BTC could bounce off $63K support if macro sentiment improves; bear case: thin volume and weak macro could lead to further downside. Not entering: confidence 5.0 due to weak volume and macro conditions.",
-      "last_updated": "2026-06-14T16:15:40.109Z",
-      "rsi": 26.5,
+      "priority": 3,
+      "reason": "RSI 26.3 is deeply oversold, suggesting a potential bounce, but volume at 0.43x is extremely thin — no institutional conviction. Price is well below the 50-day MA ($73,883), which now acts as strong resistance; no 200-day MA data available. Macro gate is technically passed but QQQ below MA50 and high VIX create a weak backdrop. Bull case: oversold bounce could retest $65K; bear case: macro pressure could push BTC to $60K. Not entering: confidence 6.5 below threshold, volume too low, macro weak.",
+      "last_updated": "2026-06-14T17:25:38.483Z",
+      "rsi": 26.3,
       "change_pct": 0,
-      "volume_ratio": 0.44,
+      "volume_ratio": 0.43,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "RSI 26.5, below MA50 $73,887, vol 0.44x",
+      "technical_setup": "RSI 26.3, below MA50 $73883, vol 0.43x",
       "added_date": "2026-04-01",
       "is_new": false
     },
@@ -1025,27 +1025,27 @@
       "change_pct": null,
       "volume_ratio": null,
       "priority": 5,
-      "last_updated": "2026-06-14T16:15:40.109Z",
+      "last_updated": "2026-06-14T17:25:38.483Z",
       "added_date": "2026-05-30",
       "is_new": false
     },
     {
       "symbol": "CRWD",
       "current_price": 682.8,
-      "confidence": 6,
+      "confidence": 5,
       "entry_signal": false,
       "entry_target": null,
       "stop_loss": null,
       "profit_target": null,
       "priority": 3,
-      "reason": "RSI 52.7 is neutral with no directional edge, and volume at 0.52x signals thin trading with no institutional participation. Price is well above the 50-day MA ($543.70), which acts as strong support, but the lack of volume raises concerns about sustainability. Macro gate is passed but QQQ below MA50 and VIX high add risk. Bull case: Sector rotation could lift CRWD if macro improves; bear case: thin volume and weak macro could lead to a pullback to MA50. Not entering: confidence 6.0 due to low volume and neutral RSI.",
+      "reason": "RSI 52.7 is neutral with no directional edge, and volume at 0.52x signals thin trading — no institutional participation. Price is above the 50-day MA ($543.70), which acts as support, but no 200-day MA data is available. Macro gate is weak (QQQ below MA50), and no catalyst is present. Bull case: sector rotation could lift CRWD; bear case: macro pressure could drag it to MA50. Not entering: confidence 5.0, volume too low, macro weak.",
       "technical_setup": "RSI 52.7, above MA50 $543.70, vol 0.52x",
       "rsi": 52.7,
       "change_pct": 0,
       "volume_ratio": 0.52,
       "added_date": "2026-06-04",
       "is_new": false,
-      "last_updated": "2026-06-14T16:15:40.109Z"
+      "last_updated": "2026-06-14T17:25:38.483Z"
     },
     {
       "symbol": "AMD",
@@ -1063,7 +1063,7 @@
       "volume_ratio": null,
       "added_date": "2026-06-05",
       "is_new": false,
-      "last_updated": "2026-06-14T16:15:40.109Z"
+      "last_updated": "2026-06-14T17:25:38.483Z"
     },
     {
       "symbol": "ASML",
@@ -1081,7 +1081,7 @@
       "volume_ratio": null,
       "added_date": "2026-06-09",
       "is_new": true,
-      "last_updated": "2026-06-14T16:15:40.109Z"
+      "last_updated": "2026-06-14T17:25:38.483Z"
     },
     {
       "symbol": "MSTR",
@@ -1099,7 +1099,7 @@
       "volume_ratio": null,
       "added_date": "2026-06-09",
       "is_new": true,
-      "last_updated": "2026-06-14T16:15:40.109Z"
+      "last_updated": "2026-06-14T17:25:38.483Z"
     },
     {
       "symbol": "PANW",
@@ -1117,7 +1117,7 @@
       "volume_ratio": null,
       "added_date": "2026-06-10",
       "is_new": true,
-      "last_updated": "2026-06-14T16:15:40.109Z"
+      "last_updated": "2026-06-14T17:25:38.483Z"
     },
     {
       "symbol": "AVGO",
@@ -1135,7 +1135,7 @@
       "volume_ratio": null,
       "added_date": "2026-06-11",
       "is_new": true,
-      "last_updated": "2026-06-14T16:15:40.109Z"
+      "last_updated": "2026-06-14T17:25:38.483Z"
     },
     {
       "symbol": "SMCI",
@@ -1153,7 +1153,7 @@
       "volume_ratio": null,
       "added_date": "2026-06-12",
       "is_new": true,
-      "last_updated": "2026-06-14T16:15:40.109Z"
+      "last_updated": "2026-06-14T17:25:38.483Z"
     },
     {
       "symbol": "DDOG",
@@ -1171,7 +1171,7 @@
       "volume_ratio": null,
       "added_date": "2026-06-12",
       "is_new": true,
-      "last_updated": "2026-06-14T16:15:40.109Z"
+      "last_updated": "2026-06-14T17:25:38.483Z"
     }
   ],
   "macro_status": {
@@ -1194,12 +1194,12 @@
   },
   "system_status": {
     "last_scan": "2026-06-14T13:52:16.272Z",
-    "last_eval": "2026-06-14T16:15:21.783Z",
+    "last_eval": "2026-06-14T17:25:18.643Z",
     "market_status": "weekend",
     "bot_version": "2.0.0",
     "trades_json_version": 2,
     "data_health": {
-      "timestamp": "2026-06-14T16:15:40.110Z",
+      "timestamp": "2026-06-14T17:25:38.484Z",
       "crumb_auth": true,
       "price_data": {
         "total": 1,
