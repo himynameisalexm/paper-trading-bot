@@ -1,5 +1,143 @@
 [
   {
+    "date": "2026-06-15",
+    "timestamp": "2026-06-15T16:23:58.206Z",
+    "rule_issues": [],
+    "assessment": "Watchlist quality is currently poor due to widespread unavailable price data for most symbols, limiting actionable signals. The only active symbol, BTC, is deeply oversold with low volume, suggesting weak momentum and limited setup opportunities in the near term.",
+    "market_regime_note": "AI/tech sector momentum appears subdued, with thin trading volumes and no clear breakout candidates, reducing the frequency of high-confidence setups.",
+    "flags": [
+      "Widespread price data unavailability for 10/13 watchlist symbols — check API/data feed health.",
+      "BTC is the only symbol with data but shows no immediate setup; risk of prolonged consolidation."
+    ],
+    "changes_applied": [
+      {
+        "action": "REMOVE",
+        "symbol": "CRWD",
+        "reason": "Price data unavailable in recent scans, no confidence score or entry signal generated."
+      },
+      {
+        "action": "REMOVE",
+        "symbol": "TSM",
+        "reason": "Price data unavailable, poor trade history (1 loss, -4.42%)."
+      },
+      {
+        "action": "ADD",
+        "symbol": "ARM",
+        "reason": "High-liquidity AI/tech leader with strong institutional coverage, frequent volatility, and clear sector relevance."
+      },
+      {
+        "action": "ADD",
+        "symbol": "SNOW",
+        "reason": "Cloud/AI data play with high volatility, active options market, and strong institutional interest."
+      }
+    ],
+    "watchlist_after": [
+      "NVDA",
+      "META",
+      "MSFT",
+      "BTC",
+      "AMD",
+      "ASML",
+      "MSTR",
+      "PANW",
+      "AVGO",
+      "SMCI",
+      "DDOG",
+      "ARM",
+      "SNOW"
+    ],
+    "symbol_notes": {
+      "NVDA": "Price data unavailable — no analysis possible.",
+      "META": "Price data unavailable — no analysis possible.",
+      "MSFT": "Price data unavailable — no analysis possible.",
+      "BTC": "Deeply oversold (RSI 26.4) but lacks volume conviction; monitor for bounce or further weakness.",
+      "ARM": "Potential momentum breakout candidate if price data becomes available; high-beta AI/tech play.",
+      "SNOW": "Cloud data leader with frequent 5%+ daily ranges; fits oversold bounce/momentum strategies."
+    },
+    "data_health": {
+      "no_price_data": [
+        "NVDA",
+        "META",
+        "MSFT",
+        "TSM",
+        "AMD"
+      ],
+      "no_confidence_score": [
+        "NVDA",
+        "META",
+        "MSFT",
+        "TSM",
+        "CRWD",
+        "AMD"
+      ]
+    },
+    "performance_snapshot": {
+      "BTC": {
+        "trades": 13,
+        "wins": 4,
+        "losses": 9,
+        "win_rate": 31,
+        "avg_pnl_pct": -0.59
+      },
+      "COIN": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.52
+      },
+      "ETH": {
+        "trades": 6,
+        "wins": 3,
+        "losses": 2,
+        "win_rate": 60,
+        "avg_pnl_pct": 0.05
+      },
+      "META": {
+        "trades": 6,
+        "wins": 4,
+        "losses": 2,
+        "win_rate": 67,
+        "avg_pnl_pct": 0.63
+      },
+      "GOOGL": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.8
+      },
+      "TSM": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -4.42
+      },
+      "ARM": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -1.66
+      },
+      "ASML": {
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_rate": 100,
+        "avg_pnl_pct": 6.28
+      },
+      "CRWD": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -1.32
+      }
+    }
+  },
+  {
     "date": "2026-06-12",
     "timestamp": "2026-06-12T14:18:25.491Z",
     "rule_issues": [],
