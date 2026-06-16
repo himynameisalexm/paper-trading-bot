@@ -1046,16 +1046,16 @@
     },
     {
       "symbol": "BTC",
-      "current_price": 65635.27,
+      "current_price": 65703.6,
       "confidence": 6.2,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
       "reason": "RSI 46.6 is neutral, and volume at 0.87x is below average. Price is well below the 50-day MA ($73,438), a major resistance level. Macro gate is green, but BTC lacks a strong catalyst. Bull case: consolidation could lead to a bounce; bear case: further drift without volume. Not entering: confidence 6.2 due to neutral RSI and weak price action.",
       "last_updated": "2026-06-16T21:43:29.142Z",
-      "rsi": 46.6,
+      "rsi": 46.8,
       "change_pct": 0,
-      "volume_ratio": 0.87,
+      "volume_ratio": 0.78,
       "stop_loss": null,
       "profit_target": null,
       "technical_setup": "RSI 46.6, below MA50, vol 0.87x",
@@ -1231,7 +1231,7 @@
     "qqq_above_ma": true,
     "vix": 16.41,
     "vix_below_25": true,
-    "timestamp": "2026-06-16T21:42:42.177Z",
+    "timestamp": "2026-06-16T22:11:38.736Z",
     "gate_pass": true
   },
   "performance_metrics": {
@@ -1247,12 +1247,12 @@
   },
   "system_status": {
     "last_scan": "2026-06-16T16:43:36.729Z",
-    "last_eval": "2026-06-16T21:42:42.315Z",
+    "last_eval": "2026-06-16T22:11:38.933Z",
     "market_status": "closed",
     "bot_version": "2.0.0",
     "trades_json_version": 2,
     "data_health": {
-      "timestamp": "2026-06-16T21:43:29.143Z",
+      "timestamp": "2026-06-16T22:13:39.056Z",
       "crumb_auth": true,
       "price_data": {
         "total": 13,
