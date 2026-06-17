@@ -11,13 +11,13 @@
     "BTC",
     "AMD",
     "ASML",
-    "MSTR",
     "PANW",
     "DDOG",
     "ARM",
-    "SNOW",
     "CRWD",
-    "MDB"
+    "MDB",
+    "SMCI",
+    "AVGO"
   ],
   "trading_rules": {
     "min_confidence": 7,
