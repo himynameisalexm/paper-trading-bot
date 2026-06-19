@@ -10,14 +10,14 @@
     "MSFT",
     "BTC",
     "AMD",
-    "ASML",
     "PANW",
     "DDOG",
     "ARM",
     "MDB",
     "AVGO",
     "TSLA",
-    "SNOW"
+    "CRWD",
+    "SMCI"
   ],
   "trading_rules": {
     "min_confidence": 7,
