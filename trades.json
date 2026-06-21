@@ -4,39 +4,19 @@
     "total_account_value": 20322.65,
     "daily_trading_capital": 5000,
     "daily_trading_used": 0,
-    "current_cash": 18046.25,
-    "open_positions_value": 2276.4,
-    "realized_pnl": 0,
-    "unrealized_pnl": -0.18,
+    "current_cash": 20322.65,
+    "open_positions_value": 0,
+    "realized_pnl": -0.18,
+    "unrealized_pnl": 0,
     "total_pnl": -0.18,
-    "trades_closed": 0,
-    "trades_open": 1,
+    "trades_closed": 1,
+    "trades_open": 0,
     "win_rate": 0,
     "wins": 0,
-    "losses": 0,
+    "losses": 1,
     "break_even": 0
   },
-  "open_positions": [
-    {
-      "id": "trade_1781801884925_MSFT",
-      "symbol": "MSFT",
-      "entry_price": 379.43,
-      "entry_date": "2026-06-18T16:57:13.299Z",
-      "entry_reason": "RSI 18.6 is deeply oversold, a high-priority bounce candidate, and volume at 0.79x is below average but expected in oversold conditions. Price is well below the 50-day MA ($412.98), which is now resistance, but the extreme RSI provides a strong edge. QQQ macro gate is green, and MSFT’s AI leadership remains a tailwind. Bull case: deep oversold bounce to the 5% target; bear case: sustained weakness could test lower support. Entering at confidence 7.8 — deep oversold RSI with sector tailwinds.",
-      "thesis": "RSI 18.6 is deeply oversold, a high-priority bounce candidate, and volume at 0.79x is below average but expected in oversold conditions. Price is well below the 50-day MA ($412.98), which is now resistance, but the extreme RSI provides a strong edge. QQQ macro gate is green, and MSFT’s AI leadership remains a tailwind. Bull case: deep oversold bounce to the 5% target; bear case: sustained weakness could test lower support. Entering at confidence 7.8 — deep oversold RSI with sector tailwinds.",
-      "shares": 6,
-      "current_price": 379.4,
-      "stop_loss": 369.94,
-      "profit_target": 398.4,
-      "confidence": 7.8,
-      "priority": 3,
-      "rsi_at_entry": 18.6,
-      "volume_ratio_at_entry": 0.79,
-      "earnings_days_away": null,
-      "macro_gate_pass": true,
-      "session_date": "2026-06-18"
-    }
-  ],
+  "open_positions": [],
   "closed_trades": [
     {
       "id": "pos_btc_20260413",
@@ -667,6 +647,20 @@
       "entry_reason": "RSI 50.5 is neutral but volume at 0.39x is thin — however, price is above the 50-day MA ($405.12), providing support. Macro gate is green, and AMD has a recent Citigroup upgrade (Neutral→Buy↑ on Jun 12) as a catalyst. Bull case: sector rotation and upgrade momentum drive to the 5% target; bear case: thin volume risks a pullback below MA50. Entering at confidence 7.0 — catalyst present, macro green.",
       "exit_reason": "Max hold reached (3.0 days)",
       "session_date": "2026-06-20"
+    },
+    {
+      "id": "trade_1781801884925_MSFT",
+      "symbol": "MSFT",
+      "entry_price": 379.43,
+      "exit_price": 379.4,
+      "shares": 6,
+      "realized_pnl": -0.18,
+      "realized_pnl_percent": -0.01,
+      "entry_date": "2026-06-18T16:57:13.299Z",
+      "exit_date": "2026-06-21T17:44:22.300Z",
+      "entry_reason": "RSI 18.6 is deeply oversold, a high-priority bounce candidate, and volume at 0.79x is below average but expected in oversold conditions. Price is well below the 50-day MA ($412.98), which is now resistance, but the extreme RSI provides a strong edge. QQQ macro gate is green, and MSFT’s AI leadership remains a tailwind. Bull case: deep oversold bounce to the 5% target; bear case: sustained weakness could test lower support. Entering at confidence 7.8 — deep oversold RSI with sector tailwinds.",
+      "exit_reason": "Max hold reached (3.0 days)",
+      "session_date": "2026-06-21"
     }
   ],
   "daily_sessions": [
@@ -1039,8 +1033,8 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and moving averages cannot be assessed. Macro gate is closed, so entry is blocked regardless.",
-      "last_updated": "2026-06-21T16:24:04.964Z",
+      "reason": "Price data unavailable — no recommendation made.",
+      "last_updated": "2026-06-21T17:44:38.609Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
@@ -1057,8 +1051,8 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and moving averages cannot be assessed. Macro gate is closed, so entry is blocked regardless.",
-      "last_updated": "2026-06-21T16:24:04.964Z",
+      "reason": "Price data unavailable — no recommendation made.",
+      "last_updated": "2026-06-21T17:44:38.609Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
@@ -1071,36 +1065,36 @@
     {
       "symbol": "MSFT",
       "current_price": 379.4,
-      "confidence": 4.5,
+      "confidence": 5,
       "entry_signal": false,
       "entry_target": null,
       "priority": 3,
-      "reason": "RSI 18.6 is deeply oversold, but volume at 1.71x signals institutional selling pressure — not a typical bounce setup. Price is $33 below the 50-day MA ($412.98), a major resistance level, and no 200-day MA data is available for structural support. Macro gate is closed (QQQ below MA50), blocking new entries. Bull case: extreme oversold could spark a dead-cat bounce; bear case: trend remains down with no catalyst to reverse. Not entering: macro gate closed, trend weak, confidence 4.5.",
-      "last_updated": "2026-06-21T16:24:04.964Z",
+      "reason": "RSI 18.6 is deeply oversold, but volume at 1.71x shows institutional participation — a potential bounce setup. However, price is $33 below the 50-day MA ($412.98), which is now strong resistance, and no MA200 data is available. Macro gate is red (QQQ below MA50, VIX high), blocking any new entries. Bull case: oversold bounce could retest $390; bear case: downtrend continues below $370. Not entering: macro gate failure, confidence 5.0.",
+      "last_updated": "2026-06-21T17:44:38.609Z",
       "rsi": 18.6,
       "change_pct": 0,
       "volume_ratio": 1.71,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "RSI 18.6 (deep oversold), below MA50 $412.98, vol 1.71x",
+      "technical_setup": "RSI 18.6 (deep oversold), below MA50 $412.98, volume ratio 1.71x",
       "added_date": "2026-04-01",
       "is_new": false
     },
     {
       "symbol": "BTC",
-      "current_price": 64150.23,
-      "confidence": 3,
+      "current_price": 64034.56,
+      "confidence": 4.5,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
-      "reason": "RSI 54 is neutral with no directional edge, and volume at 0.57x confirms thin trading with no institutional conviction. Price is $7,966 below the 50-day MA ($72,116.89), a major resistance level, and no 200-day MA data is available. Macro gate is closed (QQQ below MA50), and negative news headlines (holder selling, price weakness) further weigh on sentiment. Bull case: micro-transaction uptick could spark a short-term bounce; bear case: trend remains down with no catalyst to reverse. Not entering: macro gate closed, weak trend, confidence 3.0.",
-      "last_updated": "2026-06-21T16:24:04.964Z",
-      "rsi": 54,
+      "reason": "RSI 53.4 is neutral with no directional edge, and volume at 0.55x signals thin trading — no institutional conviction. Price is $8,080 below the 50-day MA ($72,114.58), which is now distant resistance, and no MA200 data is available. Macro gate is red (QQQ below MA50, VIX high), and recent news is mixed (bottom speculation vs. holder selling). Bull case: rebound to $66k if macro improves; bear case: drift to $60k on weak volume. Not entering: macro gate failure, low volume, confidence 4.5.",
+      "last_updated": "2026-06-21T17:44:38.609Z",
+      "rsi": 53.4,
       "change_pct": 0,
-      "volume_ratio": 0.57,
+      "volume_ratio": 0.55,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "RSI 54 (neutral), below MA50 $72,116.89, vol 0.57x",
+      "technical_setup": "RSI 53.4, below MA50 $72,114.58, volume ratio 0.55x",
       "added_date": "2026-04-01",
       "is_new": false
     },
@@ -1113,14 +1107,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and moving averages cannot be assessed. Macro gate is closed, so entry is blocked regardless.",
+      "reason": "Price data unavailable — no recommendation made.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-06-05",
       "is_new": false,
-      "last_updated": "2026-06-21T16:24:04.964Z"
+      "last_updated": "2026-06-21T17:44:38.609Z"
     },
     {
       "symbol": "PANW",
@@ -1131,14 +1125,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and moving averages cannot be assessed. Macro gate is closed, so entry is blocked regardless.",
+      "reason": "Price data unavailable — no recommendation made.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-06-10",
       "is_new": false,
-      "last_updated": "2026-06-21T16:24:04.964Z"
+      "last_updated": "2026-06-21T17:44:38.609Z"
     },
     {
       "symbol": "DDOG",
@@ -1149,14 +1143,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and moving averages cannot be assessed. Macro gate is closed, so entry is blocked regardless.",
+      "reason": "Price data unavailable — no recommendation made.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-06-12",
       "is_new": false,
-      "last_updated": "2026-06-21T16:24:04.964Z"
+      "last_updated": "2026-06-21T17:44:38.609Z"
     },
     {
       "symbol": "ARM",
@@ -1167,14 +1161,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and moving averages cannot be assessed. Macro gate is closed, so entry is blocked regardless.",
+      "reason": "Price data unavailable — no recommendation made.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-06-15",
       "is_new": true,
-      "last_updated": "2026-06-21T16:24:04.964Z"
+      "last_updated": "2026-06-21T17:44:38.609Z"
     },
     {
       "symbol": "MDB",
@@ -1185,14 +1179,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and moving averages cannot be assessed. Macro gate is closed, so entry is blocked regardless.",
+      "reason": "Price data unavailable — no recommendation made.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-06-16",
       "is_new": true,
-      "last_updated": "2026-06-21T16:24:04.964Z"
+      "last_updated": "2026-06-21T17:44:38.609Z"
     },
     {
       "symbol": "AVGO",
@@ -1203,14 +1197,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and moving averages cannot be assessed. Macro gate is closed, so entry is blocked regardless.",
+      "reason": "Price data unavailable — no recommendation made.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-06-17",
       "is_new": true,
-      "last_updated": "2026-06-21T16:24:04.964Z"
+      "last_updated": "2026-06-21T17:44:38.609Z"
     },
     {
       "symbol": "TSLA",
@@ -1221,14 +1215,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and moving averages cannot be assessed. Macro gate is closed, so entry is blocked regardless.",
+      "reason": "Price data unavailable — no recommendation made.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-06-18",
       "is_new": true,
-      "last_updated": "2026-06-21T16:24:04.964Z"
+      "last_updated": "2026-06-21T17:44:38.609Z"
     },
     {
       "symbol": "CRWD",
@@ -1239,14 +1233,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and moving averages cannot be assessed. Macro gate is closed, so entry is blocked regardless.",
+      "reason": "Price data unavailable — no recommendation made.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-06-19",
       "is_new": true,
-      "last_updated": "2026-06-21T16:24:04.964Z"
+      "last_updated": "2026-06-21T17:44:38.609Z"
     },
     {
       "symbol": "SMCI",
@@ -1257,14 +1251,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and moving averages cannot be assessed. Macro gate is closed, so entry is blocked regardless.",
+      "reason": "Price data unavailable — no recommendation made.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-06-19",
       "is_new": true,
-      "last_updated": "2026-06-21T16:24:04.964Z"
+      "last_updated": "2026-06-21T17:44:38.609Z"
     }
   ],
   "macro_status": {
@@ -1287,12 +1281,12 @@
   },
   "system_status": {
     "last_scan": "2026-06-21T13:59:04.715Z",
-    "last_eval": "2026-06-21T16:23:44.367Z",
+    "last_eval": "2026-06-21T17:44:22.300Z",
     "market_status": "weekend",
     "bot_version": "2.0.0",
     "trades_json_version": 2,
     "data_health": {
-      "timestamp": "2026-06-21T16:24:04.965Z",
+      "timestamp": "2026-06-21T17:44:38.610Z",
       "crumb_auth": true,
       "price_data": {
         "total": 1,
