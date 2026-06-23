@@ -1,5 +1,142 @@
 [
   {
+    "date": "2026-06-23",
+    "timestamp": "2026-06-23T13:57:54.511Z",
+    "rule_issues": [],
+    "assessment": "Watchlist quality is strong with multiple high-confidence oversold bounce candidates (MSFT, DDOG, MDB, CRWD). Current setups align well with the bot's strategy, though some symbols show thin volume or neutral RSI, limiting immediate opportunities.",
+    "market_regime_note": "AI/tech sector is exhibiting mixed momentum with pockets of extreme oversold conditions, increasing bounce setup frequency but requiring strict volume confirmation.",
+    "flags": [],
+    "changes_applied": [
+      {
+        "action": "REMOVE",
+        "symbol": "ARM",
+        "reason": "Consistently neutral RSI (49.8) and low volume (0.64x) with no entry signals or trade history wins."
+      },
+      {
+        "action": "REMOVE",
+        "symbol": "PANW",
+        "reason": "Neutral RSI (41) and thin volume (0.77x) with no trade history or entry signals."
+      },
+      {
+        "action": "ADD",
+        "symbol": "SNOW",
+        "reason": "High-liquidity AI/tech cloud leader with frequent 5%+ daily ranges and strong institutional coverage."
+      },
+      {
+        "action": "ADD",
+        "symbol": "ASML",
+        "reason": "Critical AI/tech semiconductor equipment supplier with high volatility and institutional participation."
+      }
+    ],
+    "watchlist_after": [
+      "NVDA",
+      "META",
+      "MSFT",
+      "BTC",
+      "AMD",
+      "DDOG",
+      "MDB",
+      "AVGO",
+      "TSLA",
+      "CRWD",
+      "SMCI",
+      "SNOW",
+      "ASML"
+    ],
+    "symbol_notes": {
+      "NVDA": "Oversold RSI (38.2) but weak volume (0.71x) limits bounce confidence; monitor for volume spike.",
+      "MSFT": "Deeply oversold (RSI 9.3) with acceptable volume (1.15x); high-priority bounce candidate.",
+      "DDOG": "Extreme oversold (RSI 13.2) with entry signal; thin volume (0.80x) but acceptable for setup.",
+      "MDB": "Deeply oversold (RSI 24) with strong volume (1.33x); high-confidence bounce setup.",
+      "CRWD": "Deeply oversold (RSI 26.9) with near-average volume (1.03x); high-priority candidate.",
+      "BTC": "Neutral RSI (54.4) with average volume (1.12x); no edge currently.",
+      "META": "Neutral RSI (40) with thin volume (0.78x); no directional edge."
+    },
+    "data_health": {
+      "no_price_data": [],
+      "no_confidence_score": []
+    },
+    "performance_snapshot": {
+      "BTC": {
+        "trades": 14,
+        "wins": 5,
+        "losses": 9,
+        "win_rate": 36,
+        "avg_pnl_pct": -0.22
+      },
+      "COIN": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.52
+      },
+      "ETH": {
+        "trades": 6,
+        "wins": 3,
+        "losses": 2,
+        "win_rate": 60,
+        "avg_pnl_pct": 0.05
+      },
+      "META": {
+        "trades": 6,
+        "wins": 4,
+        "losses": 2,
+        "win_rate": 67,
+        "avg_pnl_pct": 0.63
+      },
+      "GOOGL": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.8
+      },
+      "TSM": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -4.42
+      },
+      "ARM": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -1.66
+      },
+      "ASML": {
+        "trades": 4,
+        "wins": 2,
+        "losses": 2,
+        "win_rate": 50,
+        "avg_pnl_pct": 1.23
+      },
+      "CRWD": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -1.32
+      },
+      "AMD": {
+        "trades": 3,
+        "wins": 1,
+        "losses": 2,
+        "win_rate": 33,
+        "avg_pnl_pct": -1.52
+      },
+      "MSFT": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -0.01
+      }
+    }
+  },
+  {
     "date": "2026-06-22",
     "timestamp": "2026-06-22T16:09:28.418Z",
     "rule_issues": [],
