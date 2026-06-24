@@ -1076,7 +1076,7 @@
       "last_updated": "2026-06-24T20:51:35.394Z",
       "rsi": 38.2,
       "change_pct": 0,
-      "volume_ratio": 0.83,
+      "volume_ratio": 0.97,
       "stop_loss": null,
       "profit_target": null,
       "technical_setup": "RSI 38.2, below MA50 $210.23, vol 0.83x",
@@ -1121,16 +1121,16 @@
     },
     {
       "symbol": "BTC",
-      "current_price": 60909.95,
+      "current_price": 60793.18,
       "confidence": 6.8,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
       "reason": "RSI 48.1 is neutral with volume at 1.62x — strong institutional flow but no directional edge. Price is $10k below the 50-day MA ($71k), now resistance; macro gate is green but BTC is underperforming stocks today. Bull case: reclaim $62k sets up a run to $65k; bear case: drift below $60k risks a move to $58k. Not entering: neutral RSI, no catalyst, confidence 6.8.",
       "last_updated": "2026-06-24T20:51:35.394Z",
-      "rsi": 48.1,
+      "rsi": 47.7,
       "change_pct": 0,
-      "volume_ratio": 1.62,
+      "volume_ratio": 1.65,
       "stop_loss": null,
       "profit_target": null,
       "technical_setup": "RSI 48.1, below MA50 $71k, vol 1.62x",
@@ -1168,7 +1168,7 @@
       "technical_setup": "RSI 23.4, above MA50 $192.86, vol 0.36x",
       "rsi": 23.4,
       "change_pct": 0,
-      "volume_ratio": 0.36,
+      "volume_ratio": 0.45,
       "added_date": "2026-06-12",
       "is_new": false,
       "last_updated": "2026-06-24T20:51:35.394Z"
@@ -1204,7 +1204,7 @@
       "technical_setup": "RSI 30, below MA50 $412.64, vol 0.73x",
       "rsi": 30,
       "change_pct": 0,
-      "volume_ratio": 0.73,
+      "volume_ratio": 0.81,
       "added_date": "2026-06-17",
       "is_new": false,
       "last_updated": "2026-06-24T20:51:35.394Z"
@@ -1240,7 +1240,7 @@
       "technical_setup": "RSI 34.9, above MA50 $185.71, vol 0.67x",
       "rsi": 34.9,
       "change_pct": 0,
-      "volume_ratio": 0.67,
+      "volume_ratio": 0.68,
       "added_date": "2026-06-23",
       "is_new": true,
       "last_updated": "2026-06-24T20:51:35.394Z"
@@ -1258,7 +1258,7 @@
       "technical_setup": "RSI 51.9, above MA50 $1600.86, vol 0.79x",
       "rsi": 51.9,
       "change_pct": 0,
-      "volume_ratio": 0.79,
+      "volume_ratio": 0.8,
       "added_date": "2026-06-23",
       "is_new": true,
       "last_updated": "2026-06-24T20:51:35.394Z"
@@ -1276,7 +1276,7 @@
       "technical_setup": "RSI 42.6, above MA50 $278.07, vol 0.58x",
       "rsi": 42.6,
       "change_pct": 0,
-      "volume_ratio": 0.58,
+      "volume_ratio": 0.61,
       "added_date": "2026-06-24",
       "is_new": true,
       "last_updated": "2026-06-24T20:51:35.394Z"
@@ -1294,7 +1294,7 @@
       "technical_setup": "RSI 53.6, above MA50 $232.13, vol 0.63x",
       "rsi": 53.6,
       "change_pct": 0,
-      "volume_ratio": 0.63,
+      "volume_ratio": 0.67,
       "added_date": "2026-06-24",
       "is_new": true,
       "last_updated": "2026-06-24T20:51:35.394Z"
@@ -1306,7 +1306,7 @@
     "qqq_above_ma": true,
     "vix": 18.63,
     "vix_below_25": true,
-    "timestamp": "2026-06-24T20:49:39.246Z",
+    "timestamp": "2026-06-24T21:22:00.708Z",
     "gate_pass": true
   },
   "performance_metrics": {
@@ -1322,12 +1322,12 @@
   },
   "system_status": {
     "last_scan": "2026-06-24T14:22:06.968Z",
-    "last_eval": "2026-06-24T20:49:39.423Z",
+    "last_eval": "2026-06-24T21:22:00.855Z",
     "market_status": "closed",
     "bot_version": "2.0.0",
     "trades_json_version": 2,
     "data_health": {
-      "timestamp": "2026-06-24T20:51:35.396Z",
+      "timestamp": "2026-06-24T21:24:00.962Z",
       "crumb_auth": true,
       "price_data": {
         "total": 13,
