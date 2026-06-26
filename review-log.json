@@ -1,5 +1,148 @@
 [
   {
+    "date": "2026-06-26",
+    "timestamp": "2026-06-26T13:27:18.359Z",
+    "rule_issues": [],
+    "assessment": "Watchlist quality is strong with multiple oversold AI/tech leaders showing institutional accumulation signals. Current setup frequency is elevated due to broad sector weakness creating high-confidence bounce candidates, though liquidity remains thin for some symbols.",
+    "market_regime_note": "AI/tech sector is in a corrective phase with elevated oversold conditions, increasing the likelihood of short-term bounces but requiring tight risk management due to volatility.",
+    "flags": [],
+    "changes_applied": [
+      {
+        "action": "REMOVE",
+        "symbol": "AVGO",
+        "reason": "Consistently neutral RSI (39.2) with weak volume (0.63x) and no trade history despite being on watchlist"
+      },
+      {
+        "action": "REMOVE",
+        "symbol": "SMCI",
+        "reason": "Extremely thin volume (0.44x) and poor liquidity make it unsuitable for 3-day hold strategy"
+      },
+      {
+        "action": "ADD",
+        "symbol": "ARM",
+        "reason": "High institutional coverage, strong AI/tech thesis, and typically high volatility (5%+ daily range) with active options market"
+      },
+      {
+        "action": "ADD",
+        "symbol": "ASML",
+        "reason": "Critical AI/tech supply chain player with strong liquidity and institutional interest, fitting oversold bounce strategy"
+      }
+    ],
+    "watchlist_after": [
+      "NVDA",
+      "META",
+      "MSFT",
+      "BTC",
+      "AMD",
+      "DDOG",
+      "MDB",
+      "CRWD",
+      "SNOW",
+      "PANW",
+      "MSTR",
+      "ARM",
+      "ASML"
+    ],
+    "symbol_notes": {
+      "NVDA": "Oversold but weak volume suggests caution; needs confirmation before entry",
+      "META": "Deeply oversold with thin volume; high-confidence bounce candidate",
+      "MSFT": "Extremely oversold with institutional accumulation; highest confidence setup",
+      "BTC": "Oversold with strong volume; short-squeeze potential aligns with strategy",
+      "MDB": "Extremely oversold with thin volume; watch for volume confirmation",
+      "MSTR": "Deeply oversold with strong institutional volume; high-confidence crypto proxy play",
+      "DDOG": "Open position; monitor for volume confirmation despite weak institutional interest",
+      "AMD": "Neutral with weak volume; no clear catalyst",
+      "CRWD": "Neutral with thin volume; stock split chatter not sufficient for entry",
+      "SNOW": "Oversold but thin volume; needs stronger catalyst",
+      "PANW": "Neutral with decent volume; no clear momentum signal",
+      "AVGO": "Neutral with weak volume; no trade history or catalyst",
+      "SMCI": "Oversold but extremely thin volume; unsuitable for strategy"
+    },
+    "data_health": {
+      "no_price_data": [],
+      "no_confidence_score": []
+    },
+    "performance_snapshot": {
+      "BTC": {
+        "trades": 14,
+        "wins": 5,
+        "losses": 9,
+        "win_rate": 36,
+        "avg_pnl_pct": -0.22
+      },
+      "COIN": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.52
+      },
+      "ETH": {
+        "trades": 6,
+        "wins": 3,
+        "losses": 2,
+        "win_rate": 60,
+        "avg_pnl_pct": 0.05
+      },
+      "META": {
+        "trades": 6,
+        "wins": 4,
+        "losses": 2,
+        "win_rate": 67,
+        "avg_pnl_pct": 0.63
+      },
+      "GOOGL": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.8
+      },
+      "TSM": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -4.42
+      },
+      "ARM": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -1.66
+      },
+      "ASML": {
+        "trades": 4,
+        "wins": 2,
+        "losses": 2,
+        "win_rate": 50,
+        "avg_pnl_pct": 1.23
+      },
+      "CRWD": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -1.32
+      },
+      "AMD": {
+        "trades": 3,
+        "wins": 1,
+        "losses": 2,
+        "win_rate": 33,
+        "avg_pnl_pct": -1.52
+      },
+      "MSFT": {
+        "trades": 2,
+        "wins": 0,
+        "losses": 2,
+        "win_rate": 0,
+        "avg_pnl_pct": -2.42
+      }
+    }
+  },
+  {
     "date": "2026-06-25",
     "timestamp": "2026-06-25T13:33:15.951Z",
     "rule_issues": [],
