@@ -1089,8 +1089,8 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red, so even with data, no entry would be possible.",
-      "last_updated": "2026-06-28T17:20:11.513Z",
+      "reason": "Price data unavailable — no analysis possible. Without current price, RSI, volume, or moving averages, no technical assessment can be made.",
+      "last_updated": "2026-06-28T17:59:07.770Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
@@ -1107,8 +1107,8 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red, so even with data, no entry would be possible.",
-      "last_updated": "2026-06-28T17:20:11.513Z",
+      "reason": "Price data unavailable — no analysis possible. Critical fields (price, RSI, volume, moving averages) are missing, preventing any trade decision.",
+      "last_updated": "2026-06-28T17:59:07.770Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
@@ -1125,8 +1125,8 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red, so even with data, no entry would be possible.",
-      "last_updated": "2026-06-28T17:20:11.513Z",
+      "reason": "Price data unavailable — no analysis possible. Without current price or technical indicators, no trade thesis can be constructed.",
+      "last_updated": "2026-06-28T17:59:07.770Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
@@ -1138,19 +1138,19 @@
     },
     {
       "symbol": "BTC",
-      "current_price": 59537.77,
+      "current_price": 59507.82,
       "confidence": 6.5,
       "entry_signal": false,
       "entry_target": null,
       "priority": 3,
-      "reason": "RSI 24.4 is deeply oversold, suggesting a potential bounce, but volume at 0.54x signals thin trading with no institutional conviction. Price is well below the 50-day MA ($69,403), which is now strong resistance — a reclaim with volume would be the setup trigger. Macro gate is red (QQQ below MA50, VIX unknown/high), blocking any new entries. Bull case: short-squeeze or weak demand relief could spark a bounce; bear case: continued drift below $60K risks a leg to $55K. Not entering: macro gate red, volume below minimum, confidence 6.5.",
-      "last_updated": "2026-06-28T17:20:11.513Z",
-      "rsi": 24.4,
+      "reason": "RSI 24.3 is deeply oversold, suggesting a potential bounce, but volume at 0.54x signals thin trading with no institutional conviction. Price is well below the 50-day MA ($69,403), which is now acting as strong resistance — a reclaim would be needed for a bullish setup. Macro gate is red (QQQ below MA50, VIX assumed high), blocking new entries despite the oversold condition. Bull case: a relief bounce could target $61,500 if volume improves; bear case: continued drift toward $58,000 on weak demand. Not entering: macro gate red, volume too low, confidence 6.5 below threshold.",
+      "last_updated": "2026-06-28T17:59:07.770Z",
+      "rsi": 24.3,
       "change_pct": 0,
       "volume_ratio": 0.54,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "RSI 24.4, below MA50 $69,403, volume ratio 0.54x",
+      "technical_setup": "RSI 24.3 (deep oversold), below MA50 $69,403, volume ratio 0.54x",
       "added_date": "2026-04-01",
       "is_new": false
     },
@@ -1163,14 +1163,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red, so even with data, no entry would be possible.",
+      "reason": "Price data unavailable — no analysis possible. Critical technical fields are missing, preventing any trade assessment.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-06-05",
       "is_new": false,
-      "last_updated": "2026-06-28T17:20:11.513Z"
+      "last_updated": "2026-06-28T17:59:07.770Z"
     },
     {
       "symbol": "DDOG",
@@ -1181,14 +1181,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red, so even with data, no entry would be possible.",
+      "reason": "Price data unavailable — no analysis possible. Without current price or technical indicators, no trade decision can be made.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-06-12",
       "is_new": false,
-      "last_updated": "2026-06-28T17:20:11.513Z"
+      "last_updated": "2026-06-28T17:59:07.770Z"
     },
     {
       "symbol": "MDB",
@@ -1199,14 +1199,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red, so even with data, no entry would be possible.",
+      "reason": "Price data unavailable — no analysis possible. Missing data prevents any technical or macro assessment.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-06-16",
       "is_new": false,
-      "last_updated": "2026-06-28T17:20:11.513Z"
+      "last_updated": "2026-06-28T17:59:07.770Z"
     },
     {
       "symbol": "CRWD",
@@ -1217,14 +1217,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red, so even with data, no entry would be possible.",
+      "reason": "Price data unavailable — no analysis possible. Critical fields for trade evaluation are missing.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-06-19",
       "is_new": false,
-      "last_updated": "2026-06-28T17:20:11.513Z"
+      "last_updated": "2026-06-28T17:59:07.770Z"
     },
     {
       "symbol": "SNOW",
@@ -1235,14 +1235,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red, so even with data, no entry would be possible.",
+      "reason": "Price data unavailable — no analysis possible. No technical or macro data available for assessment.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-06-23",
       "is_new": true,
-      "last_updated": "2026-06-28T17:20:11.513Z"
+      "last_updated": "2026-06-28T17:59:07.770Z"
     },
     {
       "symbol": "PANW",
@@ -1253,14 +1253,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red, so even with data, no entry would be possible.",
+      "reason": "Price data unavailable — no analysis possible. Missing data prevents any trade thesis.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-06-24",
       "is_new": true,
-      "last_updated": "2026-06-28T17:20:11.513Z"
+      "last_updated": "2026-06-28T17:59:07.770Z"
     },
     {
       "symbol": "MSTR",
@@ -1271,14 +1271,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red, so even with data, no entry would be possible.",
+      "reason": "Price data unavailable — no analysis possible. No technical or macro data provided for evaluation.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-06-25",
       "is_new": true,
-      "last_updated": "2026-06-28T17:20:11.513Z"
+      "last_updated": "2026-06-28T17:59:07.770Z"
     },
     {
       "symbol": "ARM",
@@ -1289,14 +1289,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red, so even with data, no entry would be possible.",
+      "reason": "Price data unavailable — no analysis possible. Missing data prevents any trade assessment.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-06-26",
       "is_new": true,
-      "last_updated": "2026-06-28T17:20:11.513Z"
+      "last_updated": "2026-06-28T17:59:07.770Z"
     },
     {
       "symbol": "ASML",
@@ -1307,14 +1307,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red, so even with data, no entry would be possible.",
+      "reason": "Price data unavailable — no analysis possible. No technical or macro data available for analysis.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-06-26",
       "is_new": true,
-      "last_updated": "2026-06-28T17:20:11.513Z"
+      "last_updated": "2026-06-28T17:59:07.770Z"
     }
   ],
   "macro_status": {
@@ -1337,12 +1337,12 @@
   },
   "system_status": {
     "last_scan": "2026-06-28T13:26:28.273Z",
-    "last_eval": "2026-06-28T17:19:47.895Z",
+    "last_eval": "2026-06-28T17:58:42.843Z",
     "market_status": "weekend",
     "bot_version": "2.0.0",
     "trades_json_version": 2,
     "data_health": {
-      "timestamp": "2026-06-28T17:20:11.513Z",
+      "timestamp": "2026-06-28T17:59:07.770Z",
       "crumb_auth": true,
       "price_data": {
         "total": 1,
