@@ -1,5 +1,175 @@
 [
   {
+    "date": "2026-06-29",
+    "timestamp": "2026-06-29T14:55:44.915Z",
+    "rule_issues": [],
+    "assessment": "The current watchlist is severely limited by unavailable price data for most symbols, leaving only BTC as actionable. This restricts the bot's ability to capitalize on AI/tech momentum breakouts or oversold bounces. The watchlist requires urgent optimization to include symbols with reliable data and strong sector alignment.",
+    "market_regime_note": "AI/tech sector momentum remains volatile but skewed toward oversold conditions, increasing potential for short-term bounces in high-beta names.",
+    "flags": [
+      "12/13 symbols have unavailable price data — investigate API/data feed failure immediately.",
+      "BTC is the only actionable symbol; diversify watchlist to reduce concentration risk.",
+      "Candidate pool symbols (e.g., SMCI, AVGO) prioritized for high volatility and sector alignment."
+    ],
+    "changes_applied": [
+      {
+        "action": "REMOVE",
+        "symbol": "DDOG",
+        "reason": "Price data consistently unavailable; no entry signals generated despite single past win."
+      },
+      {
+        "action": "REMOVE",
+        "symbol": "MSTR",
+        "reason": "Price data unavailable; poor trade history (0W/1L) with outsized loss (-3.16%)."
+      },
+      {
+        "action": "ADD",
+        "symbol": "SMCI",
+        "reason": "High-volatility AI/tech play with strong liquidity, frequent 5%+ daily ranges, and clear sector leadership in AI infrastructure."
+      },
+      {
+        "action": "ADD",
+        "symbol": "AVGO",
+        "reason": "Broadcom's AI chip dominance, institutional coverage, and active options market align with bot's momentum/breakout focus."
+      }
+    ],
+    "watchlist_after": [
+      "NVDA",
+      "META",
+      "MSFT",
+      "BTC",
+      "AMD",
+      "MDB",
+      "CRWD",
+      "SNOW",
+      "PANW",
+      "ARM",
+      "ASML",
+      "SMCI",
+      "AVGO"
+    ],
+    "symbol_notes": {
+      "NVDA": "Price data unavailable — macro gate remains; monitor for restoration to assess breakout potential.",
+      "META": "Price data unavailable — no technical analysis possible; await data feed recovery.",
+      "MSFT": "Price data unavailable — no signals; critical to restore for cloud/AI exposure.",
+      "BTC": "Deeply oversold (RSI 24.4) with bounce potential; volume below average but typical for crypto consolidations.",
+      "SMCI": "High-beta AI infrastructure stock; ideal for momentum breakouts or oversold bounces if data becomes available.",
+      "AVGO": "Strong AI/tech thesis with institutional backing; liquidity and volatility fit bot parameters."
+    },
+    "data_health": {
+      "no_price_data": [
+        "NVDA",
+        "META",
+        "MSFT",
+        "AMD",
+        "DDOG",
+        "MDB",
+        "CRWD"
+      ],
+      "no_confidence_score": [
+        "NVDA",
+        "META",
+        "MSFT",
+        "AMD",
+        "DDOG",
+        "MDB",
+        "CRWD"
+      ]
+    },
+    "performance_snapshot": {
+      "BTC": {
+        "trades": 15,
+        "wins": 5,
+        "losses": 10,
+        "win_rate": 33,
+        "avg_pnl_pct": -0.21
+      },
+      "COIN": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.52
+      },
+      "ETH": {
+        "trades": 6,
+        "wins": 3,
+        "losses": 2,
+        "win_rate": 60,
+        "avg_pnl_pct": 0.05
+      },
+      "META": {
+        "trades": 6,
+        "wins": 4,
+        "losses": 2,
+        "win_rate": 67,
+        "avg_pnl_pct": 0.63
+      },
+      "GOOGL": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.8
+      },
+      "TSM": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -4.42
+      },
+      "ARM": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -1.66
+      },
+      "ASML": {
+        "trades": 4,
+        "wins": 2,
+        "losses": 2,
+        "win_rate": 50,
+        "avg_pnl_pct": 1.23
+      },
+      "CRWD": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -1.32
+      },
+      "AMD": {
+        "trades": 3,
+        "wins": 1,
+        "losses": 2,
+        "win_rate": 33,
+        "avg_pnl_pct": -1.52
+      },
+      "MSFT": {
+        "trades": 2,
+        "wins": 0,
+        "losses": 2,
+        "win_rate": 0,
+        "avg_pnl_pct": -2.42
+      },
+      "DDOG": {
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_rate": 100,
+        "avg_pnl_pct": 5.61
+      },
+      "MSTR": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -3.16
+      }
+    }
+  },
+  {
     "date": "2026-06-26",
     "timestamp": "2026-06-26T13:27:18.359Z",
     "rule_issues": [],
