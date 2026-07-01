@@ -1,41 +1,22 @@
 {
   "session": {
     "date": "2026-07-01",
-    "total_account_value": 20357.79,
+    "total_account_value": 20374.34,
     "daily_trading_capital": 5000,
-    "daily_trading_used": 2484.6,
-    "current_cash": 15388.06,
-    "open_positions_value": 4969.73,
-    "realized_pnl": 114.41,
-    "unrealized_pnl": -14.86,
-    "total_pnl": 99.55,
-    "trades_closed": 1,
-    "trades_open": 2,
+    "daily_trading_used": 0,
+    "current_cash": 17922.70112375,
+    "open_positions_value": 2451.64,
+    "realized_pnl": 149.06,
+    "unrealized_pnl": -32.96,
+    "total_pnl": 116.1,
+    "trades_closed": 2,
+    "trades_open": 1,
     "win_rate": 100,
-    "wins": 1,
+    "wins": 2,
     "losses": 0,
     "break_even": 0
   },
   "open_positions": [
-    {
-      "id": "trade_1782680445270_BTC",
-      "symbol": "BTC",
-      "entry_price": 59559.05,
-      "entry_date": "2026-06-28T21:00:09.830Z",
-      "entry_reason": "RSI 24.4 is deeply oversold, signaling strong potential for a bounce. Volume at 0.54x is below average, but this is typical in oversold conditions as sellers exhaust. Price is well below the 50-day MA ($69,404), which now acts as major resistance. Macro gate is red due to missing QQQ/VIX data, but the oversold RSI and short-squeeze potential (per CoinDesk news) provide a contrarian edge. Bull case: short-squeeze drives price to $63,728 target; bear case: continued weakness could test $57,479 stop. Entering at confidence 7.2 — oversold bounce setup with catalyst support.",
-      "thesis": "RSI 24.4 is deeply oversold, signaling strong potential for a bounce. Volume at 0.54x is below average, but this is typical in oversold conditions as sellers exhaust. Price is well below the 50-day MA ($69,404), which now acts as major resistance. Macro gate is red due to missing QQQ/VIX data, but the oversold RSI and short-squeeze potential (per CoinDesk news) provide a contrarian edge. Bull case: short-squeeze drives price to $63,728 target; bear case: continued weakness could test $57,479 stop. Entering at confidence 7.2 — oversold bounce setup with catalyst support.",
-      "shares": 0.041975,
-      "current_price": 59990.13,
-      "stop_loss": 57474.48,
-      "profit_target": 63728.18,
-      "confidence": 7.2,
-      "priority": 3,
-      "rsi_at_entry": 24.4,
-      "volume_ratio_at_entry": 0.54,
-      "earnings_days_away": null,
-      "macro_gate_pass": true,
-      "session_date": "2026-06-28"
-    },
     {
       "id": "trade_1782929156776_META",
       "symbol": "META",
@@ -770,6 +751,20 @@
       "entry_reason": "RSI 31.5 is deeply oversold with room to bounce, and volume at 0.44x is thin but acceptable for an oversold play. Price is $41 below the 50-day MA ($409.95), which is resistance, but MSFT is a quality name with strong support near $360. Macro gate is green; no major negative news today. Bull case: oversold bounce to $387 target; bear case: failure to hold $360 risks a drop to $350. Entering at confidence 7.0 — oversold edge present.",
       "exit_reason": "Profit target reached at $387.94 (target $387.31)",
       "session_date": "2026-07-01"
+    },
+    {
+      "id": "trade_1782680445270_BTC",
+      "symbol": "BTC",
+      "entry_price": 59559.05,
+      "exit_price": 60384.54,
+      "shares": 0.041975,
+      "realized_pnl": 34.65,
+      "realized_pnl_percent": 1.39,
+      "entry_date": "2026-06-28T21:00:09.830Z",
+      "exit_date": "2026-07-01T21:27:54.903Z",
+      "entry_reason": "RSI 24.4 is deeply oversold, signaling strong potential for a bounce. Volume at 0.54x is below average, but this is typical in oversold conditions as sellers exhaust. Price is well below the 50-day MA ($69,404), which now acts as major resistance. Macro gate is red due to missing QQQ/VIX data, but the oversold RSI and short-squeeze potential (per CoinDesk news) provide a contrarian edge. Bull case: short-squeeze drives price to $63,728 target; bear case: continued weakness could test $57,479 stop. Entering at confidence 7.2 — oversold bounce setup with catalyst support.",
+      "exit_reason": "Max hold reached (3.0 days)",
+      "session_date": "2026-07-01"
     }
   ],
   "daily_sessions": [
@@ -1191,14 +1186,14 @@
     },
     {
       "symbol": "BTC",
-      "current_price": 59990.13,
+      "current_price": 60384.54,
       "confidence": 6.5,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
       "reason": "RSI 33.2 is oversold with bounce potential, and volume at 1.22x is acceptable for crypto. Price is $8,100 below the 50-day MA ($68,090), which is now resistance — a reclaim would be a strong signal. Macro gate is green, but mixed news (Citi cuts, ETF outflows) offsets the Cantor bottom call. Bull case: Elliott Wave $70K target could spark a recovery; bear case: continued ETF outflows risk a retest of $58K. Not entering: below MA50, mixed news, confidence 6.5.",
       "last_updated": "2026-07-01T20:49:16.021Z",
-      "rsi": 33.2,
+      "rsi": 35.2,
       "change_pct": 0,
       "volume_ratio": 1.22,
       "stop_loss": null,
@@ -1256,7 +1251,7 @@
       "technical_setup": "RSI 89.6, above MA50 $247.98, vol 0.92x",
       "rsi": 89.6,
       "change_pct": 0,
-      "volume_ratio": 0.92,
+      "volume_ratio": 0.95,
       "added_date": "2026-06-24",
       "is_new": false,
       "last_updated": "2026-07-01T20:49:16.022Z"
@@ -1274,7 +1269,7 @@
       "technical_setup": "RSI 55, above MA50 $1640.94, vol 1.13x",
       "rsi": 55,
       "change_pct": 0,
-      "volume_ratio": 1.13,
+      "volume_ratio": 1.16,
       "added_date": "2026-06-26",
       "is_new": true,
       "last_updated": "2026-07-01T20:49:16.022Z"
@@ -1310,7 +1305,7 @@
       "technical_setup": "RSI 74.9, above MA50 $205.31, vol 0.68x",
       "rsi": 74.9,
       "change_pct": 0,
-      "volume_ratio": 0.68,
+      "volume_ratio": 0.72,
       "added_date": "2026-06-30",
       "is_new": true,
       "last_updated": "2026-07-01T20:49:16.022Z"
@@ -1346,7 +1341,7 @@
       "technical_setup": "RSI 49.1, below MA50 $410.26, vol 0.73x",
       "rsi": 49.1,
       "change_pct": 0,
-      "volume_ratio": 0.73,
+      "volume_ratio": 0.74,
       "added_date": "2026-07-01",
       "is_new": true,
       "last_updated": "2026-07-01T20:49:16.022Z"
@@ -1376,7 +1371,7 @@
     "qqq_above_ma": true,
     "vix": 16.59,
     "vix_below_25": true,
-    "timestamp": "2026-07-01T20:48:24.533Z",
+    "timestamp": "2026-07-01T21:27:54.777Z",
     "gate_pass": true
   },
   "performance_metrics": {
@@ -1392,12 +1387,12 @@
   },
   "system_status": {
     "last_scan": "2026-07-01T14:27:57.533Z",
-    "last_eval": "2026-07-01T20:48:24.731Z",
+    "last_eval": "2026-07-01T21:27:54.903Z",
     "market_status": "closed",
     "bot_version": "2.0.0",
     "trades_json_version": 2,
     "data_health": {
-      "timestamp": "2026-07-01T20:49:16.023Z",
+      "timestamp": "2026-07-01T21:29:55.017Z",
       "crumb_auth": true,
       "price_data": {
         "total": 13,
