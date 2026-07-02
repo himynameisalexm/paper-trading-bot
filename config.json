@@ -13,11 +13,11 @@
     "CRWD",
     "PANW",
     "ASML",
-    "SMCI",
     "DDOG",
     "MSTR",
     "AVGO",
-    "ARM"
+    "TSLA",
+    "SNOW"
   ],
   "trading_rules": {
     "min_confidence": 7,
