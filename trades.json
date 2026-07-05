@@ -1170,8 +1170,8 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. RSI, volume, and moving averages cannot be assessed. Macro gate is technically passed but irrelevant without price data. No bull or bear case can be formed. Not entering: data unavailable, confidence null.",
-      "last_updated": "2026-07-05T15:58:52.246Z",
+      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed without current price.",
+      "last_updated": "2026-07-05T17:18:50.405Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
@@ -1188,8 +1188,8 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. RSI, volume, and moving averages cannot be assessed. Macro gate is technically passed but irrelevant without price data. No bull or bear case can be formed. Not entering: data unavailable, confidence null.",
-      "last_updated": "2026-07-05T15:58:52.247Z",
+      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed without current price.",
+      "last_updated": "2026-07-05T17:18:50.405Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
@@ -1206,8 +1206,8 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. RSI, volume, and moving averages cannot be assessed. Macro gate is technically passed but irrelevant without price data. No bull or bear case can be formed. Not entering: data unavailable, confidence null.",
-      "last_updated": "2026-07-05T15:58:52.247Z",
+      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed without current price.",
+      "last_updated": "2026-07-05T17:18:50.405Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
@@ -1219,19 +1219,19 @@
     },
     {
       "symbol": "BTC",
-      "current_price": 62693.61,
-      "confidence": 5,
+      "current_price": 62656.94,
+      "confidence": 4.5,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
-      "reason": "RSI 47.9 is neutral with no directional edge, and volume at 0.55x signals extremely thin trading — no institutional conviction. Price is $4,043 below the 50-day MA ($66,736), a major resistance level; no support from moving averages. Macro gate is technically passed but QQQ below MA50 and high VIX create a weak backdrop. Bull case: BTC could bounce if ETF flows resume; bear case: continued drift below MA50 risks a leg to $60k. Not entering: volume too low, no catalyst, confidence 5.0.",
-      "last_updated": "2026-07-05T15:58:52.247Z",
-      "rsi": 47.9,
+      "reason": "RSI 47.7 is neutral with no directional edge, and volume at 0.56x signals thin trading with no institutional conviction. Price is well below the 50-day MA ($66,735), which is now strong resistance — a reclaim with volume would be required for any bullish thesis. Macro gate is technically passed but QQQ below MA50 and high VIX suggest caution; news is speculative and offers no clear catalyst. Bull case: a break above $63,000 with volume could set up a relief rally; bear case: continued drift below MA50 risks a move to $60,000. Not entering: low volume, weak macro, no catalyst, confidence 4.5.",
+      "last_updated": "2026-07-05T17:18:50.405Z",
+      "rsi": 47.7,
       "change_pct": 0,
-      "volume_ratio": 0.55,
+      "volume_ratio": 0.56,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "RSI 47.9, below MA50 $66,736, vol 0.55x",
+      "technical_setup": "RSI 47.7, below MA50 $66,735, vol 0.56x",
       "added_date": "2026-04-01",
       "is_new": false
     },
@@ -1244,14 +1244,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 3,
-      "reason": "RSI 54.6 is neutral with no directional edge, and volume at 0.87x is below average — institutional interest is muted. Price is $57 above the 50-day MA ($460), a strong support level, but lacks momentum to push higher. Macro gate is weak due to QQQ below MA50 and high VIX. Bull case: sector rotation could lift AMD to $530; bear case: broad market weakness could drag it back to MA50. Not entering: volume below minimum, no catalyst, confidence 6.5.",
+      "reason": "RSI 54.6 is neutral with no directional edge, and volume at 0.87x is below average — institutional interest is muted. Price is above the 50-day MA ($460) but lacks momentum; the 200-day MA is not available for context. Macro gate is weak (QQQ below MA50), and no analyst upgrades or news catalysts are present. Bull case: a break above $520 with volume could set up a momentum play; bear case: drift below MA50 risks a leg to $480. Not entering: volume below minimum, macro weak, confidence 6.5.",
       "technical_setup": "RSI 54.6, above MA50 $460, vol 0.87x",
       "rsi": 54.6,
       "change_pct": 0,
       "volume_ratio": 0.87,
       "added_date": "2026-06-05",
       "is_new": false,
-      "last_updated": "2026-07-05T15:58:52.247Z"
+      "last_updated": "2026-07-05T17:18:50.405Z"
     },
     {
       "symbol": "CRWD",
@@ -1262,14 +1262,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. RSI, volume, and moving averages cannot be assessed. Macro gate is technically passed but irrelevant without price data. No bull or bear case can be formed. Not entering: data unavailable, confidence null.",
+      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed without current price.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-06-19",
       "is_new": false,
-      "last_updated": "2026-07-05T15:58:52.247Z"
+      "last_updated": "2026-07-05T17:18:50.405Z"
     },
     {
       "symbol": "ASML",
@@ -1280,14 +1280,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. RSI, volume, and moving averages cannot be assessed. Macro gate is technically passed but irrelevant without price data. No bull or bear case can be formed. Not entering: data unavailable, confidence null.",
+      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed without current price.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-06-26",
       "is_new": false,
-      "last_updated": "2026-07-05T15:58:52.247Z"
+      "last_updated": "2026-07-05T17:18:50.405Z"
     },
     {
       "symbol": "DDOG",
@@ -1298,14 +1298,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. RSI, volume, and moving averages cannot be assessed. Macro gate is technically passed but irrelevant without price data. No bull or bear case can be formed. Not entering: data unavailable, confidence null.",
+      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed without current price.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-06-30",
       "is_new": true,
-      "last_updated": "2026-07-05T15:58:52.247Z"
+      "last_updated": "2026-07-05T17:18:50.405Z"
     },
     {
       "symbol": "AVGO",
@@ -1316,14 +1316,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. RSI, volume, and moving averages cannot be assessed. Macro gate is technically passed but irrelevant without price data. No bull or bear case can be formed. Not entering: data unavailable, confidence null.",
+      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed without current price.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-01",
       "is_new": true,
-      "last_updated": "2026-07-05T15:58:52.247Z"
+      "last_updated": "2026-07-05T17:18:50.405Z"
     },
     {
       "symbol": "TSLA",
@@ -1334,14 +1334,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. RSI, volume, and moving averages cannot be assessed. Macro gate is technically passed but irrelevant without price data. No bull or bear case can be formed. Not entering: data unavailable, confidence null.",
+      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed without current price.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-02",
       "is_new": true,
-      "last_updated": "2026-07-05T15:58:52.247Z"
+      "last_updated": "2026-07-05T17:18:50.405Z"
     },
     {
       "symbol": "SNOW",
@@ -1352,14 +1352,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 2,
-      "reason": "RSI 63.3 is elevated but not overbought, and volume at 1.04x is average — institutional interest is present but not strong. Price is $62 above the 50-day MA ($198), a strong support level, but lacks momentum to push higher. Macro gate is weak due to QQQ below MA50 and high VIX. Bull case: sector strength could lift SNOW to $273; bear case: broad market weakness could drag it back to $250. Not entering: volume neutral, no catalyst, confidence 6.8.",
+      "reason": "RSI 63.3 is elevated but not overbought, and volume at 1.04x is average — institutional interest is present but not strong. Price is well above the 50-day MA ($198), which is now strong support; the 200-day MA is not available for context. Macro gate is weak (QQQ below MA50), and no analyst upgrades or news catalysts are present. Bull case: momentum could carry to $270 if sector rotation resumes; bear case: broad risk-off could drag even strong names. Not entering: macro weak, confidence 6.8 below threshold.",
       "technical_setup": "RSI 63.3, above MA50 $198, vol 1.04x",
       "rsi": 63.3,
       "change_pct": 0,
       "volume_ratio": 1.04,
       "added_date": "2026-07-02",
       "is_new": true,
-      "last_updated": "2026-07-05T15:58:52.247Z"
+      "last_updated": "2026-07-05T17:18:50.405Z"
     },
     {
       "symbol": "SMCI",
@@ -1370,14 +1370,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. RSI, volume, and moving averages cannot be assessed. Macro gate is technically passed but irrelevant without price data. No bull or bear case can be formed. Not entering: data unavailable, confidence null.",
+      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed without current price.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-03",
       "is_new": true,
-      "last_updated": "2026-07-05T15:58:52.247Z"
+      "last_updated": "2026-07-05T17:18:50.405Z"
     },
     {
       "symbol": "ARM",
@@ -1388,14 +1388,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. RSI, volume, and moving averages cannot be assessed. Macro gate is technically passed but irrelevant without price data. No bull or bear case can be formed. Not entering: data unavailable, confidence null.",
+      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed without current price.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-03",
       "is_new": true,
-      "last_updated": "2026-07-05T15:58:52.247Z"
+      "last_updated": "2026-07-05T17:18:50.405Z"
     }
   ],
   "macro_status": {
@@ -1418,12 +1418,12 @@
   },
   "system_status": {
     "last_scan": "2026-07-05T13:21:14.406Z",
-    "last_eval": "2026-07-05T15:58:28.262Z",
+    "last_eval": "2026-07-05T17:18:28.224Z",
     "market_status": "weekend",
     "bot_version": "2.0.0",
     "trades_json_version": 2,
     "data_health": {
-      "timestamp": "2026-07-05T15:58:52.247Z",
+      "timestamp": "2026-07-05T17:18:50.406Z",
       "crumb_auth": true,
       "price_data": {
         "total": 1,
