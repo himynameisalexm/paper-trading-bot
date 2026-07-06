@@ -1,5 +1,172 @@
 [
   {
+    "date": "2026-07-06",
+    "timestamp": "2026-07-06T14:41:32.010Z",
+    "rule_issues": [],
+    "assessment": "Watchlist quality is currently poor due to widespread price data unavailability, limiting actionable signals. Only BTC and SNOW have fresh data, with SNOW showing mild momentum but no clear entry signal yet.",
+    "market_regime_note": "AI/tech sector momentum appears muted or data-starved, reducing setup frequency for momentum breakouts and oversold bounces.",
+    "flags": [
+      "Widespread price data unavailability across 10/13 symbols — API or source issues likely.",
+      "Only BTC and SNOW have actionable data; watchlist effectiveness severely limited."
+    ],
+    "changes_applied": [
+      {
+        "action": "REMOVE",
+        "symbol": "AMD",
+        "reason": "Price data unavailable despite RSI/vol_ratio being populated — inconsistent data state."
+      },
+      {
+        "action": "REMOVE",
+        "symbol": "CRWD",
+        "reason": "Price data unavailable with poor trade history (1 loss, no wins)."
+      },
+      {
+        "action": "ADD",
+        "symbol": "PANW",
+        "reason": "Strong AI/tech cybersecurity thesis, high liquidity, and institutional coverage; fits momentum breakout criteria."
+      },
+      {
+        "action": "ADD",
+        "symbol": "MSTR",
+        "reason": "High-volatility crypto proxy with clear continuation patterns; aligns with bot's crypto focus."
+      }
+    ],
+    "watchlist_after": [
+      "NVDA",
+      "META",
+      "MSFT",
+      "BTC",
+      "ASML",
+      "DDOG",
+      "AVGO",
+      "TSLA",
+      "SNOW",
+      "SMCI",
+      "ARM",
+      "PANW",
+      "MSTR"
+    ],
+    "symbol_notes": {
+      "NVDA": "Price data unavailable — no assessment possible.",
+      "META": "Price data unavailable — no assessment possible.",
+      "MSFT": "Price data unavailable — no assessment possible.",
+      "BTC": "Neutral RSI and thin volume; no edge detected.",
+      "SNOW": "Healthy RSI but neutral volume; no entry signal yet.",
+      "PANW": "Candidate with strong sector fit and liquidity; potential for momentum setups.",
+      "MSTR": "Candidate with high volatility and crypto correlation; fits continuation strategy."
+    },
+    "data_health": {
+      "no_price_data": [
+        "NVDA",
+        "META",
+        "MSFT",
+        "CRWD",
+        "ASML"
+      ],
+      "no_confidence_score": [
+        "NVDA",
+        "META",
+        "MSFT",
+        "AMD",
+        "CRWD",
+        "ASML"
+      ]
+    },
+    "performance_snapshot": {
+      "BTC": {
+        "trades": 16,
+        "wins": 6,
+        "losses": 10,
+        "win_rate": 38,
+        "avg_pnl_pct": -0.11
+      },
+      "COIN": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.52
+      },
+      "ETH": {
+        "trades": 6,
+        "wins": 3,
+        "losses": 2,
+        "win_rate": 60,
+        "avg_pnl_pct": 0.05
+      },
+      "META": {
+        "trades": 7,
+        "wins": 4,
+        "losses": 3,
+        "win_rate": 57,
+        "avg_pnl_pct": -0.14
+      },
+      "GOOGL": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.8
+      },
+      "TSM": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -4.42
+      },
+      "ARM": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -1.66
+      },
+      "ASML": {
+        "trades": 4,
+        "wins": 2,
+        "losses": 2,
+        "win_rate": 50,
+        "avg_pnl_pct": 1.23
+      },
+      "CRWD": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -1.32
+      },
+      "AMD": {
+        "trades": 4,
+        "wins": 2,
+        "losses": 2,
+        "win_rate": 50,
+        "avg_pnl_pct": -0.92
+      },
+      "MSFT": {
+        "trades": 3,
+        "wins": 1,
+        "losses": 2,
+        "win_rate": 33,
+        "avg_pnl_pct": 0.11
+      },
+      "DDOG": {
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_rate": 100,
+        "avg_pnl_pct": 5.61
+      },
+      "MSTR": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -3.16
+      }
+    }
+  },
+  {
     "date": "2026-07-03",
     "timestamp": "2026-07-03T13:19:04.453Z",
     "rule_issues": [],
