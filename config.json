@@ -14,10 +14,10 @@
     "AVGO",
     "TSLA",
     "SNOW",
-    "SMCI",
     "ARM",
     "PANW",
-    "MSTR"
+    "CRWD",
+    "AMD"
   ],
   "trading_rules": {
     "min_confidence": 7,
