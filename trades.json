@@ -1191,7 +1191,7 @@
       "last_updated": "2026-07-07T20:06:21.836Z",
       "rsi": 33.5,
       "change_pct": 0,
-      "volume_ratio": 0.81,
+      "volume_ratio": 0.83,
       "stop_loss": null,
       "profit_target": null,
       "technical_setup": "RSI 33.5 (oversold), below MA50 $209.60, vol 0.81x",
@@ -1227,7 +1227,7 @@
       "last_updated": "2026-07-07T20:06:21.836Z",
       "rsi": 45.2,
       "change_pct": 0,
-      "volume_ratio": 0.47,
+      "volume_ratio": 0.48,
       "stop_loss": null,
       "profit_target": null,
       "technical_setup": "RSI 45.2, below MA50 $406.13, vol 0.47x",
@@ -1236,14 +1236,14 @@
     },
     {
       "symbol": "BTC",
-      "current_price": 63834.18,
+      "current_price": 63578.06,
       "confidence": 6,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
       "reason": "RSI 55.1 is neutral, and volume at 1.19x is slightly above average, but macro gate failure due to QQQ weakness blocks entry. Price is $2,388 below the 50-day MA ($66,222), a key resistance level. News is positive on macro relief, but no strong catalyst. Bull case: break above MA50; bear case: rejection at MA50 risks a pullback. Not entering: macro gate red, confidence 6.0.",
       "last_updated": "2026-07-07T20:06:21.836Z",
-      "rsi": 55.1,
+      "rsi": 53.9,
       "change_pct": 0,
       "volume_ratio": 1.19,
       "stop_loss": null,
@@ -1326,7 +1326,7 @@
     },
     {
       "symbol": "SNOW",
-      "current_price": 262.72,
+      "current_price": 262.74,
       "confidence": 6.5,
       "entry_signal": false,
       "entry_target": null,
@@ -1373,7 +1373,7 @@
       "technical_setup": "RSI 71, above MA50 $258.24, vol 1.12x",
       "rsi": 71,
       "change_pct": 0,
-      "volume_ratio": 1.12,
+      "volume_ratio": 1.13,
       "added_date": "2026-07-06",
       "is_new": true,
       "last_updated": "2026-07-07T20:06:21.836Z"
@@ -1409,7 +1409,7 @@
       "technical_setup": "RSI 45.3, above MA50 $469.57, vol 0.91x",
       "rsi": 45.3,
       "change_pct": 0,
-      "volume_ratio": 0.91,
+      "volume_ratio": 0.92,
       "added_date": "2026-07-07",
       "is_new": true,
       "last_updated": "2026-07-07T20:06:21.836Z"
@@ -1419,9 +1419,9 @@
     "qqq_price": 709.43,
     "qqq_50day_ma": 711.66,
     "qqq_above_ma": false,
-    "vix": 16.22,
+    "vix": 16.13,
     "vix_below_25": true,
-    "timestamp": "2026-07-07T20:05:36.047Z",
+    "timestamp": "2026-07-07T20:50:17.677Z",
     "gate_pass": false
   },
   "performance_metrics": {
@@ -1437,12 +1437,12 @@
   },
   "system_status": {
     "last_scan": "2026-07-07T14:23:06.688Z",
-    "last_eval": "2026-07-07T20:05:36.180Z",
+    "last_eval": "2026-07-07T20:50:17.797Z",
     "market_status": "closed",
     "bot_version": "2.0.0",
     "trades_json_version": 2,
     "data_health": {
-      "timestamp": "2026-07-07T20:06:21.837Z",
+      "timestamp": "2026-07-07T20:52:17.906Z",
       "crumb_auth": true,
       "price_data": {
         "total": 13,
