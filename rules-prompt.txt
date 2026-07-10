@@ -223,7 +223,7 @@ The code handles stops, targets, trail stops, and max hold automatically. You do
 
 ## CURRENT WATCHLIST
 
-Active symbols (dynamic — updated as insights develop): NVDA, META, MSFT, BTC, ASML, DDOG, SNOW, ARM, PANW, CRWD, AMD, AVGO, MSTR
+Active symbols (dynamic — updated as insights develop): NVDA, META, MSFT, BTC, ASML, DDOG, ARM, PANW, CRWD, AMD, AVGO, SMCI, MDB
 
 Watchlist is NOT fixed. Symbols are added/removed based on catalyst availability, volatility, and analyst coverage.
 
