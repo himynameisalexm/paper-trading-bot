@@ -1,5 +1,174 @@
 [
   {
+    "date": "2026-07-13",
+    "timestamp": "2026-07-13T13:32:41.259Z",
+    "rule_issues": [],
+    "assessment": "Watchlist quality is currently limited by unavailable price data for 9 out of 13 symbols, reducing actionable opportunities. The available symbols (META, ARM, BTC) show mixed signals with no clear entry points, suggesting a cautious approach is warranted.",
+    "market_regime_note": "AI/tech sector momentum appears muted with thin volume and elevated RSI levels, reducing the frequency of high-confidence breakout or bounce setups.",
+    "flags": [
+      "API/data fetch failures for 9 symbols (69% of watchlist) — investigate connectivity or symbol availability.",
+      "Open positions (META, ARM) require active monitoring despite no current entry signals."
+    ],
+    "changes_applied": [
+      {
+        "action": "REMOVE",
+        "symbol": "ASML",
+        "reason": "Consistently unavailable price data with no trade history improvement potential."
+      },
+      {
+        "action": "REMOVE",
+        "symbol": "DDOG",
+        "reason": "Unavailable price data and limited trade history with no recent signals."
+      },
+      {
+        "action": "ADD",
+        "symbol": "TSLA",
+        "reason": "High liquidity, AI/tech sector relevance, and frequent volatility align with momentum breakout strategy."
+      },
+      {
+        "action": "ADD",
+        "symbol": "SNOW",
+        "reason": "Strong institutional coverage in AI/data cloud sector with high volatility and active options market."
+      }
+    ],
+    "watchlist_after": [
+      "NVDA",
+      "META",
+      "MSFT",
+      "BTC",
+      "ARM",
+      "PANW",
+      "CRWD",
+      "AMD",
+      "AVGO",
+      "SMCI",
+      "MDB",
+      "TSLA",
+      "SNOW"
+    ],
+    "symbol_notes": {
+      "NVDA": "Price data unavailable — no analysis possible; monitor for data restoration.",
+      "META": "Elevated RSI but strong volume; potential breakout if institutional participation continues.",
+      "ARM": "Deeply oversold but thin volume; risk of false bounce without confirmation.",
+      "BTC": "Elevated RSI and weak volume; unlikely to trigger entry without institutional conviction.",
+      "MSFT": "Price data unavailable — no analysis possible; monitor for data restoration."
+    },
+    "data_health": {
+      "no_price_data": [
+        "NVDA",
+        "MSFT",
+        "ASML",
+        "DDOG"
+      ],
+      "no_confidence_score": [
+        "NVDA",
+        "MSFT",
+        "ASML",
+        "DDOG"
+      ]
+    },
+    "performance_snapshot": {
+      "BTC": {
+        "trades": 16,
+        "wins": 6,
+        "losses": 10,
+        "win_rate": 38,
+        "avg_pnl_pct": -0.11
+      },
+      "COIN": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.52
+      },
+      "ETH": {
+        "trades": 6,
+        "wins": 3,
+        "losses": 2,
+        "win_rate": 60,
+        "avg_pnl_pct": 0.05
+      },
+      "META": {
+        "trades": 7,
+        "wins": 4,
+        "losses": 3,
+        "win_rate": 57,
+        "avg_pnl_pct": -0.14
+      },
+      "GOOGL": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.8
+      },
+      "TSM": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -4.42
+      },
+      "ARM": {
+        "trades": 3,
+        "wins": 0,
+        "losses": 3,
+        "win_rate": 0,
+        "avg_pnl_pct": -3.06
+      },
+      "ASML": {
+        "trades": 4,
+        "wins": 2,
+        "losses": 2,
+        "win_rate": 50,
+        "avg_pnl_pct": 1.23
+      },
+      "CRWD": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -1.32
+      },
+      "AMD": {
+        "trades": 4,
+        "wins": 2,
+        "losses": 2,
+        "win_rate": 50,
+        "avg_pnl_pct": -0.92
+      },
+      "MSFT": {
+        "trades": 3,
+        "wins": 1,
+        "losses": 2,
+        "win_rate": 33,
+        "avg_pnl_pct": 0.11
+      },
+      "DDOG": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.92
+      },
+      "MSTR": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -3.16
+      },
+      "SNOW": {
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_rate": 100,
+        "avg_pnl_pct": 1.63
+      }
+    }
+  },
+  {
     "date": "2026-07-10",
     "timestamp": "2026-07-10T13:23:16.440Z",
     "rule_issues": [],
@@ -3861,113 +4030,6 @@
         "losses": 6,
         "win_rate": 25,
         "avg_pnl_pct": -0.53
-      },
-      "COIN": {
-        "trades": 1,
-        "wins": 1,
-        "losses": 0,
-        "win_rate": 100,
-        "avg_pnl_pct": 5.98
-      },
-      "ETH": {
-        "trades": 6,
-        "wins": 3,
-        "losses": 2,
-        "win_rate": 60,
-        "avg_pnl_pct": 0.05
-      },
-      "META": {
-        "trades": 6,
-        "wins": 4,
-        "losses": 2,
-        "win_rate": 67,
-        "avg_pnl_pct": 0.63
-      }
-    }
-  },
-  {
-    "date": "2026-06-01",
-    "timestamp": "2026-06-01T16:59:42.255Z",
-    "rule_issues": [],
-    "assessment": "Watchlist quality is currently poor due to widespread price data unavailability, limiting actionable signals. The bot's strategy is best suited for high-momentum AI/tech/fintech names, but most symbols lack fresh data to evaluate setups.",
-    "market_regime_note": "AI/tech sector shows mixed momentum with BTC oversold but thin volume, suggesting cautious breakout potential and higher likelihood of oversold bounces in the near term.",
-    "flags": [
-      "Widespread API/data fetch failures for most watchlist symbols; investigate data pipeline health.",
-      "BTC oversold but volume is weak; watch for confirmation before entry."
-    ],
-    "changes_applied": [
-      {
-        "action": "REMOVE",
-        "symbol": "HOOD",
-        "reason": "Consistently unavailable price data with no trade history or signals."
-      },
-      {
-        "action": "REMOVE",
-        "symbol": "SOFI",
-        "reason": "Consistently unavailable price data with no trade history or signals."
-      },
-      {
-        "action": "ADD",
-        "symbol": "CRWD",
-        "reason": "Strong AI/tech cybersecurity leader with high volatility, liquidity, and institutional coverage; fits momentum breakout and oversold bounce setups."
-      },
-      {
-        "action": "ADD",
-        "symbol": "SMCI",
-        "reason": "High-momentum AI infrastructure play with frequent 5%+ daily ranges and active options market; aligns with bot's strategy."
-      }
-    ],
-    "watchlist_after": [
-      "NVDA",
-      "PLTR",
-      "META",
-      "MSFT",
-      "GOOGL",
-      "AMZN",
-      "ORCL",
-      "ANET",
-      "COIN",
-      "BTC",
-      "TSM",
-      "CRWD",
-      "SMCI"
-    ],
-    "symbol_notes": {
-      "NVDA": "Price data unavailable; monitor for recovery to assess momentum resumption.",
-      "PLTR": "Price data unavailable; no actionable thesis until data resumes.",
-      "META": "Price data unavailable; historically strong performer, but currently untradeable.",
-      "MSFT": "Price data unavailable; core AI/tech holding with no signals.",
-      "BTC": "Oversold with thin volume; high-priority bounce candidate if volume confirms participation.",
-      "COIN": "Price data unavailable; single win suggests potential but needs fresh data.",
-      "ANET": "Price data unavailable; no trade history to evaluate.",
-      "ORCL": "Price data unavailable; no trade history to evaluate.",
-      "AMZN": "Price data unavailable; no trade history to evaluate.",
-      "GOOGL": "Price data unavailable; no trade history to evaluate.",
-      "TSM": "Price data unavailable; no trade history to evaluate."
-    },
-    "data_health": {
-      "no_price_data": [
-        "NVDA",
-        "PLTR",
-        "META",
-        "MSFT",
-        "HOOD"
-      ],
-      "no_confidence_score": [
-        "NVDA",
-        "PLTR",
-        "META",
-        "MSFT",
-        "HOOD"
-      ]
-    },
-    "performance_snapshot": {
-      "BTC": {
-        "trades": 7,
-        "wins": 2,
-        "losses": 5,
-        "win_rate": 29,
-        "avg_pnl_pct": -0.17
       },
       "COIN": {
         "trades": 1,
