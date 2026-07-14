@@ -13,11 +13,11 @@
     "PANW",
     "CRWD",
     "AMD",
-    "AVGO",
     "SMCI",
     "MDB",
     "TSLA",
-    "SNOW"
+    "DDOG",
+    "MSTR"
   ],
   "trading_rules": {
     "min_confidence": 7,
