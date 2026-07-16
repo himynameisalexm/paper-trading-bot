@@ -14,10 +14,10 @@
     "CRWD",
     "AMD",
     "MDB",
-    "TSLA",
     "DDOG",
-    "SNOW",
-    "AVGO"
+    "AVGO",
+    "SMCI",
+    "MSTR"
   ],
   "trading_rules": {
     "min_confidence": 7,
