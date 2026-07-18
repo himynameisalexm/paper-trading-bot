@@ -1314,7 +1314,7 @@
       "entry_target": null,
       "priority": 5,
       "reason": "Price data unavailable — no recommendation made.",
-      "last_updated": "2026-07-18T13:03:17.610Z",
+      "last_updated": "2026-07-18T13:59:03.633Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
@@ -1332,7 +1332,7 @@
       "entry_target": null,
       "priority": 5,
       "reason": "Price data unavailable — no recommendation made.",
-      "last_updated": "2026-07-18T13:03:17.610Z",
+      "last_updated": "2026-07-18T13:59:03.633Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
@@ -1350,7 +1350,7 @@
       "entry_target": null,
       "priority": 5,
       "reason": "Price data unavailable — no recommendation made.",
-      "last_updated": "2026-07-18T13:03:17.610Z",
+      "last_updated": "2026-07-18T13:59:03.633Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
@@ -1362,19 +1362,19 @@
     },
     {
       "symbol": "BTC",
-      "current_price": 64120.19,
+      "current_price": 64051.81,
       "confidence": 6,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
-      "reason": "RSI 54.9 is neutral with no directional edge, and volume at 0.77x signals below-average participation — likely retail-driven flow. Price is above the 50-day MA ($63,523.72) but below the 200-day MA (unavailable), leaving mid-term support unclear. Macro gate fails due to QQQ/VIX data gaps; news is mixed with short-term recovery headlines offset by broader sector weakness. Bull case: weak jobs data could fuel further BTC rally if macro sentiment improves; bear case: Middle East tensions and AI fatigue may drag crypto lower. Not entering: macro gate failure, neutral RSI, and thin volume reduce confidence to 6.0.",
-      "last_updated": "2026-07-18T13:03:17.610Z",
-      "rsi": 54.9,
+      "reason": "RSI 54.6 is neutral with no directional edge, and volume at 0.71x signals thin trading with below-average institutional participation. Price is above the 50-day MA ($63,522) but MA200 is unavailable — limited long-term context. Macro gate is red (QQQ below MA50, VIX assumed high), blocking new entries; news is mixed with AI fatigue and geopolitical tensions offsetting weak jobs data. Bull case: BTC reclaims $64K with volume could set up a momentum play; bear case: macro risk-off could drag crypto lower. Not entering: macro gate red, volume below 1.0x, confidence 6.0.",
+      "last_updated": "2026-07-18T13:59:03.633Z",
+      "rsi": 54.6,
       "change_pct": 0,
-      "volume_ratio": 0.77,
+      "volume_ratio": 0.71,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "RSI 54.9 (neutral), above 50-day MA $63,523.72, volume ratio 0.77x",
+      "technical_setup": "RSI 54.6, above MA50 $63,522, volume ratio 0.71x",
       "added_date": "2026-04-01",
       "is_new": false
     },
@@ -1394,7 +1394,7 @@
       "volume_ratio": null,
       "added_date": "2026-07-03",
       "is_new": false,
-      "last_updated": "2026-07-18T13:03:17.610Z"
+      "last_updated": "2026-07-18T13:59:03.633Z"
     },
     {
       "symbol": "PANW",
@@ -1412,7 +1412,7 @@
       "volume_ratio": null,
       "added_date": "2026-07-06",
       "is_new": false,
-      "last_updated": "2026-07-18T13:03:17.610Z"
+      "last_updated": "2026-07-18T13:59:03.633Z"
     },
     {
       "symbol": "CRWD",
@@ -1430,7 +1430,7 @@
       "volume_ratio": null,
       "added_date": "2026-07-07",
       "is_new": false,
-      "last_updated": "2026-07-18T13:03:17.610Z"
+      "last_updated": "2026-07-18T13:59:03.633Z"
     },
     {
       "symbol": "AMD",
@@ -1448,7 +1448,7 @@
       "volume_ratio": null,
       "added_date": "2026-07-07",
       "is_new": false,
-      "last_updated": "2026-07-18T13:03:17.610Z"
+      "last_updated": "2026-07-18T13:59:03.633Z"
     },
     {
       "symbol": "DDOG",
@@ -1466,7 +1466,7 @@
       "volume_ratio": null,
       "added_date": "2026-07-14",
       "is_new": true,
-      "last_updated": "2026-07-18T13:03:17.610Z"
+      "last_updated": "2026-07-18T13:59:03.633Z"
     },
     {
       "symbol": "AVGO",
@@ -1484,7 +1484,7 @@
       "volume_ratio": null,
       "added_date": "2026-07-15",
       "is_new": true,
-      "last_updated": "2026-07-18T13:03:17.610Z"
+      "last_updated": "2026-07-18T13:59:03.633Z"
     },
     {
       "symbol": "SMCI",
@@ -1502,7 +1502,7 @@
       "volume_ratio": null,
       "added_date": "2026-07-16",
       "is_new": true,
-      "last_updated": "2026-07-18T13:03:17.610Z"
+      "last_updated": "2026-07-18T13:59:03.633Z"
     },
     {
       "symbol": "SNOW",
@@ -1520,14 +1520,15 @@
       "volume_ratio": null,
       "added_date": "2026-07-17",
       "is_new": true,
-      "last_updated": "2026-07-18T13:03:17.610Z"
+      "last_updated": "2026-07-18T13:59:03.633Z"
     }
   ],
   "macro_status": {
     "gate_pass": true,
     "qqq_above_ma": null,
     "vix_below_25": null,
-    "weekend": true
+    "weekend": true,
+    "gate_note": "Weekend — crypto only, macro gate N/A"
   },
   "performance_metrics": {
     "daily_pnl": 0,
@@ -1542,12 +1543,12 @@
   },
   "system_status": {
     "last_scan": "2026-07-18T13:03:17.610Z",
-    "last_eval": "2026-07-17T20:54:21.441Z",
-    "market_status": "pre-market",
+    "last_eval": "2026-07-18T13:58:45.791Z",
+    "market_status": "weekend",
     "bot_version": "2.0.0",
     "trades_json_version": 2,
     "data_health": {
-      "timestamp": "2026-07-18T13:03:17.610Z",
+      "timestamp": "2026-07-18T13:59:03.634Z",
       "crumb_auth": true,
       "price_data": {
         "total": 1,
