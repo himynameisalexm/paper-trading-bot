@@ -1,5 +1,184 @@
 [
   {
+    "date": "2026-07-20",
+    "timestamp": "2026-07-20T13:23:11.950Z",
+    "rule_issues": [],
+    "assessment": "The current watchlist is largely non-functional due to unavailable price data for most symbols, limiting the bot's ability to generate actionable signals. BTC is the only symbol with active data, but it shows neutral momentum and thin trading volume, offering no clear edge.",
+    "market_regime_note": "AI/tech sector momentum appears muted or data-starved, reducing the frequency of high-confidence breakout or oversold bounce setups.",
+    "flags": [
+      "API/data feed failure suspected for 11/12 symbols — immediate investigation required.",
+      "Watchlist size reduced to 10 symbols post-changes to maintain focus."
+    ],
+    "changes_applied": [
+      {
+        "action": "REMOVE",
+        "symbol": "ARM",
+        "reason": "Consistently unavailable price data and poor trade history (1W/8L, avg -2.33%)."
+      },
+      {
+        "action": "REMOVE",
+        "symbol": "CRWD",
+        "reason": "No price data available and single losing trade (-1.32%)."
+      },
+      {
+        "action": "ADD",
+        "symbol": "TSLA",
+        "reason": "High liquidity, volatility, and AI/tech thesis (EV/AI data centers); fits momentum breakout criteria."
+      },
+      {
+        "action": "ADD",
+        "symbol": "MSTR",
+        "reason": "Strong crypto proxy with high volatility and institutional coverage; aligns with BTC continuation strategy."
+      }
+    ],
+    "watchlist_after": [
+      "NVDA",
+      "META",
+      "MSFT",
+      "BTC",
+      "PANW",
+      "AMD",
+      "DDOG",
+      "AVGO",
+      "SMCI",
+      "SNOW",
+      "TSLA",
+      "MSTR"
+    ],
+    "symbol_notes": {
+      "NVDA": "Price data unavailable — no assessment possible.",
+      "META": "Price data unavailable — no assessment possible.",
+      "MSFT": "Price data unavailable — no assessment possible.",
+      "BTC": "Neutral RSI and low volume ratio; no directional edge.",
+      "PANW": "Price data unavailable — no assessment possible.",
+      "DDOG": "Price data unavailable — no assessment possible.",
+      "AVGO": "Price data unavailable — no assessment possible.",
+      "SMCI": "Price data unavailable — no assessment possible.",
+      "SNOW": "Price data unavailable — no assessment possible.",
+      "AMD": "Price data unavailable — no assessment possible."
+    },
+    "data_health": {
+      "no_price_data": [
+        "NVDA",
+        "META",
+        "MSFT",
+        "ARM",
+        "PANW",
+        "CRWD",
+        "AMD"
+      ],
+      "no_confidence_score": [
+        "NVDA",
+        "META",
+        "MSFT",
+        "ARM",
+        "PANW",
+        "CRWD",
+        "AMD"
+      ]
+    },
+    "performance_snapshot": {
+      "BTC": {
+        "trades": 17,
+        "wins": 6,
+        "losses": 11,
+        "win_rate": 35,
+        "avg_pnl_pct": -0.14
+      },
+      "COIN": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.52
+      },
+      "ETH": {
+        "trades": 6,
+        "wins": 3,
+        "losses": 2,
+        "win_rate": 60,
+        "avg_pnl_pct": 0.05
+      },
+      "META": {
+        "trades": 8,
+        "wins": 4,
+        "losses": 4,
+        "win_rate": 50,
+        "avg_pnl_pct": -0.29
+      },
+      "GOOGL": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.8
+      },
+      "TSM": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -4.42
+      },
+      "ARM": {
+        "trades": 9,
+        "wins": 1,
+        "losses": 8,
+        "win_rate": 11,
+        "avg_pnl_pct": -2.33
+      },
+      "ASML": {
+        "trades": 4,
+        "wins": 2,
+        "losses": 2,
+        "win_rate": 50,
+        "avg_pnl_pct": 1.23
+      },
+      "CRWD": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -1.32
+      },
+      "AMD": {
+        "trades": 4,
+        "wins": 2,
+        "losses": 2,
+        "win_rate": 50,
+        "avg_pnl_pct": -0.92
+      },
+      "MSFT": {
+        "trades": 3,
+        "wins": 1,
+        "losses": 2,
+        "win_rate": 33,
+        "avg_pnl_pct": 0.11
+      },
+      "DDOG": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.92
+      },
+      "MSTR": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -3.16
+      },
+      "SNOW": {
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_rate": 100,
+        "avg_pnl_pct": 1.63
+      }
+    }
+  },
+  {
     "date": "2026-07-17",
     "timestamp": "2026-07-17T12:40:04.637Z",
     "rule_issues": [],
@@ -4193,117 +4372,6 @@
         "losses": 8,
         "win_rate": 27,
         "avg_pnl_pct": -0.7
-      },
-      "COIN": {
-        "trades": 2,
-        "wins": 1,
-        "losses": 1,
-        "win_rate": 50,
-        "avg_pnl_pct": 0.52
-      },
-      "ETH": {
-        "trades": 6,
-        "wins": 3,
-        "losses": 2,
-        "win_rate": 60,
-        "avg_pnl_pct": 0.05
-      },
-      "META": {
-        "trades": 6,
-        "wins": 4,
-        "losses": 2,
-        "win_rate": 67,
-        "avg_pnl_pct": 0.63
-      },
-      "GOOGL": {
-        "trades": 2,
-        "wins": 1,
-        "losses": 1,
-        "win_rate": 50,
-        "avg_pnl_pct": 0.8
-      }
-    }
-  },
-  {
-    "date": "2026-06-08",
-    "timestamp": "2026-06-08T14:55:05.798Z",
-    "rule_issues": [],
-    "assessment": "Watchlist quality is currently poor due to widespread price data unavailability, limiting actionable signals. The only active symbol, BTC, is deeply oversold but lacks institutional volume confirmation, reducing confidence in a bounce setup.",
-    "market_regime_note": "AI/tech sector momentum appears stalled or consolidating, with low setup frequency due to missing data and weak participation signals.",
-    "flags": [
-      "Widespread price data unavailability across 10/13 watchlist symbols — API or data feed issue likely.",
-      "BTC trade history shows 80% loss rate; reassess strategy if oversold bounces continue to fail."
-    ],
-    "changes_applied": [
-      {
-        "action": "REMOVE",
-        "symbol": "GOOGL",
-        "reason": "Price data unavailable for multiple scans with no trade history or signals."
-      },
-      {
-        "action": "REMOVE",
-        "symbol": "AMZN",
-        "reason": "Price data unavailable with no trade history or signals."
-      },
-      {
-        "action": "ADD",
-        "symbol": "TSLA",
-        "reason": "High-liquidity AI/tech-adjacent name with frequent volatility and institutional coverage, fitting momentum breakout setups."
-      },
-      {
-        "action": "ADD",
-        "symbol": "DDOG",
-        "reason": "Strong AI/tech sector relevance, high volatility, and active options market for oversold bounce setups."
-      }
-    ],
-    "watchlist_after": [
-      "NVDA",
-      "META",
-      "MSFT",
-      "BTC",
-      "TSM",
-      "PANW",
-      "AVGO",
-      "CRWD",
-      "ARM",
-      "SMCI",
-      "AMD",
-      "TSLA",
-      "DDOG"
-    ],
-    "symbol_notes": {
-      "NVDA": "Price data unavailable — no momentum assessment possible.",
-      "META": "Price data unavailable — no momentum assessment possible.",
-      "MSFT": "Price data unavailable — no momentum assessment possible.",
-      "BTC": "Deeply oversold (RSI 8.6) but weak volume (0.74x) suggests low-confidence capitulation setup.",
-      "TSLA": "Candidate for momentum breakouts due to high volatility and AI/autonomous driving thesis.",
-      "DDOG": "Candidate for oversold bounces in cloud/AI monitoring space."
-    },
-    "data_health": {
-      "no_price_data": [
-        "NVDA",
-        "META",
-        "MSFT",
-        "GOOGL",
-        "AMZN",
-        "TSM"
-      ],
-      "no_confidence_score": [
-        "NVDA",
-        "META",
-        "MSFT",
-        "GOOGL",
-        "AMZN",
-        "TSM"
-      ]
-    },
-    "performance_snapshot": {
-      "BTC": {
-        "trades": 10,
-        "wins": 2,
-        "losses": 8,
-        "win_rate": 20,
-        "avg_pnl_pct": -1.28
       },
       "COIN": {
         "trades": 2,
