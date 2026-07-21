@@ -1,6 +1,6 @@
 {
   "session": {
-    "date": "2026-07-20",
+    "date": "2026-07-21",
     "total_account_value": 19826.27,
     "daily_trading_capital": 5000,
     "daily_trading_used": 0,
@@ -945,6 +945,18 @@
   ],
   "daily_sessions": [
     {
+      "date": "2026-07-20",
+      "total_account_before_day": 19826.27,
+      "daily_trading_capital_used": 0,
+      "ending_account_value": 19826.27,
+      "realized_pnl": 0,
+      "unrealized_pnl": 0,
+      "trades_closed": 0,
+      "wins": 0,
+      "losses": 0,
+      "win_rate": 0
+    },
+    {
       "date": "2026-07-19",
       "total_account_before_day": 19826.27,
       "daily_trading_capital_used": 0,
@@ -1291,18 +1303,6 @@
       "wins": 0,
       "losses": 1,
       "win_rate": 0
-    },
-    {
-      "date": "2026-06-20",
-      "total_account_before_day": 20322.83,
-      "daily_trading_capital_used": 0,
-      "ending_account_value": 20322.83,
-      "realized_pnl": 63.34,
-      "unrealized_pnl": -0.18,
-      "trades_closed": 1,
-      "wins": 1,
-      "losses": 0,
-      "win_rate": 100
     }
   ],
   "watchlist": [
@@ -1314,7 +1314,7 @@
       "entry_target": null,
       "priority": 3,
       "reason": "RSI 57.5 is neutral with no directional edge, and volume at 0.68x signals thin trading with no institutional conviction. Price is below the 50-day MA ($209.82), which has flipped to resistance — a reclaim with volume would be needed for a setup. Macro gate is red due to QQQ below MA50; news is neutral to negative, citing flat performance despite earnings growth. Bull case: sector rotation could lift NVDA back above MA50; bear case: continued drift below MA50 risks a move to $195. Not entering: macro gate fail, no catalyst, confidence 5.0.",
-      "last_updated": "2026-07-20T21:12:25.538Z",
+      "last_updated": "2026-07-21T13:29:39.003Z",
       "rsi": 57.5,
       "change_pct": 0,
       "volume_ratio": 0.68,
@@ -1332,10 +1332,10 @@
       "entry_target": null,
       "priority": 3,
       "reason": "RSI 65.8 is elevated but volume at 0.47x is extremely thin, suggesting retail-driven noise rather than institutional flow. Price is above the 50-day MA ($605.19), but the lack of volume raises questions about sustainability. Macro gate is red due to QQQ below MA50; news is mixed, with AI investment cuts offsetting bullish sentiment. Bull case: AI-driven momentum could extend to $660; bear case: thin volume and macro weakness risk a pullback to MA50. Not entering: volume too low, macro gate fail, confidence 5.5.",
-      "last_updated": "2026-07-20T21:12:25.538Z",
+      "last_updated": "2026-07-21T13:29:39.003Z",
       "rsi": 65.8,
       "change_pct": 0,
-      "volume_ratio": 0.47,
+      "volume_ratio": 0.48,
       "stop_loss": null,
       "profit_target": null,
       "technical_setup": "RSI 65.8, above MA50, vol 0.47x",
@@ -1350,7 +1350,7 @@
       "entry_target": null,
       "priority": 2,
       "reason": "RSI 71.4 is elevated, nearing overbought, but volume at 0.90x is neutral — not strong enough to confirm institutional participation. Price is above the 50-day MA ($401.28), a positive, but macro gate is red due to QQQ below MA50. News is mixed, with AMD deal bullish but broader narrative cautious. Bull case: AI deal momentum could push MSFT to $410; bear case: overbought RSI and macro weakness risk a pullback. Not entering: macro gate fail, confidence 6.0 (below threshold).",
-      "last_updated": "2026-07-20T21:12:25.538Z",
+      "last_updated": "2026-07-21T13:29:39.003Z",
       "rsi": 71.4,
       "change_pct": 0,
       "volume_ratio": 0.9,
@@ -1362,16 +1362,16 @@
     },
     {
       "symbol": "BTC",
-      "current_price": 65299.72,
+      "current_price": 66380.78,
       "confidence": 6.5,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
       "reason": "RSI 55.9 is neutral with room to run, and volume at 1.31x confirms moderate institutional interest. Price is above the 50-day MA ($63,190), a positive, but macro gate is red due to QQQ below MA50. News is mixed, with volatility warnings offset by recent price strength. Bull case: breakout above $66K could target $68K; bear case: macro weakness risks a pullback to MA50. Not entering: macro gate fail, confidence 6.5 (below threshold).",
-      "last_updated": "2026-07-20T21:12:25.538Z",
-      "rsi": 55.9,
+      "last_updated": "2026-07-21T13:29:39.003Z",
+      "rsi": 63.4,
       "change_pct": 0,
-      "volume_ratio": 1.31,
+      "volume_ratio": 1.23,
       "stop_loss": null,
       "profit_target": null,
       "technical_setup": "RSI 55.9, above MA50, vol 1.31x",
@@ -1391,10 +1391,10 @@
       "technical_setup": "RSI 55.8, above MA50, vol 0.74x",
       "rsi": 55.8,
       "change_pct": 0,
-      "volume_ratio": 0.74,
+      "volume_ratio": 0.77,
       "added_date": "2026-07-06",
       "is_new": false,
-      "last_updated": "2026-07-20T21:12:25.538Z"
+      "last_updated": "2026-07-21T13:29:39.003Z"
     },
     {
       "symbol": "AMD",
@@ -1409,10 +1409,10 @@
       "technical_setup": "RSI 44.3, above MA50, vol 0.88x",
       "rsi": 44.3,
       "change_pct": 0,
-      "volume_ratio": 0.88,
+      "volume_ratio": 0.89,
       "added_date": "2026-07-07",
       "is_new": false,
-      "last_updated": "2026-07-20T21:12:25.538Z"
+      "last_updated": "2026-07-21T13:29:39.003Z"
     },
     {
       "symbol": "DDOG",
@@ -1427,28 +1427,10 @@
       "technical_setup": "RSI 59.2, above MA50, vol 0.70x",
       "rsi": 59.2,
       "change_pct": 0,
-      "volume_ratio": 0.7,
+      "volume_ratio": 0.76,
       "added_date": "2026-07-14",
-      "is_new": true,
-      "last_updated": "2026-07-20T21:12:25.538Z"
-    },
-    {
-      "symbol": "AVGO",
-      "current_price": 378.16,
-      "confidence": 4.5,
-      "entry_signal": false,
-      "entry_target": null,
-      "stop_loss": null,
-      "profit_target": null,
-      "priority": 3,
-      "reason": "RSI 52.2 is neutral with no edge, and volume at 0.63x is very thin, suggesting no institutional conviction. Price is below the 50-day MA ($402.00), which has flipped to resistance — a reclaim with volume would be needed. Macro gate is red; news is mixed, with AI growth offset by market cap concerns. Bull case: AI mix shift could lift AVGO back above MA50; bear case: continued drift below MA50 risks a move to $360. Not entering: volume too low, macro gate fail, confidence 4.5.",
-      "technical_setup": "RSI 52.2, below MA50, vol 0.63x",
-      "rsi": 52.2,
-      "change_pct": 0,
-      "volume_ratio": 0.63,
-      "added_date": "2026-07-15",
-      "is_new": true,
-      "last_updated": "2026-07-20T21:12:25.538Z"
+      "is_new": false,
+      "last_updated": "2026-07-21T13:29:39.003Z"
     },
     {
       "symbol": "SMCI",
@@ -1463,10 +1445,10 @@
       "technical_setup": "RSI 30, below MA50, vol 0.78x",
       "rsi": 30,
       "change_pct": 0,
-      "volume_ratio": 0.78,
+      "volume_ratio": 0.81,
       "added_date": "2026-07-16",
       "is_new": true,
-      "last_updated": "2026-07-20T21:12:25.538Z"
+      "last_updated": "2026-07-21T13:29:39.003Z"
     },
     {
       "symbol": "SNOW",
@@ -1484,7 +1466,7 @@
       "volume_ratio": 0.86,
       "added_date": "2026-07-17",
       "is_new": true,
-      "last_updated": "2026-07-20T21:12:25.538Z"
+      "last_updated": "2026-07-21T13:29:39.003Z"
     },
     {
       "symbol": "TSLA",
@@ -1499,37 +1481,55 @@
       "technical_setup": "RSI 36.1, below MA50, vol 0.95x",
       "rsi": 36.1,
       "change_pct": 0,
-      "volume_ratio": 0.95,
+      "volume_ratio": 0.98,
       "added_date": "2026-07-20",
       "is_new": true,
-      "last_updated": "2026-07-20T21:12:25.538Z"
+      "last_updated": "2026-07-21T13:29:39.003Z"
     },
     {
-      "symbol": "MSTR",
-      "current_price": 97.82,
-      "confidence": 4.5,
+      "symbol": "CRWD",
+      "current_price": 198.49,
+      "confidence": null,
       "entry_signal": false,
       "entry_target": null,
       "stop_loss": null,
       "profit_target": null,
-      "priority": 4,
-      "reason": "RSI 56 is neutral with no edge, and volume at 0.99x is neutral but not strong enough to confirm institutional participation. Price is well below the 50-day MA ($127.78), which is now resistance — a reclaim would be needed. Macro gate is red; news is mixed, with Bitcoin holdings unchanged but cash reserves raised. Bull case: Bitcoin rebound could lift MSTR to $100; bear case: macro weakness risks further downside. Not entering: macro gate fail, no catalyst, confidence 4.5.",
-      "technical_setup": "RSI 56, below MA50, vol 0.99x",
-      "rsi": 56,
+      "priority": 5,
+      "reason": "Newly added to watchlist — pending first scan",
+      "technical_setup": null,
+      "rsi": 58.4,
       "change_pct": 0,
-      "volume_ratio": 0.99,
-      "added_date": "2026-07-20",
+      "volume_ratio": 0.81,
+      "added_date": "2026-07-21",
       "is_new": true,
-      "last_updated": "2026-07-20T21:12:25.538Z"
+      "last_updated": "2026-07-21T13:29:39.003Z"
+    },
+    {
+      "symbol": "ARM",
+      "current_price": 269.61,
+      "confidence": null,
+      "entry_signal": false,
+      "entry_target": null,
+      "stop_loss": null,
+      "profit_target": null,
+      "priority": 5,
+      "reason": "Newly added to watchlist — pending first scan",
+      "technical_setup": null,
+      "rsi": 29.5,
+      "change_pct": 0,
+      "volume_ratio": 0.51,
+      "added_date": "2026-07-21",
+      "is_new": true,
+      "last_updated": "2026-07-21T13:29:39.003Z"
     }
   ],
   "macro_status": {
     "qqq_price": 696.06,
     "qqq_50day_ma": 719.01,
     "qqq_above_ma": false,
-    "vix": 18.65,
+    "vix": 17.84,
     "vix_below_25": true,
-    "timestamp": "2026-07-20T21:11:47.707Z",
+    "timestamp": "2026-07-21T13:27:11.168Z",
     "gate_pass": false
   },
   "performance_metrics": {
@@ -1544,13 +1544,13 @@
     "consecutive_losses": 0
   },
   "system_status": {
-    "last_scan": "2026-07-20T13:57:41.773Z",
+    "last_scan": "2026-07-21T13:29:39.004Z",
     "last_eval": "2026-07-20T21:11:47.809Z",
-    "market_status": "closed",
+    "market_status": "pre-market",
     "bot_version": "2.0.0",
     "trades_json_version": 2,
     "data_health": {
-      "timestamp": "2026-07-20T21:12:25.539Z",
+      "timestamp": "2026-07-21T13:29:39.004Z",
       "crumb_auth": true,
       "price_data": {
         "total": 12,
@@ -1564,7 +1564,7 @@
       },
       "analyst": {
         "working": true,
-        "symbols_with_data": 8,
+        "symbols_with_data": 9,
         "total_symbols": 11
       },
       "news": {
