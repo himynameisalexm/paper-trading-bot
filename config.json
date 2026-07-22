@@ -13,10 +13,10 @@
     "AMD",
     "DDOG",
     "SMCI",
-    "SNOW",
     "TSLA",
     "CRWD",
-    "ARM"
+    "AVGO",
+    "MSTR"
   ],
   "trading_rules": {
     "min_confidence": 7,
