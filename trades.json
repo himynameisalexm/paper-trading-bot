@@ -1313,8 +1313,8 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red, so even with data, entry would be blocked.",
-      "last_updated": "2026-07-26T17:08:34.376Z",
+      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red due to missing QQQ/VIX data. No analyst actions or news provided. Decision: confidence null, entry_signal false.",
+      "last_updated": "2026-07-26T17:55:26.552Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
@@ -1331,8 +1331,8 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red, so even with data, entry would be blocked.",
-      "last_updated": "2026-07-26T17:08:34.376Z",
+      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red due to missing QQQ/VIX data. No analyst actions or news provided. Decision: confidence null, entry_signal false.",
+      "last_updated": "2026-07-26T17:55:26.552Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
@@ -1349,8 +1349,8 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red, so even with data, entry would be blocked.",
-      "last_updated": "2026-07-26T17:08:34.376Z",
+      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red due to missing QQQ/VIX data. No analyst actions or news provided. Decision: confidence null, entry_signal false.",
+      "last_updated": "2026-07-26T17:55:26.552Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
@@ -1362,19 +1362,19 @@
     },
     {
       "symbol": "BTC",
-      "current_price": 64632.76,
+      "current_price": 64644.19,
       "confidence": 5,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
-      "reason": "RSI 53.9 is neutral with no directional edge, and volume at 0.53x signals thin trading — no institutional conviction. Price is above the 50-day MA ($63,250) but MA200 is unavailable, leaving long-term support unclear. Macro gate is red (QQQ below MA50, VIX assumed high), blocking new entries regardless of setup. Bull case: reclaim of $65K with volume could set up a momentum play; bear case: thin volume and macro headwinds risk a drift to $63K. Not entering: macro gate red, volume below minimum, confidence 5.0.",
-      "last_updated": "2026-07-26T17:08:34.376Z",
+      "reason": "RSI 53.9 is neutral with no directional edge, and volume at 0.54x signals thin trading — no institutional conviction. Price is above the 50-day MA ($63,250) but MA200 is unavailable, leaving long-term support unclear. Macro gate is red (QQQ below MA50, VIX assumed high), blocking new entries regardless of setup. Bull case: reclaim of $65K with volume could set up a momentum play; bear case: macro risk-off could drag BTC below MA50. Not entering: macro gate red, low volume, confidence 5.0.",
+      "last_updated": "2026-07-26T17:55:26.552Z",
       "rsi": 53.9,
       "change_pct": 0,
-      "volume_ratio": 0.53,
+      "volume_ratio": 0.54,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "RSI 53.9, above MA50 $63,250, volume ratio 0.53x",
+      "technical_setup": "RSI 53.9, above MA50 $63,250, vol 0.54x",
       "added_date": "2026-04-01",
       "is_new": false
     },
@@ -1387,14 +1387,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red, so even with data, entry would be blocked.",
+      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red due to missing QQQ/VIX data. No analyst actions or news provided. Decision: confidence null, entry_signal false.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-06",
       "is_new": false,
-      "last_updated": "2026-07-26T17:08:34.376Z"
+      "last_updated": "2026-07-26T17:55:26.552Z"
     },
     {
       "symbol": "AMD",
@@ -1405,14 +1405,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red, so even with data, entry would be blocked.",
+      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red due to missing QQQ/VIX data. No analyst actions or news provided. Decision: confidence null, entry_signal false.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-07",
       "is_new": false,
-      "last_updated": "2026-07-26T17:08:34.376Z"
+      "last_updated": "2026-07-26T17:55:26.552Z"
     },
     {
       "symbol": "DDOG",
@@ -1423,14 +1423,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red, so even with data, entry would be blocked.",
+      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red due to missing QQQ/VIX data. No analyst actions or news provided. Decision: confidence null, entry_signal false.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-14",
       "is_new": false,
-      "last_updated": "2026-07-26T17:08:34.376Z"
+      "last_updated": "2026-07-26T17:55:26.552Z"
     },
     {
       "symbol": "SMCI",
@@ -1441,14 +1441,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red, so even with data, entry would be blocked.",
+      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red due to missing QQQ/VIX data. No analyst actions or news provided. Decision: confidence null, entry_signal false.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-16",
       "is_new": false,
-      "last_updated": "2026-07-26T17:08:34.376Z"
+      "last_updated": "2026-07-26T17:55:26.552Z"
     },
     {
       "symbol": "AVGO",
@@ -1459,14 +1459,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red, so even with data, entry would be blocked.",
+      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red due to missing QQQ/VIX data. No analyst actions or news provided. Decision: confidence null, entry_signal false.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-22",
       "is_new": true,
-      "last_updated": "2026-07-26T17:08:34.376Z"
+      "last_updated": "2026-07-26T17:55:26.552Z"
     },
     {
       "symbol": "SNOW",
@@ -1477,14 +1477,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red, so even with data, entry would be blocked.",
+      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red due to missing QQQ/VIX data. No analyst actions or news provided. Decision: confidence null, entry_signal false.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-23",
       "is_new": true,
-      "last_updated": "2026-07-26T17:08:34.376Z"
+      "last_updated": "2026-07-26T17:55:26.552Z"
     },
     {
       "symbol": "MSTR",
@@ -1495,14 +1495,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red, so even with data, entry would be blocked.",
+      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red due to missing QQQ/VIX data. No analyst actions or news provided. Decision: confidence null, entry_signal false.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-24",
       "is_new": true,
-      "last_updated": "2026-07-26T17:08:34.376Z"
+      "last_updated": "2026-07-26T17:55:26.552Z"
     },
     {
       "symbol": "ASML",
@@ -1513,14 +1513,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red, so even with data, entry would be blocked.",
+      "reason": "Price data unavailable — no recommendation made. RSI, volume, and key levels cannot be assessed. Macro gate is red due to missing QQQ/VIX data. No analyst actions or news provided. Decision: confidence null, entry_signal false.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-24",
       "is_new": true,
-      "last_updated": "2026-07-26T17:08:34.376Z"
+      "last_updated": "2026-07-26T17:55:26.552Z"
     }
   ],
   "macro_status": {
@@ -1543,12 +1543,12 @@
   },
   "system_status": {
     "last_scan": "2026-07-26T13:09:30.616Z",
-    "last_eval": "2026-07-26T17:08:15.831Z",
+    "last_eval": "2026-07-26T17:55:06.750Z",
     "market_status": "weekend",
     "bot_version": "2.0.0",
     "trades_json_version": 2,
     "data_health": {
-      "timestamp": "2026-07-26T17:08:34.377Z",
+      "timestamp": "2026-07-26T17:55:26.553Z",
       "crumb_auth": true,
       "price_data": {
         "total": 1,
