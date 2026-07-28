@@ -15,8 +15,8 @@
     "SNOW",
     "MSTR",
     "ASML",
-    "CRWD",
-    "ARM"
+    "SMCI",
+    "PANW"
   ],
   "trading_rules": {
     "min_confidence": 7,
