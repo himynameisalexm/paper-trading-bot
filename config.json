@@ -14,9 +14,9 @@
     "AVGO",
     "SNOW",
     "ASML",
-    "PANW",
-    "CRWD",
-    "ARM"
+    "ARM",
+    "SMCI",
+    "MDB"
   ],
   "trading_rules": {
     "min_confidence": 7,
