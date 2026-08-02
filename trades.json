@@ -1356,7 +1356,7 @@
       "entry_target": null,
       "priority": 5,
       "reason": "Price data unavailable — no recommendation made.",
-      "last_updated": "2026-08-02T17:54:18.709Z",
+      "last_updated": "2026-08-02T19:19:20.045Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
@@ -1374,7 +1374,7 @@
       "entry_target": null,
       "priority": 5,
       "reason": "Price data unavailable — no recommendation made.",
-      "last_updated": "2026-08-02T17:54:18.709Z",
+      "last_updated": "2026-08-02T19:19:20.045Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
@@ -1392,7 +1392,7 @@
       "entry_target": null,
       "priority": 3,
       "reason": "Price data unavailable — no recommendation made.",
-      "last_updated": "2026-08-02T17:54:18.709Z",
+      "last_updated": "2026-08-02T19:19:20.045Z",
       "rsi": 75,
       "change_pct": 0,
       "volume_ratio": 1.56,
@@ -1404,19 +1404,19 @@
     },
     {
       "symbol": "BTC",
-      "current_price": 63240.02,
-      "confidence": 5.5,
+      "current_price": 63287.55,
+      "confidence": 5,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
-      "reason": "RSI 43.1 is neutral with no directional edge, and volume at 0.69x signals thin trading — no institutional conviction today. Price is below the 50-day MA ($63,346), which is now acting as resistance; the 200-day MA is unavailable but likely lower. Macro gate is red (QQQ below MA50, VIX unknown/high), blocking any new entries. Bull case: a reclaim of $63,346 with volume >1.5x could set up a bounce; bear case: continued drift risks a test of $62,000 support. Not entering: macro gate red, volume below average, confidence 5.5.",
-      "last_updated": "2026-08-02T17:54:18.709Z",
-      "rsi": 43.1,
+      "reason": "RSI 43.4 is neutral with no directional edge, and volume at 0.66x signals thin trading with no institutional conviction. Price is below the 50-day MA ($63,347), which is acting as resistance — a reclaim with volume >1.5x would be required for a valid setup. Macro gate is red (QQQ below MA50, VIX assumed high), blocking all entries. Bull case: break above MA50 with volume could set up a momentum play; bear case: continued drift below MA50 risks a test of $60K. Not entering: macro gate red, volume below minimum, confidence 5.0.",
+      "last_updated": "2026-08-02T19:19:20.045Z",
+      "rsi": 43.4,
       "change_pct": 0,
-      "volume_ratio": 0.69,
+      "volume_ratio": 0.66,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "RSI 43.1, below MA50 $63,346, volume ratio 0.69x",
+      "technical_setup": "RSI 43.4, below MA50, volume ratio 0.66x",
       "added_date": "2026-04-01",
       "is_new": false
     },
@@ -1436,7 +1436,7 @@
       "volume_ratio": null,
       "added_date": "2026-07-07",
       "is_new": false,
-      "last_updated": "2026-08-02T17:54:18.709Z"
+      "last_updated": "2026-08-02T19:19:20.045Z"
     },
     {
       "symbol": "DDOG",
@@ -1454,7 +1454,7 @@
       "volume_ratio": null,
       "added_date": "2026-07-14",
       "is_new": false,
-      "last_updated": "2026-08-02T17:54:18.709Z"
+      "last_updated": "2026-08-02T19:19:20.045Z"
     },
     {
       "symbol": "SNOW",
@@ -1472,7 +1472,7 @@
       "volume_ratio": null,
       "added_date": "2026-07-23",
       "is_new": false,
-      "last_updated": "2026-08-02T17:54:18.709Z"
+      "last_updated": "2026-08-02T19:19:20.045Z"
     },
     {
       "symbol": "ASML",
@@ -1490,7 +1490,7 @@
       "volume_ratio": null,
       "added_date": "2026-07-24",
       "is_new": false,
-      "last_updated": "2026-08-02T17:54:18.709Z"
+      "last_updated": "2026-08-02T19:19:20.045Z"
     },
     {
       "symbol": "ARM",
@@ -1501,14 +1501,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no recommendation made.",
+      "reason": "Price data unavailable ��� no recommendation made.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-29",
       "is_new": true,
-      "last_updated": "2026-08-02T17:54:18.709Z"
+      "last_updated": "2026-08-02T19:19:20.045Z"
     },
     {
       "symbol": "MDB",
@@ -1526,7 +1526,7 @@
       "volume_ratio": null,
       "added_date": "2026-07-30",
       "is_new": true,
-      "last_updated": "2026-08-02T17:54:18.709Z"
+      "last_updated": "2026-08-02T19:19:20.045Z"
     },
     {
       "symbol": "CRWD",
@@ -1544,7 +1544,7 @@
       "volume_ratio": null,
       "added_date": "2026-07-31",
       "is_new": true,
-      "last_updated": "2026-08-02T17:54:18.709Z"
+      "last_updated": "2026-08-02T19:19:20.045Z"
     },
     {
       "symbol": "PANW",
@@ -1562,7 +1562,7 @@
       "volume_ratio": null,
       "added_date": "2026-07-31",
       "is_new": true,
-      "last_updated": "2026-08-02T17:54:18.709Z"
+      "last_updated": "2026-08-02T19:19:20.045Z"
     }
   ],
   "macro_status": {
@@ -1585,12 +1585,12 @@
   },
   "system_status": {
     "last_scan": "2026-08-02T13:09:24.346Z",
-    "last_eval": "2026-08-02T17:54:00.149Z",
+    "last_eval": "2026-08-02T19:19:06.958Z",
     "market_status": "weekend",
     "bot_version": "2.0.0",
     "trades_json_version": 2,
     "data_health": {
-      "timestamp": "2026-08-02T17:54:18.710Z",
+      "timestamp": "2026-08-02T19:19:20.046Z",
       "crumb_auth": true,
       "price_data": {
         "total": 1,
