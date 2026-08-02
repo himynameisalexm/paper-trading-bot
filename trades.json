@@ -1355,8 +1355,8 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. Without current price, RSI, volume, or key levels, no trade thesis can be formed.",
-      "last_updated": "2026-08-02T20:11:28.515Z",
+      "reason": "Price data unavailable — no recommendation made.",
+      "last_updated": "2026-08-02T20:54:33.460Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
@@ -1373,8 +1373,8 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. Critical fields (RSI, volume, MA levels) are missing, preventing any trade assessment.",
-      "last_updated": "2026-08-02T20:11:28.515Z",
+      "reason": "Price data unavailable — no recommendation made.",
+      "last_updated": "2026-08-02T20:54:33.460Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
@@ -1391,8 +1391,8 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 3,
-      "reason": "Price data unavailable — no analysis possible. Without current price or technical indicators, no trade decision can be justified.",
-      "last_updated": "2026-08-02T20:11:28.515Z",
+      "reason": "Price data unavailable — no recommendation made.",
+      "last_updated": "2026-08-02T20:54:33.460Z",
       "rsi": 75,
       "change_pct": 0,
       "volume_ratio": 1.56,
@@ -1404,19 +1404,19 @@
     },
     {
       "symbol": "BTC",
-      "current_price": 63358.78,
-      "confidence": 5.5,
+      "current_price": 63393.96,
+      "confidence": 5,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
-      "reason": "RSI 43.7 is neutral with no directional edge, and volume at 0.65x signals thin trading — no institutional conviction today. Price is $10 above the 50-day MA ($63,348), but the MA200 is unavailable, leaving long-term support unclear. Macro gate is red (QQQ below MA50, VIX assumed high), blocking new entries regardless of setup. Bull case: reclaim of $64K with volume could set up a momentum play; bear case: thin volume risks a drift toward $62K. Not entering: macro gate failure, low volume, confidence 5.5.",
-      "last_updated": "2026-08-02T20:11:28.515Z",
-      "rsi": 43.7,
+      "reason": "RSI 43.9 is neutral with no directional edge, and volume at 0.65x signals thin trading — no institutional conviction today. Price is just above the 50-day MA ($63,349), which is currently acting as weak support; no 200-day MA data is available. Macro gate is red due to QQQ below MA50 and high VIX, blocking any entry. Bull case: a reclaim of $64,000 with volume >1.5x could set up a momentum play; bear case: thin volume and macro headwinds risk a drift to $62,000. Not entering: macro gate failure, low volume, confidence 5.0.",
+      "last_updated": "2026-08-02T20:54:33.460Z",
+      "rsi": 43.9,
       "change_pct": 0,
       "volume_ratio": 0.65,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "RSI 43.7, above MA50 $63,348, volume ratio 0.65x",
+      "technical_setup": "RSI 43.9, above MA50 $63,349, vol 0.65x",
       "added_date": "2026-04-01",
       "is_new": false
     },
@@ -1429,14 +1429,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. Missing RSI, volume, and key levels prevent any trade assessment.",
+      "reason": "Price data unavailable — no recommendation made.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-07",
       "is_new": false,
-      "last_updated": "2026-08-02T20:11:28.515Z"
+      "last_updated": "2026-08-02T20:54:33.460Z"
     },
     {
       "symbol": "DDOG",
@@ -1447,14 +1447,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. Critical technical fields are missing, so no trade thesis can be formed.",
+      "reason": "Price data unavailable — no recommendation made.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-14",
       "is_new": false,
-      "last_updated": "2026-08-02T20:11:28.515Z"
+      "last_updated": "2026-08-02T20:54:33.460Z"
     },
     {
       "symbol": "SNOW",
@@ -1465,14 +1465,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. Without current price or technical indicators, no trade decision can be justified.",
+      "reason": "Price data unavailable — no recommendation made.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-23",
       "is_new": false,
-      "last_updated": "2026-08-02T20:11:28.515Z"
+      "last_updated": "2026-08-02T20:54:33.460Z"
     },
     {
       "symbol": "ASML",
@@ -1483,14 +1483,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. Missing RSI, volume, and key levels prevent any trade assessment.",
+      "reason": "Price data unavailable — no recommendation made.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-24",
       "is_new": false,
-      "last_updated": "2026-08-02T20:11:28.515Z"
+      "last_updated": "2026-08-02T20:54:33.460Z"
     },
     {
       "symbol": "ARM",
@@ -1501,14 +1501,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. Critical technical fields are missing, so no trade thesis can be formed.",
+      "reason": "Price data unavailable — no recommendation made.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-29",
       "is_new": true,
-      "last_updated": "2026-08-02T20:11:28.515Z"
+      "last_updated": "2026-08-02T20:54:33.460Z"
     },
     {
       "symbol": "MDB",
@@ -1519,14 +1519,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. Without current price or technical indicators, no trade decision can be justified.",
+      "reason": "Price data unavailable — no recommendation made.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-30",
       "is_new": true,
-      "last_updated": "2026-08-02T20:11:28.515Z"
+      "last_updated": "2026-08-02T20:54:33.460Z"
     },
     {
       "symbol": "CRWD",
@@ -1537,14 +1537,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. Missing RSI, volume, and key levels prevent any trade assessment.",
+      "reason": "Price data unavailable — no recommendation made.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-31",
       "is_new": true,
-      "last_updated": "2026-08-02T20:11:28.515Z"
+      "last_updated": "2026-08-02T20:54:33.460Z"
     },
     {
       "symbol": "PANW",
@@ -1555,14 +1555,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. Critical technical fields are missing, so no trade thesis can be formed.",
+      "reason": "Price data unavailable — no recommendation made.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-31",
       "is_new": true,
-      "last_updated": "2026-08-02T20:11:28.515Z"
+      "last_updated": "2026-08-02T20:54:33.460Z"
     }
   ],
   "macro_status": {
@@ -1585,12 +1585,12 @@
   },
   "system_status": {
     "last_scan": "2026-08-02T13:09:24.346Z",
-    "last_eval": "2026-08-02T20:11:11.010Z",
+    "last_eval": "2026-08-02T20:54:18.559Z",
     "market_status": "weekend",
     "bot_version": "2.0.0",
     "trades_json_version": 2,
     "data_health": {
-      "timestamp": "2026-08-02T20:11:28.516Z",
+      "timestamp": "2026-08-02T20:54:33.461Z",
       "crumb_auth": true,
       "price_data": {
         "total": 1,
