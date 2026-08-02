@@ -4,39 +4,19 @@
     "total_account_value": 20206.35,
     "daily_trading_capital": 5000,
     "daily_trading_used": 0,
-    "current_cash": 17882.75,
-    "open_positions_value": 2323.6,
-    "realized_pnl": 0,
-    "unrealized_pnl": 47.85,
+    "current_cash": 20206.35,
+    "open_positions_value": 0,
+    "realized_pnl": 47.85,
+    "unrealized_pnl": 0,
     "total_pnl": 47.85,
-    "trades_closed": 0,
-    "trades_open": 1,
-    "win_rate": 0,
-    "wins": 0,
+    "trades_closed": 1,
+    "trades_open": 0,
+    "win_rate": 100,
+    "wins": 1,
     "losses": 0,
     "break_even": 0
   },
-  "open_positions": [
-    {
-      "id": "trade_1785428404690_MSFT",
-      "symbol": "MSFT",
-      "entry_price": 455.15,
-      "entry_date": "2026-07-30T16:19:25.943Z",
-      "entry_reason": "RSI 74.4 is elevated but volume at 2.27x confirms strong institutional buying post-earnings beat. Price is well above the 50-day MA ($398.54), with support at $450. Macro gate is red, but MSFT’s earnings beat and multiple analyst reiterations provide an override catalyst. Bull case: momentum carries to the 5% target; bear case: broad tech weakness could pull MSFT lower. Entering at confidence 7.2 due to volume and earnings strength.",
-      "thesis": "RSI 74.4 is elevated but volume at 2.27x confirms strong institutional buying post-earnings beat. Price is well above the 50-day MA ($398.54), with support at $450. Macro gate is red, but MSFT’s earnings beat and multiple analyst reiterations provide an override catalyst. Bull case: momentum carries to the 5% target; bear case: broad tech weakness could pull MSFT lower. Entering at confidence 7.2 due to volume and earnings strength.",
-      "shares": 5,
-      "current_price": 464.72,
-      "stop_loss": 443.77,
-      "profit_target": 477.91,
-      "confidence": 7.2,
-      "priority": 2,
-      "rsi_at_entry": 74.4,
-      "volume_ratio_at_entry": 2.27,
-      "earnings_days_away": null,
-      "macro_gate_pass": false,
-      "session_date": "2026-07-30"
-    }
-  ],
+  "open_positions": [],
   "closed_trades": [
     {
       "id": "pos_btc_20260413",
@@ -989,6 +969,20 @@
       "entry_reason": "RSI 65.2 is elevated but volume at 1.69x confirms institutional interest. Price is $46 above the 50-day MA ($242.53), providing strong support. Macro gate is red, but SNOW's momentum and news of a golden cross offset it. Bull case: momentum to $303; bear case: pullback if tech weakens. Entering at confidence 7.2 — volume and RSI edge justify entry despite macro gate fail.",
       "exit_reason": "Stop loss hit at $293.28 (stop was $293.46)",
       "session_date": "2026-07-31"
+    },
+    {
+      "id": "trade_1785428404690_MSFT",
+      "symbol": "MSFT",
+      "entry_price": 455.15,
+      "exit_price": 464.72,
+      "shares": 5,
+      "realized_pnl": 47.85,
+      "realized_pnl_percent": 2.1,
+      "entry_date": "2026-07-30T16:19:25.943Z",
+      "exit_date": "2026-08-02T17:06:28.234Z",
+      "entry_reason": "RSI 74.4 is elevated but volume at 2.27x confirms strong institutional buying post-earnings beat. Price is well above the 50-day MA ($398.54), with support at $450. Macro gate is red, but MSFT’s earnings beat and multiple analyst reiterations provide an override catalyst. Bull case: momentum carries to the 5% target; bear case: broad tech weakness could pull MSFT lower. Entering at confidence 7.2 due to volume and earnings strength.",
+      "exit_reason": "Max hold reached (3.0 days)",
+      "session_date": "2026-08-02"
     }
   ],
   "daily_sessions": [
@@ -1361,8 +1355,8 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. Confidence set to null.",
-      "last_updated": "2026-08-02T15:50:10.651Z",
+      "reason": "Price data unavailable — no analysis possible. No recommendation made.",
+      "last_updated": "2026-08-02T17:06:46.146Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
@@ -1379,8 +1373,8 @@
       "entry_signal": false,
       "entry_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. Confidence set to null.",
-      "last_updated": "2026-08-02T15:50:10.651Z",
+      "reason": "Price data unavailable — no analysis possible. No recommendation made.",
+      "last_updated": "2026-08-02T17:06:46.146Z",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
@@ -1396,33 +1390,33 @@
       "confidence": 6.5,
       "entry_signal": false,
       "entry_target": null,
-      "priority": 5,
-      "reason": "RSI 75 is elevated, nearing overbought territory, and volume at 1.56x confirms institutional participation but not a surge. Price is well above the 50-day MA ($399.40), which acts as strong support, but macro gate fails due to QQQ/VIX uncertainty. No analyst actions or Reddit data available. Bull case: strong support and institutional volume could extend gains; bear case: elevated RSI and macro uncertainty risk a pullback. Not entering due to macro gate failure and RSI near overbought — confidence 6.5.",
-      "last_updated": "2026-08-02T15:50:10.651Z",
+      "priority": 3,
+      "reason": "RSI 75 is elevated, nearing overbought territory, and volume at 1.56x shows institutional participation but not overwhelming conviction. Price is well above the 50-day MA ($399.40), which acts as strong support, but the absence of MA200 data limits long-term trend assessment. Macro gate is technically passed, but QQQ and VIX data are missing, adding uncertainty. Bull case: Strong momentum could push MSFT to new highs; bear case: Elevated RSI and missing macro data increase reversal risk. Not entering — confidence 6.5 below threshold, elevated RSI, and macro uncertainty.",
+      "last_updated": "2026-08-02T17:06:46.146Z",
       "rsi": 75,
       "change_pct": 0,
       "volume_ratio": 1.56,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "RSI 75, above MA50 $399.40, volume ratio 1.56x",
+      "technical_setup": "RSI 75 (elevated), above MA50 $399.40, volume ratio 1.56x",
       "added_date": "2026-04-01",
       "is_new": false
     },
     {
       "symbol": "BTC",
-      "current_price": 63062.09,
+      "current_price": 63093.04,
       "confidence": 5,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
-      "reason": "RSI 42.1 is neutral with no directional edge, and volume at 0.70x signals thin trading with no institutional conviction. Price is below the 50-day MA ($63,342.81), which acts as resistance, and macro gate fails due to QQQ/VIX uncertainty. News headlines are mixed, with Bitcoin sliding while equities boom. Bull case: a reclaim of the 50-day MA with volume could set up a bounce; bear case: continued drift below MA50 risks further downside. Not entering: low volume, macro gate failure, and no clear catalyst — confidence 5.0.",
-      "last_updated": "2026-08-02T15:50:10.651Z",
-      "rsi": 42.1,
+      "reason": "RSI 42.3 is neutral with no directional edge, and volume at 0.70x signals thin trading with weak institutional interest. Price is below the 50-day MA ($63,343), which has flipped to resistance, and no MA200 data is available for long-term trend context. Negative news headlines (e.g., 'Bitcoin slides on the final day of July') add to bearish sentiment. Bull case: A reclaim of the 50-day MA with volume could signal a reversal; bear case: Continued downtrend risks a move to lower support levels. Not entering — confidence 5.0 below threshold, weak volume, and negative news.",
+      "last_updated": "2026-08-02T17:06:46.146Z",
+      "rsi": 42.3,
       "change_pct": 0,
       "volume_ratio": 0.7,
       "stop_loss": null,
       "profit_target": null,
-      "technical_setup": "RSI 42.1, below MA50 $63,342.81, volume ratio 0.70x",
+      "technical_setup": "RSI 42.3, below MA50 $63,343, volume ratio 0.70x",
       "added_date": "2026-04-01",
       "is_new": false
     },
@@ -1435,14 +1429,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. Confidence set to null.",
+      "reason": "Price data unavailable — no analysis possible. No recommendation made.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-07",
       "is_new": false,
-      "last_updated": "2026-08-02T15:50:10.651Z"
+      "last_updated": "2026-08-02T17:06:46.146Z"
     },
     {
       "symbol": "DDOG",
@@ -1453,14 +1447,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. Confidence set to null.",
+      "reason": "Price data unavailable — no analysis possible. No recommendation made.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-14",
       "is_new": false,
-      "last_updated": "2026-08-02T15:50:10.651Z"
+      "last_updated": "2026-08-02T17:06:46.146Z"
     },
     {
       "symbol": "SNOW",
@@ -1471,14 +1465,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. Confidence set to null.",
+      "reason": "Price data unavailable — no analysis possible. No recommendation made.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-23",
       "is_new": false,
-      "last_updated": "2026-08-02T15:50:10.651Z"
+      "last_updated": "2026-08-02T17:06:46.146Z"
     },
     {
       "symbol": "ASML",
@@ -1489,14 +1483,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. Confidence set to null.",
+      "reason": "Price data unavailable — no analysis possible. No recommendation made.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-24",
       "is_new": false,
-      "last_updated": "2026-08-02T15:50:10.651Z"
+      "last_updated": "2026-08-02T17:06:46.146Z"
     },
     {
       "symbol": "ARM",
@@ -1507,14 +1501,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. Confidence set to null.",
+      "reason": "Price data unavailable — no analysis possible. No recommendation made.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-29",
       "is_new": true,
-      "last_updated": "2026-08-02T15:50:10.651Z"
+      "last_updated": "2026-08-02T17:06:46.146Z"
     },
     {
       "symbol": "MDB",
@@ -1525,14 +1519,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. Confidence set to null.",
+      "reason": "Price data unavailable — no analysis possible. No recommendation made.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-30",
       "is_new": true,
-      "last_updated": "2026-08-02T15:50:10.651Z"
+      "last_updated": "2026-08-02T17:06:46.146Z"
     },
     {
       "symbol": "CRWD",
@@ -1543,14 +1537,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. Confidence set to null.",
+      "reason": "Price data unavailable — no analysis possible. No recommendation made.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-31",
       "is_new": true,
-      "last_updated": "2026-08-02T15:50:10.651Z"
+      "last_updated": "2026-08-02T17:06:46.146Z"
     },
     {
       "symbol": "PANW",
@@ -1561,14 +1555,14 @@
       "stop_loss": null,
       "profit_target": null,
       "priority": 5,
-      "reason": "Price data unavailable — no analysis possible. Confidence set to null.",
+      "reason": "Price data unavailable — no analysis possible. No recommendation made.",
       "technical_setup": "Data unavailable",
       "rsi": null,
       "change_pct": null,
       "volume_ratio": null,
       "added_date": "2026-07-31",
       "is_new": true,
-      "last_updated": "2026-08-02T15:50:10.651Z"
+      "last_updated": "2026-08-02T17:06:46.146Z"
     }
   ],
   "macro_status": {
@@ -1591,12 +1585,12 @@
   },
   "system_status": {
     "last_scan": "2026-08-02T13:09:24.346Z",
-    "last_eval": "2026-08-02T15:49:53.391Z",
+    "last_eval": "2026-08-02T17:06:28.234Z",
     "market_status": "weekend",
     "bot_version": "2.0.0",
     "trades_json_version": 2,
     "data_health": {
-      "timestamp": "2026-08-02T15:50:10.652Z",
+      "timestamp": "2026-08-02T17:06:46.147Z",
       "crumb_auth": true,
       "price_data": {
         "total": 1,
