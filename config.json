@@ -13,10 +13,10 @@
     "DDOG",
     "MDB",
     "PANW",
-    "AVGO",
     "CRWD",
-    "ARM",
-    "SNOW"
+    "SNOW",
+    "SMCI",
+    "ASML"
   ],
   "trading_rules": {
     "min_confidence": 7,
