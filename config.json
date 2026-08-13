@@ -15,8 +15,8 @@
     "ASML",
     "AVGO",
     "AMD",
-    "ARM",
-    "MSTR"
+    "TSLA",
+    "DDOG"
   ],
   "trading_rules": {
     "min_confidence": 7,
