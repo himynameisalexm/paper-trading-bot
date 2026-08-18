@@ -14,9 +14,9 @@
     "AVGO",
     "AMD",
     "TSLA",
-    "MSTR",
     "PANW",
-    "DDOG"
+    "CRWD",
+    "ARM"
   ],
   "trading_rules": {
     "min_confidence": 7,
