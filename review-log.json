@@ -1,5 +1,188 @@
 [
   {
+    "date": "2026-08-19",
+    "timestamp": "2026-08-19T11:47:46.160Z",
+    "rule_issues": [],
+    "assessment": "Watchlist quality is solid with a mix of AI/tech leaders and crypto exposure. Current setups are limited, with only META showing a clear entry signal, suggesting a cautious or consolidating market regime. Most symbols are overbought or lack institutional conviction.",
+    "market_regime_note": "AI/tech sector momentum appears muted, with few breakouts or oversold bounces, favoring selective setups over broad participation.",
+    "flags": [
+      "No API/stale data issues detected; all symbols have fresh data."
+    ],
+    "changes_applied": [
+      {
+        "action": "REMOVE",
+        "symbol": "SMCI",
+        "reason": "Consistently overbought with weak volume (0.70x) and poor trade history (1W/1L, +5.08% avg but small sample)."
+      },
+      {
+        "action": "REMOVE",
+        "symbol": "ARM",
+        "reason": "Poor trade history (1W/8L, -2.33% avg) despite high volume, signaling weak strategy fit."
+      },
+      {
+        "action": "ADD",
+        "symbol": "DDOG",
+        "reason": "High volatility, strong AI/tech thesis (observability/cloud), and active institutional coverage; fits momentum breakout criteria."
+      },
+      {
+        "action": "ADD",
+        "symbol": "SNOW",
+        "reason": "Cloud/AI sector leader with high liquidity and frequent 5%+ daily ranges; aligns with oversold bounce potential."
+      }
+    ],
+    "watchlist_after": [
+      "NVDA",
+      "META",
+      "MSFT",
+      "BTC",
+      "ASML",
+      "AVGO",
+      "AMD",
+      "TSLA",
+      "PANW",
+      "CRWD",
+      "DDOG",
+      "SNOW"
+    ],
+    "symbol_notes": {
+      "NVDA": "Overbought (RSI 77.4) with weak volume; monitor for institutional re-entry.",
+      "META": "Strong entry signal (RSI 39.5, 1.93x volume); trial-related dip may present oversold bounce.",
+      "MSFT": "Overbought (RSI 78.1) with thin volume; no edge currently.",
+      "BTC": "Neutral RSI and volume; above MA50 but lacks directional conviction.",
+      "AVGO": "Neutral RSI but below MA50; volume (1.26x) suggests balanced flow.",
+      "CRWD": "Elevated RSI (72.9) with moderate volume; no strong signal yet.",
+      "PANW": "Overbought (RSI 75) with weak volume; avoid until confirmation.",
+      "TSLA": "Overbought (RSI 75.5) with mixed news; weak institutional participation.",
+      "ASML": "Elevated RSI (73) with moderate volume; no clear edge.",
+      "AMD": "Neutral RSI (61.2) with thin volume; below MA50 limits upside."
+    },
+    "data_health": {
+      "no_price_data": [],
+      "no_confidence_score": []
+    },
+    "performance_snapshot": {
+      "BTC": {
+        "trades": 18,
+        "wins": 6,
+        "losses": 12,
+        "win_rate": 33,
+        "avg_pnl_pct": -0.16
+      },
+      "COIN": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.52
+      },
+      "ETH": {
+        "trades": 6,
+        "wins": 3,
+        "losses": 2,
+        "win_rate": 60,
+        "avg_pnl_pct": 0.05
+      },
+      "META": {
+        "trades": 10,
+        "wins": 4,
+        "losses": 6,
+        "win_rate": 40,
+        "avg_pnl_pct": -0.53
+      },
+      "GOOGL": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.8
+      },
+      "TSM": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -4.42
+      },
+      "ARM": {
+        "trades": 9,
+        "wins": 1,
+        "losses": 8,
+        "win_rate": 11,
+        "avg_pnl_pct": -2.33
+      },
+      "ASML": {
+        "trades": 4,
+        "wins": 2,
+        "losses": 2,
+        "win_rate": 50,
+        "avg_pnl_pct": 1.23
+      },
+      "CRWD": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 2.4
+      },
+      "AMD": {
+        "trades": 5,
+        "wins": 3,
+        "losses": 2,
+        "win_rate": 60,
+        "avg_pnl_pct": 1.58
+      },
+      "MSFT": {
+        "trades": 4,
+        "wins": 2,
+        "losses": 2,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.61
+      },
+      "DDOG": {
+        "trades": 3,
+        "wins": 1,
+        "losses": 2,
+        "win_rate": 33,
+        "avg_pnl_pct": -1.12
+      },
+      "MSTR": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -3.16
+      },
+      "SNOW": {
+        "trades": 2,
+        "wins": 2,
+        "losses": 0,
+        "win_rate": 100,
+        "avg_pnl_pct": 1.53
+      },
+      "SMCI": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 5.08
+      },
+      "PANW": {
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_rate": 100,
+        "avg_pnl_pct": 2.64
+      },
+      "AVGO": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -4.56
+      }
+    }
+  },
+  {
     "date": "2026-08-18",
     "timestamp": "2026-08-18T11:48:01.139Z",
     "rule_issues": [],
@@ -4713,170 +4896,6 @@
       "CRWD": "Overbought (RSI 72.9), thin volume; high risk without institutional support.",
       "AMD": "Neutral RSI, thin volume; no edge despite strong sector thesis.",
       "ASML": "Neutral RSI, thin volume; lacks near-term catalyst."
-    },
-    "data_health": {
-      "no_price_data": [],
-      "no_confidence_score": []
-    },
-    "performance_snapshot": {
-      "BTC": {
-        "trades": 16,
-        "wins": 6,
-        "losses": 10,
-        "win_rate": 38,
-        "avg_pnl_pct": -0.11
-      },
-      "COIN": {
-        "trades": 2,
-        "wins": 1,
-        "losses": 1,
-        "win_rate": 50,
-        "avg_pnl_pct": 0.52
-      },
-      "ETH": {
-        "trades": 6,
-        "wins": 3,
-        "losses": 2,
-        "win_rate": 60,
-        "avg_pnl_pct": 0.05
-      },
-      "META": {
-        "trades": 7,
-        "wins": 4,
-        "losses": 3,
-        "win_rate": 57,
-        "avg_pnl_pct": -0.14
-      },
-      "GOOGL": {
-        "trades": 2,
-        "wins": 1,
-        "losses": 1,
-        "win_rate": 50,
-        "avg_pnl_pct": 0.8
-      },
-      "TSM": {
-        "trades": 1,
-        "wins": 0,
-        "losses": 1,
-        "win_rate": 0,
-        "avg_pnl_pct": -4.42
-      },
-      "ARM": {
-        "trades": 2,
-        "wins": 0,
-        "losses": 2,
-        "win_rate": 0,
-        "avg_pnl_pct": -2.48
-      },
-      "ASML": {
-        "trades": 4,
-        "wins": 2,
-        "losses": 2,
-        "win_rate": 50,
-        "avg_pnl_pct": 1.23
-      },
-      "CRWD": {
-        "trades": 1,
-        "wins": 0,
-        "losses": 1,
-        "win_rate": 0,
-        "avg_pnl_pct": -1.32
-      },
-      "AMD": {
-        "trades": 4,
-        "wins": 2,
-        "losses": 2,
-        "win_rate": 50,
-        "avg_pnl_pct": -0.92
-      },
-      "MSFT": {
-        "trades": 3,
-        "wins": 1,
-        "losses": 2,
-        "win_rate": 33,
-        "avg_pnl_pct": 0.11
-      },
-      "DDOG": {
-        "trades": 2,
-        "wins": 1,
-        "losses": 1,
-        "win_rate": 50,
-        "avg_pnl_pct": 0.92
-      },
-      "MSTR": {
-        "trades": 1,
-        "wins": 0,
-        "losses": 1,
-        "win_rate": 0,
-        "avg_pnl_pct": -3.16
-      },
-      "SNOW": {
-        "trades": 1,
-        "wins": 1,
-        "losses": 0,
-        "win_rate": 100,
-        "avg_pnl_pct": 1.63
-      }
-    }
-  },
-  {
-    "date": "2026-07-08",
-    "timestamp": "2026-07-08T12:57:56.218Z",
-    "rule_issues": [],
-    "assessment": "The current watchlist is well-balanced with a mix of AI/tech leaders and crypto, but several symbols show weak institutional participation or poor trade history. The market regime appears neutral to slightly oversold, favoring oversold bounces over momentum breakouts in the near term.",
-    "market_regime_note": "AI/tech sector momentum is subdued with thin volume, suggesting limited breakout potential but opportunities for oversold bounces in high-quality names.",
-    "flags": [
-      "No API issues or stale data detected; all symbols have fresh data."
-    ],
-    "changes_applied": [
-      {
-        "action": "REMOVE",
-        "symbol": "AVGO",
-        "reason": "Consistently neutral RSI, below-average volume, and no trade history despite multiple scans."
-      },
-      {
-        "action": "REMOVE",
-        "symbol": "TSLA",
-        "reason": "Neutral RSI, weak volume, and no trade history or edge in current regime."
-      },
-      {
-        "action": "ADD",
-        "symbol": "SMCI",
-        "reason": "High-volatility AI/tech leader with strong institutional coverage and frequent 5%+ daily ranges."
-      },
-      {
-        "action": "ADD",
-        "symbol": "MDB",
-        "reason": "Cloud/AI growth name with high liquidity, active options market, and potential for momentum breakouts."
-      }
-    ],
-    "watchlist_after": [
-      "NVDA",
-      "META",
-      "MSFT",
-      "BTC",
-      "ASML",
-      "DDOG",
-      "SNOW",
-      "ARM",
-      "PANW",
-      "CRWD",
-      "AMD",
-      "SMCI",
-      "MDB"
-    ],
-    "symbol_notes": {
-      "NVDA": "Oversold but weak volume limits bounce conviction; monitor for institutional participation.",
-      "META": "Neutral RSI with room to run, but volume constraints cap confidence.",
-      "MSFT": "Thin volume and neutral RSI offer no edge; low priority.",
-      "BTC": "Neutral RSI with above-average volume, but macro correlation remains a gate.",
-      "ARM": "Deeply oversold with acceptable volume; highest priority for oversold bounce setup.",
-      "PANW": "Elevated RSI and strong volume confirm institutional interest; watch for breakout.",
-      "CRWD": "Elevated RSI but weak volume; lower priority than PANW or SMCI.",
-      "DDOG": "Neutral RSI with institutional volume; potential for continuation.",
-      "SNOW": "Elevated RSI but thin volume; low conviction.",
-      "ASML": "Neutral RSI and weak volume; no edge.",
-      "AMD": "Neutral RSI and below-average volume; no edge."
     },
     "data_health": {
       "no_price_data": [],
