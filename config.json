@@ -12,11 +12,11 @@
     "TSLA",
     "CRWD",
     "SNOW",
-    "SMCI",
     "MDB",
     "DDOG",
     "AMD",
-    "AVGO"
+    "PANW",
+    "ARM"
   ],
   "trading_rules": {
     "min_confidence": 7,
