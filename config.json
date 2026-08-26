@@ -13,10 +13,10 @@
     "CRWD",
     "SNOW",
     "MDB",
-    "DDOG",
     "AMD",
     "PANW",
-    "ARM"
+    "SMCI",
+    "AVGO"
   ],
   "trading_rules": {
     "min_confidence": 7,
