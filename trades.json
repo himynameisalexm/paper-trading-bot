@@ -1586,16 +1586,16 @@
     },
     {
       "symbol": "BTC",
-      "current_price": 80308.15,
+      "current_price": 80227.87,
       "confidence": 4,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
       "reason": "RSI 88.5 is severely overbought, and volume at 0.72x is thin despite the rally. Price is above MA50 ($66,062) but macro gate is red. News shows steady ETF demand but no new catalyst. Bull case: momentum extends; bear case: RSI reversal imminent. Not entering: overbought, macro gate fail, confidence 4.0.",
       "last_updated": "2026-08-27T21:40:05.984Z",
-      "rsi": 89.4,
+      "rsi": 89.3,
       "change_pct": 0,
-      "volume_ratio": 0.82,
+      "volume_ratio": 0.8,
       "stop_loss": null,
       "profit_target": null,
       "technical_setup": "RSI 88.5, above MA50, vol 0.72x",
@@ -1753,7 +1753,7 @@
     "qqq_above_ma": true,
     "vix": 14.51,
     "vix_below_25": true,
-    "timestamp": "2026-08-27T23:39:04.708Z",
+    "timestamp": "2026-08-28T00:08:16.592Z",
     "gate_pass": true
   },
   "performance_metrics": {
@@ -1769,12 +1769,12 @@
   },
   "system_status": {
     "last_scan": "2026-08-27T21:40:05.985Z",
-    "last_eval": "2026-08-27T23:39:04.847Z",
+    "last_eval": "2026-08-28T00:08:16.679Z",
     "market_status": "closed",
     "bot_version": "2.0.0",
     "trades_json_version": 2,
     "data_health": {
-      "timestamp": "2026-08-27T23:41:04.909Z",
+      "timestamp": "2026-08-28T00:10:16.779Z",
       "crumb_auth": true,
       "price_data": {
         "total": 12,
