@@ -1586,16 +1586,16 @@
     },
     {
       "symbol": "BTC",
-      "current_price": 80455.29,
+      "current_price": 80127.08,
       "confidence": 4.5,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
       "reason": "RSI 89.6 is deeply overbought, and volume at 0.81x signals thin trading with no new institutional flow. Price is well above the 50-day MA ($66,439.71), but the $80,800 resistance is immediate. QQQ macro is green but BTC is at extreme RSI levels, a high-risk zone. Bull case: ETF inflows extend the streak; bear case: overbought RSI triggers a sharp pullback. Not entering: RSI > 75, confidence 4.5.",
       "last_updated": "2026-08-28T01:14:52.251Z",
-      "rsi": 89.4,
+      "rsi": 89.3,
       "change_pct": 0,
-      "volume_ratio": 0.85,
+      "volume_ratio": 0.83,
       "stop_loss": null,
       "profit_target": null,
       "technical_setup": "RSI 89.6, above MA50 $66,439.71, vol 0.81x",
@@ -1753,7 +1753,7 @@
     "qqq_above_ma": true,
     "vix": 14.51,
     "vix_below_25": true,
-    "timestamp": "2026-08-28T02:07:26.550Z",
+    "timestamp": "2026-08-28T02:26:42.008Z",
     "gate_pass": true
   },
   "performance_metrics": {
@@ -1769,12 +1769,12 @@
   },
   "system_status": {
     "last_scan": "2026-08-27T21:40:05.985Z",
-    "last_eval": "2026-08-28T02:07:26.861Z",
+    "last_eval": "2026-08-28T02:26:42.194Z",
     "market_status": "closed",
     "bot_version": "2.0.0",
     "trades_json_version": 2,
     "data_health": {
-      "timestamp": "2026-08-28T02:09:26.997Z",
+      "timestamp": "2026-08-28T02:28:42.320Z",
       "crumb_auth": true,
       "price_data": {
         "total": 12,
