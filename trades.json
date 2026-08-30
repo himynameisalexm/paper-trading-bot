@@ -1586,16 +1586,16 @@
     },
     {
       "symbol": "BTC",
-      "current_price": 78817.02,
+      "current_price": 79197,
       "confidence": 6,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
       "reason": "RSI 81.2 is overbought, and volume at 0.91x signals declining participation. Price is well above the 50-day MA ($66,718.78), but the overbought RSI increases reversal risk. QQQ macro is green, but BTC’s correlation with gold and Nasdaq is mixed. Bull case: breakout above $81K could extend gains; bear case: overbought RSI and thin volume risk a pullback. Not entering: overbought, confidence 6.0.",
       "last_updated": "2026-08-30T15:54:52.510Z",
-      "rsi": 82.4,
+      "rsi": 82.7,
       "change_pct": 0,
-      "volume_ratio": 0.3,
+      "volume_ratio": 0.32,
       "stop_loss": null,
       "profit_target": null,
       "technical_setup": "RSI 81.2, above MA50 $66,718.78, volume ratio 0.91x",
@@ -1751,7 +1751,8 @@
     "gate_pass": true,
     "qqq_above_ma": null,
     "vix_below_25": null,
-    "weekend": true
+    "weekend": true,
+    "gate_note": "Weekend — crypto only, macro gate N/A"
   },
   "performance_metrics": {
     "daily_pnl": 0,
@@ -1766,12 +1767,12 @@
   },
   "system_status": {
     "last_scan": "2026-08-30T15:54:52.511Z",
-    "last_eval": "2026-08-29T22:22:41.957Z",
-    "market_status": "pre-market",
+    "last_eval": "2026-08-30T16:55:22.220Z",
+    "market_status": "weekend",
     "bot_version": "2.0.0",
     "trades_json_version": 2,
     "data_health": {
-      "timestamp": "2026-08-30T15:54:52.511Z",
+      "timestamp": "2026-08-30T16:55:32.880Z",
       "crumb_auth": true,
       "price_data": {
         "total": 1,
