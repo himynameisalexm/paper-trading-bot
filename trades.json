@@ -1,6 +1,6 @@
 {
   "session": {
-    "date": "2026-08-30",
+    "date": "2026-08-31",
     "total_account_value": 21116.76,
     "daily_trading_capital": 5000,
     "daily_trading_used": 0,
@@ -1169,6 +1169,18 @@
   ],
   "daily_sessions": [
     {
+      "date": "2026-08-30",
+      "total_account_before_day": 21116.76,
+      "daily_trading_capital_used": 0,
+      "ending_account_value": 21116.76,
+      "realized_pnl": 0,
+      "unrealized_pnl": 0,
+      "trades_closed": 0,
+      "wins": 0,
+      "losses": 0,
+      "win_rate": 0
+    },
+    {
       "date": "2026-08-29",
       "total_account_before_day": 21116.76,
       "daily_trading_capital_used": 0,
@@ -1515,33 +1527,21 @@
       "wins": 0,
       "losses": 0,
       "win_rate": 0
-    },
-    {
-      "date": "2026-07-31",
-      "total_account_before_day": 20110.65,
-      "daily_trading_capital_used": 0,
-      "ending_account_value": 20110.65,
-      "realized_pnl": 33.28,
-      "unrealized_pnl": 47.85,
-      "trades_closed": 1,
-      "wins": 1,
-      "losses": 0,
-      "win_rate": 100
     }
   ],
   "watchlist": [
     {
       "symbol": "NVDA",
-      "current_price": 217.55,
+      "current_price": 218.135,
       "confidence": 7.8,
       "entry_signal": true,
       "entry_target": 217.55,
       "priority": 1,
       "reason": "RSI 50 is neutral but volume at 1.5x confirms institutional participation following the blowout earnings report. Price is $9 above the 50-day MA ($208.42), providing strong support. QQQ macro gate is green; news flow is overwhelmingly positive with earnings beat and AI demand acceleration. Bull case: momentum from earnings carries to the 5% target; bear case: profit-taking after the post-earnings run could trigger a pullback. Entering at confidence 7.8 — strong volume, macro support, and earnings catalyst.",
-      "last_updated": "2026-08-28T23:45:31.846Z",
-      "rsi": 50,
+      "last_updated": "2026-08-31T18:39:20.727Z",
+      "rsi": 50.5,
       "change_pct": 0,
-      "volume_ratio": 1.5,
+      "volume_ratio": 0.48,
       "stop_loss": 212.11,
       "profit_target": 228.43,
       "technical_setup": "RSI 50, above MA50 $208.42, volume ratio 1.5x",
@@ -1550,16 +1550,16 @@
     },
     {
       "symbol": "META",
-      "current_price": 578.02,
+      "current_price": 571.685,
       "confidence": 5.2,
       "entry_signal": false,
       "entry_target": null,
       "priority": 3,
       "reason": "RSI 43.8 is neutral with no directional edge, and volume at 0.93x signals thin trading. Price is below the 50-day MA ($592.14), which acts as resistance. QQQ macro is green but META is underperforming; news flow is dominated by the $18B settlement, which is a one-time event. Bull case: reclaim of MA50 with volume could set up a bounce; bear case: continued drift below MA50 risks a move to $560. Not entering: no catalyst, below MA50, confidence 5.2.",
-      "last_updated": "2026-08-28T23:45:31.846Z",
-      "rsi": 43.8,
+      "last_updated": "2026-08-31T18:39:20.727Z",
+      "rsi": 40.1,
       "change_pct": 0,
-      "volume_ratio": 0.93,
+      "volume_ratio": 0.37,
       "stop_loss": null,
       "profit_target": null,
       "technical_setup": "RSI 43.8, below MA50, volume ratio 0.93x",
@@ -1568,16 +1568,16 @@
     },
     {
       "symbol": "MSFT",
-      "current_price": 513.53,
+      "current_price": 509.975,
       "confidence": 7.2,
       "entry_signal": true,
       "entry_target": 513.53,
       "priority": 2,
       "reason": "RSI 55 shows healthy momentum with room to run, and volume at 1.32x confirms institutional interest. Price is $83 above the 50-day MA ($430.65), a strong support level. QQQ macro gate is green; news flow highlights AI revenue streams and buy signals. Bull case: sector leadership drives to the 5% target; bear case: broad tech rotation reversal could drag even strong names. Entering at confidence 7.2 — volume confirmed, macro green, sector catalyst.",
-      "last_updated": "2026-08-28T23:45:31.846Z",
-      "rsi": 55,
+      "last_updated": "2026-08-31T18:39:20.727Z",
+      "rsi": 54.1,
       "change_pct": 0,
-      "volume_ratio": 1.32,
+      "volume_ratio": 0.43,
       "stop_loss": 498.19,
       "profit_target": 539.21,
       "technical_setup": "RSI 55, above MA50 $430.65, volume ratio 1.32x",
@@ -1586,16 +1586,16 @@
     },
     {
       "symbol": "BTC",
-      "current_price": 78372.84,
+      "current_price": 78999.52,
       "confidence": 6,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
       "reason": "RSI 81.2 is overbought, and volume at 0.91x signals declining participation. Price is well above the 50-day MA ($66,718.78), but the overbought RSI increases reversal risk. QQQ macro is green, but BTC’s correlation with gold and Nasdaq is mixed. Bull case: breakout above $81K could extend gains; bear case: overbought RSI and thin volume risk a pullback. Not entering: overbought, confidence 6.0.",
-      "last_updated": "2026-08-30T15:54:52.510Z",
-      "rsi": 82.1,
+      "last_updated": "2026-08-31T18:39:20.727Z",
+      "rsi": 83.2,
       "change_pct": 0,
-      "volume_ratio": 0.36,
+      "volume_ratio": 0.77,
       "stop_loss": null,
       "profit_target": null,
       "technical_setup": "RSI 81.2, above MA50 $66,718.78, volume ratio 0.91x",
@@ -1604,7 +1604,7 @@
     },
     {
       "symbol": "CRWD",
-      "current_price": 218.4,
+      "current_price": 228.49,
       "confidence": 7.5,
       "entry_signal": true,
       "entry_target": 218.4,
@@ -1613,16 +1613,16 @@
       "priority": 2,
       "reason": "RSI 46.7 is neutral but volume at 1.46x confirms institutional flow into cybersecurity. Price is $22 above the 50-day MA ($196.23), providing strong support. QQQ macro gate is green; news highlights record Q2 results and AI-driven demand. Bull case: sector rotation drives to the 5% target; bear case: profit-taking after the 11% jump could trigger a pullback. Entering at confidence 7.5 — volume confirmed, macro green, earnings catalyst.",
       "technical_setup": "RSI 46.7, above MA50 $196.23, volume ratio 1.46x",
-      "rsi": 46.7,
+      "rsi": 53,
       "change_pct": 0,
-      "volume_ratio": 1.46,
+      "volume_ratio": 0.82,
       "added_date": "2026-08-18",
       "is_new": false,
-      "last_updated": "2026-08-28T23:45:31.846Z"
+      "last_updated": "2026-08-31T18:39:20.727Z"
     },
     {
       "symbol": "SNOW",
-      "current_price": 328,
+      "current_price": 328.28,
       "confidence": 5.8,
       "entry_signal": false,
       "entry_target": null,
@@ -1631,16 +1631,16 @@
       "priority": 3,
       "reason": "RSI 45.2 is neutral with no edge, and volume at 0.87x signals thin trading. Price is $41 above the 50-day MA ($287.15), but news flow questions valuation. QQQ macro is green but SNOW is under scrutiny for cash flow and sales metrics. Bull case: reclaim of $335 with volume could set up a bounce; bear case: drift below MA50 risks a leg to $310. Not entering: no catalyst, thin volume, confidence 5.8.",
       "technical_setup": "RSI 45.2, above MA50 $287.15, volume ratio 0.87x",
-      "rsi": 45.2,
+      "rsi": 45.8,
       "change_pct": 0,
-      "volume_ratio": 0.87,
+      "volume_ratio": 0.58,
       "added_date": "2026-08-19",
       "is_new": false,
-      "last_updated": "2026-08-28T23:45:31.846Z"
+      "last_updated": "2026-08-31T18:39:20.727Z"
     },
     {
       "symbol": "MDB",
-      "current_price": 446.62,
+      "current_price": 449.4,
       "confidence": 7,
       "entry_signal": true,
       "entry_target": 446.62,
@@ -1649,16 +1649,16 @@
       "priority": 2,
       "reason": "RSI 57.3 shows healthy momentum, and volume at 1.13x confirms institutional interest. Price is $82 above the 50-day MA ($364.51), a strong support level. QQQ macro gate is green; news flow highlights AI database potential ahead of earnings. Bull case: momentum extension to the 5% target; bear case: valuation concerns could trigger profit-taking. Entering at confidence 7.0 — volume confirmed, macro green, sector catalyst.",
       "technical_setup": "RSI 57.3, above MA50 $364.51, volume ratio 1.13x",
-      "rsi": 57.3,
+      "rsi": 52.8,
       "change_pct": 0,
-      "volume_ratio": 1.13,
+      "volume_ratio": 0.7,
       "added_date": "2026-08-20",
       "is_new": false,
-      "last_updated": "2026-08-28T23:45:31.846Z"
+      "last_updated": "2026-08-31T18:39:20.727Z"
     },
     {
       "symbol": "AMD",
-      "current_price": 465.58,
+      "current_price": 468.1,
       "confidence": 6.5,
       "entry_signal": false,
       "entry_target": null,
@@ -1667,16 +1667,16 @@
       "priority": 3,
       "reason": "RSI 48.7 is neutral, and volume at 0.83x signals thin trading. Price is below the 50-day MA ($506.08), which acts as resistance; the Raymond James upgrade is a positive but not enough to overcome the technical weakness. QQQ macro is green but AMD is underperforming. Bull case: break above MA50 with volume could set up a bounce; bear case: drift below $460 risks a move to $440. Not entering: below MA50, thin volume, confidence 6.5.",
       "technical_setup": "RSI 48.7, below MA50 $506.08, volume ratio 0.83x",
-      "rsi": 48.7,
+      "rsi": 48,
       "change_pct": 0,
-      "volume_ratio": 0.83,
+      "volume_ratio": 0.44,
       "added_date": "2026-08-24",
-      "is_new": true,
-      "last_updated": "2026-08-28T23:45:31.846Z"
+      "is_new": false,
+      "last_updated": "2026-08-31T18:39:20.727Z"
     },
     {
       "symbol": "PANW",
-      "current_price": 371.59,
+      "current_price": 379.65,
       "confidence": 6.8,
       "entry_signal": false,
       "entry_target": null,
@@ -1685,16 +1685,16 @@
       "priority": 3,
       "reason": "RSI 45.2 is neutral, and volume at 1.13x is average but not exceptional. Price is $28 above the 50-day MA ($343.42), providing support, but news flow is mixed. QQQ macro is green but PANW lacks a clear catalyst today. Bull case: break above $375 with volume could set up a momentum play; bear case: drift below MA50 risks a pullback. Not entering: no catalyst, confidence 6.8.",
       "technical_setup": "RSI 45.2, above MA50 $343.42, volume ratio 1.13x",
-      "rsi": 45.2,
+      "rsi": 48.6,
       "change_pct": 0,
-      "volume_ratio": 1.13,
+      "volume_ratio": 0.58,
       "added_date": "2026-08-25",
       "is_new": true,
-      "last_updated": "2026-08-28T23:45:31.846Z"
+      "last_updated": "2026-08-31T18:39:20.727Z"
     },
     {
       "symbol": "AVGO",
-      "current_price": 368.79,
+      "current_price": 370.365,
       "confidence": 7.3,
       "entry_signal": true,
       "entry_target": 368.79,
@@ -1703,16 +1703,16 @@
       "priority": 3,
       "reason": "RSI 23.5 is deeply oversold, and volume at 0.74x is thin but acceptable for an oversold bounce. Price is below the 50-day MA ($386.11), which acts as resistance, but the oversold RSI provides a strong bounce setup. QQQ macro is green; news flow highlights AI business potential. Bull case: oversold bounce carries to the 5% target; bear case: failure to reclaim MA50 risks a move to $350. Entering at confidence 7.3 — oversold RSI, macro green, sector catalyst.",
       "technical_setup": "RSI 23.5, below MA50 $386.11, volume ratio 0.74x",
-      "rsi": 23.5,
+      "rsi": 26.3,
       "change_pct": 0,
-      "volume_ratio": 0.74,
+      "volume_ratio": 0.43,
       "added_date": "2026-08-26",
       "is_new": true,
-      "last_updated": "2026-08-28T23:45:31.846Z"
+      "last_updated": "2026-08-31T18:39:20.727Z"
     },
     {
       "symbol": "ARM",
-      "current_price": 239.05,
+      "current_price": 240.94,
       "confidence": 6.2,
       "entry_signal": false,
       "entry_target": null,
@@ -1721,16 +1721,16 @@
       "priority": 3,
       "reason": "RSI 33.6 is oversold but volume at 1.0x is neutral. Price is well below the 50-day MA ($287.86), which acts as resistance. QQQ macro is green but ARM lacks a clear catalyst today. Bull case: break above $245 with volume could set up a bounce; bear case: drift below $235 risks a move to $220. Not entering: below MA50, no catalyst, confidence 6.2.",
       "technical_setup": "RSI 33.6, below MA50 $287.86, volume ratio 1.0x",
-      "rsi": 33.6,
+      "rsi": 34.2,
       "change_pct": 0,
-      "volume_ratio": 1,
+      "volume_ratio": 0.31,
       "added_date": "2026-08-28",
       "is_new": true,
-      "last_updated": "2026-08-28T23:45:31.846Z"
+      "last_updated": "2026-08-31T18:39:20.727Z"
     },
     {
       "symbol": "DDOG",
-      "current_price": 236.98,
+      "current_price": 235.97,
       "confidence": 5.5,
       "entry_signal": false,
       "entry_target": null,
@@ -1739,20 +1739,22 @@
       "priority": 3,
       "reason": "RSI 38 is neutral, and volume at 0.68x signals thin trading. Price is below the 50-day MA ($249.45), which acts as resistance. QQQ macro is green but DDOG lacks a clear catalyst today. Bull case: reclaim of MA50 with volume could set up a bounce; bear case: drift below $235 risks a move to $225. Not entering: no catalyst, thin volume, confidence 5.5.",
       "technical_setup": "RSI 38, below MA50 $249.45, volume ratio 0.68x",
-      "rsi": 38,
+      "rsi": 43.7,
       "change_pct": 0,
-      "volume_ratio": 0.68,
+      "volume_ratio": 0.27,
       "added_date": "2026-08-28",
       "is_new": true,
-      "last_updated": "2026-08-28T23:45:31.846Z"
+      "last_updated": "2026-08-31T18:39:20.727Z"
     }
   ],
   "macro_status": {
-    "gate_pass": true,
-    "qqq_above_ma": null,
-    "vix_below_25": null,
-    "weekend": true,
-    "gate_note": "Weekend — crypto only, macro gate N/A"
+    "qqq_price": 714.22,
+    "qqq_50day_ma": 711.54,
+    "qqq_above_ma": true,
+    "vix": 15.04,
+    "vix_below_25": true,
+    "timestamp": "2026-08-31T18:38:43.543Z",
+    "gate_pass": true
   },
   "performance_metrics": {
     "daily_pnl": 0,
@@ -1766,17 +1768,17 @@
     "consecutive_losses": 0
   },
   "system_status": {
-    "last_scan": "2026-08-30T15:54:52.511Z",
+    "last_scan": "2026-08-31T18:39:20.728Z",
     "last_eval": "2026-08-30T22:24:41.677Z",
-    "market_status": "weekend",
+    "market_status": "pre-market",
     "bot_version": "2.0.0",
     "trades_json_version": 2,
     "data_health": {
-      "timestamp": "2026-08-30T22:24:52.217Z",
+      "timestamp": "2026-08-31T18:39:20.728Z",
       "crumb_auth": true,
       "price_data": {
-        "total": 1,
-        "success": 1,
+        "total": 12,
+        "success": 12,
         "failed": [],
         "success_rate": 100
       },
@@ -1785,14 +1787,14 @@
         "posts_found": 0
       },
       "analyst": {
-        "working": false,
-        "symbols_with_data": 0,
-        "total_symbols": 0
+        "working": true,
+        "symbols_with_data": 9,
+        "total_symbols": 11
       },
       "news": {
         "working": true,
-        "symbols_with_data": 1,
-        "total_symbols": 1
+        "symbols_with_data": 12,
+        "total_symbols": 12
       },
       "overall_health": "good"
     }
