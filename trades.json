@@ -1586,14 +1586,14 @@
     },
     {
       "symbol": "BTC",
-      "current_price": 77259.83,
+      "current_price": 77023.46,
       "confidence": 6,
       "entry_signal": false,
       "entry_target": null,
       "priority": 4,
       "reason": "RSI 70.1 is elevated, and volume at 0.82x is below average. Price is above MA50 ($68,126) but macro gate fails. News mentions a 'Bart Simpson' pattern, a bearish reversal signal. Bull case: breakout above $77,719; bear case: pullback to MA50. Not entering: overbought, macro red, confidence 6.0.",
       "last_updated": "2026-09-02T21:38:12.283Z",
-      "rsi": 70.1,
+      "rsi": 69.3,
       "change_pct": 0,
       "volume_ratio": 0.82,
       "stop_loss": null,
@@ -1753,7 +1753,7 @@
     "qqq_above_ma": false,
     "vix": 15.2,
     "vix_below_25": true,
-    "timestamp": "2026-09-02T21:37:42.623Z",
+    "timestamp": "2026-09-02T22:23:38.690Z",
     "gate_pass": false
   },
   "performance_metrics": {
@@ -1769,12 +1769,12 @@
   },
   "system_status": {
     "last_scan": "2026-09-02T15:52:21.107Z",
-    "last_eval": "2026-09-02T21:37:42.761Z",
+    "last_eval": "2026-09-02T22:23:38.786Z",
     "market_status": "closed",
     "bot_version": "2.0.0",
     "trades_json_version": 2,
     "data_health": {
-      "timestamp": "2026-09-02T21:38:12.284Z",
+      "timestamp": "2026-09-02T22:23:49.126Z",
       "crumb_auth": true,
       "price_data": {
         "total": 12,
