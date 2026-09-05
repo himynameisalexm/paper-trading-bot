@@ -1,19 +1,19 @@
 {
   "session": {
-    "date": "2026-09-04",
+    "date": "2026-09-05",
     "total_account_value": 20991.48,
     "daily_trading_capital": 5000,
     "daily_trading_used": 0,
-    "current_cash": 20991.480000000003,
+    "current_cash": 20991.48,
     "open_positions_value": 0,
-    "realized_pnl": -62.1,
+    "realized_pnl": 0,
     "unrealized_pnl": 0,
-    "total_pnl": -62.1,
-    "trades_closed": 1,
+    "total_pnl": 0,
+    "trades_closed": 0,
     "trades_open": 0,
     "win_rate": 0,
     "wins": 0,
-    "losses": 1,
+    "losses": 0,
     "break_even": 0
   },
   "open_positions": [],
@@ -1197,6 +1197,18 @@
   ],
   "daily_sessions": [
     {
+      "date": "2026-09-04",
+      "total_account_before_day": 20991.48,
+      "daily_trading_capital_used": 0,
+      "ending_account_value": 20991.48,
+      "realized_pnl": -62.1,
+      "unrealized_pnl": 0,
+      "trades_closed": 1,
+      "wins": 0,
+      "losses": 1,
+      "win_rate": 0
+    },
+    {
       "date": "2026-09-03",
       "total_account_before_day": 21053.58,
       "daily_trading_capital_used": 2299.8600000000006,
@@ -1543,18 +1555,6 @@
       "wins": 0,
       "losses": 1,
       "win_rate": 0
-    },
-    {
-      "date": "2026-08-05",
-      "total_account_before_day": 20206.35,
-      "daily_trading_capital_used": 0,
-      "ending_account_value": 20206.35,
-      "realized_pnl": 0,
-      "unrealized_pnl": 0,
-      "trades_closed": 0,
-      "wins": 0,
-      "losses": 0,
-      "win_rate": 0
     }
   ],
   "watchlist": [
@@ -1614,16 +1614,16 @@
     },
     {
       "symbol": "BTC",
-      "current_price": 79675.46,
+      "current_price": 79696.52,
       "confidence": 7,
       "entry_signal": true,
       "entry_target": 80808.87,
       "priority": 4,
       "reason": "RSI 69.9 is elevated but not overbought, and volume at 1.02x confirms steady institutional flow. Price is well above MA50 ($68449.35), a strong support level. QQQ macro is green; news cites BTC golden cross and USDT signals as catalysts. Bull case: momentum carries to $86k target; bear case: RSI near 70 risks pullback. Entering at confidence 7.0 — volume and macro support the trade.",
-      "last_updated": "2026-09-04T15:39:17.613Z",
-      "rsi": 54.1,
+      "last_updated": "2026-09-05T14:26:19.994Z",
+      "rsi": 58.6,
       "change_pct": 0,
-      "volume_ratio": 1.25,
+      "volume_ratio": 0.68,
       "stop_loss": 77976.56,
       "profit_target": 86465.49,
       "technical_setup": "RSI 69.9, above MA50, vol 1.02x",
@@ -1776,13 +1776,10 @@
     }
   ],
   "macro_status": {
-    "qqq_price": 718.96,
-    "qqq_50day_ma": 711.09,
-    "qqq_above_ma": true,
-    "vix": 14.53,
-    "vix_below_25": true,
-    "timestamp": "2026-09-04T22:08:26.215Z",
-    "gate_pass": true
+    "gate_pass": true,
+    "qqq_above_ma": null,
+    "vix_below_25": null,
+    "weekend": true
   },
   "performance_metrics": {
     "daily_pnl": 0,
@@ -1796,17 +1793,17 @@
     "consecutive_losses": 0
   },
   "system_status": {
-    "last_scan": "2026-09-04T15:39:17.613Z",
+    "last_scan": "2026-09-05T14:26:19.995Z",
     "last_eval": "2026-09-04T22:08:26.348Z",
-    "market_status": "closed",
+    "market_status": "pre-market",
     "bot_version": "2.0.0",
     "trades_json_version": 2,
     "data_health": {
-      "timestamp": "2026-09-04T22:08:36.691Z",
+      "timestamp": "2026-09-05T14:26:19.995Z",
       "crumb_auth": true,
       "price_data": {
-        "total": 12,
-        "success": 12,
+        "total": 1,
+        "success": 1,
         "failed": [],
         "success_rate": 100
       },
@@ -1815,14 +1812,14 @@
         "posts_found": 0
       },
       "analyst": {
-        "working": true,
-        "symbols_with_data": 9,
-        "total_symbols": 11
+        "working": false,
+        "symbols_with_data": 0,
+        "total_symbols": 0
       },
       "news": {
         "working": true,
         "symbols_with_data": 1,
-        "total_symbols": 12
+        "total_symbols": 1
       },
       "overall_health": "good"
     }
