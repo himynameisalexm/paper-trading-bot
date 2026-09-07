@@ -1,6 +1,6 @@
 {
   "session": {
-    "date": "2026-09-06",
+    "date": "2026-09-07",
     "total_account_value": 20991.48,
     "daily_trading_capital": 5000,
     "daily_trading_used": 0,
@@ -1197,6 +1197,18 @@
   ],
   "daily_sessions": [
     {
+      "date": "2026-09-06",
+      "total_account_before_day": 20991.48,
+      "daily_trading_capital_used": 0,
+      "ending_account_value": 20991.48,
+      "realized_pnl": 0,
+      "unrealized_pnl": 0,
+      "trades_closed": 0,
+      "wins": 0,
+      "losses": 0,
+      "win_rate": 0
+    },
+    {
       "date": "2026-09-05",
       "total_account_before_day": 20991.48,
       "daily_trading_capital_used": 0,
@@ -1543,18 +1555,6 @@
       "wins": 0,
       "losses": 0,
       "win_rate": 0
-    },
-    {
-      "date": "2026-08-07",
-      "total_account_before_day": 20112.92,
-      "daily_trading_capital_used": 2312.2,
-      "ending_account_value": 20112.92,
-      "realized_pnl": 0,
-      "unrealized_pnl": 43.82,
-      "trades_closed": 0,
-      "wins": 0,
-      "losses": 0,
-      "win_rate": 0
     }
   ],
   "watchlist": [
@@ -1566,10 +1566,10 @@
       "entry_target": null,
       "priority": 3,
       "reason": "RSI 51.7 is neutral with no directional edge, and volume at 0.43x signals thin trading with no institutional conviction. Price is above MA50 ($209.85) but volume is too weak to confirm the rally mentioned in news. QQQ macro is green, but NVDA lacks volume support. Bull case: news-driven momentum could resume; bear case: thin volume risks reversal. Not entering: volume below minimum, confidence 5.5.",
-      "last_updated": "2026-09-04T15:39:17.612Z",
+      "last_updated": "2026-09-07T17:06:41.721Z",
       "rsi": 53.7,
       "change_pct": 0,
-      "volume_ratio": 0.85,
+      "volume_ratio": 0.87,
       "stop_loss": null,
       "profit_target": null,
       "technical_setup": "RSI 51.7, above MA50, vol 0.43x",
@@ -1584,10 +1584,10 @@
       "entry_target": null,
       "priority": 3,
       "reason": "RSI 58.7 shows mild momentum, but volume at 0.66x is below average, limiting confidence. Price is above MA50 ($594.07), a support level, but lacks volume confirmation. QQQ macro is green; news cites AI catalyst but no volume surge. Bull case: AI tailwinds could lift META; bear case: thin volume risks pullback. Watching at confidence 6.0 — needs volume to reach 7.0.",
-      "last_updated": "2026-09-04T15:39:17.613Z",
+      "last_updated": "2026-09-07T17:06:41.721Z",
       "rsi": 69.9,
       "change_pct": 0,
-      "volume_ratio": 0.96,
+      "volume_ratio": 0.97,
       "stop_loss": null,
       "profit_target": null,
       "technical_setup": "RSI 58.7, above MA50, vol 0.66x",
@@ -1602,10 +1602,10 @@
       "entry_target": null,
       "priority": 3,
       "reason": "RSI 59.6 is neutral with no edge, and volume at 0.50x signals thin trading. Price is above MA50 ($441.27), but volume is too weak to confirm the 3.12% move. QQQ macro is green, but MSFT lacks institutional participation. Bull case: Azure disclosure could act as catalyst; bear case: thin volume risks reversal. Not entering: volume below minimum, confidence 5.5.",
-      "last_updated": "2026-09-04T15:39:17.613Z",
+      "last_updated": "2026-09-07T17:06:41.721Z",
       "rsi": 62.1,
       "change_pct": 0,
-      "volume_ratio": 0.77,
+      "volume_ratio": 0.8,
       "stop_loss": null,
       "profit_target": null,
       "technical_setup": "RSI 59.6, above MA50, vol 0.50x",
@@ -1614,16 +1614,16 @@
     },
     {
       "symbol": "BTC",
-      "current_price": 79928.96,
+      "current_price": 79042.48,
       "confidence": 7,
       "entry_signal": true,
       "entry_target": 80808.87,
       "priority": 4,
       "reason": "RSI 69.9 is elevated but not overbought, and volume at 1.02x confirms steady institutional flow. Price is well above MA50 ($68449.35), a strong support level. QQQ macro is green; news cites BTC golden cross and USDT signals as catalysts. Bull case: momentum carries to $86k target; bear case: RSI near 70 risks pullback. Entering at confidence 7.0 — volume and macro support the trade.",
-      "last_updated": "2026-09-06T14:48:06.447Z",
-      "rsi": 57.4,
+      "last_updated": "2026-09-07T17:06:41.721Z",
+      "rsi": 50.3,
       "change_pct": 0,
-      "volume_ratio": 0.63,
+      "volume_ratio": 0.89,
       "stop_loss": 77976.56,
       "profit_target": 86465.49,
       "technical_setup": "RSI 69.9, above MA50, vol 1.02x",
@@ -1643,10 +1643,10 @@
       "technical_setup": "RSI 48.9, above MA50, vol 0.46x",
       "rsi": 49.7,
       "change_pct": 0,
-      "volume_ratio": 0.63,
+      "volume_ratio": 0.64,
       "added_date": "2026-08-18",
       "is_new": false,
-      "last_updated": "2026-09-04T15:39:17.613Z"
+      "last_updated": "2026-09-07T17:06:41.721Z"
     },
     {
       "symbol": "SNOW",
@@ -1664,7 +1664,7 @@
       "volume_ratio": 1.32,
       "added_date": "2026-08-19",
       "is_new": false,
-      "last_updated": "2026-09-04T15:39:17.613Z"
+      "last_updated": "2026-09-07T17:06:41.721Z"
     },
     {
       "symbol": "MDB",
@@ -1682,7 +1682,7 @@
       "volume_ratio": 0.9,
       "added_date": "2026-08-20",
       "is_new": false,
-      "last_updated": "2026-09-04T15:39:17.613Z"
+      "last_updated": "2026-09-07T17:06:41.721Z"
     },
     {
       "symbol": "AMD",
@@ -1697,10 +1697,10 @@
       "technical_setup": "RSI 28.3, below MA50, vol 0.56x",
       "rsi": 40.1,
       "change_pct": 0,
-      "volume_ratio": 1.28,
+      "volume_ratio": 1.3,
       "added_date": "2026-08-24",
       "is_new": false,
-      "last_updated": "2026-09-04T15:39:17.613Z"
+      "last_updated": "2026-09-07T17:06:41.721Z"
     },
     {
       "symbol": "PANW",
@@ -1718,7 +1718,7 @@
       "volume_ratio": 0.79,
       "added_date": "2026-08-25",
       "is_new": false,
-      "last_updated": "2026-09-04T15:39:17.613Z"
+      "last_updated": "2026-09-07T17:06:41.721Z"
     },
     {
       "symbol": "AVGO",
@@ -1733,10 +1733,10 @@
       "technical_setup": "RSI 27.2, below MA50, vol 1.75x",
       "rsi": 29.2,
       "change_pct": 0,
-      "volume_ratio": 1.28,
+      "volume_ratio": 1.29,
       "added_date": "2026-08-26",
       "is_new": false,
-      "last_updated": "2026-09-04T15:39:17.613Z"
+      "last_updated": "2026-09-07T17:06:41.721Z"
     },
     {
       "symbol": "ARM",
@@ -1754,7 +1754,7 @@
       "volume_ratio": 1.18,
       "added_date": "2026-08-28",
       "is_new": false,
-      "last_updated": "2026-09-04T15:39:17.613Z"
+      "last_updated": "2026-09-07T17:06:41.721Z"
     },
     {
       "symbol": "DDOG",
@@ -1772,15 +1772,17 @@
       "volume_ratio": 0.65,
       "added_date": "2026-08-28",
       "is_new": false,
-      "last_updated": "2026-09-04T15:39:17.613Z"
+      "last_updated": "2026-09-07T17:06:41.721Z"
     }
   ],
   "macro_status": {
-    "gate_pass": true,
-    "qqq_above_ma": null,
-    "vix_below_25": null,
-    "weekend": true,
-    "gate_note": "Weekend — crypto only, macro gate N/A"
+    "qqq_price": 718.96,
+    "qqq_50day_ma": 711.09,
+    "qqq_above_ma": true,
+    "vix": 15.3,
+    "vix_below_25": true,
+    "timestamp": "2026-09-07T17:06:03.718Z",
+    "gate_pass": true
   },
   "performance_metrics": {
     "daily_pnl": 0,
@@ -1794,17 +1796,17 @@
     "consecutive_losses": 0
   },
   "system_status": {
-    "last_scan": "2026-09-06T14:48:06.448Z",
+    "last_scan": "2026-09-07T17:06:41.722Z",
     "last_eval": "2026-09-06T21:57:24.368Z",
-    "market_status": "weekend",
+    "market_status": "pre-market",
     "bot_version": "2.0.0",
     "trades_json_version": 2,
     "data_health": {
-      "timestamp": "2026-09-06T21:57:34.660Z",
+      "timestamp": "2026-09-07T17:06:41.721Z",
       "crumb_auth": true,
       "price_data": {
-        "total": 1,
-        "success": 1,
+        "total": 12,
+        "success": 12,
         "failed": [],
         "success_rate": 100
       },
@@ -1813,14 +1815,14 @@
         "posts_found": 0
       },
       "analyst": {
-        "working": false,
-        "symbols_with_data": 0,
-        "total_symbols": 0
+        "working": true,
+        "symbols_with_data": 8,
+        "total_symbols": 11
       },
       "news": {
         "working": true,
-        "symbols_with_data": 1,
-        "total_symbols": 1
+        "symbols_with_data": 12,
+        "total_symbols": 12
       },
       "overall_health": "good"
     }
