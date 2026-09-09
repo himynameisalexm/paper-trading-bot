@@ -1587,7 +1587,7 @@
       "last_updated": "2026-09-09T15:48:26.496Z",
       "rsi": 89.6,
       "change_pct": 0,
-      "volume_ratio": 2.04,
+      "volume_ratio": 2.05,
       "stop_loss": null,
       "profit_target": null,
       "technical_setup": "RSI 58.7, above MA50, vol 0.66x",
@@ -1614,7 +1614,7 @@
     },
     {
       "symbol": "BTC",
-      "current_price": 78234.25,
+      "current_price": 78230.22,
       "confidence": 7,
       "entry_signal": true,
       "entry_target": 80808.87,
@@ -1643,7 +1643,7 @@
       "technical_setup": "RSI 48.9, above MA50, vol 0.46x",
       "rsi": 52.4,
       "change_pct": 0,
-      "volume_ratio": 0.41,
+      "volume_ratio": 0.42,
       "added_date": "2026-08-18",
       "is_new": false,
       "last_updated": "2026-09-09T15:48:26.496Z"
@@ -1781,7 +1781,7 @@
     "qqq_above_ma": true,
     "vix": 16.46,
     "vix_below_25": true,
-    "timestamp": "2026-09-09T20:48:11.999Z",
+    "timestamp": "2026-09-09T21:32:11.260Z",
     "gate_pass": true
   },
   "performance_metrics": {
@@ -1797,12 +1797,12 @@
   },
   "system_status": {
     "last_scan": "2026-09-09T15:48:26.497Z",
-    "last_eval": "2026-09-09T20:48:12.120Z",
+    "last_eval": "2026-09-09T21:32:11.425Z",
     "market_status": "closed",
     "bot_version": "2.0.0",
     "trades_json_version": 2,
     "data_health": {
-      "timestamp": "2026-09-09T20:48:22.624Z",
+      "timestamp": "2026-09-09T21:32:21.797Z",
       "crumb_auth": true,
       "price_data": {
         "total": 12,
