@@ -1,6 +1,6 @@
 {
   "session": {
-    "date": "2026-09-11",
+    "date": "2026-09-12",
     "total_account_value": 20991.48,
     "daily_trading_capital": 5000,
     "daily_trading_used": 0,
@@ -1197,6 +1197,18 @@
   ],
   "daily_sessions": [
     {
+      "date": "2026-09-11",
+      "total_account_before_day": 20991.48,
+      "daily_trading_capital_used": 0,
+      "ending_account_value": 20991.48,
+      "realized_pnl": 0,
+      "unrealized_pnl": 0,
+      "trades_closed": 0,
+      "wins": 0,
+      "losses": 0,
+      "win_rate": 0
+    },
+    {
       "date": "2026-09-10",
       "total_account_before_day": 20991.48,
       "daily_trading_capital_used": 0,
@@ -1543,18 +1555,6 @@
       "wins": 2,
       "losses": 0,
       "win_rate": 100
-    },
-    {
-      "date": "2026-08-12",
-      "total_account_before_day": 20420.92,
-      "daily_trading_capital_used": 2483.65,
-      "ending_account_value": 20420.92,
-      "realized_pnl": -68.28,
-      "unrealized_pnl": 140.78,
-      "trades_closed": 1,
-      "wins": 0,
-      "losses": 1,
-      "win_rate": 0
     }
   ],
   "watchlist": [
@@ -1614,16 +1614,16 @@
     },
     {
       "symbol": "BTC",
-      "current_price": 77121.68,
+      "current_price": 77454.65,
       "confidence": 7,
       "entry_signal": true,
       "entry_target": 80808.87,
       "priority": 4,
       "reason": "RSI 69.9 is elevated but not overbought, and volume at 1.02x confirms steady institutional flow. Price is well above MA50 ($68449.35), a strong support level. QQQ macro is green; news cites BTC golden cross and USDT signals as catalysts. Bull case: momentum carries to $86k target; bear case: RSI near 70 risks pullback. Entering at confidence 7.0 — volume and macro support the trade.",
-      "last_updated": "2026-09-11T15:45:03.606Z",
-      "rsi": 47.4,
+      "last_updated": "2026-09-12T14:52:32.188Z",
+      "rsi": 47.1,
       "change_pct": 0,
-      "volume_ratio": 1.28,
+      "volume_ratio": 0.66,
       "stop_loss": 77976.56,
       "profit_target": 86465.49,
       "technical_setup": "RSI 69.9, above MA50, vol 1.02x",
@@ -1776,13 +1776,10 @@
     }
   ],
   "macro_status": {
-    "qqq_price": 714.88,
-    "qqq_50day_ma": 710.41,
-    "qqq_above_ma": true,
-    "vix": 15.84,
-    "vix_below_25": true,
-    "timestamp": "2026-09-11T22:16:44.428Z",
-    "gate_pass": true
+    "gate_pass": true,
+    "qqq_above_ma": null,
+    "vix_below_25": null,
+    "weekend": true
   },
   "performance_metrics": {
     "daily_pnl": 0,
@@ -1796,17 +1793,17 @@
     "consecutive_losses": 0
   },
   "system_status": {
-    "last_scan": "2026-09-11T15:45:03.606Z",
+    "last_scan": "2026-09-12T14:52:32.189Z",
     "last_eval": "2026-09-11T22:16:44.585Z",
-    "market_status": "closed",
+    "market_status": "pre-market",
     "bot_version": "2.0.0",
     "trades_json_version": 2,
     "data_health": {
-      "timestamp": "2026-09-11T22:16:55.014Z",
+      "timestamp": "2026-09-12T14:52:32.189Z",
       "crumb_auth": true,
       "price_data": {
-        "total": 12,
-        "success": 12,
+        "total": 1,
+        "success": 1,
         "failed": [],
         "success_rate": 100
       },
@@ -1815,14 +1812,14 @@
         "posts_found": 0
       },
       "analyst": {
-        "working": true,
-        "symbols_with_data": 8,
-        "total_symbols": 11
+        "working": false,
+        "symbols_with_data": 0,
+        "total_symbols": 0
       },
       "news": {
         "working": true,
-        "symbols_with_data": 12,
-        "total_symbols": 12
+        "symbols_with_data": 1,
+        "total_symbols": 1
       },
       "overall_health": "good"
     }
