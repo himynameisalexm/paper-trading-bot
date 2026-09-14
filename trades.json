@@ -1614,16 +1614,16 @@
     },
     {
       "symbol": "BTC",
-      "current_price": 78847.89,
+      "current_price": 78719.21,
       "confidence": 7,
       "entry_signal": true,
       "entry_target": 80808.87,
       "priority": 4,
       "reason": "RSI 69.9 is elevated but not overbought, and volume at 1.02x confirms steady institutional flow. Price is well above MA50 ($68449.35), a strong support level. QQQ macro is green; news cites BTC golden cross and USDT signals as catalysts. Bull case: momentum carries to $86k target; bear case: RSI near 70 risks pullback. Entering at confidence 7.0 — volume and macro support the trade.",
       "last_updated": "2026-09-14T17:30:14.876Z",
-      "rsi": 51,
+      "rsi": 50.6,
       "change_pct": 0,
-      "volume_ratio": 1.18,
+      "volume_ratio": 1.16,
       "stop_loss": 77976.56,
       "profit_target": 86465.49,
       "technical_setup": "RSI 69.9, above MA50, vol 1.02x",
@@ -1781,7 +1781,7 @@
     "qqq_above_ma": false,
     "vix": 17.1,
     "vix_below_25": true,
-    "timestamp": "2026-09-14T21:42:54.799Z",
+    "timestamp": "2026-09-14T22:19:44.804Z",
     "gate_pass": false
   },
   "performance_metrics": {
@@ -1797,12 +1797,12 @@
   },
   "system_status": {
     "last_scan": "2026-09-14T17:30:14.876Z",
-    "last_eval": "2026-09-14T21:42:54.891Z",
+    "last_eval": "2026-09-14T22:19:44.936Z",
     "market_status": "closed",
     "bot_version": "2.0.0",
     "trades_json_version": 2,
     "data_health": {
-      "timestamp": "2026-09-14T21:43:05.248Z",
+      "timestamp": "2026-09-14T22:19:55.375Z",
       "crumb_auth": true,
       "price_data": {
         "total": 12,
