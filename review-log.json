@@ -1,5 +1,161 @@
 [
   {
+    "date": "2026-09-25",
+    "timestamp": "2026-09-25T15:51:53.206Z",
+    "rule_issues": [],
+    "assessment": "AI review unavailable",
+    "market_regime_note": null,
+    "flags": [],
+    "changes_applied": [],
+    "watchlist_after": [
+      "NVDA",
+      "META",
+      "MSFT",
+      "BTC",
+      "CRWD",
+      "SNOW",
+      "MDB",
+      "AMD",
+      "PANW",
+      "AVGO",
+      "ARM",
+      "DDOG"
+    ],
+    "symbol_notes": {},
+    "data_health": {
+      "no_price_data": [],
+      "no_confidence_score": []
+    },
+    "performance_snapshot": {
+      "BTC": {
+        "trades": 20,
+        "wins": 8,
+        "losses": 12,
+        "win_rate": 40,
+        "avg_pnl_pct": 0.83
+      },
+      "COIN": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.52
+      },
+      "ETH": {
+        "trades": 6,
+        "wins": 3,
+        "losses": 2,
+        "win_rate": 60,
+        "avg_pnl_pct": 0.05
+      },
+      "META": {
+        "trades": 12,
+        "wins": 6,
+        "losses": 6,
+        "win_rate": 50,
+        "avg_pnl_pct": -0.36
+      },
+      "GOOGL": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.8
+      },
+      "TSM": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -4.42
+      },
+      "ARM": {
+        "trades": 9,
+        "wins": 1,
+        "losses": 8,
+        "win_rate": 11,
+        "avg_pnl_pct": -2.33
+      },
+      "ASML": {
+        "trades": 4,
+        "wins": 2,
+        "losses": 2,
+        "win_rate": 50,
+        "avg_pnl_pct": 1.23
+      },
+      "CRWD": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 2.4
+      },
+      "AMD": {
+        "trades": 5,
+        "wins": 3,
+        "losses": 2,
+        "win_rate": 60,
+        "avg_pnl_pct": 1.58
+      },
+      "MSFT": {
+        "trades": 4,
+        "wins": 2,
+        "losses": 2,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.61
+      },
+      "DDOG": {
+        "trades": 3,
+        "wins": 1,
+        "losses": 2,
+        "win_rate": 33,
+        "avg_pnl_pct": -1.12
+      },
+      "MSTR": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -3.16
+      },
+      "SNOW": {
+        "trades": 3,
+        "wins": 2,
+        "losses": 1,
+        "win_rate": 67,
+        "avg_pnl_pct": -0.02
+      },
+      "SMCI": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 5.08
+      },
+      "PANW": {
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_rate": 100,
+        "avg_pnl_pct": 2.64
+      },
+      "AVGO": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -4.56
+      },
+      "MDB": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -2.7
+      }
+    }
+  },
+  {
     "date": "2026-09-24",
     "timestamp": "2026-09-24T15:51:38.847Z",
     "rule_issues": [],
@@ -4716,184 +4872,6 @@
         "losses": 1,
         "win_rate": 50,
         "avg_pnl_pct": 5.08
-      },
-      "PANW": {
-        "trades": 1,
-        "wins": 1,
-        "losses": 0,
-        "win_rate": 100,
-        "avg_pnl_pct": 2.64
-      }
-    }
-  },
-  {
-    "date": "2026-08-14",
-    "timestamp": "2026-08-14T12:04:47.871Z",
-    "rule_issues": [],
-    "assessment": "The current watchlist is well-balanced with a mix of AI/tech leaders and crypto, though several symbols show thin volume and neutral RSI, limiting setup frequency. Trade history is mixed but generally positive for high-confidence symbols like SMCI and NVDA.",
-    "market_regime_note": "AI/tech sector momentum remains choppy with elevated RSI in some leaders (MSFT, CRWD, PANW) but thin volume, suggesting cautious institutional participation.",
-    "flags": [
-      "No API/stale data issues detected; all symbols have fresh data."
-    ],
-    "changes_applied": [
-      {
-        "action": "REMOVE",
-        "symbol": "DDOG",
-        "reason": "Consistently thin volume (0.50x) and neutral RSI (51.6) with poor trade history (1W/2L, avg -1.12%)."
-      },
-      {
-        "action": "REMOVE",
-        "symbol": "PANW",
-        "reason": "Overbought RSI (82.5) and thin volume (0.74x) with limited trade history (1W/0L) and no edge."
-      },
-      {
-        "action": "ADD",
-        "symbol": "ARM",
-        "reason": "High institutional coverage, strong AI/tech thesis, and volatility (5%+ daily range common) with active options market."
-      },
-      {
-        "action": "ADD",
-        "symbol": "MSTR",
-        "reason": "Strong crypto proxy with high volatility and institutional interest, fitting the bot's continuation strategy for BTC exposure."
-      }
-    ],
-    "watchlist_after": [
-      "NVDA",
-      "META",
-      "MSFT",
-      "BTC",
-      "CRWD",
-      "SMCI",
-      "ASML",
-      "AVGO",
-      "AMD",
-      "TSLA",
-      "ARM",
-      "MSTR"
-    ],
-    "symbol_notes": {
-      "NVDA": "Healthy RSI (63.9) but thin volume (0.76x) may limit follow-through; monitor for institutional participation.",
-      "META": "Neutral RSI (49.9) and thin volume (0.57x) with MA50 resistance; no edge currently.",
-      "MSFT": "Overbought RSI (86.3) and extremely thin volume (0.45x) signal exhaustion; avoid until reset.",
-      "BTC": "Oversold RSI (39.3) with neutral volume (0.94x); critical MA50 support test in play.",
-      "SMCI": "Elevated RSI (70.2) but strong volume (2.12x) post-earnings; monitor for continuation.",
-      "ASML": "Neutral RSI (57.2) with thin volume (0.86x); MA50 support holds but lacks momentum.",
-      "AVGO": "Elevated RSI (71.1) and thin volume (0.73x); overbought with no clear edge.",
-      "AMD": "Neutral RSI (43) and thin volume (0.62x); MA50 resistance overhead limits upside.",
-      "TSLA": "Elevated RSI (66.3) with neutral volume (1.05x); MA50 resistance caps momentum.",
-      "CRWD": "Overbought RSI (81.1) and thin volume (0.73x); exhaustion risk despite strong MA50 support.",
-      "ARM": "Not yet watched; high volatility and AI/tech leadership make it a strong momentum candidate.",
-      "MSTR": "Not yet watched; crypto proxy with high beta and institutional interest for continuation plays."
-    },
-    "data_health": {
-      "no_price_data": [],
-      "no_confidence_score": []
-    },
-    "performance_snapshot": {
-      "BTC": {
-        "trades": 17,
-        "wins": 6,
-        "losses": 11,
-        "win_rate": 35,
-        "avg_pnl_pct": -0.14
-      },
-      "COIN": {
-        "trades": 2,
-        "wins": 1,
-        "losses": 1,
-        "win_rate": 50,
-        "avg_pnl_pct": 0.52
-      },
-      "ETH": {
-        "trades": 6,
-        "wins": 3,
-        "losses": 2,
-        "win_rate": 60,
-        "avg_pnl_pct": 0.05
-      },
-      "META": {
-        "trades": 10,
-        "wins": 4,
-        "losses": 6,
-        "win_rate": 40,
-        "avg_pnl_pct": -0.53
-      },
-      "GOOGL": {
-        "trades": 2,
-        "wins": 1,
-        "losses": 1,
-        "win_rate": 50,
-        "avg_pnl_pct": 0.8
-      },
-      "TSM": {
-        "trades": 1,
-        "wins": 0,
-        "losses": 1,
-        "win_rate": 0,
-        "avg_pnl_pct": -4.42
-      },
-      "ARM": {
-        "trades": 9,
-        "wins": 1,
-        "losses": 8,
-        "win_rate": 11,
-        "avg_pnl_pct": -2.33
-      },
-      "ASML": {
-        "trades": 4,
-        "wins": 2,
-        "losses": 2,
-        "win_rate": 50,
-        "avg_pnl_pct": 1.23
-      },
-      "CRWD": {
-        "trades": 2,
-        "wins": 1,
-        "losses": 1,
-        "win_rate": 50,
-        "avg_pnl_pct": 2.4
-      },
-      "AMD": {
-        "trades": 5,
-        "wins": 3,
-        "losses": 2,
-        "win_rate": 60,
-        "avg_pnl_pct": 1.58
-      },
-      "MSFT": {
-        "trades": 4,
-        "wins": 2,
-        "losses": 2,
-        "win_rate": 50,
-        "avg_pnl_pct": 0.61
-      },
-      "DDOG": {
-        "trades": 3,
-        "wins": 1,
-        "losses": 2,
-        "win_rate": 33,
-        "avg_pnl_pct": -1.12
-      },
-      "MSTR": {
-        "trades": 1,
-        "wins": 0,
-        "losses": 1,
-        "win_rate": 0,
-        "avg_pnl_pct": -3.16
-      },
-      "SNOW": {
-        "trades": 2,
-        "wins": 2,
-        "losses": 0,
-        "win_rate": 100,
-        "avg_pnl_pct": 1.53
-      },
-      "SMCI": {
-        "trades": 1,
-        "wins": 1,
-        "losses": 0,
-        "win_rate": 100,
-        "avg_pnl_pct": 10.68
       },
       "PANW": {
         "trades": 1,
