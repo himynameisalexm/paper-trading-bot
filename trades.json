@@ -1614,7 +1614,7 @@
     },
     {
       "symbol": "BTC",
-      "current_price": 84744.14,
+      "current_price": 84760.82,
       "confidence": 7,
       "entry_signal": true,
       "entry_target": 80808.87,
@@ -1623,7 +1623,7 @@
       "last_updated": "2026-09-27T16:15:37.274Z",
       "rsi": 71.6,
       "change_pct": 0,
-      "volume_ratio": 0.56,
+      "volume_ratio": 0.57,
       "stop_loss": 77976.56,
       "profit_target": 86465.49,
       "technical_setup": "RSI 69.9, above MA50, vol 1.02x",
@@ -1795,12 +1795,12 @@
   },
   "system_status": {
     "last_scan": "2026-09-27T16:15:37.275Z",
-    "last_eval": "2026-09-27T18:43:19.727Z",
+    "last_eval": "2026-09-27T19:40:18.590Z",
     "market_status": "weekend",
     "bot_version": "2.0.0",
     "trades_json_version": 2,
     "data_health": {
-      "timestamp": "2026-09-27T18:43:30.203Z",
+      "timestamp": "2026-09-27T19:40:28.932Z",
       "crumb_auth": true,
       "price_data": {
         "total": 1,
