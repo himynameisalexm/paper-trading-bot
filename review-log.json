@@ -1,5 +1,161 @@
 [
   {
+    "date": "2026-09-28",
+    "timestamp": "2026-09-28T18:39:19.285Z",
+    "rule_issues": [],
+    "assessment": "AI review unavailable",
+    "market_regime_note": null,
+    "flags": [],
+    "changes_applied": [],
+    "watchlist_after": [
+      "NVDA",
+      "META",
+      "MSFT",
+      "BTC",
+      "CRWD",
+      "SNOW",
+      "MDB",
+      "AMD",
+      "PANW",
+      "AVGO",
+      "ARM",
+      "DDOG"
+    ],
+    "symbol_notes": {},
+    "data_health": {
+      "no_price_data": [],
+      "no_confidence_score": []
+    },
+    "performance_snapshot": {
+      "BTC": {
+        "trades": 20,
+        "wins": 8,
+        "losses": 12,
+        "win_rate": 40,
+        "avg_pnl_pct": 0.83
+      },
+      "COIN": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.52
+      },
+      "ETH": {
+        "trades": 6,
+        "wins": 3,
+        "losses": 2,
+        "win_rate": 60,
+        "avg_pnl_pct": 0.05
+      },
+      "META": {
+        "trades": 12,
+        "wins": 6,
+        "losses": 6,
+        "win_rate": 50,
+        "avg_pnl_pct": -0.36
+      },
+      "GOOGL": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.8
+      },
+      "TSM": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -4.42
+      },
+      "ARM": {
+        "trades": 9,
+        "wins": 1,
+        "losses": 8,
+        "win_rate": 11,
+        "avg_pnl_pct": -2.33
+      },
+      "ASML": {
+        "trades": 4,
+        "wins": 2,
+        "losses": 2,
+        "win_rate": 50,
+        "avg_pnl_pct": 1.23
+      },
+      "CRWD": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 2.4
+      },
+      "AMD": {
+        "trades": 5,
+        "wins": 3,
+        "losses": 2,
+        "win_rate": 60,
+        "avg_pnl_pct": 1.58
+      },
+      "MSFT": {
+        "trades": 4,
+        "wins": 2,
+        "losses": 2,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.61
+      },
+      "DDOG": {
+        "trades": 3,
+        "wins": 1,
+        "losses": 2,
+        "win_rate": 33,
+        "avg_pnl_pct": -1.12
+      },
+      "MSTR": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -3.16
+      },
+      "SNOW": {
+        "trades": 3,
+        "wins": 2,
+        "losses": 1,
+        "win_rate": 67,
+        "avg_pnl_pct": -0.02
+      },
+      "SMCI": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 5.08
+      },
+      "PANW": {
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_rate": 100,
+        "avg_pnl_pct": 2.64
+      },
+      "AVGO": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -4.56
+      },
+      "MDB": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -2.7
+      }
+    }
+  },
+  {
     "date": "2026-09-25",
     "timestamp": "2026-09-25T15:51:53.206Z",
     "rule_issues": [],
@@ -4579,193 +4735,6 @@
     "data_health": {
       "no_price_data": [],
       "no_confidence_score": []
-    },
-    "performance_snapshot": {
-      "BTC": {
-        "trades": 18,
-        "wins": 6,
-        "losses": 12,
-        "win_rate": 33,
-        "avg_pnl_pct": -0.16
-      },
-      "COIN": {
-        "trades": 2,
-        "wins": 1,
-        "losses": 1,
-        "win_rate": 50,
-        "avg_pnl_pct": 0.52
-      },
-      "ETH": {
-        "trades": 6,
-        "wins": 3,
-        "losses": 2,
-        "win_rate": 60,
-        "avg_pnl_pct": 0.05
-      },
-      "META": {
-        "trades": 10,
-        "wins": 4,
-        "losses": 6,
-        "win_rate": 40,
-        "avg_pnl_pct": -0.53
-      },
-      "GOOGL": {
-        "trades": 2,
-        "wins": 1,
-        "losses": 1,
-        "win_rate": 50,
-        "avg_pnl_pct": 0.8
-      },
-      "TSM": {
-        "trades": 1,
-        "wins": 0,
-        "losses": 1,
-        "win_rate": 0,
-        "avg_pnl_pct": -4.42
-      },
-      "ARM": {
-        "trades": 9,
-        "wins": 1,
-        "losses": 8,
-        "win_rate": 11,
-        "avg_pnl_pct": -2.33
-      },
-      "ASML": {
-        "trades": 4,
-        "wins": 2,
-        "losses": 2,
-        "win_rate": 50,
-        "avg_pnl_pct": 1.23
-      },
-      "CRWD": {
-        "trades": 2,
-        "wins": 1,
-        "losses": 1,
-        "win_rate": 50,
-        "avg_pnl_pct": 2.4
-      },
-      "AMD": {
-        "trades": 5,
-        "wins": 3,
-        "losses": 2,
-        "win_rate": 60,
-        "avg_pnl_pct": 1.58
-      },
-      "MSFT": {
-        "trades": 4,
-        "wins": 2,
-        "losses": 2,
-        "win_rate": 50,
-        "avg_pnl_pct": 0.61
-      },
-      "DDOG": {
-        "trades": 3,
-        "wins": 1,
-        "losses": 2,
-        "win_rate": 33,
-        "avg_pnl_pct": -1.12
-      },
-      "MSTR": {
-        "trades": 1,
-        "wins": 0,
-        "losses": 1,
-        "win_rate": 0,
-        "avg_pnl_pct": -3.16
-      },
-      "SNOW": {
-        "trades": 2,
-        "wins": 2,
-        "losses": 0,
-        "win_rate": 100,
-        "avg_pnl_pct": 1.53
-      },
-      "SMCI": {
-        "trades": 2,
-        "wins": 1,
-        "losses": 1,
-        "win_rate": 50,
-        "avg_pnl_pct": 5.08
-      },
-      "PANW": {
-        "trades": 1,
-        "wins": 1,
-        "losses": 0,
-        "win_rate": 100,
-        "avg_pnl_pct": 2.64
-      }
-    }
-  },
-  {
-    "date": "2026-08-17",
-    "timestamp": "2026-08-17T11:47:44.375Z",
-    "rule_issues": [],
-    "assessment": "The current watchlist is severely limited by unavailable price data for most symbols, preventing any technical analysis or trade signals. Only BTC and SMCI have available data, but neither presents a clear entry signal under the bot's strategy at this time.",
-    "market_regime_note": "Current AI/tech sector momentum appears muted or unclear due to widespread data unavailability, reducing setup frequency for momentum breakouts or oversold bounces.",
-    "flags": [
-      "Widespread price data unavailability for 10/12 symbols — API or source issues likely.",
-      "Only BTC and SMCI have data, but neither meets entry criteria; watchlist effectiveness severely degraded."
-    ],
-    "changes_applied": [
-      {
-        "action": "REMOVE",
-        "symbol": "CRWD",
-        "reason": "Consistently unavailable price data with no trade signals or confidence scores generated."
-      },
-      {
-        "action": "REMOVE",
-        "symbol": "ARM",
-        "reason": "Poor trade history (1W/8L) and no price data to justify retention."
-      },
-      {
-        "action": "ADD",
-        "symbol": "PANW",
-        "reason": "Strong AI/tech cybersecurity thesis, high volatility, and institutional coverage; fits momentum breakout criteria."
-      },
-      {
-        "action": "ADD",
-        "symbol": "DDOG",
-        "reason": "High-liquidity AI/tech observability leader with frequent 5%+ daily ranges and active options market."
-      }
-    ],
-    "watchlist_after": [
-      "NVDA",
-      "META",
-      "MSFT",
-      "BTC",
-      "SMCI",
-      "ASML",
-      "AVGO",
-      "AMD",
-      "TSLA",
-      "MSTR",
-      "PANW",
-      "DDOG"
-    ],
-    "symbol_notes": {
-      "NVDA": "Price data unavailable — no analysis possible; monitor for data restoration.",
-      "META": "Price data unavailable — no analysis possible; trade history neutral but requires data to re-evaluate.",
-      "MSFT": "Price data unavailable — no analysis possible; trade history slightly positive but stale.",
-      "BTC": "Neutral RSI and thin volume; no edge for continuation or bounce setups.",
-      "SMCI": "RSI 71.9 suggests overbought, but price data missing prevents further assessment.",
-      "PANW": "Candidate with strong AI/tech sector alignment and liquidity; potential for momentum setups.",
-      "DDOG": "Candidate with high volatility and institutional interest; fits oversold bounce/momentum criteria."
-    },
-    "data_health": {
-      "no_price_data": [
-        "NVDA",
-        "META",
-        "MSFT",
-        "CRWD",
-        "ASML"
-      ],
-      "no_confidence_score": [
-        "NVDA",
-        "META",
-        "MSFT",
-        "CRWD",
-        "SMCI",
-        "ASML"
-      ]
     },
     "performance_snapshot": {
       "BTC": {
