@@ -1614,7 +1614,7 @@
     },
     {
       "symbol": "BTC",
-      "current_price": 81666.72,
+      "current_price": 81658.95,
       "confidence": 7,
       "entry_signal": true,
       "entry_target": 80808.87,
@@ -1781,7 +1781,7 @@
     "qqq_above_ma": true,
     "vix": 15.41,
     "vix_below_25": true,
-    "timestamp": "2026-10-08T21:13:00.279Z",
+    "timestamp": "2026-10-08T21:39:52.692Z",
     "gate_pass": true
   },
   "performance_metrics": {
@@ -1797,12 +1797,12 @@
   },
   "system_status": {
     "last_scan": "2026-10-08T18:20:01.424Z",
-    "last_eval": "2026-10-08T21:13:00.479Z",
+    "last_eval": "2026-10-08T21:39:52.878Z",
     "market_status": "closed",
     "bot_version": "2.0.0",
     "trades_json_version": 2,
     "data_health": {
-      "timestamp": "2026-10-08T21:13:10.955Z",
+      "timestamp": "2026-10-08T21:40:03.400Z",
       "crumb_auth": true,
       "price_data": {
         "total": 12,
