@@ -1,5 +1,161 @@
 [
   {
+    "date": "2026-10-08",
+    "timestamp": "2026-10-08T17:55:36.021Z",
+    "rule_issues": [],
+    "assessment": "AI review unavailable",
+    "market_regime_note": null,
+    "flags": [],
+    "changes_applied": [],
+    "watchlist_after": [
+      "NVDA",
+      "META",
+      "MSFT",
+      "BTC",
+      "CRWD",
+      "SNOW",
+      "MDB",
+      "AMD",
+      "PANW",
+      "AVGO",
+      "ARM",
+      "DDOG"
+    ],
+    "symbol_notes": {},
+    "data_health": {
+      "no_price_data": [],
+      "no_confidence_score": []
+    },
+    "performance_snapshot": {
+      "BTC": {
+        "trades": 20,
+        "wins": 8,
+        "losses": 12,
+        "win_rate": 40,
+        "avg_pnl_pct": 0.83
+      },
+      "COIN": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.52
+      },
+      "ETH": {
+        "trades": 6,
+        "wins": 3,
+        "losses": 2,
+        "win_rate": 60,
+        "avg_pnl_pct": 0.05
+      },
+      "META": {
+        "trades": 12,
+        "wins": 6,
+        "losses": 6,
+        "win_rate": 50,
+        "avg_pnl_pct": -0.36
+      },
+      "GOOGL": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.8
+      },
+      "TSM": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -4.42
+      },
+      "ARM": {
+        "trades": 9,
+        "wins": 1,
+        "losses": 8,
+        "win_rate": 11,
+        "avg_pnl_pct": -2.33
+      },
+      "ASML": {
+        "trades": 4,
+        "wins": 2,
+        "losses": 2,
+        "win_rate": 50,
+        "avg_pnl_pct": 1.23
+      },
+      "CRWD": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 2.4
+      },
+      "AMD": {
+        "trades": 5,
+        "wins": 3,
+        "losses": 2,
+        "win_rate": 60,
+        "avg_pnl_pct": 1.58
+      },
+      "MSFT": {
+        "trades": 4,
+        "wins": 2,
+        "losses": 2,
+        "win_rate": 50,
+        "avg_pnl_pct": 0.61
+      },
+      "DDOG": {
+        "trades": 3,
+        "wins": 1,
+        "losses": 2,
+        "win_rate": 33,
+        "avg_pnl_pct": -1.12
+      },
+      "MSTR": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -3.16
+      },
+      "SNOW": {
+        "trades": 3,
+        "wins": 2,
+        "losses": 1,
+        "win_rate": 67,
+        "avg_pnl_pct": -0.02
+      },
+      "SMCI": {
+        "trades": 2,
+        "wins": 1,
+        "losses": 1,
+        "win_rate": 50,
+        "avg_pnl_pct": 5.08
+      },
+      "PANW": {
+        "trades": 1,
+        "wins": 1,
+        "losses": 0,
+        "win_rate": 100,
+        "avg_pnl_pct": 2.64
+      },
+      "AVGO": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -4.56
+      },
+      "MDB": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0,
+        "avg_pnl_pct": -2.7
+      }
+    }
+  },
+  {
     "date": "2026-10-07",
     "timestamp": "2026-10-07T17:52:17.281Z",
     "rule_issues": [],
@@ -4387,155 +4543,6 @@
       "SNOW": "Neutral RSI (49.1) with average volume (1.18x); lacks institutional conviction.",
       "AMD": "Neutral RSI (47.9) with thin volume (0.88x); no clear edge."
     },
-    "data_health": {
-      "no_price_data": [],
-      "no_confidence_score": []
-    },
-    "performance_snapshot": {
-      "BTC": {
-        "trades": 20,
-        "wins": 8,
-        "losses": 12,
-        "win_rate": 40,
-        "avg_pnl_pct": 0.83
-      },
-      "COIN": {
-        "trades": 2,
-        "wins": 1,
-        "losses": 1,
-        "win_rate": 50,
-        "avg_pnl_pct": 0.52
-      },
-      "ETH": {
-        "trades": 6,
-        "wins": 3,
-        "losses": 2,
-        "win_rate": 60,
-        "avg_pnl_pct": 0.05
-      },
-      "META": {
-        "trades": 12,
-        "wins": 6,
-        "losses": 6,
-        "win_rate": 50,
-        "avg_pnl_pct": -0.36
-      },
-      "GOOGL": {
-        "trades": 2,
-        "wins": 1,
-        "losses": 1,
-        "win_rate": 50,
-        "avg_pnl_pct": 0.8
-      },
-      "TSM": {
-        "trades": 1,
-        "wins": 0,
-        "losses": 1,
-        "win_rate": 0,
-        "avg_pnl_pct": -4.42
-      },
-      "ARM": {
-        "trades": 9,
-        "wins": 1,
-        "losses": 8,
-        "win_rate": 11,
-        "avg_pnl_pct": -2.33
-      },
-      "ASML": {
-        "trades": 4,
-        "wins": 2,
-        "losses": 2,
-        "win_rate": 50,
-        "avg_pnl_pct": 1.23
-      },
-      "CRWD": {
-        "trades": 2,
-        "wins": 1,
-        "losses": 1,
-        "win_rate": 50,
-        "avg_pnl_pct": 2.4
-      },
-      "AMD": {
-        "trades": 5,
-        "wins": 3,
-        "losses": 2,
-        "win_rate": 60,
-        "avg_pnl_pct": 1.58
-      },
-      "MSFT": {
-        "trades": 4,
-        "wins": 2,
-        "losses": 2,
-        "win_rate": 50,
-        "avg_pnl_pct": 0.61
-      },
-      "DDOG": {
-        "trades": 3,
-        "wins": 1,
-        "losses": 2,
-        "win_rate": 33,
-        "avg_pnl_pct": -1.12
-      },
-      "MSTR": {
-        "trades": 1,
-        "wins": 0,
-        "losses": 1,
-        "win_rate": 0,
-        "avg_pnl_pct": -3.16
-      },
-      "SNOW": {
-        "trades": 2,
-        "wins": 2,
-        "losses": 0,
-        "win_rate": 100,
-        "avg_pnl_pct": 1.53
-      },
-      "SMCI": {
-        "trades": 2,
-        "wins": 1,
-        "losses": 1,
-        "win_rate": 50,
-        "avg_pnl_pct": 5.08
-      },
-      "PANW": {
-        "trades": 1,
-        "wins": 1,
-        "losses": 0,
-        "win_rate": 100,
-        "avg_pnl_pct": 2.64
-      },
-      "AVGO": {
-        "trades": 1,
-        "wins": 0,
-        "losses": 1,
-        "win_rate": 0,
-        "avg_pnl_pct": -4.56
-      }
-    }
-  },
-  {
-    "date": "2026-08-27",
-    "timestamp": "2026-08-27T21:05:10.062Z",
-    "rule_issues": [],
-    "assessment": "AI review unavailable",
-    "market_regime_note": null,
-    "flags": [],
-    "changes_applied": [],
-    "watchlist_after": [
-      "NVDA",
-      "META",
-      "MSFT",
-      "BTC",
-      "TSLA",
-      "CRWD",
-      "SNOW",
-      "MDB",
-      "AMD",
-      "PANW",
-      "SMCI",
-      "AVGO"
-    ],
-    "symbol_notes": {},
     "data_health": {
       "no_price_data": [],
       "no_confidence_score": []
